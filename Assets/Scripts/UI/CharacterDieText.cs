@@ -5,6 +5,10 @@ public class CharacterDieText : MonoBehaviour
 {
     [SerializeField] GameObject dieTextPrefab;
 
+    /// <summary>
+    /// 渡された文字列を一文字ずつ分解して表示
+    /// </summary>
+    /// <param name="allText">顔文字</param>
     public void SetText(string allText)
     {
         char[] split = allText.ToCharArray();
@@ -21,6 +25,20 @@ public class CharacterDieText : MonoBehaviour
         }
     }
 
+    public void SetSeparateText(string allText)
+    {
+        GameObject obj = Instantiate(dieTextPrefab, transform.position, Quaternion.identity);
+
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+        TextMeshPro mesh = obj.GetComponentInChildren<TextMeshPro>();
+        mesh.text = allText;
+        Impact(rb);
+    }
+
+    /// <summary>
+    /// 文字にランダムな力を加える
+    /// </summary>
+    /// <param name="rb"></param>
     void Impact(Rigidbody2D rb)
     {
         float randomPower = Random.Range(0.8f, 3f);
