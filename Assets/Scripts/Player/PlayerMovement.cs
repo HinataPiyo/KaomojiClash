@@ -43,6 +43,8 @@ public class PlayerMovement : CharacterMoveBase
             aimLine.SetPosition(1, end);
         }
 
+        CameraZoom.I.ApplyZoom(dragVector);
+
         // ボタンを離したら発射
         if (Input.GetMouseButtonUp(0))
         {
@@ -66,6 +68,7 @@ public class PlayerMovement : CharacterMoveBase
             float launchSpeed = launchPower * powerRate;
 
             Launch(launchDir * launchSpeed);
+            CameraZoom.I.ResetZoom();
         }
     }
 

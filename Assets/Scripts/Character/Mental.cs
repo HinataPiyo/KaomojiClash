@@ -21,11 +21,12 @@ public class Mental : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentMental -= damage;
-        CameraShake.I.ApplyShake(1.5f, 1.5f, 0.2f);
+        
         WorldCanvasManager.I.ShowDamageText(transform.position, damage);
         
         if (currentMental <= 0)
         {
+            CameraShake.I.ApplyShake(3f, 1.5f, 0.2f);
             if(currentSeparate > 0)
             {
                 currentSeparate--;
@@ -38,7 +39,10 @@ public class Mental : MonoBehaviour
             }
 
             Die();
+            return;
         }
+
+        CameraShake.I.ApplyShake(1.5f, 1.5f, 0.2f);
     }
 
     void Die()
