@@ -8,11 +8,11 @@ public class Mental : MonoBehaviour
     [SerializeField] float currentMental;
     [SerializeField] int currentSeparate;
     TextMeshPro kaomoji;
-    CharacterDieText dieText;
+    CharacterDieEffect dieEffect;
 
     void Awake()
     {
-        dieText = GetComponent<CharacterDieText>();
+        dieEffect = GetComponent<CharacterDieEffect>();
         kaomoji = GetComponentInChildren<TextMeshPro>();
         currentMental = data.Status.maxMental;
         currentSeparate = data.Status.maxSeparate;     // テスト用に3回分離可能に設定
@@ -34,7 +34,7 @@ public class Mental : MonoBehaviour
                 if(currentMental < 1f) currentMental = 1f;    // 最低1は確保
                 // 分離エフェクトなどをここで実行可能
                 // 注意: CharacterDieText に SetSeparateText が存在しないため既存の SetText を呼ぶ
-                dieText.SetText(kaomoji.text);
+                dieEffect.SetSeparateText(kaomoji.text);
                 return;
             }
 
@@ -47,7 +47,7 @@ public class Mental : MonoBehaviour
 
     void Die()
     {
-        dieText.SetText(kaomoji.text);
+        dieEffect.SetText(kaomoji.text);
         // 死亡処理（例: オブジェクトの破壊、アニメーションの再生など）
         Destroy(gameObject);
     }

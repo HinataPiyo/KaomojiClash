@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class CharacterDieText : MonoBehaviour
+public class CharacterDieEffect : MonoBehaviour
 {
     [SerializeField] GameObject dieTextPrefab;
 
