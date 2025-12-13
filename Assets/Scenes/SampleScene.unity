@@ -679,7 +679,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.24989113, g: 0.30239278, b: 0.59748423, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1633,6 +1633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageTextPrefab: {fileID: 4030348778515424144, guid: 39f589ea9558c0947a7ce98e3642a6ee, type: 3}
   damageTextOffset: {x: 0, y: 0.5}
+  arrowPrefab: {fileID: 1854561144591636534, guid: 3f06c4c36b4e00f4d8383c1d5c1795f3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerMovement : CharacterMoveBase
 {
+    CharacterShootDirectionArrow shootDirectionArrow;
     /// <summary>
     /// 待機中の入力処理
     /// </summary>
@@ -12,6 +13,8 @@ public class PlayerMovement : CharacterMoveBase
         {
             dragStartWorld = GetMouseWorldPos();
             state = State.Dragging;
+
+            shootDirectionArrow = WorldCanvasManager.I.CreateShootDirectionArrow(transform.position);
 
             if (aimLine != null)
             {
@@ -44,6 +47,7 @@ public class PlayerMovement : CharacterMoveBase
         }
 
         CameraZoom.I.ApplyZoom(dragVector);
+        WorldCanvasManager.I.ShowShootDirectionArrow(shootDirectionArrow, transform.position, dragVector, dragVector.magnitude);
 
         // ボタンを離したら発射
         if (Input.GetMouseButtonUp(0))
@@ -69,6 +73,7 @@ public class PlayerMovement : CharacterMoveBase
 
             Launch(launchDir * launchSpeed);
             CameraZoom.I.ResetZoom();
+            shootDirectionArrow.Del();
         }
     }
 
