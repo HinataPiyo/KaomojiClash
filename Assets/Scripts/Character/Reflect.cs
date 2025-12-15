@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Reflect : MonoBehaviour
 {
     protected Rigidbody2D rb;
+    [SerializeField] GameObject hitEffectPrefab;
     [SerializeField] protected CharacterData data;
 
     void Awake()
@@ -24,6 +25,9 @@ public abstract class Reflect : MonoBehaviour
 
         // 速度の大きさは維持したまま向きだけ変更
         rb.linearVelocity = reflected.normalized * v.magnitude;
+
+        // エフェクトを生成
+        Instantiate(hitEffectPrefab, col.contacts[0].point, Quaternion.identity);
     }
 
     protected bool CanReflection()

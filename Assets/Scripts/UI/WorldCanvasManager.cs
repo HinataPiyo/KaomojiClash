@@ -18,6 +18,9 @@ public class WorldCanvasManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ダメージテキストを表示
+    /// </summary>
     public void ShowDamageText(Vector3 position, float damage)
     {
         Vector2 newPos = position + (Vector3)damageTextOffset;
@@ -26,6 +29,9 @@ public class WorldCanvasManager : MonoBehaviour
         damageText.SetDamage(damage);
     }
 
+    /// <summary>
+    /// 射撃方向矢印を作成
+    /// </summary>
     public CharacterShootDirectionArrow CreateShootDirectionArrow(Vector3 position)
     {
         GameObject obj = Instantiate(arrowPrefab, position, Quaternion.identity, transform);
@@ -33,6 +39,9 @@ public class WorldCanvasManager : MonoBehaviour
         return arrow;
     }
 
+    /// <summary>
+    /// 射撃方向矢印を表示
+    /// </summary>
     public void ShowShootDirectionArrow(CharacterShootDirectionArrow arrow, Vector3 position, Vector2 dir, float power = 1f)
     {
         arrow.transform.position = position;

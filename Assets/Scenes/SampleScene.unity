@@ -422,7 +422,7 @@ Transform:
   m_GameObject: {fileID: 500343488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -469,6 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db33c73ae8490cd4d89a0ed84f0c5163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEffectPrefab: {fileID: 5053206923923617459, guid: 6992f0d222af63e42b07fc233b5b0bc1, type: 3}
   data: {fileID: 11400000, guid: 1370d74249f64b24491a84b7883ae0fc, type: 2}
 --- !u!114 &500343495
 MonoBehaviour:
@@ -793,7 +794,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.33333334, y: 0, z: -10}
+  m_LocalPosition: {x: 0.3090169, y: -0.34549153, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1019,7 +1020,7 @@ Transform:
   m_GameObject: {fileID: 710609431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.33333334, y: 0, z: -10}
+  m_LocalPosition: {x: 0.3090169, y: -0.34549153, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1179,7 +1180,7 @@ Transform:
   m_GameObject: {fileID: 898216137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.33333334, y: 0, z: 0}
+  m_LocalPosition: {x: 0.3090169, y: -0.34549153, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1491,6 +1492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789fccff5a2228f46bc67635e0399ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEffectPrefab: {fileID: 5053206923923617459, guid: 6992f0d222af63e42b07fc233b5b0bc1, type: 3}
   data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
 --- !u!114 &1170213479
 MonoBehaviour:

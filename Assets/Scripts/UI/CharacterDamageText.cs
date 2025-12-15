@@ -16,6 +16,6 @@ public class CharacterDamageText : MonoBehaviour
     /// <param name="damage"></param>
     public void SetDamage(float damage)
     {
-        mesh.text = damage.ToString("F2");
+        mesh.text = damage.ToString("0.##");
     }
 }
