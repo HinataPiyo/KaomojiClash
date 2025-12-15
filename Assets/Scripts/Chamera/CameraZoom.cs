@@ -4,7 +4,7 @@ using UnityEngine;
 public class CameraZoom : MonoBehaviour
 {
     public static CameraZoom I { get; private set; }
-    static readonly float DefaultOrthographicSize = 3f;
+    static readonly float DefaultOrthographicSize = 3.3f;
     [SerializeField] float zoomFactor = 0.1f; // ドラッグ距離に対するズーム倍率
     [SerializeField] float smoothTime = 0.15f;   // 滑らかに戻る時間
 
