@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   status:
+    attackPower: 5.5
     maxMental: 10
     maxSeparate: 3
     launchPower: 10

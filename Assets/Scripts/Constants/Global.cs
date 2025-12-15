@@ -6,6 +6,7 @@ namespace Constants.Global
     [Serializable]
     public class CharacterStatus
     {
+        public float attackPower = 1f;
         public float maxMental = 10f;
         public int maxSeparate = 3;
 

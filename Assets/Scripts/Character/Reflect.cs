@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Reflect : MonoBehaviour
 {
     protected Rigidbody2D rb;
+    [SerializeField] protected CharacterData data;
 
     void Awake()
     {
@@ -28,5 +29,11 @@ public abstract class Reflect : MonoBehaviour
     protected bool CanReflection()
     {
         return rb.linearVelocity.sqrMagnitude >= 1f;
+    }
+
+    protected bool CanApplyDamage(Rigidbody2D otherRb)
+    {
+        // 相手より自分のほうが速い場合のみダメージを与える
+        return otherRb != null && rb.linearVelocity.sqrMagnitude > otherRb.linearVelocity.sqrMagnitude;
     }
 }

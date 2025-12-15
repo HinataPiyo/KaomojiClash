@@ -444,8 +444,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 1370d74249f64b24491a84b7883ae0fc, type: 2}
   currentMental: 0
   currentSeparate: 0
-  kaomoji: {fileID: 504621304}
-  dieEffect: {fileID: 500343493}
 --- !u!114 &500343493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db33c73ae8490cd4d89a0ed84f0c5163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 1370d74249f64b24491a84b7883ae0fc, type: 2}
 --- !u!114 &500343495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,8 +1479,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
   currentMental: 0
   currentSeparate: 0
-  kaomoji: {fileID: 1360198080}
-  dieEffect: {fileID: 1170213479}
 --- !u!114 &1170213478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,6 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789fccff5a2228f46bc67635e0399ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
 --- !u!114 &1170213479
 MonoBehaviour:
   m_ObjectHideFlags: 0
