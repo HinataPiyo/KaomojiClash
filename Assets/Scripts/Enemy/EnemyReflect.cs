@@ -7,14 +7,14 @@ public class EnemyReflect : Reflect
         // 敵と衝突した
         if (col.collider.CompareTag("Player"))
         {
-            if (!CanReflection())
+            if (!CanReflection())       // 反射できない状態なら何もしない
             {
                 return;
             }
 
             Reflection(col);        // 反射
-            Mental enemyHealth = col.collider.GetComponent<Mental>();
-            enemyHealth.TakeDamage(1f);
+            Mental player = col.collider.GetComponent<Mental>();
+            player.TakeDamage(1f);
         }
     }
 }

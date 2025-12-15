@@ -1,27 +1,43 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMovement : CharacterMoveBase
+public class EnemyMovement : CharacterMoveBase
 {
-    [SerializeField] PlayerData data;
+    [SerializeField] EnemyData data;
     CharacterShootDirectionArrow shootDirectionArrow;
+
+    bool isInput;      // 発射可能フラグ
+    bool isLaunch;     // 発射中フラグ
+
+    void Start()
+    {
+        StartCoroutine(LaunchRoutine());
+    }
+
+
+    IEnumerator LaunchRoutine()
+    {
+        while(true)
+        {
+            isInput = true;
+
+            // 発射までの待機時間
+            yield return new WaitForSeconds(data.launchDuration);
+            isLaunch = true;
+            
+            yield return new WaitUntil(() => cooldown == null);
+        }
+    }
     /// <summary>
     /// 待機中の入力処理
     /// </summary>
     protected override void HandleIdleInput()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            dragStartWorld = GetMouseWorldPos();
-            state = State.Dragging;
-
-            shootDirectionArrow = WorldCanvasManager.I.CreateShootDirectionArrow(transform.position);
-
-            if (aimLine != null)
-            {
-                aimLine.positionCount = 2;
-            }
-        }
+        if(!isInput) return;
+        dragStartWorld = transform.position;    // ドラッグ開始位置を記録
+        state = State.Dragging;     // ドラッグ中状態へ
+        shootDirectionArrow = WorldCanvasManager.I.CreateShootDirectionArrow(transform.position);   // 照準矢印作成
+        isInput = false;
     }
 
     /// <summary>
@@ -29,35 +45,18 @@ public class PlayerMovement : CharacterMoveBase
     /// </summary>
     protected override void HandleDraggingInput()
     {
-        Vector2 currentWorld = GetMouseWorldPos();
-        Vector2 dragVector = currentWorld - dragStartWorld;
+        if(Context.I.Player == null) return;
+        // プレイヤーへの方角
+        Vector2 directionToPlayer = Context.I.Player.transform.position - transform.position;
 
-        // 最大ドラッグ距離を制限
-        if (dragVector.magnitude > data.Status.maxDragDistance)
-        {
-            dragVector = dragVector.normalized * data.Status.maxDragDistance;
-        }
+        // スリングショットなので、ドラッグベクトルはプレイヤーと逆方向にする
+        Vector2 dragVector = -directionToPlayer.normalized * data.Status.maxDragDistance;
 
-        // LineRendererで方向表示（スリングショットっぽく逆向きに伸ばす）
-        if (aimLine != null)
-        {
-            Vector3 start = dragStartWorld;
-            Vector3 end = dragStartWorld + dragVector;
-            aimLine.SetPosition(0, start);
-            aimLine.SetPosition(1, end);
-        }
-
-        CameraZoom.I.ApplyZoom(dragVector);
         WorldCanvasManager.I.ShowShootDirectionArrow(shootDirectionArrow, transform.position, dragVector, dragVector.magnitude);
 
         // ボタンを離したら発射
-        if (Input.GetMouseButtonUp(0))
+        if (isLaunch)
         {
-            if (aimLine != null)
-            {
-                aimLine.positionCount = 0;
-            }
-
             if (dragVector.magnitude < data.Status.minLaunchDistance)
             {
                 // ほぼ動いてない → 発射キャンセル
@@ -75,6 +74,8 @@ public class PlayerMovement : CharacterMoveBase
             Launch(launchDir * launchSpeed);
             CameraZoom.I.ResetZoom();
             shootDirectionArrow.Del();
+
+            isLaunch = false;
         }
     }
 
@@ -98,5 +99,4 @@ public class PlayerMovement : CharacterMoveBase
 
         cooldown = null;
     }
-
 }

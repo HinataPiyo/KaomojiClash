@@ -6,14 +6,6 @@ public abstract class CharacterMoveBase : MonoBehaviour
     Rigidbody2D rb;
     RectTransform rectTF;
 
-    [Header("Launch")]
-    [SerializeField] protected float launchPower = 10f;          // 最大発射パワー
-    [SerializeField] protected float maxDragDistance = 3f;       // ドラッグ最大距離
-    [SerializeField] protected float minLaunchDistance = 0.1f;   // これ未満なら発射しない
-
-    [Header("Landing / Cooldown")]
-    [SerializeField] protected float landingCooldown = 0.25f;    // 着地硬直時間(=CT)
-
     [Header("Debug / Optional")]
     [SerializeField] protected LineRenderer aimLine;             // 照準線（任意）
 
@@ -27,7 +19,7 @@ public abstract class CharacterMoveBase : MonoBehaviour
 
     [SerializeField] protected State state = State.Idle;
     protected Vector2 dragStartWorld;
-    Coroutine cooldown;
+    protected Coroutine cooldown;
 
     void Awake()
     {
@@ -37,9 +29,6 @@ public abstract class CharacterMoveBase : MonoBehaviour
 
     void Update()
     {
-        // var hor = Input.GetAxisRaw("Horizontal");
-        // rb.linearVelocity = new Vector2(hor, 0);
-
         switch (state)
         {
             case State.Idle:
@@ -99,26 +88,7 @@ public abstract class CharacterMoveBase : MonoBehaviour
     /// 着地硬直ルーチン
     /// </summary>
     /// <returns></returns>
-    private IEnumerator LandingCooldownRoutine()
-    {
-        state = State.Cooldown;
-
-        // 着地直後に速度を止める
-        // rb.linearVelocity = Vector2.zero;
-
-        // ここで「着地硬直中の顔文字」に切り替える
-        // 例：faceController.SetLandingFace();
-
-        yield return new WaitForSeconds(landingCooldown);
-
-        // 硬直終了 → Idleへ
-        state = State.Idle;
-
-        // 顔文字をIdleに戻すなど
-        // faceController.SetIdleFace();
-
-        cooldown = null;
-    }
+    protected abstract IEnumerator LandingCooldownRoutine();
 
     // --- ユーティリティ ---
 

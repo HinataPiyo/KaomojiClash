@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b657cab522250754b96752fca85ba6f1, type: 3}
-  m_Name: CharacterData_Demo
+  m_Script: {fileID: 11500000, guid: fb2f3378565d3264eb4809f6ca1e1dab, type: 3}
+  m_Name: PlayerData
   m_EditorClassIdentifier: 
   status:
     maxMental: 10
-    maxSeparate: 2
+    maxSeparate: 3
+    launchPower: 10
+    maxDragDistance: 3
+    minLaunchDistance: 0.1
+    landingCooldown: 0.25

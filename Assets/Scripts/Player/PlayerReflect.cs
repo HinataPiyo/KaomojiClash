@@ -7,7 +7,7 @@ public class PlayerReflect : Reflect
         // 敵と衝突した
         if (col.collider.CompareTag("Enemy"))
         {
-            if (!CanReflection())
+            if (!CanReflection())       // 反射できない状態なら何もしない
             {
                 Debug.Log("速度が小さいため反射しません");
                 return;
