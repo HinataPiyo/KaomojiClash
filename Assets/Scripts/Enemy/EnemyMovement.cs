@@ -17,16 +17,11 @@ public class EnemyMovement : CharacterMoveBase
 
     IEnumerator LaunchRoutine()
     {
-        while(true)
-        {
-            isInput = true;
+        isInput = true;
 
-            // 発射までの待機時間
-            yield return new WaitForSeconds(data.launchDuration);
-            isLaunch = true;
-            
-            yield return new WaitUntil(() => cooldown == null);
-        }
+        // 発射までの待機時間
+        yield return new WaitForSeconds(data.launchDuration);
+        isLaunch = true;
     }
     /// <summary>
     /// 待機中の入力処理
@@ -35,8 +30,8 @@ public class EnemyMovement : CharacterMoveBase
     {
         if(!isInput) return;
         dragStartWorld = transform.position;    // ドラッグ開始位置を記録
-        state = State.Dragging;     // ドラッグ中状態へ
         shootDirectionArrow = WorldCanvasManager.I.CreateShootDirectionArrow(transform.position);   // 照準矢印作成
+        state = State.Dragging;     // ドラッグ中状態へ
         isInput = false;
     }
 
@@ -71,9 +66,9 @@ public class EnemyMovement : CharacterMoveBase
             float powerRate = Mathf.Clamp01(dragVector.magnitude / data.Status.maxDragDistance);
             float launchSpeed = data.Status.launchPower * powerRate;
 
-            Launch(launchDir * launchSpeed);
             CameraZoom.I.ResetZoom();
             shootDirectionArrow.Del();
+            Launch(launchDir * launchSpeed);
 
             isLaunch = false;
         }
@@ -83,20 +78,13 @@ public class EnemyMovement : CharacterMoveBase
     {
         state = State.Cooldown;
 
-        // 着地直後に速度を止める
-        // rb.linearVelocity = Vector2.zero;
-
-        // ここで「着地硬直中の顔文字」に切り替える
-        // 例：faceController.SetLandingFace();
-
         yield return new WaitForSeconds(data.Status.landingCooldown);
 
         // 硬直終了 → Idleへ
         state = State.Idle;
-
-        // 顔文字をIdleに戻すなど
-        // faceController.SetIdleFace();
+        Debug.Log("Idleに変わりました");
 
         cooldown = null;
+        StartCoroutine(LaunchRoutine());
     }
 }

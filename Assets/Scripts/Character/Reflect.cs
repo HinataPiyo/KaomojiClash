@@ -24,7 +24,7 @@ public abstract class Reflect : MonoBehaviour
         Vector2 reflected = Vector2.Reflect(v, n);
 
         // 速度の大きさは維持したまま向きだけ変更
-        rb.linearVelocity = reflected.normalized * v.magnitude;
+        rb.linearVelocity = reflected.normalized * v.magnitude * data.Status.reflectPower;
 
         // エフェクトを生成
         Instantiate(hitEffectPrefab, col.contacts[0].point, Quaternion.identity);

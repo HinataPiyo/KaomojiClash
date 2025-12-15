@@ -20,3 +20,4 @@ MonoBehaviour:
     maxDragDistance: 3
     minLaunchDistance: 0.1
     landingCooldown: 0.25
+    reflectPower: 2
