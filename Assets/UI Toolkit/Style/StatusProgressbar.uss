@@ -1,0 +1,17 @@
+.unity-progress-bar__container {
+    min-height: auto;
+    max-height: none;
+}
+
+#health .unity-progress-bar__container {
+}
+
+#health .unity-progress-bar__progress {
+    background-color: rgb(68, 255, 115);
+}
+
+#health .unity-progress-bar__title {
+    font-size: 26px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+}

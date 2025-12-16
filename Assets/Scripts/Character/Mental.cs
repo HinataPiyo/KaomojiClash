@@ -2,50 +2,25 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class Mental : MonoBehaviour
+public abstract class Mental : MonoBehaviour
 {
-    [SerializeField] CharacterData data;
-    [SerializeField] float currentMental;
-    [SerializeField] int currentSeparate;
-    TextMeshPro kaomoji;
-    CharacterDieEffect dieEffect;
+    [SerializeField] protected CharacterData data;
+    [SerializeField] protected float currentHealth;
+    [SerializeField] protected int currentMental;
+    protected TextMeshPro kaomoji;
+    protected CharacterDieEffect dieEffect;
 
     void Awake()
     {
         kaomoji = GetComponentInChildren<TextMeshPro>();
         dieEffect = GetComponent<CharacterDieEffect>();
-        currentMental = data.Status.maxMental;
-        currentSeparate = data.Status.maxSeparate;     // テスト用に3回分離可能に設定
+        currentHealth = data.Status.maxHealth;
+        currentMental = data.Status.maxMental;     // テスト用に3回分離可能に設定
     }
 
-    public void TakeDamage(float damage)
-    {
-        currentMental -= damage;
-        
-        WorldCanvasManager.I.ShowDamageText(transform.position, damage);
-        
-        if (currentMental <= 0)
-        {
-            CameraShake.I.ApplyShake(3f, 1.5f, 0.2f);
-            if(currentSeparate > 0)
-            {
-                currentSeparate--;
-                currentMental = data.Status.maxMental * ((float)(currentSeparate + 1) / (data.Status.maxSeparate + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
-                if(currentMental < 1f) currentMental = 1f;    // 最低1は確保
-                // 分離エフェクトなどをここで実行可能
-                // 注意:CharacterDieText に SetSeparateText が存在しないため既存の SetText を呼ぶ
-                dieEffect?.SetSeparateText(kaomoji?.text);
-                return;
-            }
+    public abstract void TakeDamage(float damage);
 
-            Die();
-            return;
-        }
-
-        CameraShake.I.ApplyShake(1.5f, 1.5f, 0.2f);
-    }
-
-    void Die()
+    protected virtual void Die()
     {
         dieEffect.SetText(kaomoji.text);
         // 死亡処理（例: オブジェクトの破壊、アニメーションの再生など）

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: EnemyData
   m_EditorClassIdentifier: 
   status:
-    attackPower: 1
-    maxMental: 100
-    maxSeparate: 3
+    attackPower: 6
+    maxHealth: 100
+    maxMental: 2
     launchPower: 5
     maxDragDistance: 3
     minLaunchDistance: 0.1
     landingCooldown: 2
-    reflectPower: 1.8
+    reflectPower: 1.3
   launchDuration: 1

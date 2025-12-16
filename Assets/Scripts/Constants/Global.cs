@@ -9,8 +9,8 @@ namespace Constants.Global
     public class CharacterStatus
     {
         public float attackPower = 1f;
-        public float maxMental = 10f;
-        public int maxSeparate = 3;
+        public float maxHealth = 10f;
+        public int maxMental = 3;
 
         [Header("Launch")]
         public float launchPower = 10f;          // 最大発射パワー
