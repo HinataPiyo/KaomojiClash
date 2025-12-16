@@ -21,6 +21,7 @@ public class PlayerReflect : Reflect
             {
                 Mental enemyHealth = col.collider.GetComponent<Mental>();
                 enemyHealth.TakeDamage(data.Status.attackPower);
+                HitStop.I.StartHitStop();
             }
         }
     }
