@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 364def34125dd4f439a291c4a7cd357b
+timeCreated: 1480496825
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI Shapes/Required/Scripts/LeanPolygon.cs
+  uploadId: 653660

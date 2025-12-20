@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fab100b7dd9740743ae3a959917ea6c1
+timeCreated: 1480498784
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI Shapes/Examples/06    2D & 3D.unity
+  uploadId: 653660

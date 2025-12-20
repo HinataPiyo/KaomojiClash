@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 70f77f6743d47994a84e68ac7177b97d
+timeCreated: 1548119655
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI/Examples/15 Switch.unity
+  uploadId: 653660

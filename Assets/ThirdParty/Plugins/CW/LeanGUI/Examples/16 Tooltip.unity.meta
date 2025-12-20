@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f69a95af83ceeb44580d7cc8295e9e65
+timeCreated: 1548119655
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI/Examples/16 Tooltip.unity
+  uploadId: 653660

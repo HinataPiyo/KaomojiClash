@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 89872575be1375741932baaf324f80bf
+timeCreated: 1480498784
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI Shapes/Examples/22    Fill.unity
+  uploadId: 653660

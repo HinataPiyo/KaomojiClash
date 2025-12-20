@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bc93f029d90ae56488878910868eed21
+timeCreated: 1480498784
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI Shapes/Examples/13    Inflate.unity
+  uploadId: 653660

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 88e5d5d45ddf1334da72ab5f0de7d1d9
+timeCreated: 1480498784
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI Shapes/Examples/23    Customize.unity
+  uploadId: 653660
