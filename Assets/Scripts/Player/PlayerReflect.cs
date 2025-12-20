@@ -1,7 +1,9 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Combo))]
 public class PlayerReflect : Reflect
 {
+    [SerializeField] Combo combo;    
     protected override void OnCollisionEnter2D(Collision2D col)
     {
         // 敵と衝突した
@@ -20,7 +22,9 @@ public class PlayerReflect : Reflect
             if (CanApplyDamage(otherRb))
             {
                 Mental enemyHealth = col.collider.GetComponent<Mental>();
-                enemyHealth.TakeDamage(data.Status.attackPower);
+                combo.IncreaseCombo();
+                float finalPower = data.Status.attackPower * combo.CurrentAmplifyer;
+                enemyHealth.TakeDamage(finalPower);
                 HitStop.I.StartHitStop();
             }
         }

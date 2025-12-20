@@ -16,6 +16,7 @@ public class PlayerMental : Mental
         currentHealth -= damage;
         WorldCanvasManager.I.ShowDamageText(transform.position, damage);
         statusUI.UpdateHealth(currentHealth);
+        GlobalVolumeManager.I.SetHitEffect();
         
         if (currentHealth <= 0)
         {

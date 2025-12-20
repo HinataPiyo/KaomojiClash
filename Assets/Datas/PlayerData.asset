@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status:
     attackPower: 5.5
-    maxHealth: 10
+    maxHealth: 100
     maxMental: 3
     launchPower: 10
     maxDragDistance: 3
     minLaunchDistance: 0.1
     landingCooldown: 0.25
     reflectPower: 1.5
+  strengthMaxAmplifyer: 1.5
