@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1a23438f66c1f0a42a38829f740bb501
+timeCreated: 1480498784
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI Shapes/Examples/18 Circle.unity
+  uploadId: 653660

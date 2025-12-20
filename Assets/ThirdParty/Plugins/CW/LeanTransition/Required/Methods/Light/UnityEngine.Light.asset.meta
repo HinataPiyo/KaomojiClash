@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: afc3336a355265f48a974be1e640531c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanTransition/Required/Methods/Light/UnityEngine.Light.asset
+  uploadId: 653660

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d849cf0c27c699841887ae0035dc4106
+timeCreated: 1480498784
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI/Examples/27 Swipe.unity
+  uploadId: 653660

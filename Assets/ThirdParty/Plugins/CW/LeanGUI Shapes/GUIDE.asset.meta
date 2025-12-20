@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 423a33646508c6a459725796ef7c98fa
+timeCreated: 1571907532
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI Shapes/GUIDE.asset
+  uploadId: 653660

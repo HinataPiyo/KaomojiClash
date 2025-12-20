@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 627f04d1fd48ef845af1cb621b9fbbb3
+timeCreated: 1480498784
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI/Examples/01 Button.unity
+  uploadId: 653660

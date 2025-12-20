@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b14ad78aaa9211b418ddcf21ec04b98a
+timeCreated: 1480498784
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI Shapes/Examples/20    Thickness.unity
+  uploadId: 653660

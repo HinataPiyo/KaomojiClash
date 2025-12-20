@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 45dc7fc64bd322e4c95b47a357df2217
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI Shapes/LeanGUIShapes.asmdef
+  uploadId: 653660

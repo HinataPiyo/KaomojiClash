@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb2f3378565d3264eb4809f6ca1e1dab, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  status:
+    attackPower: 5.5
+    maxHealth: 100
+    maxMental: 3
+    launchPower: 10
+    maxDragDistance: 3
+    minLaunchDistance: 0.1
+    landingCooldown: 0.25
+    reflectPower: 1.5
+  strengthMaxAmplifyer: 1.5

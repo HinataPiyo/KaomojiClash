@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5e18033851312ba49a44ea2be5d89d20
+timeCreated: 1480498784
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanGUI Shapes/Examples/08    Radius.unity
+  uploadId: 653660

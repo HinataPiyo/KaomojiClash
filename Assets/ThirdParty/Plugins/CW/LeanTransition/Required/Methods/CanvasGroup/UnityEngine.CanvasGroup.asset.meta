@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6e993f2bc6ff9184db8b649642e4632e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanTransition/Required/Methods/CanvasGroup/UnityEngine.CanvasGroup.asset
+  uploadId: 653660

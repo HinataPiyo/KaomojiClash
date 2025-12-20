@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d2257f53d31da2e4b95e46be43d3bfee
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69366
+  packageName: Lean GUI Shapes
+  packageVersion: 2.1.0
+  assetPath: Assets/Plugins/CW/LeanTransition/Required/Methods/Transform/LeanTransformLocalPosition_xy.cs
+  uploadId: 653660
