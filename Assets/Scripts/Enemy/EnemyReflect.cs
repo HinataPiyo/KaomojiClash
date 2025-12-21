@@ -20,6 +20,7 @@ public class EnemyReflect : Reflect
             {
                 Mental player = col.collider.GetComponent<Mental>();
                 player.TakeDamage(data.Status.attackPower);
+                AudioManager.I.PlaySEReflect();
             }
         }
     }
