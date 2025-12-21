@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMovement : CharacterMoveBase
+public class PlayerMovement : Movement
 {
     [SerializeField] PlayerData data;
-    CharacterShootDirectionArrow shootDirectionArrow;
+
     /// <summary>
     /// 待機中の入力処理
     /// </summary>

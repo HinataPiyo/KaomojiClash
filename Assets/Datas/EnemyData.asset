@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status:
     attackPower: 6
-    maxHealth: 100
+    maxHealth: 10
     maxMental: 2
     launchPower: 5
     maxDragDistance: 3

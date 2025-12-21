@@ -31,6 +31,7 @@ public class PlayerMental : Mental
                 // 注意:CharacterDieText に SetSeparateText が存在しないため既存の SetText を呼ぶ
                 dieEffect?.SetSeparateText(kaomoji?.text);
                 statusUI.UpdateHealth(currentHealth);
+                AudioManager.I.PlaySE("MentalBreak");
                 return;
             }
 

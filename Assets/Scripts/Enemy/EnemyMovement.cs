@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyMovement : CharacterMoveBase
+public class EnemyMovement : Movement
 {
     [SerializeField] EnemyData data;
-    CharacterShootDirectionArrow shootDirectionArrow;
+    
 
     bool isInput;      // 発射可能フラグ
     bool isLaunch;     // 発射中フラグ
@@ -82,7 +82,6 @@ public class EnemyMovement : CharacterMoveBase
 
         // 硬直終了 → Idleへ
         state = State.Idle;
-        Debug.Log("Idleに変わりました");
 
         cooldown = null;
         StartCoroutine(LaunchRoutine());

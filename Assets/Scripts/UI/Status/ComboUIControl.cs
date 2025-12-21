@@ -1,3 +1,4 @@
+
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -8,8 +9,19 @@ public class ComboUIControl : MonoBehaviour
     [SerializeField] TextMeshProUGUI comboCountText;
     [SerializeField] Animator anim;
 
+    GameObject[] childs;
+
     Coroutine fillRoutine;
     int beforeComboCount = 0;
+
+    void Awake()
+    {
+        childs = new GameObject[transform.childCount];
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            childs[i] = transform.GetChild(i).gameObject;
+        }
+    }
 
     /// <summary>
     /// コンボUIを更新する
@@ -25,6 +37,11 @@ public class ComboUIControl : MonoBehaviour
         {
             anim.SetTrigger("combo");
             beforeComboCount = comboCount;
+        }
+
+        foreach (var child in childs)
+        {
+            child.SetActive(comboCount > 0);
         }
     }
 
