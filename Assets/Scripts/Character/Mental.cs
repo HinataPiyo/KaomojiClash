@@ -17,7 +17,7 @@ public abstract class Mental : MonoBehaviour
         dieEffect = GetComponent<CharacterDieEffect>();
         movement = GetComponent<Movement>();
         currentHealth = data.Status.maxHealth;
-        currentMental = data.Status.maxMental;     // テスト用に3回分離可能に設定
+        currentMental = data.Kaomoji.mentalData.maxMental;     // テスト用に3回分離可能に設定
     }
 
     public abstract void TakeDamage(float damage);

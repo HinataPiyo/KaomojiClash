@@ -13,7 +13,7 @@ public class EnemyMental : Mental
             if(currentMental > 0)
             {
                 currentMental--;
-                currentHealth = data.Status.maxHealth * ((float)(currentMental + 1) / (data.Status.maxMental + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
+                currentHealth = data.Status.maxHealth * ((float)(currentMental + 1) / (data.Kaomoji.mentalData.maxMental + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
                 if(currentHealth < 1f) currentHealth = 1f;    // 最低1は確保
                 // 分離エフェクトなどをここで実行可能
                 // 注意:CharacterDieText に SetSeparateText が存在しないため既存の SetText を呼ぶ

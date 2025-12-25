@@ -1,7 +1,5 @@
 using System;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.Animations;
 
 namespace Constants.Global
 {
@@ -10,7 +8,6 @@ namespace Constants.Global
     {
         public float attackPower = 1f;
         public float maxHealth = 10f;
-        public int maxMental = 3;
 
         [Header("Launch")]
         public float launchPower = 10f;          // 最大発射パワー
@@ -22,5 +19,42 @@ namespace Constants.Global
 
         [Header("Reflect")]
         public float reflectPower = 1f;         // 反射時の速度倍率
+    }
+
+    [Serializable]
+    public class KAOMOJI
+    {
+        public float coliderXSize = 1.5f;      // コライダーの当たり判定の幅を調整
+        public MentalData mentalData;
+        public KaomojiPart eyes;
+        public KaomojiPart mouth;
+        public KaomojiPart decoration_first;
+        public KaomojiPart decoration_second;
+        [Serializable]
+        public class MentalData
+        {
+            public string faceline = "()";
+            public int maxMental = 3;
+        }
+    }
+
+    [Serializable]
+    public class KaomojiPart
+    {
+        /// <summary>
+        /// 顔文字のパーツが持つステータスはこんだけ
+        /// </summary>
+        public string part;
+        
+        [Tooltip("移動速度に影響")] public Level speed;
+        [Tooltip("攻撃力に影響")] public Level power;
+        [Tooltip("防御力に影響")] public Level guard;
+        [Tooltip("体力に影響")] public Level stamina;
+        [Serializable]
+        public class Level
+        {
+            [Range(0, 8)] public int level;
+            [Range(-10, 10)] public float value;
+        }
     }
 }
