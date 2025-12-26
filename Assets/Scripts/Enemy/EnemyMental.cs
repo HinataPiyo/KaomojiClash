@@ -7,7 +7,7 @@ public class EnemyMental : Mental
     {
         float reduct = damage * (1f - totalStatus.Guard);
         currentHealth -= Mathf.Max(1f, reduct);     // 最低1ダメージ保証
-        
+
         WorldCanvasManager.I.ShowDamageText(transform.position, damage);
         
         if (currentHealth <= 0)
@@ -29,5 +29,12 @@ public class EnemyMental : Mental
         }
 
         CameraShake.I.ApplyShake(1.5f, 1.5f, 0.2f);
+    }
+
+    protected override void Die()
+    {
+        CameraZoom.I.EnemyKilledZoom();
+        // 敵固有の死亡処理をここに追加可能
+        base.Die();
     }
 }

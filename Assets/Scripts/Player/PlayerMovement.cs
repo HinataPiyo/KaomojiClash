@@ -47,7 +47,7 @@ public class PlayerMovement : Movement
             aimLine.SetPosition(1, end);
         }
 
-        CameraZoom.I.ApplyZoom(dragVector);
+        CameraZoom.I.ApplyZoomByDrag(dragVector);
         WorldCanvasManager.I.ShowShootDirectionArrow(shootDirectionArrow, transform.position, dragVector, dragVector.magnitude);
 
         // ボタンを離したら発射
