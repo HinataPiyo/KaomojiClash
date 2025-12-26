@@ -35,18 +35,23 @@ public class ComboUIControl : MonoBehaviour
     {
         if(beforeComboCount != comboCount)
         {
-            ChildEnabled(true);
-
             if(fillRoutine != null) StopCoroutine(fillRoutine);
             fillRoutine = StartCoroutine(FillCircleRoutine(fillAmount));
             comboCountText.text = comboCount.ToString("F0");
 
             if(comboCount > 0)
             {
+                ChildEnabled(true);
                 anim.SetTrigger("combo");
                 beforeComboCount = comboCount;
             }
+            else
+            {
+                ChildEnabled(false);
+            }
         }
+
+        Debug.Log(beforeComboCount);
     }
 
     IEnumerator FillCircleRoutine(float targetFill)
@@ -64,11 +69,6 @@ public class ComboUIControl : MonoBehaviour
 
         amplifyerCircle.Fill = targetFill;
         fillRoutine = null;
-
-        if(beforeComboCount == 0)
-        {
-            ChildEnabled(false);
-        }
     }
 
     void ChildEnabled(bool enabled)
