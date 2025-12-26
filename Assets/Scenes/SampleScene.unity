@@ -4282,7 +4282,7 @@ MonoBehaviour:
   thickness: 60
   detail: 32
   angle: 0
-  fill: -0.59
+  fill: 0
 --- !u!222 &1244158590
 CanvasRenderer:
   m_ObjectHideFlags: 0

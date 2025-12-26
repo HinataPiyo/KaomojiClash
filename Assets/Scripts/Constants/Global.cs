@@ -30,6 +30,8 @@ namespace Constants.Global
         public KaomojiPart mouth;
         public KaomojiPart decoration_first;
         public KaomojiPart decoration_second;
+
+        // 精神強度など精神に関するデータ
         [Serializable]
         public class MentalData
         {
@@ -50,6 +52,8 @@ namespace Constants.Global
         [Tooltip("攻撃力に影響")] public Level power;
         [Tooltip("防御力に影響")] public Level guard;
         [Tooltip("体力に影響")] public Level stamina;
+
+        // レベルごとの効果値
         [Serializable]
         public class Level
         {

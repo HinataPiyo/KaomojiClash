@@ -21,6 +21,9 @@ public class ComboUIControl : MonoBehaviour
         {
             childs[i] = transform.GetChild(i).gameObject;
         }
+
+        amplifyerCircle.Fill = 0f;
+        ChildEnabled(false);
     }
 
     /// <summary>
@@ -30,18 +33,19 @@ public class ComboUIControl : MonoBehaviour
     /// <param name="fillAmount">Fill</param>
     public void UpdateComboUI(int comboCount, float fillAmount)
     {
-        if(fillRoutine != null) StopCoroutine(fillRoutine);
-        fillRoutine = StartCoroutine(FillCircleRoutine(fillAmount));
-        comboCountText.text = comboCount.ToString("F0");
-        if(beforeComboCount != comboCount && comboCount > 0)
+        if(beforeComboCount != comboCount)
         {
-            anim.SetTrigger("combo");
-            beforeComboCount = comboCount;
-        }
+            ChildEnabled(true);
 
-        foreach (var child in childs)
-        {
-            child.SetActive(comboCount > 0);
+            if(fillRoutine != null) StopCoroutine(fillRoutine);
+            fillRoutine = StartCoroutine(FillCircleRoutine(fillAmount));
+            comboCountText.text = comboCount.ToString("F0");
+
+            if(comboCount > 0)
+            {
+                anim.SetTrigger("combo");
+                beforeComboCount = comboCount;
+            }
         }
     }
 
@@ -60,5 +64,18 @@ public class ComboUIControl : MonoBehaviour
 
         amplifyerCircle.Fill = targetFill;
         fillRoutine = null;
+
+        if(beforeComboCount == 0)
+        {
+            ChildEnabled(false);
+        }
+    }
+
+    void ChildEnabled(bool enabled)
+    {
+        foreach (var child in childs)
+        {
+            child.SetActive(enabled);
+        }
     }
 }
