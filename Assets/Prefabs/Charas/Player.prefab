@@ -369,3 +369,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
   faceText: {fileID: 8282320392764057508}
+  col: {fileID: 821636326774840891}

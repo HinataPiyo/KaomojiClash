@@ -24,7 +24,7 @@ namespace Constants.Global
     [Serializable]
     public class KAOMOJI
     {
-        public float coliderXSize = 1.5f;      // コライダーの当たり判定の幅を調整
+        public const float ColiderXSize = 0.1f;      // コライダーの当たり判定の幅を調整
         public MentalData mentalData;
         public KaomojiPartData eyes;
         public KaomojiPartData mouth;

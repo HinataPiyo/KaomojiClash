@@ -6,7 +6,11 @@ public class ApplyKaomoji : MonoBehaviour
 {
     [SerializeField] CharacterData data;
     [SerializeField] TextMeshPro faceText;
+    [SerializeField] CapsuleCollider2D col;
 
+    string current_Kaomoji;     // 現在の顔文字
+
+    // 総合ステータス
     public float Speed { get; private set; }
     public float Power { get; private set; }
     public float Guard { get; private set; }
@@ -17,8 +21,13 @@ public class ApplyKaomoji : MonoBehaviour
     {
         TotalParameter();
         faceText.text = BuildKaomoji();
+        SetColliderSize();
     }
 
+    /// <summary>
+    /// 顔文字の組み立て
+    /// </summary>
+    /// <returns>設定された顔文字のPartsを合体させたもの</returns>
     string BuildKaomoji()
     {
         KAOMOJI K = data.Kaomoji;
@@ -31,9 +40,13 @@ public class ApplyKaomoji : MonoBehaviour
         // string right_hands = SeparatePart(K.hands.Data.part, 1);
 
         string merged = left_faceline + left_eye + mouth + right_eye + right_faceline;
+        current_Kaomoji = merged;
         return merged;
     }
 
+    /// <summary>
+    /// パーツのステータスを合計
+    /// </summary>
     void TotalParameter()
     {
         KAOMOJI K = data.Kaomoji;
@@ -46,6 +59,7 @@ public class ApplyKaomoji : MonoBehaviour
         {
             if(part == null) continue;
 
+            // SOが設定されていなければ0を返す
             Speed += part.Data == null ? 0f : part.Data.speed.GetSpeedByLevel();
             Power += part.Data == null ? 0f : part.Data.power.GetSpeedByLevel();
             Guard += part.Data == null ? 0f : part.Data.guard.GetSpeedByLevel();
@@ -54,6 +68,12 @@ public class ApplyKaomoji : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// パーツの左右分割
+    /// </summary>
+    /// <param name="part">SOで設定した記号</param>
+    /// <param name="index">左右どちらか(0=左側、1=右側)</param>
+    /// <returns></returns>
     string SeparatePart(string part, int index)
     {
         // index: 0=左側、1=右側
@@ -64,5 +84,18 @@ public class ApplyKaomoji : MonoBehaviour
         }
 
         return part[index].ToString();
+    }
+
+    /// <summary>
+    /// コライダーサイズ設定
+    /// </summary>
+    void SetColliderSize()
+    {
+        KAOMOJI K = data.Kaomoji;
+        if(K == null) return;
+
+        Vector2 size = col.size;
+        size.x = KAOMOJI.ColiderXSize * current_Kaomoji.Length;
+        col.size = size;
     }
 }
