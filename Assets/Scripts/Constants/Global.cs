@@ -49,39 +49,44 @@ namespace Constants.Global
         /// </summary>
         public string part;
         
-        [Tooltip("移動速度に影響")] public Level speed;     // %で計算(例: 0.1なら10%UP)
-        [Tooltip("攻撃力に影響")] public Level power;
-        [Tooltip("防御力に影響")] public Level guard;
-        [Tooltip("体力に影響")] public Level stamina;
+        // %で計算(例: 0.1なら10%UP)
+        [Tooltip("移動速度に影響")] public Speed speed;
+        [Tooltip("攻撃力に影響")] public Power power;
+        [Tooltip("防御力に影響")] public Guard guard;
+        [Tooltip("体力に影響")] public Stamina stamina;
 
         // レベルごとの効果値
         [Serializable]
-        public class Level
+        public class Speed
         {
             [Range(1, 7)] public int level;
-            [Range(-1, 1)] public float value;
-
-            public float GetSpeedByLevel()
-            {
-                return value + (value * level);
-            }
-
-            public float GetPowerByLevel()
-            {
-                return value + (value * level);
-            }
-
-            public float GetGuardByLevel()
-            {
-                return value + (value * level);
-            }
-
-            public float GetStaminaByLevel()
-            {
-                return value + (value * level);
-            }
+            [Range(-0.5f, 0.5f)] public float value;
+            public float GetSpeedByLevel() => level * value;
         }
 
+        [Serializable]
+        public class Power
+        {
+            [Range(1, 7)] public int level;
+            [Range(-0.7f, 0.7f)] public float value;
+            public float GetPowerByLevel() => level * value;
+        }
+
+        [Serializable]
+        public class Guard
+        {
+            [Range(1, 7)] public int level;
+            [Range(-0.05f, 0.05f)] public float value;
+            public float GetGuardByLevel() => level * value;
+        }
+
+        [Serializable]
+        public class Stamina
+        {
+            [Range(1, 7)] public int level;
+            [Range(-0.2f, 0.2f)] public float value;
+            public float GetStaminaByLevel() => level * value;
+        }
         
     }
 }

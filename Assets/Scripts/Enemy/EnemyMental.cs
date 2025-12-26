@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
 
 public class EnemyMental : Mental
 {
     public override void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        float reduct = damage * (1f - totalStatus.Guard);
+        currentHealth -= Mathf.Max(1f, reduct);     // 最低1ダメージ保証
+        
         WorldCanvasManager.I.ShowDamageText(transform.position, damage);
         
         if (currentHealth <= 0)

@@ -8,13 +8,17 @@ public class PlayerMental : Mental
     {
         statusUI = FindAnyObjectByType<StatusUIControl>();
         statusUI.UpdateMental(data.Kaomoji.mentalData.maxMental);
-        statusUI.SetMaxHealth(data.Status.maxHealth);
+        statusUI.SetMaxHealth(data.Status.maxHealth * (1f + totalStatus.Stamina));
     }
 
     public override void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        WorldCanvasManager.I.ShowDamageText(transform.position, damage);
+        float reductDamage = damage * (1f - totalStatus.Guard);
+        float finalDamage = Mathf.Max(1f, reductDamage); // 最低1ダメージ保証
+        currentHealth -= finalDamage;     // 最低1ダメージ保証
+        Debug.Log($"CurrentHealth : {currentHealth}, Final: { finalDamage }, Damage: {damage}, Guard: {totalStatus.Guard}, Reduced Damage: {reductDamage}");
+
+        WorldCanvasManager.I.ShowDamageText(transform.position, finalDamage);
         statusUI.UpdateHealth(currentHealth);
         GlobalVolumeManager.I.SetHitEffect();
         

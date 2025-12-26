@@ -22,6 +22,8 @@ public class ApplyKaomoji : MonoBehaviour
         TotalParameter();
         faceText.text = BuildKaomoji();
         SetColliderSize();
+
+        GetComponent<Mental>().Initialize(Stamina);
     }
 
     /// <summary>
@@ -61,9 +63,9 @@ public class ApplyKaomoji : MonoBehaviour
 
             // SOが設定されていなければ0を返す
             Speed += part.Data == null ? 0f : part.Data.speed.GetSpeedByLevel();
-            Power += part.Data == null ? 0f : part.Data.power.GetSpeedByLevel();
-            Guard += part.Data == null ? 0f : part.Data.guard.GetSpeedByLevel();
-            Stamina += part.Data == null ? 0f : part.Data.stamina.GetSpeedByLevel();
+            Power += part.Data == null ? 0f : part.Data.power.GetPowerByLevel();
+            Guard += part.Data == null ? 0f : part.Data.guard.GetGuardByLevel();
+            Stamina += part.Data == null ? 0f : part.Data.stamina.GetStaminaByLevel();
         }
 
     }

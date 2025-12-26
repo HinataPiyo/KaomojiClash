@@ -19,7 +19,8 @@ public class EnemyReflect : Reflect
             if (CanApplyDamage(otherRb))
             {
                 Mental player = col.collider.GetComponent<Mental>();
-                player.TakeDamage(data.Status.attackPower);
+                float finalPower = data.Status.attackPower * (1f + totalStatus.Power);
+                player.TakeDamage(finalPower);
                 AudioManager.I.PlaySEReflect();
             }
         }

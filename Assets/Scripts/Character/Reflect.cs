@@ -3,12 +3,14 @@ using UnityEngine;
 public abstract class Reflect : MonoBehaviour
 {
     protected Rigidbody2D rb;
+    protected ApplyKaomoji totalStatus;
     [SerializeField] GameObject hitEffectPrefab;
     [SerializeField] protected CharacterData data;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        totalStatus = GetComponent<ApplyKaomoji>();
     }
 
     protected abstract void OnCollisionEnter2D(Collision2D col);

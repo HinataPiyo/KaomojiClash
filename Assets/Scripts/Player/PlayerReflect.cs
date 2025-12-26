@@ -23,7 +23,7 @@ public class PlayerReflect : Reflect
             {
                 Mental enemyHealth = col.collider.GetComponent<Mental>();
                 combo.IncreaseCombo();
-                float finalPower = data.Status.attackPower * combo.CurrentAmplifyer;
+                float finalPower = data.Status.attackPower * combo.CurrentAmplifyer * (1f + totalStatus.Power);
                 enemyHealth.TakeDamage(finalPower);
                 HitStop.I.StartHitStop();
                 AudioManager.I.PlaySEReflect();

@@ -17,13 +17,13 @@ MonoBehaviour:
     part: "\u03C9"
     speed:
       level: 1
-      value: 0.1
+      value: 0.2
     power:
       level: 1
-      value: 1
+      value: 0.7
     guard:
       level: 1
-      value: 0.5
+      value: 0.05
     stamina:
       level: 1
-      value: -1
+      value: 0.5

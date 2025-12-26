@@ -1,4 +1,5 @@
 using System;
+using Constants.Global;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public abstract class Mental : MonoBehaviour
     [SerializeField] protected int currentMental;
     protected TextMeshPro kaomoji;
     protected CharacterDieEffect dieEffect;
+    protected ApplyKaomoji totalStatus;
+
     Movement movement;
 
     void Awake()
@@ -16,7 +19,13 @@ public abstract class Mental : MonoBehaviour
         kaomoji = GetComponentInChildren<TextMeshPro>();
         dieEffect = GetComponent<CharacterDieEffect>();
         movement = GetComponent<Movement>();
-        currentHealth = data.Status.maxHealth;
+        totalStatus = GetComponent<ApplyKaomoji>();
+    }
+
+
+    public void Initialize(float stamina)
+    {
+        currentHealth = data.Status.maxHealth * (1f + stamina);
         currentMental = data.Kaomoji.mentalData.maxMental;     // テスト用に3回分離可能に設定
     }
 
