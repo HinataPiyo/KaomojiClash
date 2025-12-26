@@ -10,7 +10,7 @@ namespace Constants.Global
         public float maxHealth = 10f;
 
         [Header("Launch")]
-        public float launchPower = 10f;          // 最大発射パワー
+        public float default_LaunchPower = 10f;          // 最大発射パワー
         public float maxDragDistance = 3f;       // ドラッグ最大距離
         public float minLaunchDistance = 0.1f;   // これ未満なら発射しない
 
@@ -26,10 +26,11 @@ namespace Constants.Global
     {
         public float coliderXSize = 1.5f;      // コライダーの当たり判定の幅を調整
         public MentalData mentalData;
-        public KaomojiPart eyes;
-        public KaomojiPart mouth;
-        public KaomojiPart decoration_first;
-        public KaomojiPart decoration_second;
+        public KaomojiPartData eyes;
+        public KaomojiPartData mouth;
+        public KaomojiPartData hands;
+        public KaomojiPartData decoration_first;
+        public KaomojiPartData decoration_second;
 
         // 精神強度など精神に関するデータ
         [Serializable]
@@ -48,7 +49,7 @@ namespace Constants.Global
         /// </summary>
         public string part;
         
-        [Tooltip("移動速度に影響")] public Level speed;
+        [Tooltip("移動速度に影響")] public Level speed;     // %で計算(例: 0.1なら10%UP)
         [Tooltip("攻撃力に影響")] public Level power;
         [Tooltip("防御力に影響")] public Level guard;
         [Tooltip("体力に影響")] public Level stamina;
@@ -57,8 +58,36 @@ namespace Constants.Global
         [Serializable]
         public class Level
         {
-            [Range(0, 8)] public int level;
-            [Range(-10, 10)] public float value;
+            [Range(1, 7)] public int level;
+            [Range(-1, 1)] public float value;
+
+            public float GetSpeedByLevel()
+            {
+                return value + (value * level);
+            }
+
+            public float GetPowerByLevel()
+            {
+                return value + (value * level);
+            }
+
+            public float GetGuardByLevel()
+            {
+                return value + (value * level);
+            }
+
+            public float GetStaminaByLevel()
+            {
+                return value + (value * level);
+            }
         }
+
+        
     }
+}
+
+namespace ENUM
+{
+    public enum KaomojiPartType
+    { Eyes, Mouth, Hands, Decoration_First, Decoration_Second }
 }

@@ -50,8 +50,6 @@ public class ComboUIControl : MonoBehaviour
                 ChildEnabled(false);
             }
         }
-
-        Debug.Log(beforeComboCount);
     }
 
     IEnumerator FillCircleRoutine(float targetFill)

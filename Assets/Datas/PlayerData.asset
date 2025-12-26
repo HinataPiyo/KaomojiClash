@@ -15,10 +15,19 @@ MonoBehaviour:
   status:
     attackPower: 10
     maxHealth: 1000
-    maxMental: 3
-    launchPower: 10
+    default_LaunchPower: 3
     maxDragDistance: 3
     minLaunchDistance: 0.1
     landingCooldown: 0.25
     reflectPower: 1.5
+  kaomoji:
+    coliderXSize: 1.5
+    mentalData:
+      faceline: ()
+      maxMental: 3
+    eyes: {fileID: 11400000, guid: 2b93afa8f8b295048b5d6cd3986e4149, type: 2}
+    mouth: {fileID: 11400000, guid: 0899cf25843677842bf92cc5b4a28eec, type: 2}
+    hands: {fileID: 0}
+    decoration_first: {fileID: 0}
+    decoration_second: {fileID: 0}
   strengthMaxAmplifyer: 1.5
