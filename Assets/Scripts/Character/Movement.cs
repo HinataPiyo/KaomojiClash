@@ -1,13 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class CharacterMoveBase : MonoBehaviour
+public abstract class Movement : MonoBehaviour
 {
     Rigidbody2D rb;
     RectTransform rectTF;
+    protected ApplyKaomoji totalStatus;
 
     [Header("Debug / Optional")]
     [SerializeField] protected LineRenderer aimLine;             // 照準線（任意）
+
+    protected CharacterShootDirectionArrow shootDirectionArrow;
+    public CharacterShootDirectionArrow ShootDirectionArrow => shootDirectionArrow;
 
     protected enum State
     {
@@ -25,6 +29,7 @@ public abstract class CharacterMoveBase : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rectTF = GetComponentInChildren<RectTransform>();
+        totalStatus = GetComponent<ApplyKaomoji>();
     }
 
     void Update()

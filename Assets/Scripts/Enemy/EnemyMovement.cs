@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyMovement : CharacterMoveBase
+public class EnemyMovement : Movement
 {
     [SerializeField] EnemyData data;
-    CharacterShootDirectionArrow shootDirectionArrow;
+    
 
     bool isInput;      // 発射可能フラグ
     bool isLaunch;     // 発射中フラグ
@@ -64,11 +64,11 @@ public class EnemyMovement : CharacterMoveBase
 
             // 距離に応じて速度をスケール
             float powerRate = Mathf.Clamp01(dragVector.magnitude / data.Status.maxDragDistance);
-            float launchSpeed = data.Status.launchPower * powerRate;
+            float launchSpeed = data.Status.default_LaunchPower * powerRate;
 
             CameraZoom.I.ResetZoom();
             shootDirectionArrow.Del();
-            Launch(launchDir * launchSpeed);
+            Launch(launchDir * launchSpeed * (1f + totalStatus.Speed));
 
             isLaunch = false;
         }
@@ -82,7 +82,6 @@ public class EnemyMovement : CharacterMoveBase
 
         // 硬直終了 → Idleへ
         state = State.Idle;
-        Debug.Log("Idleに変わりました");
 
         cooldown = null;
         StartCoroutine(LaunchRoutine());

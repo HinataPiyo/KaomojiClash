@@ -1,4 +1,5 @@
 using System;
+using Constants.Global;
 using TMPro;
 using UnityEngine;
 
@@ -9,13 +10,23 @@ public abstract class Mental : MonoBehaviour
     [SerializeField] protected int currentMental;
     protected TextMeshPro kaomoji;
     protected CharacterDieEffect dieEffect;
+    protected ApplyKaomoji totalStatus;
+
+    Movement movement;
 
     void Awake()
     {
         kaomoji = GetComponentInChildren<TextMeshPro>();
         dieEffect = GetComponent<CharacterDieEffect>();
-        currentHealth = data.Status.maxHealth;
-        currentMental = data.Status.maxMental;     // テスト用に3回分離可能に設定
+        movement = GetComponent<Movement>();
+        totalStatus = GetComponent<ApplyKaomoji>();
+    }
+
+
+    public void Initialize(float stamina)
+    {
+        currentHealth = data.Status.maxHealth * (1f + stamina);
+        currentMental = data.Kaomoji.mentalData.maxMental;     // テスト用に3回分離可能に設定
     }
 
     public abstract void TakeDamage(float damage);
@@ -23,6 +34,9 @@ public abstract class Mental : MonoBehaviour
     protected virtual void Die()
     {
         dieEffect.SetText(kaomoji.text);
+        AudioManager.I.PlaySE("K.O.");
+        // 矢印が残らないように破棄する
+        if(movement.ShootDirectionArrow != null) movement.ShootDirectionArrow.Del();
         // 死亡処理（例: オブジェクトの破壊、アニメーションの再生など）
         Destroy(gameObject);
     }

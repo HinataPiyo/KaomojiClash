@@ -7,14 +7,18 @@ public class PlayerMental : Mental
     void Start()
     {
         statusUI = FindAnyObjectByType<StatusUIControl>();
-        statusUI.UpdateMental(data.Status.maxMental);
-        statusUI.SetMaxHealth(data.Status.maxHealth);
+        statusUI.UpdateMental(data.Kaomoji.mentalData.maxMental);
+        statusUI.SetMaxHealth(data.Status.maxHealth * (1f + totalStatus.Stamina));
     }
 
     public override void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        WorldCanvasManager.I.ShowDamageText(transform.position, damage);
+        float reductDamage = damage * (1f - totalStatus.Guard);
+        float finalDamage = Mathf.Max(1f, reductDamage); // 最低1ダメージ保証
+        currentHealth -= finalDamage;     // 最低1ダメージ保証
+        Debug.Log($"CurrentHealth : {currentHealth}, Final: { finalDamage }, Damage: {damage}, Guard: {totalStatus.Guard}, Reduced Damage: {reductDamage}");
+
+        WorldCanvasManager.I.ShowDamageText(transform.position, finalDamage);
         statusUI.UpdateHealth(currentHealth);
         GlobalVolumeManager.I.SetHitEffect();
         
@@ -25,12 +29,13 @@ public class PlayerMental : Mental
             {
                 currentMental--;
                 statusUI.UpdateMental(currentMental);
-                currentHealth = data.Status.maxHealth * ((float)(currentMental + 1) / (data.Status.maxMental + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
+                currentHealth = data.Status.maxHealth * ((float)(currentMental + 1) / (data.Kaomoji.mentalData.maxMental + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
                 if(currentHealth < 1f) currentHealth = 1f;    // 最低1は確保
                 // 分離エフェクトなどをここで実行可能
                 // 注意:CharacterDieText に SetSeparateText が存在しないため既存の SetText を呼ぶ
                 dieEffect?.SetSeparateText(kaomoji?.text);
                 statusUI.UpdateHealth(currentHealth);
+                AudioManager.I.PlaySE("MentalBreak");
                 return;
             }
 

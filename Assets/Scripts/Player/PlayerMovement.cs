@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMovement : CharacterMoveBase
+public class PlayerMovement : Movement
 {
     [SerializeField] PlayerData data;
-    CharacterShootDirectionArrow shootDirectionArrow;
+
     /// <summary>
     /// 待機中の入力処理
     /// </summary>
@@ -70,9 +70,9 @@ public class PlayerMovement : CharacterMoveBase
 
             // 距離に応じて速度をスケール
             float powerRate = Mathf.Clamp01(dragVector.magnitude / data.Status.maxDragDistance);
-            float launchSpeed = data.Status.launchPower * powerRate;
+            float launchSpeed = data.Status.default_LaunchPower * powerRate;
 
-            Launch(launchDir * launchSpeed);
+            Launch(launchDir * launchSpeed * (1f + totalStatus.Speed));
             CameraZoom.I.ResetZoom();
             shootDirectionArrow.Del();
         }
