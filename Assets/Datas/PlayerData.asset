@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   status:
-    attackPower: 10
+    attackPower: 50
     maxHealth: 1000
     default_LaunchPower: 3
     maxDragDistance: 3
@@ -21,7 +21,6 @@ MonoBehaviour:
     landingCooldown: 0.25
     reflectPower: 1.5
   kaomoji:
-    coliderXSize: 1.5
     mentalData:
       faceline: ()
       maxMental: 3

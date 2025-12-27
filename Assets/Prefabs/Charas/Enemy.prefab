@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9948871182661806}
   - component: {fileID: 6390053099249861067}
   - component: {fileID: 1069090222145566168}
+  - component: {fileID: 7486823852248260731}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -129,7 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffectPrefab: {fileID: 5053206923923617459, guid: 6992f0d222af63e42b07fc233b5b0bc1, type: 3}
-  data: {fileID: 11400000, guid: 1370d74249f64b24491a84b7883ae0fc, type: 2}
 --- !u!114 &9948871182661806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddcfaa61ea596c642afdf96905d34b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 1370d74249f64b24491a84b7883ae0fc, type: 2}
   currentHealth: 0
   currentMental: 0
 --- !u!114 &1069090222145566168
@@ -172,9 +171,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6f64400161de3458a91948aafc02d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 1370d74249f64b24491a84b7883ae0fc, type: 2}
   faceText: {fileID: 2564207856707311610}
   col: {fileID: 3696401431655012830}
+--- !u!114 &7486823852248260731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981634585419082555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7bed3a206614254591002145b27ae20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalStatus: {fileID: 1069090222145566168}
+  data: {fileID: 0}
+  data: {fileID: 0}
 --- !u!1 &2551700774946052522
 GameObject:
   m_ObjectHideFlags: 0

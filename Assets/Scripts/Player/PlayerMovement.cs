@@ -3,7 +3,12 @@ using UnityEngine;
 
 public class PlayerMovement : Movement
 {
-    [SerializeField] PlayerData data;
+    PlayerData data;
+
+    public void Initialize(PlayerData data)
+    {
+        this.data = data;
+    }
 
     /// <summary>
     /// 待機中の入力処理

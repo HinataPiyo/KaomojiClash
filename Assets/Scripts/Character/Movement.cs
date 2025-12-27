@@ -32,6 +32,7 @@ public abstract class Movement : MonoBehaviour
         totalStatus = GetComponent<ApplyKaomoji>();
     }
 
+
     void Update()
     {
         switch (state)

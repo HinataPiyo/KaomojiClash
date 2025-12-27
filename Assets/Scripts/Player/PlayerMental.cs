@@ -20,7 +20,7 @@ public class PlayerMental : Mental
 
         WorldCanvasManager.I.ShowDamageText(transform.position, finalDamage);
         statusUI.UpdateHealth(currentHealth);
-        GlobalVolumeManager.I.SetHitEffect();
+        GlobalVolumeManager.I.HitFlashEffect();
         CameraZoom.I.ApplyZoom(2.5f);
         
         if (currentHealth <= 0)

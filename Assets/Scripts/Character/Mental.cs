@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Mental : MonoBehaviour
 {
-    [SerializeField] protected CharacterData data;
+    protected CharacterData data;
     [SerializeField] protected float currentHealth;
     [SerializeField] protected int currentMental;
     protected TextMeshPro kaomoji;
@@ -22,9 +22,14 @@ public abstract class Mental : MonoBehaviour
         totalStatus = GetComponent<ApplyKaomoji>();
     }
 
-
-    public void Initialize(float stamina)
+    /// <summary>
+    /// この関数はApplyKaomojiから実行する
+    /// </summary>
+    /// <param name="stamina"></param>
+    /// <param name="data"></param>
+    public virtual void Initialize(float stamina, CharacterData data)
     {
+        this.data = data;
         currentHealth = data.Status.maxHealth * (1f + stamina);
         currentMental = data.Kaomoji.mentalData.maxMental;     // テスト用に3回分離可能に設定
     }

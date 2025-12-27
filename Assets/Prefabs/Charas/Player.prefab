@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 1742778275416787616}
   - component: {fileID: 3274461508384448215}
   - component: {fileID: 8720677234166295927}
+  - component: {fileID: 3580746717794450806}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -308,7 +309,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffectPrefab: {fileID: 5053206923923617459, guid: 6992f0d222af63e42b07fc233b5b0bc1, type: 3}
-  data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
   combo: {fileID: 3274461508384448215}
 --- !u!114 &8257460518724741839
 MonoBehaviour:
@@ -335,7 +335,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6794c8d40671a4dbbc23f8a38b196d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
   currentHealth: 0
   currentMental: 0
 --- !u!114 &3274461508384448215
@@ -350,7 +349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 805bf1b730e9f3d4381c48ed09c87ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
   comboUI: {fileID: 0}
   comboCount: 0
   comboTimer: 3
@@ -367,6 +365,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6f64400161de3458a91948aafc02d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
   faceText: {fileID: 8282320392764057508}
   col: {fileID: 821636326774840891}
+--- !u!114 &3580746717794450806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3564381158617660891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0618a66ea34b443866f8f41d2add06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalStatus: {fileID: 8720677234166295927}
+  data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
+  data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyMovement : Movement
 {
-    [SerializeField] EnemyData data;
+    EnemyData data;
     
 
     bool isInput;      // 発射可能フラグ
@@ -12,6 +12,11 @@ public class EnemyMovement : Movement
     void Start()
     {
         StartCoroutine(LaunchRoutine());
+    }
+
+    public void Initialize(EnemyData data)
+    {
+        this.data = data;
     }
 
 

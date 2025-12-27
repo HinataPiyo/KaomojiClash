@@ -47,6 +47,7 @@ namespace Constants.Global
         /// <summary>
         /// 顔文字のパーツが持つステータスはこんだけ
         /// </summary>
+        public string partName;
         public string part;
         
         // %で計算(例: 0.1なら10%UP)

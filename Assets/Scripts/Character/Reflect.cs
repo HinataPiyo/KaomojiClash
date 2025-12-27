@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public abstract class Reflect : MonoBehaviour
+public abstract class Reflect : MonoBehaviour, IInitialize
 {
     protected Rigidbody2D rb;
     protected ApplyKaomoji totalStatus;
     [SerializeField] GameObject hitEffectPrefab;
-    [SerializeField] protected CharacterData data;
+    protected CharacterData data;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         totalStatus = GetComponent<ApplyKaomoji>();
+    }
+
+    public void Initialize(CharacterData data)
+    {
+        this.data = data;
     }
 
     protected abstract void OnCollisionEnter2D(Collision2D col);

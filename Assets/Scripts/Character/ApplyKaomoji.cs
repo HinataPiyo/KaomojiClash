@@ -2,12 +2,12 @@ using TMPro;
 using UnityEngine;
 using Constants.Global;
 
-public class ApplyKaomoji : MonoBehaviour
+public class ApplyKaomoji : MonoBehaviour, IInitialize
 {
-    [SerializeField] CharacterData data;
     [SerializeField] TextMeshPro faceText;
     [SerializeField] CapsuleCollider2D col;
 
+    CharacterData data;
     string current_Kaomoji;     // 現在の顔文字
 
     // 総合ステータス
@@ -22,9 +22,15 @@ public class ApplyKaomoji : MonoBehaviour
         TotalParameter();
         faceText.text = BuildKaomoji();
         SetColliderSize();
-
-        GetComponent<Mental>().Initialize(Stamina);
     }
+
+    public void Initialize(CharacterData data)
+    {
+        this.data = data;
+        GetComponent<Mental>().Initialize(Stamina, data);
+    }
+
+    
 
     /// <summary>
     /// 顔文字の組み立て
