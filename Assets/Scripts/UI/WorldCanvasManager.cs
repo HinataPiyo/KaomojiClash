@@ -21,12 +21,12 @@ public class WorldCanvasManager : MonoBehaviour
     /// <summary>
     /// ダメージテキストを表示
     /// </summary>
-    public void ShowDamageText(Vector3 position, float damage)
+    public void ShowDamageText(Vector3 position, float damage, Color32 color)
     {
         Vector2 newPos = position + (Vector3)damageTextOffset;
         GameObject obj = Instantiate(damageTextPrefab, newPos, Quaternion.identity, transform);
         CharacterDamageText damageText = obj.GetComponent<CharacterDamageText>();
-        damageText.SetDamage(damage);
+        damageText.SetDamage(damage, color);
     }
 
     /// <summary>

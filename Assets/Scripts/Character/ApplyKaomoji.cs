@@ -17,16 +17,12 @@ public class ApplyKaomoji : MonoBehaviour, IInitialize
     public float Stamina { get; private set; }
 
 
-    void Awake()
-    {
-        TotalParameter();
-        faceText.text = BuildKaomoji();
-        SetColliderSize();
-    }
-
     public void Initialize(CharacterData data)
     {
         this.data = data;
+        TotalParameter();
+        faceText.text = BuildKaomoji();
+        SetColliderSize();
         GetComponent<Mental>().Initialize(Stamina, data);
     }
 

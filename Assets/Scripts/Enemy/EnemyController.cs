@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] EnemyData data;    public EnemyData EnemyData => data;
+    [SerializeField] EnemyData data;
+    public EnemyData EnemyData => data;
 
     void Awake()
     {

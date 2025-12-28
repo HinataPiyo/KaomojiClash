@@ -57,7 +57,7 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -2611809501162453130, guid: be93d70936df42b45b5e5a8bcaaa363b, type: 2}
@@ -295,7 +295,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimLine: {fileID: 0}
   state: 0
-  data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
 --- !u!114 &8817187158983881015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +378,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0618a66ea34b443866f8f41d2add06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalStatus: {fileID: 8720677234166295927}
-  data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
   data: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}

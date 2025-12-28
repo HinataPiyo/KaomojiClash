@@ -14,8 +14,10 @@ public class CharacterDamageText : MonoBehaviour
     /// ダメージ数値を設定
     /// </summary>
     /// <param name="damage"></param>
-    public void SetDamage(float damage)
+    public void SetDamage(float damage, Color32 color)
     {
-        mesh.text = damage.ToString("0.##");
+        mesh.color = color;
+        // mesh.text = damage.ToString("0.##");
+        mesh.text = damage.ToString("F0");
     }
 }

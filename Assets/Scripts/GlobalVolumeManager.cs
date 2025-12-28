@@ -30,7 +30,7 @@ public class GlobalVolumeManager : MonoBehaviour
     /// </summary>
     public void HitFlashEffect()
     {
-        StartCoroutine(FlashEffectRoutine(Color.black));
+        StartCoroutine(FlashEffectRoutine(Color.red));
     }
 
     /// <summary>

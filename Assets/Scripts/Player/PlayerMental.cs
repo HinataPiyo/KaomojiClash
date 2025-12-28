@@ -18,7 +18,7 @@ public class PlayerMental : Mental
         currentHealth -= finalDamage;     // 最低1ダメージ保証
         Debug.Log($"CurrentHealth : {currentHealth}, Final: { finalDamage }, Damage: {damage}, Guard: {totalStatus.Guard}, Reduced Damage: {reductDamage}");
 
-        WorldCanvasManager.I.ShowDamageText(transform.position, finalDamage);
+        WorldCanvasManager.I.ShowDamageText(transform.position, finalDamage, Color.red);
         statusUI.UpdateHealth(currentHealth);
         GlobalVolumeManager.I.HitFlashEffect();
         CameraZoom.I.ApplyZoom(2.5f);
