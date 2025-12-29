@@ -19,18 +19,9 @@ namespace Constants.Global
 
         [Header("Reflect")]
         public float reflectPower = 1f;         // 反射時の速度倍率
-    }
 
-    [Serializable]
-    public class KAOMOJI
-    {
-        public const float ColiderXSize = 0.1f;      // コライダーの当たり判定の幅を調整
+        [Header("MentalPower")]
         public MentalData mentalData;
-        public KaomojiPartData eyes;
-        public KaomojiPartData mouth;
-        public KaomojiPartData hands;
-        public KaomojiPartData decoration_first;
-        public KaomojiPartData decoration_second;
 
         // 精神強度など精神に関するデータ
         [Serializable]
@@ -39,6 +30,17 @@ namespace Constants.Global
             public string faceline = "()";
             public int maxMental = 3;
         }
+    }
+
+    [Serializable]
+    public class KAOMOJI
+    {
+        public const float ColiderXSize = 0.1f;      // コライダーの当たり判定の幅を調整
+        public KaomojiPartData eyes;
+        public KaomojiPartData mouth;
+        public KaomojiPartData hands;
+        public KaomojiPartData decoration_first;
+        public KaomojiPartData decoration_second;
     }
 
     [Serializable]

@@ -3,7 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Combo))]
 public class PlayerReflect : Reflect
 {
-    [SerializeField] Combo combo;    
+    PlayerApplyKaomoji totalStatus;
+    [SerializeField] Combo combo;
+    void Start()
+    {
+        totalStatus = GetComponent<PlayerApplyKaomoji>();
+    }
+
     protected override void OnCollisionEnter2D(Collision2D col)
     {
         // 敵と衝突した

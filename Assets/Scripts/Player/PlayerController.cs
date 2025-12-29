@@ -6,8 +6,12 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        // Mentalの初期化はPlayerApplyKaomoji内で実行している
+        
         Combo combo = GetComponent<Combo>();
         PlayerMovement movement = GetComponent<PlayerMovement>();
+        PlayerApplyKaomoji applyKaomoji = GetComponent<PlayerApplyKaomoji>();
+        applyKaomoji.Initialize(data);
         combo.Initialize(data);
         movement.Initialize(data);
         

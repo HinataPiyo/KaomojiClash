@@ -1,5 +1,3 @@
-using System;
-using Constants.Global;
 using TMPro;
 using UnityEngine;
 
@@ -10,7 +8,7 @@ public abstract class Mental : MonoBehaviour
     [SerializeField] protected int currentMental;
     protected TextMeshPro kaomoji;
     protected CharacterDieEffect dieEffect;
-    protected ApplyKaomoji totalStatus;
+    
 
     Movement movement;
 
@@ -19,19 +17,18 @@ public abstract class Mental : MonoBehaviour
         kaomoji = GetComponentInChildren<TextMeshPro>();
         dieEffect = GetComponent<CharacterDieEffect>();
         movement = GetComponent<Movement>();
-        totalStatus = GetComponent<ApplyKaomoji>();
     }
 
     /// <summary>
-    /// この関数はApplyKaomojiから実行する
+    /// この関数はPlayerApplyKaomojiから実行する
     /// </summary>
     /// <param name="stamina"></param>
     /// <param name="data"></param>
-    public virtual void Initialize(float stamina, CharacterData data)
+    public void Initialize(float stamina, CharacterData data)
     {
         this.data = data;
         currentHealth = data.Status.maxHealth * (1f + stamina);
-        currentMental = data.Kaomoji.mentalData.maxMental;     // テスト用に3回分離可能に設定
+        currentMental = data.Status.mentalData.maxMental;
     }
 
     public abstract void TakeDamage(float damage);

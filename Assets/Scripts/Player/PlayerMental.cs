@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class PlayerMental : Mental 
 {
+    PlayerApplyKaomoji totalStatus;
     StatusUIControl statusUI;
 
     void Start()
     {
+        totalStatus = GetComponent<PlayerApplyKaomoji>();
         statusUI = FindAnyObjectByType<StatusUIControl>();
-        statusUI.UpdateMental(data.Kaomoji.mentalData.maxMental);
+        statusUI.UpdateMental(data.Status.mentalData.maxMental);
         statusUI.SetMaxHealth(data.Status.maxHealth * (1f + totalStatus.Stamina));
     }
 
@@ -30,7 +32,7 @@ public class PlayerMental : Mental
             {
                 currentMental--;
                 statusUI.UpdateMental(currentMental);
-                currentHealth = data.Status.maxHealth * ((float)(currentMental + 1) / (data.Kaomoji.mentalData.maxMental + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
+                currentHealth = data.Status.maxHealth * ((float)(currentMental + 1) / (data.Status.mentalData.maxMental + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
                 if(currentHealth < 1f) currentHealth = 1f;    // 最低1は確保
                 // 分離エフェクトなどをここで実行可能
                 // 注意:CharacterDieText に SetSeparateText が存在しないため既存の SetText を呼ぶ

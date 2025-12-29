@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class PlayerMovement : Movement
 {
+    PlayerApplyKaomoji totalStatus;
     PlayerData data;
 
     public void Initialize(PlayerData data)
     {
+        totalStatus = GetComponent<PlayerApplyKaomoji>();
         this.data = data;
     }
 

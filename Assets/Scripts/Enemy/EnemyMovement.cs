@@ -4,19 +4,16 @@ using UnityEngine;
 public class EnemyMovement : Movement
 {
     EnemyData data;
-    
 
     bool isInput;      // 発射可能フラグ
     bool isLaunch;     // 発射中フラグ
 
-    void Start()
-    {
-        StartCoroutine(LaunchRoutine());
-    }
-
     public void Initialize(EnemyData data)
     {
         this.data = data;
+        isInput = false;
+        isLaunch = false;
+        StartCoroutine(LaunchRoutine());
     }
 
 
@@ -73,7 +70,7 @@ public class EnemyMovement : Movement
 
             CameraZoom.I.ResetZoom();
             shootDirectionArrow.Del();
-            Launch(launchDir * launchSpeed * (1f + totalStatus.Speed));
+            Launch(launchDir * launchSpeed * (1f + data.E_Status.speed));
 
             isLaunch = false;
         }

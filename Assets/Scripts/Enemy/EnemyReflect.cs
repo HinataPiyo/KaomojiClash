@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class EnemyReflect : Reflect
 {
+    EnemyData e_Data;
+
+    public void EnemyInitialize(EnemyData data)
+    {
+        e_Data = data;
+    }
+
     protected override void OnCollisionEnter2D(Collision2D col)
     {
         // 敵と衝突した
@@ -19,7 +26,7 @@ public class EnemyReflect : Reflect
             if (CanApplyDamage(otherRb))
             {
                 Mental player = col.collider.GetComponent<Mental>();
-                float finalPower = data.Status.attackPower * (1f + totalStatus.Power);
+                float finalPower = data.Status.attackPower * (1f + e_Data.E_Status.power);
                 player.TakeDamage(finalPower);
                 AudioManager.I.PlaySEReflect();
             }

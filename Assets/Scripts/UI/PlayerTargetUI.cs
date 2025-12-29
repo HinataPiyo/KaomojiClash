@@ -5,9 +5,9 @@ public class PlayerTargetUI : MonoBehaviour
     Transform player;
     static readonly Vector2 offset = new Vector2(0, 0.3f);
 
-    void Awake()
+    void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = Context.I.Player.transform;
     }
 
     void Update()

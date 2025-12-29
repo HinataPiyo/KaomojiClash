@@ -3,9 +3,16 @@ using UnityEngine;
 
 public class EnemyMental : Mental
 {
+    EnemyData e_Data;
+    public void EnemyInitialize(EnemyData data)
+    {
+        e_Data = data;
+        currentHealth = data.Status.maxHealth * (1f + e_Data.E_Status.stamina);
+    }
+
     public override void TakeDamage(float damage)
     {
-        float reduct = damage * (1f - totalStatus.Guard);
+        float reduct = damage * (1f - e_Data.E_Status.guard);
         currentHealth -= Mathf.Max(1f, reduct);     // 最低1ダメージ保証
 
         WorldCanvasManager.I.ShowDamageText(transform.position, damage, Color.yellow);
@@ -16,7 +23,7 @@ public class EnemyMental : Mental
             if(currentMental > 0)
             {
                 currentMental--;
-                currentHealth = data.Status.maxHealth * ((float)(currentMental + 1) / (data.Kaomoji.mentalData.maxMental + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
+                currentHealth = data.Status.maxHealth * ((float)(currentMental + 1) / (data.Status.mentalData.maxMental + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
                 if(currentHealth < 1f) currentHealth = 1f;    // 最低1は確保
                 // 分離エフェクトなどをここで実行可能
                 // 注意:CharacterDieText に SetSeparateText が存在しないため既存の SetText を呼ぶ
