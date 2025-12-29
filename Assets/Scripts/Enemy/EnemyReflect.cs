@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyReflect : Reflect
+public class EnemyReflect : Reflect, IEnemyInitialize
 {
     EnemyData e_Data;
 

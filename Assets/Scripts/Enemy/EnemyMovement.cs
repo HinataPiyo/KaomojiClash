@@ -1,14 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyMovement : Movement
+public class EnemyMovement : Movement, IEnemyInitialize
 {
     EnemyData data;
 
     bool isInput;      // 発射可能フラグ
     bool isLaunch;     // 発射中フラグ
 
-    public void Initialize(EnemyData data)
+    public void EnemyInitialize(EnemyData data)
     {
         this.data = data;
         isInput = false;

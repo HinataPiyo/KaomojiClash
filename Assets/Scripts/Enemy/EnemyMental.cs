@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class EnemyMental : Mental
+public class EnemyMental : Mental, IEnemyInitialize
 {
     EnemyData e_Data;
     public void EnemyInitialize(EnemyData data)
@@ -27,7 +27,7 @@ public class EnemyMental : Mental
                 if(currentHealth < 1f) currentHealth = 1f;    // 最低1は確保
                 // 分離エフェクトなどをここで実行可能
                 // 注意:CharacterDieText に SetSeparateText が存在しないため既存の SetText を呼ぶ
-                dieEffect?.SetSeparateText(kaomoji?.text);
+                dieEffect.SetSeparateText(e_Data.Kaomoji_Body);
                 return;
             }
 
