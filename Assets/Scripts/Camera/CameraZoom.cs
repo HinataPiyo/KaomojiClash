@@ -31,12 +31,26 @@ public class CameraZoom : MonoBehaviour
         cam.Lens.OrthographicSize = next;
     }
 
+    /// <summary>
+    /// ドラッグしたときにZOOMする
+    /// </summary>
+    /// <param name="dragDis"></param>
     public void ApplyZoomByDrag(Vector2 dragDis)
     {
+        if(zoomRoutine != null)
+        {
+            return;
+        }
+        
         // ここでは「目標値」を更新するだけにする
         targetSize = DefaultOrthographicSize - dragDis.magnitude * zoomFactor;
     }
 
+    /// <summary>
+    /// ただ単にZOOMする
+    /// </summary>
+    /// <param name="factor"></param>
+    /// <param name="duration"></param>
     public void ApplyZoom(float factor, float duration = 0.2f)
     {
         if(zoomRoutine != null)
@@ -47,6 +61,9 @@ public class CameraZoom : MonoBehaviour
         zoomRoutine = StartCoroutine(ZoomRoutine(factor, duration));
     }
 
+    /// <summary>
+    /// 敵をKILLしたときにZOOMする
+    /// </summary>
     public void EnemyKilledZoom()
     {
         if(zoomRoutine != null)
@@ -57,6 +74,9 @@ public class CameraZoom : MonoBehaviour
         zoomRoutine = StartCoroutine(ZoomRoutine(2f, 0.3f));
     }
 
+    /// <summary>
+    /// デフォルトに戻す
+    /// </summary>
     public void ResetZoom()
     {
         // 目標値をデフォルトに戻す。あとは LateUpdate 側で自然に戻る
