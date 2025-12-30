@@ -201,6 +201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4549554711441631825, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
@@ -264,6 +268,10 @@ PrefabInstance:
     - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_Name
       value: Enemy_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549554711441631825, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_LocalPosition.x
@@ -536,6 +544,10 @@ PrefabInstance:
     - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_Name
       value: Enemy_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549554711441631825, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_LocalPosition.x
@@ -837,7 +849,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 000000008944bded
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1789,7 +1801,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 88f77aad47e401c489e2b98ae691cc6e, type: 2}
+  sharedProfile: {fileID: 0}
 --- !u!4 &919936502
 Transform:
   m_ObjectHideFlags: 0
@@ -1829,6 +1841,10 @@ PrefabInstance:
     - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_Name
       value: Enemy_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549554711441631825, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2115,6 +2131,10 @@ PrefabInstance:
     - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_Name
       value: Enemy_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549554711441631825, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2490,6 +2510,10 @@ PrefabInstance:
     - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_Name
       value: Enemy_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549554711441631825, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2884,6 +2908,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_3
       objectReference: {fileID: 0}
+    - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4549554711441631825, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
@@ -2947,6 +2975,10 @@ PrefabInstance:
     - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_Name
       value: Enemy_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549554711441631825, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3081,7 +3113,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &1987652029
 RectTransform:
@@ -3119,6 +3151,7 @@ MonoBehaviour:
   damageTextPrefab: {fileID: 4030348778515424144, guid: 39f589ea9558c0947a7ce98e3642a6ee, type: 3}
   damageTextOffset: {x: 0, y: 0.5}
   arrowPrefab: {fileID: 1854561144591636534, guid: 3f06c4c36b4e00f4d8383c1d5c1795f3, type: 3}
+  clashEffectPrefab: {fileID: 7864013070479386715, guid: 5a2d8d8ebfcc7134a809e817f20db69e, type: 3}
 --- !u!1 &2057256372
 GameObject:
   m_ObjectHideFlags: 0

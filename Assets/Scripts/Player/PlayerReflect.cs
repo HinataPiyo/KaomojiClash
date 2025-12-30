@@ -24,6 +24,7 @@ public class PlayerReflect : Reflect
             Reflection(col);        // 反射
 
             Rigidbody2D otherRb = col.collider.GetComponent<Rigidbody2D>();
+
             // 相手より自分のほうが速い場合のみダメージを与える
             if (CanApplyDamage(otherRb))
             {

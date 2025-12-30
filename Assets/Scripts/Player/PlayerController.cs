@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
         combo.Initialize(data);
         movement.Initialize(data);
         
-        IInitialize[] init = GetComponents<IInitialize>();
+        ICharacterInitialize[] init = GetComponents<ICharacterInitialize>();
 
         foreach (var item in init)
         {

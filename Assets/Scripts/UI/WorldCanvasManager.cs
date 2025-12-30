@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WorldCanvasManager : MonoBehaviour
@@ -9,6 +10,10 @@ public class WorldCanvasManager : MonoBehaviour
 
     [Header("射撃方向矢印")]
     [SerializeField] GameObject arrowPrefab;
+
+    [Header("衝突したときのエフェクト")]
+    [SerializeField] GameObject clashEffectPrefab;
+
 
     void Awake()
     {
@@ -47,4 +52,11 @@ public class WorldCanvasManager : MonoBehaviour
         arrow.transform.position = position;
         arrow.UpdateArrow(dir, power);
     }
+
+    public void CrashEffect(Vector3 position)
+    {
+        Instantiate(clashEffectPrefab, position, Quaternion.identity, transform);
+    }
+
+
 }

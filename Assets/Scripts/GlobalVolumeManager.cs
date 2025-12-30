@@ -40,7 +40,7 @@ public class GlobalVolumeManager : MonoBehaviour
     IEnumerator FlashEffectRoutine(Color32 color)
     {
         vignette.color.value = color;
-        vignette.intensity.value = 0.4f;
+        vignette.intensity.value = 0.3f;
 
         float duration = 0.5f;
         float elapsed = 0f;

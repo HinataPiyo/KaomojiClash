@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public abstract class Reflect : MonoBehaviour, IInitialize
+public abstract class Reflect : MonoBehaviour, ICharacterInitialize
 {
     protected Rigidbody2D rb;
+    const float REFRECT_SPEED_BORDER = 2.2f;
     
     [SerializeField] GameObject hitEffectPrefab;
     protected CharacterData data;
@@ -30,7 +31,7 @@ public abstract class Reflect : MonoBehaviour, IInitialize
         Vector2 reflected = Vector2.Reflect(v, n);
 
         // 速度の大きさは維持したまま向きだけ変更
-        rb.linearVelocity = reflected.normalized * v.magnitude * data.Status.reflectPower;
+        rb.linearVelocity = reflected.normalized * data.Status.reflectPower * v.magnitude ;
 
         // エフェクトを生成
         Instantiate(hitEffectPrefab, col.contacts[0].point, Quaternion.identity);
@@ -38,7 +39,7 @@ public abstract class Reflect : MonoBehaviour, IInitialize
 
     protected bool CanReflection()
     {
-        return rb.linearVelocity.sqrMagnitude >= 1f;
+        return rb.linearVelocity.sqrMagnitude >= REFRECT_SPEED_BORDER;
     }
 
     protected bool CanApplyDamage(Rigidbody2D otherRb)

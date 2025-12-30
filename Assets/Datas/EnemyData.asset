@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status:
     attackPower: 6
-    maxHealth: 100
+    maxHealth: 500
     default_LaunchPower: 3
     maxDragDistance: 3
     minLaunchDistance: 0.1
     landingCooldown: 2.3
-    reflectPower: 1.3
+    reflectPower: 1.5
+    knockBackPower: 1.5
     mentalData:
       faceline: ()
       maxMental: 3

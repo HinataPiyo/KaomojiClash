@@ -1,4 +1,4 @@
-public interface IInitialize
+public interface ICharacterInitialize
 {
     void Initialize(CharacterData data);
 }

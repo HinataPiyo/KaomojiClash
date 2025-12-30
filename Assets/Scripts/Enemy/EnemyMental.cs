@@ -40,6 +40,7 @@ public class EnemyMental : Mental, IEnemyInitialize
 
     protected override void Die()
     {
+        WorldCanvasManager.I.CrashEffect(transform.position);
         CameraZoom.I.EnemyKilledZoom();
         // 敵固有の死亡処理をここに追加可能
         base.Die();

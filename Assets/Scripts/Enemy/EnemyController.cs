@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
-        IInitialize[] init = GetComponents<IInitialize>();
+        ICharacterInitialize[] init = GetComponents<ICharacterInitialize>();
         IEnemyInitialize[] enemyInit = GetComponents<IEnemyInitialize>();
 
         foreach (var item in init)
