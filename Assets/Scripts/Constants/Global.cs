@@ -98,4 +98,6 @@ namespace ENUM
 {
     public enum KaomojiPartType
     { Eyes, Mouth, Hands, Decoration_First, Decoration_Second }
+    public enum BattleStat
+    { None = -1, Start, Now, End }
 }

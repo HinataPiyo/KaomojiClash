@@ -4,11 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyData", menuName = "EnemyData")]
 public class EnemyData : CharacterData 
 {
-    [SerializeField] string kaomoji_Body;     // 本体の顔文字
+    // 本体の顔文字   
+    [SerializeField] string kaomoji_Body;       public string Kaomoji_Body => kaomoji_Body;
     public float launchDuration = 0.5f;
-    public string Kaomoji_Body => kaomoji_Body;
-    [SerializeField] EnemyStatus e_Status;
-    public EnemyStatus E_Status => e_Status;
+    [SerializeField] float findPlayerRadius = 2f;    public float FindPlayerRadius => findPlayerRadius;
+    [SerializeField] EnemyStatus e_Status;      public EnemyStatus E_Status => e_Status;
 
 
     [Serializable]
