@@ -69,6 +69,7 @@ public class PlayerMovement : Movement
             {
                 // ほぼ動いてない → 発射キャンセル
                 state = State.Idle;
+                shootDirectionArrow.Del();
                 return;
             }
 

@@ -21,6 +21,7 @@ public abstract class Reflect : MonoBehaviour, ICharacterInitialize
     protected abstract void OnCollisionEnter2D(Collision2D col);
     protected void Reflection(Collision2D col)
     {
+        if(data == null) return;
         // 現在の速度
         Vector2 v = rb.linearVelocity;
 

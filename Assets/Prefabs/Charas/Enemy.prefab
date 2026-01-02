@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimLine: {fileID: 0}
   state: 0
+  findPlayer: {fileID: 5791848056096802947}
 --- !u!114 &6390053099249861067
 MonoBehaviour:
   m_ObjectHideFlags: 0

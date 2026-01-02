@@ -14,6 +14,8 @@ public class EnemyFindPlayer : MonoBehaviour, IEnemyInitialize
 
     void Update()
     {
+        if(data == null) return;
+        
         // 現在が戦闘中じゃなければ
         if(Context.I.BattleStat == BattleStat.None)
         {

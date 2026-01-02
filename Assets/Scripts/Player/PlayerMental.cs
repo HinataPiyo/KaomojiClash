@@ -18,7 +18,6 @@ public class PlayerMental : Mental
         float reductDamage = damage * (1f - totalStatus.Guard);
         float finalDamage = Mathf.Max(1f, reductDamage); // 最低1ダメージ保証
         currentHealth -= finalDamage;     // 最低1ダメージ保証
-        Debug.Log($"CurrentHealth : {currentHealth}, Final: { finalDamage }, Damage: {damage}, Guard: {totalStatus.Guard}, Reduced Damage: {reductDamage}");
 
         WorldCanvasManager.I.ShowDamageText(transform.position, finalDamage, Color.red);
         statusUI.UpdateHealth(currentHealth);

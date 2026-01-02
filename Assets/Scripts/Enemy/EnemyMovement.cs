@@ -1,24 +1,34 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyMovement : Movement, IEnemyInitialize
 {
     EnemyData data;
+    [SerializeField] EnemyFindPlayer findPlayer;
 
     bool isInput;      // 発射可能フラグ
     bool isLaunch;     // 発射中フラグ
+
+    Coroutine launchRoutine;
+
 
     public void EnemyInitialize(EnemyData data)
     {
         this.data = data;
         isInput = false;
         isLaunch = false;
-        StartCoroutine(LaunchRoutine());
+    }
+
+    public void InitLaunchRoutine()
+    {
+        launchRoutine = StartCoroutine(LaunchRoutine());
     }
 
 
     IEnumerator LaunchRoutine()
     {
+        // yield return new WaitUntil(() => findPlayer.IsEncount);
         isInput = true;
 
         // 発射までの待機時間

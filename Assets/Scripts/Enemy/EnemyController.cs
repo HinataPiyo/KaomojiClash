@@ -5,12 +5,14 @@ public class EnemyController : MonoBehaviour
     [SerializeField] EnemyData data;
     public EnemyData EnemyData => data;
 
-    void Awake()
+    public void EnemyInitialize(EnemyData data)
     {
-        ICharacterInitialize[] init = GetComponents<ICharacterInitialize>();
+        if(EnemyData == null) this.data = data;
+        
         IEnemyInitialize[] enemyInit = GetComponents<IEnemyInitialize>();
+        ICharacterInitialize[] charaInit = GetComponents<ICharacterInitialize>();
 
-        foreach (var item in init)
+        foreach(var item in charaInit)
         {
             item.Initialize(data);
         }
