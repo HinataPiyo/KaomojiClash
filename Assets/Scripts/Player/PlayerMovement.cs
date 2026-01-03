@@ -81,7 +81,7 @@ public class PlayerMovement : Movement
             float launchSpeed = data.Status.default_LaunchPower * powerRate;
 
             Launch(launchDir * launchSpeed * (1f + totalStatus.Speed));
-            CameraZoom.I.ResetZoom();
+            CameraZoom.I.SetCameraOrthographic(Context.I.BattleStat);
             shootDirectionArrow.Del();
         }
     }

@@ -25,7 +25,7 @@ public class EnemyFindPlayer : MonoBehaviour, IEnemyInitialize
 
             if(IsEncount)
             {
-                Context.I.StartBattle(transform.position);
+                BattleFlowManager.I.StartBattle(transform);
             }
         }
     }

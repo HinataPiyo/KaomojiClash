@@ -19,12 +19,8 @@ public class Context : MonoBehaviour
         }
     }
 
-    public void StartBattle(Vector2 enemy)
+    public void ChangeStat(BattleStat stat)
     {
-        BattleStat = BattleStat.Start;
-        wallCtrl.CreateWall(Player.transform.position, enemy);
+        BattleStat = stat;
     }
-
-    
-    
 }

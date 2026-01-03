@@ -28,7 +28,7 @@ public class EnemyMovement : Movement, IEnemyInitialize
 
     IEnumerator LaunchRoutine()
     {
-        // yield return new WaitUntil(() => findPlayer.IsEncount);
+        yield return new WaitUntil(() => Context.I.BattleStat == ENUM.BattleStat.Now);
         isInput = true;
 
         // 発射までの待機時間
@@ -78,7 +78,7 @@ public class EnemyMovement : Movement, IEnemyInitialize
             float powerRate = Mathf.Clamp01(dragVector.magnitude / data.Status.maxDragDistance);
             float launchSpeed = data.Status.default_LaunchPower * powerRate;
 
-            CameraZoom.I.ResetZoom();
+            CameraZoom.I.SetCameraOrthographic(Context.I.BattleStat);
             shootDirectionArrow.Del();
             Launch(launchDir * launchSpeed * (1f + data.E_Status.speed));
 

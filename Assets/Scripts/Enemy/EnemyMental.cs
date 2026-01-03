@@ -42,6 +42,8 @@ public class EnemyMental : Mental, IEnemyInitialize
     {
         WorldCanvasManager.I.CrashEffect(transform.position);
         CameraZoom.I.EnemyKilledZoom();
+        BattleFlowManager.I.RemoveEnemy(transform);
+
         // 敵固有の死亡処理をここに追加可能
         base.Die();
     }

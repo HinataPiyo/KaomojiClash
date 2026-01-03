@@ -8,7 +8,18 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] GameObject enemy_Prefab;
     [SerializeField] WallController wallCtrl;
 
-    List<GameObject> currentEnemies = new List<GameObject>();
+    public List<GameObject> CurrentEnemies { get; private set; } = new List<GameObject>();
+
+
+    void Update()
+    {
+        if(Context.I.BattleStat == ENUM.BattleStat.Now
+        && BattleFlowManager.I.BattleEnemies.Count <= 0)
+        {
+            BattleFlowManager.I.EndBattle();
+            return;
+        }
+    }
 
 
     public void WallSpawnedSpawnEnemy(int count)
@@ -51,13 +62,24 @@ public class EnemySpawnController : MonoBehaviour
         enemy.GetComponent<EnemyController>().EnemyInitialize(data);
         enemy.GetComponent<EnemyMovement>().InitLaunchRoutine();
 
-        currentEnemies.Add(enemy);
+        CurrentEnemies.Add(enemy);
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(transform.position, fieldAreaSize);
+    }
+
+    public Transform[] GetEnemiesTransform()
+    {
+        Transform[] result = new Transform[CurrentEnemies.Count];
+        for(int i = 0; i < CurrentEnemies.Count; i++)
+        {
+            result[i] = CurrentEnemies[i].transform;
+        }
+
+        return result;
     }
 
 }
