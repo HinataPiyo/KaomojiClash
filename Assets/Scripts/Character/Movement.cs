@@ -5,7 +5,6 @@ public abstract class Movement : MonoBehaviour
 {
     Rigidbody2D rb;
     RectTransform rectTF;
-    protected ApplyKaomoji totalStatus;
 
     [Header("Debug / Optional")]
     [SerializeField] protected LineRenderer aimLine;             // 照準線（任意）
@@ -29,8 +28,8 @@ public abstract class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rectTF = GetComponentInChildren<RectTransform>();
-        totalStatus = GetComponent<ApplyKaomoji>();
     }
+
 
     void Update()
     {

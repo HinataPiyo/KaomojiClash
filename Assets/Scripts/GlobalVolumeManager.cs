@@ -28,19 +28,19 @@ public class GlobalVolumeManager : MonoBehaviour
     /// <summary>
     /// 被弾エフェクトを設定する
     /// </summary>
-    public void SetHitEffect()
+    public void HitFlashEffect()
     {
-        StartCoroutine(HitEffectRoutine());
+        StartCoroutine(FlashEffectRoutine(Color.red));
     }
 
     /// <summary>
     /// 被弾エフェクトコルーチン
     /// </summary>
     /// <returns></returns>
-    IEnumerator HitEffectRoutine()
+    IEnumerator FlashEffectRoutine(Color32 color)
     {
-        vignette.color.value = Color.black;
-        vignette.intensity.value = 0.4f;
+        vignette.color.value = color;
+        vignette.intensity.value = 0.3f;
 
         float duration = 0.5f;
         float elapsed = 0f;

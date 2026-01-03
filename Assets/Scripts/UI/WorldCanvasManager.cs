@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WorldCanvasManager : MonoBehaviour
@@ -10,6 +11,10 @@ public class WorldCanvasManager : MonoBehaviour
     [Header("射撃方向矢印")]
     [SerializeField] GameObject arrowPrefab;
 
+    [Header("衝突したときのエフェクト")]
+    [SerializeField] GameObject clashEffectPrefab;
+
+
     void Awake()
     {
         if(I == null)
@@ -21,12 +26,12 @@ public class WorldCanvasManager : MonoBehaviour
     /// <summary>
     /// ダメージテキストを表示
     /// </summary>
-    public void ShowDamageText(Vector3 position, float damage)
+    public void ShowDamageText(Vector3 position, float damage, Color32 color)
     {
         Vector2 newPos = position + (Vector3)damageTextOffset;
         GameObject obj = Instantiate(damageTextPrefab, newPos, Quaternion.identity, transform);
         CharacterDamageText damageText = obj.GetComponent<CharacterDamageText>();
-        damageText.SetDamage(damage);
+        damageText.SetDamage(damage, color);
     }
 
     /// <summary>
@@ -47,4 +52,11 @@ public class WorldCanvasManager : MonoBehaviour
         arrow.transform.position = position;
         arrow.UpdateArrow(dir, power);
     }
+
+    public void CrashEffect(Vector3 position)
+    {
+        Instantiate(clashEffectPrefab, position, Quaternion.identity, transform);
+    }
+
+
 }

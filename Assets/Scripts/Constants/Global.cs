@@ -19,18 +19,9 @@ namespace Constants.Global
 
         [Header("Reflect")]
         public float reflectPower = 1f;         // 反射時の速度倍率
-    }
 
-    [Serializable]
-    public class KAOMOJI
-    {
-        public const float ColiderXSize = 0.1f;      // コライダーの当たり判定の幅を調整
+        [Header("MentalPower")]
         public MentalData mentalData;
-        public KaomojiPartData eyes;
-        public KaomojiPartData mouth;
-        public KaomojiPartData hands;
-        public KaomojiPartData decoration_first;
-        public KaomojiPartData decoration_second;
 
         // 精神強度など精神に関するデータ
         [Serializable]
@@ -42,11 +33,23 @@ namespace Constants.Global
     }
 
     [Serializable]
+    public class KAOMOJI
+    {
+        public const float ColiderXSize = 0.1f;      // コライダーの当たり判定の幅を調整
+        public KaomojiPartData eyes;
+        public KaomojiPartData mouth;
+        public KaomojiPartData hands;
+        public KaomojiPartData decoration_first;
+        public KaomojiPartData decoration_second;
+    }
+
+    [Serializable]
     public class KaomojiPart
     {
         /// <summary>
         /// 顔文字のパーツが持つステータスはこんだけ
         /// </summary>
+        public string partName;
         public string part;
         
         // %で計算(例: 0.1なら10%UP)
@@ -95,4 +98,6 @@ namespace ENUM
 {
     public enum KaomojiPartType
     { Eyes, Mouth, Hands, Decoration_First, Decoration_Second }
+    public enum BattleStat
+    { None = -1, Start, Now, End }
 }

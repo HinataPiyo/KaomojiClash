@@ -3,7 +3,14 @@ using UnityEngine;
 
 public class PlayerMovement : Movement
 {
-    [SerializeField] PlayerData data;
+    PlayerApplyKaomoji totalStatus;
+    PlayerData data;
+
+    public void Initialize(PlayerData data)
+    {
+        totalStatus = GetComponent<PlayerApplyKaomoji>();
+        this.data = data;
+    }
 
     /// <summary>
     /// 待機中の入力処理
@@ -47,7 +54,7 @@ public class PlayerMovement : Movement
             aimLine.SetPosition(1, end);
         }
 
-        CameraZoom.I.ApplyZoom(dragVector);
+        CameraZoom.I.ApplyZoomByDrag(dragVector);
         WorldCanvasManager.I.ShowShootDirectionArrow(shootDirectionArrow, transform.position, dragVector, dragVector.magnitude);
 
         // ボタンを離したら発射
@@ -62,6 +69,7 @@ public class PlayerMovement : Movement
             {
                 // ほぼ動いてない → 発射キャンセル
                 state = State.Idle;
+                shootDirectionArrow.Del();
                 return;
             }
 
@@ -73,7 +81,7 @@ public class PlayerMovement : Movement
             float launchSpeed = data.Status.default_LaunchPower * powerRate;
 
             Launch(launchDir * launchSpeed * (1f + totalStatus.Speed));
-            CameraZoom.I.ResetZoom();
+            CameraZoom.I.SetCameraOrthographic(Context.I.BattleStat);
             shootDirectionArrow.Del();
         }
     }

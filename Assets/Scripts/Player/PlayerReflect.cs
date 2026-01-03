@@ -3,7 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Combo))]
 public class PlayerReflect : Reflect
 {
-    [SerializeField] Combo combo;    
+    PlayerApplyKaomoji totalStatus;
+    [SerializeField] Combo combo;
+    void Start()
+    {
+        totalStatus = GetComponent<PlayerApplyKaomoji>();
+    }
+
     protected override void OnCollisionEnter2D(Collision2D col)
     {
         // 敵と衝突した
@@ -18,6 +24,7 @@ public class PlayerReflect : Reflect
             Reflection(col);        // 反射
 
             Rigidbody2D otherRb = col.collider.GetComponent<Rigidbody2D>();
+
             // 相手より自分のほうが速い場合のみダメージを与える
             if (CanApplyDamage(otherRb))
             {

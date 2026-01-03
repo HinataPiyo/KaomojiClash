@@ -1,21 +1,24 @@
-using System.Collections;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class Combo : MonoBehaviour
 {
-    [SerializeField] PlayerData data;
     [SerializeField] ComboUIControl comboUI;
     [SerializeField] int comboCount = 0;
     [SerializeField] float comboTimer = 3f;     // コンボ継続時間
     [SerializeField] int amplifyer_MaxCombo = 10;        // 最大コンボ数
 
+    PlayerData p_data;
     float currentTimer = 0f;
     public float CurrentAmplifyer { get; private set; } = 0f;
 
     void Awake()
     {
         Reset();
+    }
+
+    public void Initialize(PlayerData data)
+    {
+        p_data = data;
     }
 
     void Update()
@@ -30,9 +33,9 @@ public class Combo : MonoBehaviour
         }
 
         // 現在の攻撃力増幅率を計算
-        CurrentAmplifyer = Mathf.Lerp(data.StrengthMinAmplifyer, data.StrengthMaxAmplifyer, (float)comboCount / amplifyer_MaxCombo);
+        CurrentAmplifyer = Mathf.Lerp(p_data.StrengthMinAmplifyer, p_data.StrengthMaxAmplifyer, (float)comboCount / amplifyer_MaxCombo);
         // StrengthMin..StrengthMax の範囲を 0..1 に正規化して UI に渡す
-        float normalizedAmplifyer = Mathf.InverseLerp(data.StrengthMinAmplifyer, data.StrengthMaxAmplifyer, CurrentAmplifyer);
+        float normalizedAmplifyer = Mathf.InverseLerp(p_data.StrengthMinAmplifyer, p_data.StrengthMaxAmplifyer, CurrentAmplifyer);
         comboUI.UpdateComboUI(comboCount, normalizedAmplifyer);
     }
 

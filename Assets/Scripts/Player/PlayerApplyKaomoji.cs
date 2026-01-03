@@ -2,12 +2,12 @@ using TMPro;
 using UnityEngine;
 using Constants.Global;
 
-public class ApplyKaomoji : MonoBehaviour
+public class PlayerApplyKaomoji : MonoBehaviour
 {
-    [SerializeField] CharacterData data;
     [SerializeField] TextMeshPro faceText;
     [SerializeField] CapsuleCollider2D col;
 
+    PlayerData data;
     string current_Kaomoji;     // 現在の顔文字
 
     // 総合ステータス
@@ -17,14 +17,16 @@ public class ApplyKaomoji : MonoBehaviour
     public float Stamina { get; private set; }
 
 
-    void Awake()
+    public void Initialize(PlayerData data)
     {
+        this.data = data;
         TotalParameter();
         faceText.text = BuildKaomoji();
         SetColliderSize();
-
-        GetComponent<Mental>().Initialize(Stamina);
+        GetComponent<Mental>().Initialize(Stamina, data);
     }
+
+    
 
     /// <summary>
     /// 顔文字の組み立て
@@ -33,8 +35,8 @@ public class ApplyKaomoji : MonoBehaviour
     string BuildKaomoji()
     {
         KAOMOJI K = data.Kaomoji;
-        string left_faceline = SeparatePart(K.mentalData?.faceline, 0);
-        string right_faceline = SeparatePart(K.mentalData?.faceline, 1);
+        string left_faceline = SeparatePart(data.Status.mentalData?.faceline, 0);
+        string right_faceline = SeparatePart(data.Status.mentalData?.faceline, 1);
         string left_eye = SeparatePart(K.eyes?.Data.part, 0);
         string right_eye = SeparatePart(K.eyes?.Data.part, 1);
         string mouth = K.mouth?.Data.part;

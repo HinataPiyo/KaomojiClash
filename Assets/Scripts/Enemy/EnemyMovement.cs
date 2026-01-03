@@ -1,22 +1,34 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyMovement : Movement
+public class EnemyMovement : Movement, IEnemyInitialize
 {
-    [SerializeField] EnemyData data;
-    
+    EnemyData data;
+    [SerializeField] EnemyFindPlayer findPlayer;
 
     bool isInput;      // 発射可能フラグ
     bool isLaunch;     // 発射中フラグ
 
-    void Start()
+    Coroutine launchRoutine;
+
+
+    public void EnemyInitialize(EnemyData data)
     {
-        StartCoroutine(LaunchRoutine());
+        this.data = data;
+        isInput = false;
+        isLaunch = false;
+    }
+
+    public void InitLaunchRoutine()
+    {
+        launchRoutine = StartCoroutine(LaunchRoutine());
     }
 
 
     IEnumerator LaunchRoutine()
     {
+        yield return new WaitUntil(() => Context.I.BattleStat == ENUM.BattleStat.Now);
         isInput = true;
 
         // 発射までの待機時間
@@ -66,9 +78,9 @@ public class EnemyMovement : Movement
             float powerRate = Mathf.Clamp01(dragVector.magnitude / data.Status.maxDragDistance);
             float launchSpeed = data.Status.default_LaunchPower * powerRate;
 
-            CameraZoom.I.ResetZoom();
+            CameraZoom.I.SetCameraOrthographic(Context.I.BattleStat);
             shootDirectionArrow.Del();
-            Launch(launchDir * launchSpeed * (1f + totalStatus.Speed));
+            Launch(launchDir * launchSpeed * (1f + data.E_Status.speed));
 
             isLaunch = false;
         }
