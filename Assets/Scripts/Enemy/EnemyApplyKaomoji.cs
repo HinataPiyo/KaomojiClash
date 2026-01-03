@@ -29,4 +29,24 @@ public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
         size.x = KAOMOJI.ColiderXSize * data.Kaomoji_Body.Length;
         col.size = size;
     }
+
+    /// <summary>
+    /// 半透明
+    /// </summary>
+    public void Translucent()
+    {
+        Color c = faceText.color;
+        c.a = 0.5f;
+        faceText.color = c;
+    }
+
+    /// <summary>
+    /// 不透明
+    /// </summary>
+    public void Opaque()
+    {
+        Color c = faceText.color;
+        c.a = 1f;
+        faceText.color = c;
+    }
 }

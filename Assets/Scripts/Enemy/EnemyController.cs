@@ -3,7 +3,13 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] EnemyData data;
+    EnemyApplyKaomoji applyKaomoji;
     public EnemyData EnemyData => data;
+
+    void Awake()
+    {
+        applyKaomoji = GetComponent<EnemyApplyKaomoji>();
+    }
 
     public void EnemyInitialize(EnemyData data)
     {
@@ -22,4 +28,23 @@ public class EnemyController : MonoBehaviour
             item.EnemyInitialize(data);
         }
     }
+
+    public void OnBattle()
+    {
+        gameObject.layer = LayerMask.NameToLayer(Layer.BATTLE);
+        applyKaomoji.Opaque();
+    }
+
+    public void OutBattle()
+    {
+        gameObject.layer = LayerMask.NameToLayer(Layer.WORLD);
+        applyKaomoji.Translucent();
+    }
+
+    public void BattleEnd()
+    {
+        gameObject.layer = LayerMask.NameToLayer(Layer.WORLD);
+        applyKaomoji.Opaque();
+    }
+        
 }

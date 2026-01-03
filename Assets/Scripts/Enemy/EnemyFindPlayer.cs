@@ -19,12 +19,13 @@ public class EnemyFindPlayer : MonoBehaviour, IEnemyInitialize
         // 現在が戦闘中じゃなければ
         if(Context.I.BattleStat == BattleStat.None)
         {
-            int playerMask = LayerMask.GetMask("Player");
+            int playerMask = LayerMask.GetMask(Layer.Player);
             Collider2D player = Physics2D.OverlapCircle((Vector2)transform.position, data.FindPlayerRadius, playerMask);
             IsEncount = player != null;
 
             if(IsEncount)
             {
+                // 戦闘開始の合図を送る
                 BattleFlowManager.I.StartBattle(transform);
             }
         }

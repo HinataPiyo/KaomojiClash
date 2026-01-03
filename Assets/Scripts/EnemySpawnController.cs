@@ -3,13 +3,20 @@ using UnityEngine;
 
 public class EnemySpawnController : MonoBehaviour
 {
-    [SerializeField] Vector2 fieldAreaSize;
-    [SerializeField] EnemyDatabase enemy_DB;
-    [SerializeField] GameObject enemy_Prefab;
-    [SerializeField] WallController wallCtrl;
+    [Header("敵のデータベース"), SerializeField] EnemyDatabase enemy_DB;
+    [Header("敵の元Prefab"), SerializeField] GameObject enemy_Prefab;
+    [Header("戦闘時の囲いを制御するスクリプト"), SerializeField] WallController wallCtrl;
 
     public List<GameObject> CurrentEnemies { get; private set; } = new List<GameObject>();
 
+    [Header("INFO")]
+    [Tooltip("最初の敵の出現数"), SerializeField] int spawnAmount;
+    [Tooltip("エリアの大きさ"), SerializeField] Vector2 fieldAreaSize;
+
+    void Start()
+    {
+        SpawnEnemy(spawnAmount);
+    }
 
     void Update()
     {

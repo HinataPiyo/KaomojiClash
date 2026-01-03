@@ -1456,7 +1456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c893168d9a2f447489059bf2fbec159c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetGroup: {fileID: 0}
 --- !u!1 &919936500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,11 +1890,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764ee5aded18e5249a608e8a0bf08d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldAreaSize: {x: 95, y: 95}
   enemy_DB: {fileID: 11400000, guid: 08058e89a0c24d242ae65817d6f47562, type: 2}
   enemy_Prefab: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
   wallCtrl: {fileID: 796114082}
-  targetGroupCtrl: {fileID: 898216140}
+  spawnAmount: 10
+  fieldAreaSize: {x: 95, y: 95}
 --- !u!114 &1800827689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2712,7 +2711,6 @@ GameObject:
   - component: {fileID: 4977452787298249652}
   - component: {fileID: 4561089515480425752}
   - component: {fileID: 8846165446821695831}
-  - component: {fileID: 8846165446821695832}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -2742,7 +2740,7 @@ MonoBehaviour:
   Target:
     TrackingTarget: {fileID: 898216139}
     LookAtTarget: {fileID: 0}
-    CustomLookAtTarget: 1
+    CustomLookAtTarget: 0
   Lens:
     FieldOfView: 34
     OrthographicSize: 3.3
@@ -3032,22 +3030,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomFactor: 0.2
   smoothTime: 0.15
---- !u!114 &8846165446821695832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5431285837369853174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7362d5a2f8ea3347bfcc808a1e9290e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FocusTarget: 2
-  CustomTarget: {fileID: 0}
-  FocusDepthOffset: 0
-  Damping: 0.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

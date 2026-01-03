@@ -16,7 +16,6 @@ public class BattleFlowManager : MonoBehaviour
     void Awake()
     {
         if(I == null) I = this;
-        enemySpawnCtrl.SpawnEnemy(1);
     }
 
     public void StartBattle(Transform enemy)
@@ -26,7 +25,8 @@ public class BattleFlowManager : MonoBehaviour
         wallCtrl.CreateWall(Context.I.Player.transform.position, enemy.position);
         CameraZoom.I.InitSetCameraOrthographic(Context.I.BattleStat);
         targetGroupCtrl.AddTarget(enemy);
-
+        OnBattleEnemies();
+        
         Context.I.ChangeStat(BattleStat.Now);
     }
 
@@ -35,7 +35,8 @@ public class BattleFlowManager : MonoBehaviour
         Context.I.ChangeStat(BattleStat.End);
         wallCtrl.DestroyWall();
         CameraZoom.I.InitSetCameraOrthographic(Context.I.BattleStat);
-
+        AllOutEnemies();
+        
         Context.I.ChangeStat(BattleStat.None);
     }
 
@@ -44,5 +45,30 @@ public class BattleFlowManager : MonoBehaviour
         BattleEnemies.Remove(killedEnemy);
         targetGroupCtrl.RemoveTarget(killedEnemy);
         enemySpawnCtrl.CurrentEnemies.Remove(killedEnemy.gameObject);
+    }
+
+    void OnBattleEnemies()
+    {
+        foreach(Transform joinE in BattleEnemies)
+        {
+            foreach(Transform outE in enemySpawnCtrl.GetEnemiesTransform())
+            {
+                if(joinE != outE)
+                {
+                    outE.GetComponent<EnemyController>().OutBattle();
+                    continue;
+                }
+            }
+
+            joinE.GetComponent<EnemyController>().OnBattle();
+        }
+    }
+
+    void AllOutEnemies()
+    {
+        foreach(Transform e in enemySpawnCtrl.GetEnemiesTransform())
+        {
+            e.GetComponent<EnemyController>().BattleEnd();
+        }
     }
 }
