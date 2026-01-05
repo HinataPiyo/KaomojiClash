@@ -5,6 +5,7 @@ using System.Collections;
 
 public class WaveController : MonoBehaviour
 {
+    public static readonly float EnemyAmountIncreaseValue = 0.6f;
     [SerializeField] EnemySpawnController enemySpawn;
     int waveCount;
     public bool IsWaving { get; private set; }
@@ -20,8 +21,9 @@ public class WaveController : MonoBehaviour
     {
         IsWaving = true;        // Wave開始
         EnemyData encountEnemy = enemy.GetComponent<EnemyController>().EnemyData;
-        
-        for(int ii = 0; ii < 3; ii++)
+        int maxWaveCount = encountEnemy.Wave.elements.Count;
+
+        for(int ii = 0; ii < maxWaveCount; ii++)
         {
             waveCount = ii;
             enemySpawn.SpawnEnemyInWall(waveCount, encountEnemy);
@@ -30,28 +32,68 @@ public class WaveController : MonoBehaviour
         }
 
         BattleFlowManager.I.EndBattle();        // 戦闘終了
+        waveCount = 0;
         IsWaving = false;       // Wave終了
     }
 
-    public void CreateWaveData(EnemyData firstEnemy, int firstEnemyLevel)
+    /// <summary>
+    /// WaveDataを作成しEnemyDataに保持させておく
+    /// ※ EnemyDataは敵生成時にCopyされている(元のSOには干渉しない)
+    /// </summary>
+    /// <param name="firstEnemy">エンカウントした敵の情報</param>
+    /// <param name="firstEnemyLevel">(現)敵のレベル（難易度）は生成時に決まるので引数で受け取る</param>
+    public void CreateWaveData(EnemyData firstEnemy, ENUM.Difficulty difficulty)
     {
         Wave w = new Wave();
+        w.difficulty = difficulty;
+        int waveCount = 0;
+        int dif_Amount = GetOneWaveEnemyAmount(w.difficulty);     // 難易度に応じて敵の量を設定
+
+        // 現在 3Wave分作成
         for(int ii = 0; ii < 3; ii++)
         {
             w.elements.Add(new Wave.Element());
         }
 
+        // 作成したWaveDataからさらに、敵情報を盛り込んでいく
         foreach(Wave.Element elem in w.elements)
         {
-            int r_EnemyAmount = Random.Range(1, 8);
-            for(int ii = 0; ii < r_EnemyAmount; ii++)
+            // 1Waveごとの設定
+            float increase = EnemyAmountIncreaseValue * waveCount;
+            int enemyAmount = Mathf.CeilToInt(dif_Amount * (increase + 1));
+            for(int ii = 0; ii < enemyAmount; ii++)
             {
-                int r_level = Random.Range(firstEnemyLevel - 2, firstEnemyLevel + 2);
-                EnemyData select = enemySpawn.SelectEnemyData(r_level);
+                // 難易度に応じて敵のレベルが決まる
+                EnemyData select = enemySpawn.SelectEnemyData(w.difficulty);
                 elem.datas.Add(select);              
             }
+
+            waveCount++;
         }
 
+        // WaveDataを作成し終わったらエンカウントした敵にWaveDataを再度Setする
         firstEnemy.SetWaveData(w);
+    }
+
+    /// <summary>
+    /// 1Waveごとの敵の数
+    /// </summary>
+    /// <param name="difficulty">難易度</param>
+    int GetOneWaveEnemyAmount(ENUM.Difficulty difficulty)
+    {
+        bool isMany = Random.Range(0, 2) == 1;
+        switch(difficulty)
+        {
+            case ENUM.Difficulty.Easy:
+                return isMany ? 1 : 2;
+            case ENUM.Difficulty.Normal:
+                return isMany ? 2 : 3;
+            case ENUM.Difficulty.Hard:
+                return isMany ? 3 : 4;;
+            case ENUM.Difficulty.Extreme:
+                return isMany ? 4 : 5;
+            default:
+                return 0;
+        }
     }
 }

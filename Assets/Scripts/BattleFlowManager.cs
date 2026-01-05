@@ -38,6 +38,8 @@ public class BattleFlowManager : MonoBehaviour
         targetGroupCtrl.AddTarget(enemy);
 
         waveCtrl.WaveStart(enemy);
+
+        Debug.Log("エンカウントした敵の難易度 : " + enemy.GetComponent<EnemyController>().EnemyData.Wave.difficulty.ToString());
         
         Context.I.ChangeStat(BattleStat.Now);
     }
@@ -88,12 +90,10 @@ public class BattleFlowManager : MonoBehaviour
             if(isInBattle)
             {
                 all.GetComponent<EnemyController>().OnBattle();
-                Debug.Log("On");
             }
             else
             {
                 all.GetComponent<EnemyController>().OutBattle();
-                Debug.Log("Out");
             }
         }
     }

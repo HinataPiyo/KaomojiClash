@@ -31,13 +31,10 @@ public class EnemySpawnController : MonoBehaviour
         Wall wall = wallCtrl.GetWall();
         Vector2 spawnAreaSize = wall.SpawnArea;
 
-        Debug.Log("elements : " + firstEnemyData.Wave.elements.Count);
-        Debug.Log("datas : " + firstEnemyData.Wave.elements[waveCount].datas.Count);
-
         // 今のところ敵はランダム抽選
         foreach(EnemyData data in firstEnemyData.Wave.elements[waveCount].datas)
         {
-            // WaveControllerでFirstEnemyに入れたWaveDataのEnemyDataをSpawn()関数に入れ実行
+            // WaveControllerでFirstEnemyに入れたWaveDataの中にあるEnemyDataをSpawn()関数に入れ実行
             GameObject e = Spawn(RandomPosition(wall.CenterPosition, spawnAreaSize), data);
             BattleFlowManager.I.BattleEnemies.Add(e.transform);
             targetGroupCtrl.AddTarget(e.transform);
@@ -53,12 +50,12 @@ public class EnemySpawnController : MonoBehaviour
     /// <param name="count">生成量</param>
     public void FirstSpawnEnemy(int count)
     {
-        int r_level = Random.Range(1, 10);
         for(int i = 0; i < count; i++)
         {
-            GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), SelectEnemyData(r_level));
+            ENUM.Difficulty dif = (ENUM.Difficulty)Random.Range(0, (int)ENUM.Difficulty.Max);
+            GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), SelectEnemyData(dif));
             EnemyData data = e.GetComponent<EnemyController>().EnemyData;
-            waveCtrl.CreateWaveData(data, r_level);
+            waveCtrl.CreateWaveData(data, dif);
         }
     }
 
@@ -81,9 +78,10 @@ public class EnemySpawnController : MonoBehaviour
     /// <summary>
     /// 敵のデータベースからランダムに抽選する
     /// </summary>
-    public EnemyData SelectEnemyData(int level = 1)
+    public EnemyData SelectEnemyData(ENUM.Difficulty difficulty)
     {
         int index = Random.Range(0, enemy_DB.EnemyData.Length);
+        int level = Calculation.GetLevelByDifficulty(difficulty);
         EnemyData copy = Instantiate(enemy_DB.EnemyData[index]);
         copy.E_Status.SetLevel(level);
         return copy;
