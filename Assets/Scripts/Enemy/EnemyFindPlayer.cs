@@ -31,6 +31,8 @@ public class EnemyFindPlayer : MonoBehaviour, IEnemyInitialize
         }
     }
 
+    public void DoEncount() => IsEncount = true;
+
     void OnDrawGizmos()
     {
         Gizmos.color = IsEncount ? Color.green : Color.red;

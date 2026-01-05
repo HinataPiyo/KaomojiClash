@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Constants.Global
@@ -91,6 +92,20 @@ namespace Constants.Global
             public float GetStaminaByLevel() => level * value;
         }
         
+    }
+
+    public class Wave
+    {
+        public List<Element> elements = new List<Element>();
+
+        /// <summary>
+        /// 1Waveごとのデータ
+        /// </summary>
+        public class Element
+        {
+            // 出現する敵データ
+            public List<EnemyData> datas = new List<EnemyData>();
+        }
     }
 }
 

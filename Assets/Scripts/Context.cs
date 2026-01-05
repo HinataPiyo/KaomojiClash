@@ -19,6 +19,10 @@ public class Context : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 戦闘状態の状態遷移
+    /// </summary>
+    /// <param name="stat"></param>
     public void ChangeStat(BattleStat stat)
     {
         BattleStat = stat;

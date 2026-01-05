@@ -3,12 +3,14 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] EnemyData data;
+    EnemyFindPlayer findPlayer;
     EnemyApplyKaomoji applyKaomoji;
     public EnemyData EnemyData => data;
 
     void Awake()
     {
         applyKaomoji = GetComponent<EnemyApplyKaomoji>();
+        findPlayer = GetComponent<EnemyFindPlayer>();
     }
 
     public void EnemyInitialize(EnemyData data)
@@ -29,18 +31,28 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 戦闘中になった敵の処理
+    /// </summary>
     public void OnBattle()
     {
+        findPlayer.DoEncount();
         gameObject.layer = LayerMask.NameToLayer(Layer.BATTLE);
         applyKaomoji.Opaque();
     }
 
+    /// <summary>
+    /// 戦闘外の敵の処理
+    /// </summary>
     public void OutBattle()
     {
         gameObject.layer = LayerMask.NameToLayer(Layer.WORLD);
         applyKaomoji.Translucent();
     }
 
+    /// <summary>
+    /// 戦闘終了時に実行する処理
+    /// </summary>
     public void BattleEnd()
     {
         gameObject.layer = LayerMask.NameToLayer(Layer.WORLD);

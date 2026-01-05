@@ -2,15 +2,22 @@ using UnityEngine;
 using ENUM;
 using System.Collections.Generic;
 
+
+/// <summary>
+/// 戦闘の流れを管理するクラス
+/// </summary>
 public class BattleFlowManager : MonoBehaviour
 {
     public static BattleFlowManager I { get; private set; }
 
     [SerializeField] WallController wallCtrl;
     [SerializeField] EnemySpawnController enemySpawnCtrl;
+    [SerializeField] WaveController waveCtrl;
     [SerializeField] TargetGroupController targetGroupCtrl;
 
     public List<Transform> BattleEnemies { get; private set; } = new List<Transform>();
+    public bool NoneEnemy() => BattleEnemies.Count == 0;
+
 
 
     void Awake()
@@ -18,6 +25,10 @@ public class BattleFlowManager : MonoBehaviour
         if(I == null) I = this;
     }
 
+    /// <summary>
+    /// 戦闘開始の際に実行する処理
+    /// </summary>
+    /// <param name="enemy"></param>
     public void StartBattle(Transform enemy)
     {
         Context.I.ChangeStat(BattleStat.Start);
@@ -25,11 +36,15 @@ public class BattleFlowManager : MonoBehaviour
         wallCtrl.CreateWall(Context.I.Player.transform.position, enemy.position);
         CameraZoom.I.InitSetCameraOrthographic(Context.I.BattleStat);
         targetGroupCtrl.AddTarget(enemy);
-        OnBattleEnemies();
+
+        waveCtrl.WaveStart(enemy);
         
         Context.I.ChangeStat(BattleStat.Now);
     }
 
+    /// <summary>
+    /// 戦闘終了するときに実行する処理
+    /// </summary>
     public void EndBattle()
     {
         Context.I.ChangeStat(BattleStat.End);
@@ -40,6 +55,10 @@ public class BattleFlowManager : MonoBehaviour
         Context.I.ChangeStat(BattleStat.None);
     }
 
+    /// <summary>
+    /// 敵が死んだときに全てのListに保持されていた自身（敵）の要素を除外する
+    /// </summary>
+    /// <param name="killedEnemy"></param>
     public void RemoveEnemy(Transform killedEnemy)
     {
         BattleEnemies.Remove(killedEnemy);
@@ -47,28 +66,47 @@ public class BattleFlowManager : MonoBehaviour
         enemySpawnCtrl.CurrentEnemies.Remove(killedEnemy.gameObject);
     }
 
-    void OnBattleEnemies()
+    /// <summary>
+    /// 戦闘中の敵の処理と戦闘外の敵の処理を実行する
+    /// </summary>
+    public void OnBattleEnemies()
     {
-        foreach(Transform joinE in BattleEnemies)
+        for(int ii = 0; ii < enemySpawnCtrl.CurrentEnemies.Count; ii++)
         {
-            foreach(Transform outE in enemySpawnCtrl.GetEnemiesTransform())
+            Transform all = enemySpawnCtrl.CurrentEnemies[ii].transform;
+            bool isInBattle = false;
+
+            for(int qq = 0; qq < BattleEnemies.Count; qq++)
             {
-                if(joinE != outE)
+                if(BattleEnemies[qq] == all)
                 {
-                    outE.GetComponent<EnemyController>().OutBattle();
-                    continue;
+                    isInBattle = true;
+                    break;
                 }
             }
 
-            joinE.GetComponent<EnemyController>().OnBattle();
+            if(isInBattle)
+            {
+                all.GetComponent<EnemyController>().OnBattle();
+                Debug.Log("On");
+            }
+            else
+            {
+                all.GetComponent<EnemyController>().OutBattle();
+                Debug.Log("Out");
+            }
         }
     }
 
+    /// <summary>
+    /// 戦闘終了時、すべての敵を戦闘外の状態に戻す
+    /// ここでは敵は不透明、レイヤーを戻す処理をしている
+    /// </summary>
     void AllOutEnemies()
     {
-        foreach(Transform e in enemySpawnCtrl.GetEnemiesTransform())
+        for(int ii = 0; ii < enemySpawnCtrl.CurrentEnemies.Count; ii++)
         {
-            e.GetComponent<EnemyController>().BattleEnd();
+            enemySpawnCtrl.CurrentEnemies[ii].GetComponent<EnemyController>().BattleEnd();
         }
     }
 }
