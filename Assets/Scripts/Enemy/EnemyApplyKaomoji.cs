@@ -9,6 +9,7 @@ using Constants.Global;
 public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
 {
     [SerializeField] TextMeshPro faceText;
+    [SerializeField] TextMeshPro level_Difficulty_Text;
     [SerializeField] CapsuleCollider2D col;
     
     EnemyData data;
@@ -49,4 +50,24 @@ public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
         c.a = 1f;
         faceText.color = c;
     }
+
+    /// <summary>
+    /// レベルと難易度を表示
+    /// </summary>
+    /// <param name="level">レベル</param>
+    /// <param name="difficulty">難易度</param>
+    public void SetLevelAndDifficultyText(int level, ENUM.Difficulty difficulty)
+    {
+        level_Difficulty_Text.color = Calculation.GetColorByDifficulty(difficulty);
+        level_Difficulty_Text.text = $"Lv{level} {difficulty}";
+    }
+
+    /// <summary>
+    /// レベルと難易度表示テキストを非表示
+    /// </summary>
+    public void DisableLevelAndDifficulty()
+    {
+        level_Difficulty_Text.gameObject.SetActive(false);
+    }
+
 }

@@ -7,6 +7,8 @@ public class WaveController : MonoBehaviour
 {
     public static readonly float EnemyAmountIncreaseValue = 0.6f;
     [SerializeField] EnemySpawnController enemySpawn;
+    [SerializeField] WaveDataUIControl waveDataCtrl;
+
     int waveCount;
     public bool IsWaving { get; private set; }
 
@@ -22,6 +24,7 @@ public class WaveController : MonoBehaviour
         IsWaving = true;        // Wave開始
         EnemyData encountEnemy = enemy.GetComponent<EnemyController>().EnemyData;
         int maxWaveCount = encountEnemy.Wave.elements.Count;
+        waveDataCtrl.SetWaveData(encountEnemy.Wave, encountEnemy.E_Status.GetLevel());
 
         for(int ii = 0; ii < maxWaveCount; ii++)
         {

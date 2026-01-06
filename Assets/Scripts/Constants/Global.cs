@@ -108,7 +108,7 @@ namespace Constants.Global
         }
     }
 
-    public class Calculation
+    public static class Calculation
     {
         /// <summary>
         /// 難易度に応じてレベルを取得する
@@ -129,6 +129,23 @@ namespace Constants.Global
                     return Random.Range(5, 8);
                 default:
                     return 0;
+            }
+        }
+
+        public static Color GetColorByDifficulty(ENUM.Difficulty difficulty)
+        {
+            switch(difficulty)
+            {
+                case ENUM.Difficulty.Easy:
+                    return Color.green;
+                case ENUM.Difficulty.Normal:
+                    return Color.yellow;
+                case ENUM.Difficulty.Hard:
+                    return new Color32(255, 100, 0, 255);
+                case ENUM.Difficulty.Extreme:
+                    return Color.red;
+                default:
+                    return Color.white;
             }
         }
     }

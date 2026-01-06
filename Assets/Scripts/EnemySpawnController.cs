@@ -54,8 +54,9 @@ public class EnemySpawnController : MonoBehaviour
         {
             ENUM.Difficulty dif = (ENUM.Difficulty)Random.Range(0, (int)ENUM.Difficulty.Max);
             GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), SelectEnemyData(dif));
-            EnemyData data = e.GetComponent<EnemyController>().EnemyData;
-            waveCtrl.CreateWaveData(data, dif);
+            EnemyController eCtrl = e.GetComponent<EnemyController>();
+            waveCtrl.CreateWaveData(eCtrl.EnemyData, dif);
+            eCtrl.SetLevelAndDifficultyText(eCtrl.EnemyData.E_Status.GetLevel(), dif);
         }
     }
 

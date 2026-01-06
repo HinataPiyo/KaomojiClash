@@ -31,6 +31,11 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void SetLevelAndDifficultyText(int level, ENUM.Difficulty difficulty)
+    {
+        applyKaomoji.SetLevelAndDifficultyText(level, difficulty);
+    }
+
     /// <summary>
     /// 戦闘中になった敵の処理
     /// </summary>
@@ -39,6 +44,7 @@ public class EnemyController : MonoBehaviour
         findPlayer.DoEncount();
         gameObject.layer = LayerMask.NameToLayer(Layer.BATTLE);
         applyKaomoji.Opaque();
+        applyKaomoji.DisableLevelAndDifficulty();
     }
 
     /// <summary>
@@ -48,6 +54,7 @@ public class EnemyController : MonoBehaviour
     {
         gameObject.layer = LayerMask.NameToLayer(Layer.WORLD);
         applyKaomoji.Translucent();
+        applyKaomoji.DisableLevelAndDifficulty();
     }
 
     /// <summary>

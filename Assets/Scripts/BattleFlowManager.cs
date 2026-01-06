@@ -42,6 +42,7 @@ public class BattleFlowManager : MonoBehaviour
         Debug.Log("エンカウントした敵の難易度 : " + enemy.GetComponent<EnemyController>().EnemyData.Wave.difficulty.ToString());
         
         Context.I.ChangeStat(BattleStat.Now);
+        AudioManager.I.PlayBGM("StartBattle");
     }
 
     /// <summary>
@@ -53,8 +54,11 @@ public class BattleFlowManager : MonoBehaviour
         wallCtrl.DestroyWall();
         CameraZoom.I.InitSetCameraOrthographic(Context.I.BattleStat);
         AllOutEnemies();
+
+        // AudioManager.I.PlaySE("BattleEnd");
         
         Context.I.ChangeStat(BattleStat.None);
+        AudioManager.I.PlayBGM("EndBattle");
     }
 
     /// <summary>

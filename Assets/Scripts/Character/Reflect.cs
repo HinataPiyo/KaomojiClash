@@ -34,8 +34,11 @@ public abstract class Reflect : MonoBehaviour, ICharacterInitialize
         // 速度の大きさは維持したまま向きだけ変更
         rb.linearVelocity = reflected.normalized * data.Status.reflectPower * v.magnitude ;
 
-        // エフェクトを生成
-        Instantiate(hitEffectPrefab, col.contacts[0].point, Quaternion.identity);
+        // エフェクトを生成（反射方向に合わせて回転）
+        Vector2 dir = reflected.normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Quaternion rot = Quaternion.Euler(0f, 0f, angle);
+        Instantiate(hitEffectPrefab, col.contacts[0].point, rot);
     }
 
     protected bool CanReflection()
