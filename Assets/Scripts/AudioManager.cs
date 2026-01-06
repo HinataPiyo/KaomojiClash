@@ -20,9 +20,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySEReflect()
     {
-        AudioClip clip = data.GetSEClip("Reflect_0");
-        AudioClip clip1 = data.GetSEClip("Reflect_1");
-        AudioClip clip2 = data.GetSEClip("Reflect_2");
+        AudioClip clip = data.GetAudioClip("Reflect_0");
+        AudioClip clip1 = data.GetAudioClip("Reflect_1");
+        AudioClip clip2 = data.GetAudioClip("Reflect_2");
         // AudioClip clip3 = data.GetSEClip("Reflect_3");
 
         AudioClip[] clips = { clip, clip1, clip2, };
@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySE(string tag)
     {
-        seSource.PlayOneShot(data.GetSEClip(tag));
+        seSource.PlayOneShot(data.GetAudioClip(tag));
     }
 
     public void PlayBGM(string tag)
@@ -56,8 +56,10 @@ public class AudioManager : MonoBehaviour
             bgmSource.Stop();
         }
 
+        if(tag == string.Empty) yield break;
+
         // 新しい BGM をセット
-        bgmSource.clip = bgmData.GetSEClip(tag);
+        bgmSource.clip = bgmData.GetAudioClip(tag);
         if(bgmSource.clip != null)
         {
             bgmSource.Play();

@@ -1,6 +1,7 @@
 using UnityEngine;
 using ENUM;
 using System.Collections.Generic;
+using System.Collections;
 
 
 /// <summary>
@@ -13,10 +14,17 @@ public class BattleFlowManager : MonoBehaviour
     [SerializeField] WallController wallCtrl;
     [SerializeField] EnemySpawnController enemySpawnCtrl;
     [SerializeField] WaveController waveCtrl;
+    [SerializeField] WaveDataUIControl waveDataCtrl;
     [SerializeField] TargetGroupController targetGroupCtrl;
+
+    [SerializeField] GameObject encountEffect;
+    [SerializeField] GameObject startWaveEffect;
+
 
     public List<Transform> BattleEnemies { get; private set; } = new List<Transform>();
     public bool NoneEnemy() => BattleEnemies.Count == 0;
+
+    static readonly float EncountWaitTime = 1.5f;
 
 
 
@@ -31,16 +39,32 @@ public class BattleFlowManager : MonoBehaviour
     /// <param name="enemy"></param>
     public void StartBattle(Transform enemy)
     {
+        Transform player = Context.I.Player.transform;
         Context.I.ChangeStat(BattleStat.Start);
         BattleEnemies.Add(enemy);
-        wallCtrl.CreateWall(Context.I.Player.transform.position, enemy.position);
-        CameraZoom.I.InitSetCameraOrthographic(Context.I.BattleStat);
+        wallCtrl.CreateWall(player.position, enemy.position);
         targetGroupCtrl.AddTarget(enemy);
+        GameObject effect = EncountEffect(player.position, enemy.position);
 
         waveCtrl.WaveStart(enemy);
 
         Debug.Log("エンカウントした敵の難易度 : " + enemy.GetComponent<EnemyController>().EnemyData.Wave.difficulty.ToString());
-        
+        AudioManager.I.PlayBGM(string.Empty);       // BGMを止める
+        AudioManager.I.PlaySE("Encount");
+
+        StartCoroutine(BattleStatChangeNowFlow(effect));
+    }
+
+    IEnumerator BattleStatChangeNowFlow(GameObject encountEffect)
+    {
+        yield return new WaitForSeconds(EncountWaitTime);
+
+        Destroy(encountEffect);
+        startWaveEffect.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+        startWaveEffect.SetActive(false);
+
         Context.I.ChangeStat(BattleStat.Now);
         AudioManager.I.PlayBGM("StartBattle");
     }
@@ -54,6 +78,8 @@ public class BattleFlowManager : MonoBehaviour
         wallCtrl.DestroyWall();
         CameraZoom.I.InitSetCameraOrthographic(Context.I.BattleStat);
         AllOutEnemies();
+
+        waveDataCtrl.DisablePanel();
 
         // AudioManager.I.PlaySE("BattleEnd");
         
@@ -70,6 +96,21 @@ public class BattleFlowManager : MonoBehaviour
         BattleEnemies.Remove(killedEnemy);
         targetGroupCtrl.RemoveTarget(killedEnemy);
         enemySpawnCtrl.CurrentEnemies.Remove(killedEnemy.gameObject);
+        
+        waveDataCtrl.SetEnemyCountText(BattleEnemies.Count);        // 残り敵数をUIに反映
+    }
+
+    /// <summary>
+    /// 接敵した際にEffectを表示する
+    /// </summary>
+    GameObject EncountEffect(Vector2 player, Vector2 enemy)
+    {
+        Vector2 createPos = Vector2.Lerp(player, enemy, 0.5f);        // プレイヤーと敵との距離の中心を取得
+        GameObject effect = Instantiate(encountEffect, createPos, Quaternion.identity, WorldCanvasManager.I.transform);
+
+        // カメラの距離とZoomする時間を設定
+        CameraZoom.I.StartEncountZoom(1.5f, EncountWaitTime);
+        return effect;
     }
 
     /// <summary>
@@ -108,9 +149,9 @@ public class BattleFlowManager : MonoBehaviour
     /// </summary>
     void AllOutEnemies()
     {
-        for(int ii = 0; ii < enemySpawnCtrl.CurrentEnemies.Count; ii++)
+        foreach(var enemyObject in enemySpawnCtrl.CurrentEnemies)
         {
-            enemySpawnCtrl.CurrentEnemies[ii].GetComponent<EnemyController>().BattleEnd();
+            enemyObject.GetComponent<EnemyController>().BattleEnd();
         }
     }
 }

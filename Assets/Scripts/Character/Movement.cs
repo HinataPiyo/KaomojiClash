@@ -33,6 +33,15 @@ public abstract class Movement : MonoBehaviour
 
     void Update()
     {
+        // StatがStartの状態である場合、動かない
+        if(Context.I.BattleStat == ENUM.BattleStat.Start)
+        {
+            rb.linearVelocity = Vector2.zero;
+            if(ShootDirectionArrow != null) ShootDirectionArrow.Del();
+            state = State.Idle;
+            return;
+        }
+
         switch (state)
         {
             case State.Idle:

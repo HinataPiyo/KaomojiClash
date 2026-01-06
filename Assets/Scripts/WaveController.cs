@@ -29,8 +29,9 @@ public class WaveController : MonoBehaviour
         for(int ii = 0; ii < maxWaveCount; ii++)
         {
             waveCount = ii;
-            enemySpawn.SpawnEnemyInWall(waveCount, encountEnemy);
-            Debug.Log("WaveLoop");
+            waveDataCtrl.SetWaveCountText(waveCount);
+            enemySpawn.SpawnEnemyInWall(waveCount, encountEnemy);       // 敵を生成したのち
+            waveDataCtrl.SetEnemyCountText(BattleFlowManager.I.BattleEnemies.Count);    // UIに反映
             yield return new WaitUntil(() => BattleFlowManager.I.NoneEnemy());
         }
 

@@ -31,3 +31,5 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ebfc34a8579f322429e050ab7090ffe9, type: 3}
   - tag: BattleEnd
     clip: {fileID: 8300000, guid: 8e2ac060ce8e5d64eb5b3cb7a02f8330, type: 3}
+  - tag: Encount
+    clip: {fileID: 8300000, guid: 852bc2fbeac2ccf4889c4f9470662a62, type: 3}

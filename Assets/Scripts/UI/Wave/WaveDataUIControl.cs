@@ -31,8 +31,13 @@ public class WaveDataUIControl : MonoBehaviour
         panel.style.display = DisplayStyle.Flex;
         SetDifficultyText(wave.difficulty);
         SetLevelText(level);
-        SetWaveCountText(wave.elements.Count);
+        SetWaveCountText(1);
         SetEnemyCountText(BattleFlowManager.I.BattleEnemies.Count);
+    }
+
+    public void DisablePanel()
+    {
+        panel.style.display = DisplayStyle.None;
     }
 
     public void SetDifficultyText(ENUM.Difficulty difficulty)
@@ -47,7 +52,7 @@ public class WaveDataUIControl : MonoBehaviour
 
     public void SetWaveCountText(int waveCount)
     {
-        this.waveCount.text = waveCount.ToString();
+        this.waveCount.text = (waveCount + 1).ToString();
     }
     
     public void SetEnemyCountText(int enemyCount)
