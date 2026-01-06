@@ -70,4 +70,8 @@ public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
         level_Difficulty_Text.gameObject.SetActive(false);
     }
 
+    public void EnableLevelAndDifficulty()
+    {
+        level_Difficulty_Text.gameObject.SetActive(true);
+    }
 }

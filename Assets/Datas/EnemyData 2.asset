@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status:
     attackPower: 6
-    maxHealth: 100
+    maxHealth: 500
     default_LaunchPower: 4
     maxDragDistance: 3
     minLaunchDistance: 0.1

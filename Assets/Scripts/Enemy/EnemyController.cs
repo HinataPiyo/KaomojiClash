@@ -64,6 +64,7 @@ public class EnemyController : MonoBehaviour
     {
         gameObject.layer = LayerMask.NameToLayer(Layer.WORLD);
         applyKaomoji.Opaque();
+        applyKaomoji.EnableLevelAndDifficulty();
     }
         
 }
