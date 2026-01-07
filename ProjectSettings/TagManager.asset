@@ -15,7 +15,7 @@ TagManager:
   - Player
   - World
   - Battle
-  - 
+  - Minimap
   - 
   - 
   - 
@@ -45,5 +45,10 @@ TagManager:
   - name: UI
     uniqueID: 3988604041
     locked: 0
+  - name: Minimap
+    uniqueID: 1642401505
+    locked: 0
   m_RenderingLayers:
   - Default
+  - Minimap
+  - World

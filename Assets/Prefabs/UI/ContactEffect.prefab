@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7995159612407786482}
   - component: {fileID: 4485235718279290262}
   m_Layer: 5
-  m_Name: EncountEffect
+  m_Name: ContactEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 1204080861180469129}
   - component: {fileID: 7545862341671143232}
   m_Layer: 5
-  m_Name: encountText
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Encount
+  m_text: CONTACT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c44ea29a2b0b5fe4285e294bf43995bd, type: 2}
   m_sharedMaterial: {fileID: 3186585561523843303, guid: c44ea29a2b0b5fe4285e294bf43995bd, type: 2}
