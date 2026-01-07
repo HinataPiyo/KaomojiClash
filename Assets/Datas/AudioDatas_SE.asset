@@ -33,3 +33,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 8e2ac060ce8e5d64eb5b3cb7a02f8330, type: 3}
   - tag: Encount
     clip: {fileID: 8300000, guid: 852bc2fbeac2ccf4889c4f9470662a62, type: 3}
+  - tag: READY
+    clip: {fileID: 8300000, guid: a6a516b548636cd42ae0cf9cd207edfa, type: 3}
+  - tag: FIGHT
+    clip: {fileID: 8300000, guid: 0a88524dd08f79049af41887822d7c20, type: 3}
