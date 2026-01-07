@@ -139,4 +139,23 @@ public class CameraZoom : MonoBehaviour
 
         zoomRoutine = null;
     }
+
+    public void StartEncountZoom(float factor, float duration)
+    {
+        if(zoomRoutine != null)
+        {
+            StopCoroutine(zoomRoutine);
+        }
+
+        zoomRoutine = StartCoroutine(EncountRoutine(factor, duration));
+    }
+
+    IEnumerator EncountRoutine(float factor, float duration)
+    {
+        targetSize = factor;
+        yield return new WaitForSeconds(duration);
+        ResetBattleZoom();
+
+        zoomRoutine = null;
+    }
 }

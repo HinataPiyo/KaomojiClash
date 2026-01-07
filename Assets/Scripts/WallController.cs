@@ -14,6 +14,8 @@ public class WallController : MonoBehaviour
     {
         Vector2 createPos = Vector2.Lerp(player, enemy, 0.5f);        // プレイヤーと敵との距離の中心を取得
         currentWall = Instantiate(wall, createPos, Quaternion.identity);
+        AudioManager.I.PlaySE("SetWall");
+        CameraShake.I.ApplyShake(1, 2f, 0.5f);
     }
 
     public Wall GetWall()

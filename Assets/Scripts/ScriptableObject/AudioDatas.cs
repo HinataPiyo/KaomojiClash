@@ -13,7 +13,7 @@ public class AudioDatas : ScriptableObject
 
     [SerializeField] List<Clip> seClips = new List<Clip>();
 
-    public AudioClip GetSEClip(string tag)
+    public AudioClip GetAudioClip(string tag)
     {
         foreach (var clip in seClips)
         {

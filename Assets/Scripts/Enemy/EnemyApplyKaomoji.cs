@@ -9,6 +9,7 @@ using Constants.Global;
 public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
 {
     [SerializeField] TextMeshPro faceText;
+    [SerializeField] TextMeshPro level_Difficulty_Text;
     [SerializeField] CapsuleCollider2D col;
     
     EnemyData data;
@@ -28,5 +29,49 @@ public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
         Vector2 size = col.size;
         size.x = KAOMOJI.ColiderXSize * data.Kaomoji_Body.Length;
         col.size = size;
+    }
+
+    /// <summary>
+    /// 半透明
+    /// </summary>
+    public void Translucent()
+    {
+        Color c = faceText.color;
+        c.a = 0.5f;
+        faceText.color = c;
+    }
+
+    /// <summary>
+    /// 不透明
+    /// </summary>
+    public void Opaque()
+    {
+        Color c = faceText.color;
+        c.a = 1f;
+        faceText.color = c;
+    }
+
+    /// <summary>
+    /// レベルと難易度を表示
+    /// </summary>
+    /// <param name="level">レベル</param>
+    /// <param name="difficulty">難易度</param>
+    public void SetLevelAndDifficultyText(int level, ENUM.Difficulty difficulty)
+    {
+        level_Difficulty_Text.color = Calculation.GetColorByDifficulty(difficulty);
+        level_Difficulty_Text.text = $"Lv{level} {difficulty}";
+    }
+
+    /// <summary>
+    /// レベルと難易度表示テキストを非表示
+    /// </summary>
+    public void DisableLevelAndDifficulty()
+    {
+        level_Difficulty_Text.gameObject.SetActive(false);
+    }
+
+    public void EnableLevelAndDifficulty()
+    {
+        level_Difficulty_Text.gameObject.SetActive(true);
     }
 }

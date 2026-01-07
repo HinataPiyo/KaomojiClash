@@ -1,9 +1,9 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Constants.Global
 {
-    [Serializable]
+    [System.Serializable]
     public class CharacterStatus
     {
         public float attackPower = 1f;
@@ -24,7 +24,7 @@ namespace Constants.Global
         public MentalData mentalData;
 
         // 精神強度など精神に関するデータ
-        [Serializable]
+        [System.Serializable]
         public class MentalData
         {
             public string faceline = "()";
@@ -32,7 +32,7 @@ namespace Constants.Global
         }
     }
 
-    [Serializable]
+    [System.Serializable]
     public class KAOMOJI
     {
         public const float ColiderXSize = 0.1f;      // コライダーの当たり判定の幅を調整
@@ -43,7 +43,7 @@ namespace Constants.Global
         public KaomojiPartData decoration_second;
     }
 
-    [Serializable]
+    [System.Serializable]
     public class KaomojiPart
     {
         /// <summary>
@@ -59,7 +59,7 @@ namespace Constants.Global
         [Tooltip("体力に影響")] public Stamina stamina;
 
         // レベルごとの効果値
-        [Serializable]
+        [System.Serializable]
         public class Speed
         {
             [Range(1, 7)] public int level;
@@ -67,7 +67,7 @@ namespace Constants.Global
             public float GetSpeedByLevel() => level * value;
         }
 
-        [Serializable]
+        [System.Serializable]
         public class Power
         {
             [Range(1, 7)] public int level;
@@ -75,7 +75,7 @@ namespace Constants.Global
             public float GetPowerByLevel() => level * value;
         }
 
-        [Serializable]
+        [System.Serializable]
         public class Guard
         {
             [Range(1, 7)] public int level;
@@ -83,7 +83,7 @@ namespace Constants.Global
             public float GetGuardByLevel() => level * value;
         }
 
-        [Serializable]
+        [System.Serializable]
         public class Stamina
         {
             [Range(1, 7)] public int level;
@@ -91,6 +91,63 @@ namespace Constants.Global
             public float GetStaminaByLevel() => level * value;
         }
         
+    }
+
+    public class Wave
+    {
+        public ENUM.Difficulty difficulty;
+        public List<Element> elements = new List<Element>();
+
+        /// <summary>
+        /// 1Waveごとのデータ
+        /// </summary>
+        public class Element
+        {
+            // 出現する敵データ
+            public List<EnemyData> datas = new List<EnemyData>();
+        }
+    }
+
+    public static class Calculation
+    {
+        /// <summary>
+        /// 難易度に応じてレベルを取得する
+        /// </summary>
+        /// <param name="difficulty"></param>
+        /// <returns></returns>
+        public static int GetLevelByDifficulty(ENUM.Difficulty difficulty)
+        {
+            switch(difficulty)
+            {
+                case ENUM.Difficulty.Easy:
+                    return Random.Range(1, 3);
+                case ENUM.Difficulty.Normal:
+                    return Random.Range(2, 4);
+                case ENUM.Difficulty.Hard:
+                    return Random.Range(3, 6);
+                case ENUM.Difficulty.Extreme:
+                    return Random.Range(5, 8);
+                default:
+                    return 0;
+            }
+        }
+
+        public static Color GetColorByDifficulty(ENUM.Difficulty difficulty)
+        {
+            switch(difficulty)
+            {
+                case ENUM.Difficulty.Easy:
+                    return Color.green;
+                case ENUM.Difficulty.Normal:
+                    return Color.yellow;
+                case ENUM.Difficulty.Hard:
+                    return new Color32(255, 100, 0, 255);
+                case ENUM.Difficulty.Extreme:
+                    return Color.red;
+                default:
+                    return Color.white;
+            }
+        }
     }
 }
 
@@ -100,4 +157,6 @@ namespace ENUM
     { Eyes, Mouth, Hands, Decoration_First, Decoration_Second }
     public enum BattleStat
     { None = -1, Start, Now, End }
+    public enum Difficulty
+    { Easy, Normal, Hard, Extreme, Max }
 }

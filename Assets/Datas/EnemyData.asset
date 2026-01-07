@@ -30,4 +30,4 @@ MonoBehaviour:
     speed: 2
     power: 1.24
     guard: 0.397
-    stamina: 0.76
+    stamina: 0.35

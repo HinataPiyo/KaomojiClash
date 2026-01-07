@@ -28,6 +28,7 @@ public class EnemyMovement : Movement, IEnemyInitialize
 
     IEnumerator LaunchRoutine()
     {
+        // 戦闘開始の合図があるまで待機
         yield return new WaitUntil(() => Context.I.BattleStat == ENUM.BattleStat.Now);
         isInput = true;
 
@@ -40,7 +41,7 @@ public class EnemyMovement : Movement, IEnemyInitialize
     /// </summary>
     protected override void HandleIdleInput()
     {
-        if(!isInput) return;
+        if(!isInput || !findPlayer.IsEncount) return;
         dragStartWorld = transform.position;    // ドラッグ開始位置を記録
         shootDirectionArrow = WorldCanvasManager.I.CreateShootDirectionArrow(transform.position);   // 照準矢印作成
         state = State.Dragging;     // ドラッグ中状態へ
