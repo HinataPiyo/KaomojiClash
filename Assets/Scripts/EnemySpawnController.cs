@@ -56,7 +56,7 @@ public class EnemySpawnController : MonoBehaviour
             GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), SelectEnemyData(dif));
             EnemyController eCtrl = e.GetComponent<EnemyController>();
             waveCtrl.CreateWaveData(eCtrl.EnemyData, dif);
-            eCtrl.SetLevelAndDifficultyText(eCtrl.EnemyData.E_Status.GetLevel(), dif);
+            eCtrl.SetEnemyWorldUI(eCtrl.EnemyData.E_Status.GetLevel(), dif);
         }
     }
 

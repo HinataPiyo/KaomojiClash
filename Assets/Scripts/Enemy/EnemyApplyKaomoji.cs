@@ -10,6 +10,7 @@ public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
 {
     [SerializeField] TextMeshPro faceText;
     [SerializeField] TextMeshPro level_Difficulty_Text;
+    [SerializeField] SpriteRenderer minimapIcon;
     [SerializeField] CapsuleCollider2D col;
     
     EnemyData data;
@@ -73,5 +74,10 @@ public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
     public void EnableLevelAndDifficulty()
     {
         level_Difficulty_Text.gameObject.SetActive(true);
+    }
+
+    public void ChangeMinimapIconColor(ENUM.Difficulty difficulty)
+    {
+        minimapIcon.color = Calculation.GetColorByDifficulty(difficulty);
     }
 }
