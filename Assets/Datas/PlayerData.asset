@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   status:
-    attackPower: 500
+    attackPower: 1000
     maxHealth: 1000
     default_LaunchPower: 3
     maxDragDistance: 3

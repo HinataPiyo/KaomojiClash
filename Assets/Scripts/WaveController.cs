@@ -11,6 +11,7 @@ public class WaveController : MonoBehaviour
     [SerializeField] EnemySpawnController enemySpawn;
     [SerializeField] WaveDataUIControl waveDataCtrl;
     [SerializeField] DropController dropCtrl;
+    [SerializeField] ResultController resultCtrl;
 
 
     int waveCount;
@@ -28,7 +29,10 @@ public class WaveController : MonoBehaviour
         IsWaving = true;        // Wave開始
         EnemyData encountEnemy = enemy.GetComponent<EnemyController>().EnemyData;
         int maxWaveCount = encountEnemy.Wave.elements.Count;
-        waveDataCtrl.SetWaveData(encountEnemy.Wave, encountEnemy.E_Status.GetLevel());
+
+        int level = encountEnemy.E_Status.GetLevel();
+        Wave wave = encountEnemy.Wave;
+        waveDataCtrl.SetWaveData(wave, level);
 
         for(int ii = 0; ii < maxWaveCount; ii++)
         {
@@ -40,6 +44,8 @@ public class WaveController : MonoBehaviour
         }
 
         BattleFlowManager.I.EndBattle();        // 戦闘終了
+        Result(wave, level);
+
         waveCount = 0;
         IsWaving = false;       // Wave終了
     }
@@ -52,7 +58,6 @@ public class WaveController : MonoBehaviour
     /// <param name="firstEnemyLevel">(現)敵のレベル（難易度）は生成時に決まるので引数で受け取る</param>
     public void CreateWaveData(EnemyData firstEnemy, ENUM.Difficulty difficulty)
     {
-        Debug.Log("この関数が実行された回数を監視");
         Wave w = new Wave();
         w.difficulty = difficulty;
         int waveCount = 0;
@@ -74,7 +79,7 @@ public class WaveController : MonoBehaviour
             {
                 // 難易度に応じて敵のレベルが決まる
                 EnemyData select = enemySpawn.SelectEnemyData(w.difficulty);
-                GetDropParts(w.dropKaomojiParts, select);
+                GetDropParts(w.dropKaomojiParts, select);       // ドロップ内容を決める
                 elem.datas.Add(select);              
             }
 
@@ -90,26 +95,28 @@ public class WaveController : MonoBehaviour
     /// </summary>
     public void GetDropParts(List<HasKaomojiParts> dropParts, EnemyData data)
     {
-        // ドロップする記号を抽選する
         List<KaomojiPartData> parts = dropCtrl.GetDorpParts(data.Parts);
 
         if(parts.Count == 0) return;
 
         foreach(KaomojiPartData part in parts)
         {
-            foreach(HasKaomojiParts hasPart in dropParts)
+            HasKaomojiParts existing = dropParts.Find(hp => hp.part == part);
+            if(existing != null)
             {
-                // 存在すればamountを増やす
-                if(hasPart.part == part)
-                {
-                    hasPart.amount++;
-                    continue;
-                }
+                existing.amount++;
             }
-
-            // 存在しなければ新しく追加
-            dropParts.Add(new HasKaomojiParts { amount = 1, part = part });
+            else
+            {
+                dropParts.Add(new HasKaomojiParts { amount = 1, part = part });
+            }
         }
+    }
+
+    void Result(Wave wave, int level)
+    {
+        resultCtrl.DropsToInventory(wave.dropKaomojiParts);        // ドロップ品をインベントリに格納
+        resultCtrl.ApplyResultUI(wave, level);
     }
 
     /// <summary>

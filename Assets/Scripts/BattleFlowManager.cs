@@ -80,8 +80,6 @@ public class BattleFlowManager : MonoBehaviour
         AllOutEnemies();
 
         waveDataCtrl.DisablePanel();
-
-        // AudioManager.I.PlaySE("BattleEnd");
         
         Context.I.ChangeStat(BattleStat.None);
         AudioManager.I.PlayBGM("EndBattle");

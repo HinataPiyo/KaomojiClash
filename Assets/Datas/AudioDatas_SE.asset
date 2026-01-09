@@ -37,3 +37,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a6a516b548636cd42ae0cf9cd207edfa, type: 3}
   - tag: FIGHT
     clip: {fileID: 8300000, guid: 0a88524dd08f79049af41887822d7c20, type: 3}
+  - tag: EndResult
+    clip: {fileID: 8300000, guid: 61fc2b54cf121ab4190e10fad8abf952, type: 3}
+  - tag: ShowGetItem
+    clip: {fileID: 8300000, guid: 37118c02d729d7c4495b671016e77c22, type: 3}
