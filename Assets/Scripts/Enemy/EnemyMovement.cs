@@ -33,7 +33,7 @@ public class EnemyMovement : Movement, IEnemyInitialize
         isInput = true;
 
         // 発射までの待機時間
-        yield return new WaitForSeconds(data.launchDuration);
+        yield return new WaitForSeconds(data.LaunchDuration);
         isLaunch = true;
     }
     /// <summary>

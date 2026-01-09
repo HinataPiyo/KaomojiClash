@@ -1,6 +1,8 @@
 using UnityEngine;
 using Constants.Global;
 using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
 
 
 public class WaveController : MonoBehaviour
@@ -8,6 +10,8 @@ public class WaveController : MonoBehaviour
     public static readonly float EnemyAmountIncreaseValue = 0.6f;
     [SerializeField] EnemySpawnController enemySpawn;
     [SerializeField] WaveDataUIControl waveDataCtrl;
+    [SerializeField] DropController dropCtrl;
+
 
     int waveCount;
     public bool IsWaving { get; private set; }
@@ -44,10 +48,11 @@ public class WaveController : MonoBehaviour
     /// WaveDataを作成しEnemyDataに保持させておく
     /// ※ EnemyDataは敵生成時にCopyされている(元のSOには干渉しない)
     /// </summary>
-    /// <param name="firstEnemy">エンカウントした敵の情報</param>
+    /// <param name="firstEnemy">エンカウント可能な敵の情報</param>
     /// <param name="firstEnemyLevel">(現)敵のレベル（難易度）は生成時に決まるので引数で受け取る</param>
     public void CreateWaveData(EnemyData firstEnemy, ENUM.Difficulty difficulty)
     {
+        Debug.Log("この関数が実行された回数を監視");
         Wave w = new Wave();
         w.difficulty = difficulty;
         int waveCount = 0;
@@ -64,11 +69,12 @@ public class WaveController : MonoBehaviour
         {
             // 1Waveごとの設定
             float increase = EnemyAmountIncreaseValue * waveCount;
-            int enemyAmount = Mathf.CeilToInt(dif_Amount * (increase + 1));
+            int enemyAmount = Mathf.CeilToInt(dif_Amount * (increase + 1));     // 敵の量を設定
             for(int ii = 0; ii < enemyAmount; ii++)
             {
                 // 難易度に応じて敵のレベルが決まる
                 EnemyData select = enemySpawn.SelectEnemyData(w.difficulty);
+                GetDropParts(w.dropKaomojiParts, select);
                 elem.datas.Add(select);              
             }
 
@@ -77,6 +83,33 @@ public class WaveController : MonoBehaviour
 
         // WaveDataを作成し終わったらエンカウントした敵にWaveDataを再度Setする
         firstEnemy.SetWaveData(w);
+    }
+
+    /// <summary>
+    /// Wave生成時にドロップ内容も決めておく
+    /// </summary>
+    public void GetDropParts(List<HasKaomojiParts> dropParts, EnemyData data)
+    {
+        // ドロップする記号を抽選する
+        List<KaomojiPartData> parts = dropCtrl.GetDorpParts(data.Parts);
+
+        if(parts.Count == 0) return;
+
+        foreach(KaomojiPartData part in parts)
+        {
+            foreach(HasKaomojiParts hasPart in dropParts)
+            {
+                // 存在すればamountを増やす
+                if(hasPart.part == part)
+                {
+                    hasPart.amount++;
+                    continue;
+                }
+            }
+
+            // 存在しなければ新しく追加
+            dropParts.Add(new HasKaomojiParts { amount = 1, part = part });
+        }
     }
 
     /// <summary>
