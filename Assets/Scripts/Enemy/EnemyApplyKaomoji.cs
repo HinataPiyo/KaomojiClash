@@ -60,7 +60,7 @@ public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
     public void SetLevelAndDifficultyText(int level, ENUM.Difficulty difficulty)
     {
         level_Difficulty_Text.color = Calculation.GetColorByDifficulty(difficulty);
-        level_Difficulty_Text.text = $"Lv{level} {difficulty}";
+        level_Difficulty_Text.text = $"Lv{level} {difficulty.ToString().ToUpper()}";
     }
 
     /// <summary>
