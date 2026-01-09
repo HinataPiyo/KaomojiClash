@@ -61,6 +61,7 @@ public class WaveController : MonoBehaviour
         Wave w = new Wave();
         w.difficulty = difficulty;
         int waveCount = 0;
+        int getMoney = 0;
         int dif_Amount = GetOneWaveEnemyAmount(w.difficulty);     // 難易度に応じて敵の量を設定
 
         // 現在 3Wave分作成
@@ -80,11 +81,14 @@ public class WaveController : MonoBehaviour
                 // 難易度に応じて敵のレベルが決まる
                 EnemyData select = enemySpawn.SelectEnemyData(w.difficulty);
                 GetDropParts(w.dropKaomojiParts, select);       // ドロップ内容を決める
-                elem.datas.Add(select);              
+                elem.datas.Add(select);
+                getMoney += Calculation.GetMoneyByDifficultyAndLevel(w.difficulty, select.E_Status.GetLevel());     // 獲得金を計算
             }
 
             waveCount++;
         }
+
+        w.getMoney = getMoney;      // 獲得金を保持
 
         // WaveDataを作成し終わったらエンカウントした敵にWaveDataを再度Setする
         firstEnemy.SetWaveData(w);
@@ -113,9 +117,13 @@ public class WaveController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// リザルト処理
+    /// </summary>
     void Result(Wave wave, int level)
     {
-        resultCtrl.DropsToInventory(wave.dropKaomojiParts);        // ドロップ品をインベントリに格納
+        resultCtrl.DropsToInventory(wave.dropKaomojiParts);         // ドロップ品をインベントリに格納
+        resultCtrl.GetMoneyToHasMoney(wave.getMoney);               // 所持金を更新
         resultCtrl.ApplyResultUI(wave, level);
     }
 

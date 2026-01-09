@@ -41,3 +41,5 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 61fc2b54cf121ab4190e10fad8abf952, type: 3}
   - tag: ShowGetItem
     clip: {fileID: 8300000, guid: 37118c02d729d7c4495b671016e77c22, type: 3}
+  - tag: TextWriting
+    clip: {fileID: 8300000, guid: 93f4bb7c1ea74434b836ebb1a48bf9ab, type: 3}

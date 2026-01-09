@@ -15,9 +15,16 @@ public class ResultController : MonoBehaviour
         {
             InventoryManager.I.AddPart(hasPart.part, hasPart.amount);
         }
-        Debug.Log("ドロップ品がインベントリに格納されました");
-        
         InventoryManager.I.AllItemCheck();
+    }
+
+    /// <summary>
+    /// 取得金額分、所持金に反映させる
+    /// </summary>
+    /// <param name="getMoney"></param>
+    public void GetMoneyToHasMoney(int getMoney)
+    {
+        MoneyManager.I.AddMoney(getMoney);
     }
 
     public void ApplyResultUI(Wave wave, int level)

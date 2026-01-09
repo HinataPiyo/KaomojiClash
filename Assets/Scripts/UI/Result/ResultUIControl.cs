@@ -70,7 +70,7 @@ public class ResultUIControl : MonoBehaviour
             getItem.StartUIRoutine();       // UIを更新
         }
 
-        getMoney.Initialize(1234567890);        // ! 獲得金額を表示
+        getMoney.Initialize(wave.getMoney);        // 獲得金額を表示
         yield return new WaitForSeconds(1f);
         AudioManager.I.PlaySE("EndResult");
 
@@ -85,6 +85,7 @@ public class ResultUIControl : MonoBehaviour
         textUI.text = "";
         foreach(char c in text)
         {
+            AudioManager.I.PlaySE("TextWriting");
             textUI.text += c;
             yield return new WaitForSeconds(UPDATE_TEXT_SPEED);
         }

@@ -108,6 +108,7 @@ namespace Constants.Global
         public ENUM.Difficulty difficulty;
         public List<Element> elements = new List<Element>();
         public List<HasKaomojiParts> dropKaomojiParts = new List<HasKaomojiParts>();
+        public int getMoney;
 
         /// <summary>
         /// 1Waveごとのデータ
@@ -158,6 +159,19 @@ namespace Constants.Global
                 default:
                     return Color.white;
             }
+        }
+
+        /// <summary>
+        /// レベルや難易度に応じて獲得金額を調整する
+        /// </summary>
+        public static int GetMoneyByDifficultyAndLevel(ENUM.Difficulty difficulty, int level)
+        {
+            int baseMoney = 5;
+            float difficultyRate = 1.0f + (int)difficulty * 0.1f;
+            float levelRate      = 1.0f + level * 0.05f;
+
+            int getMoney = Mathf.FloorToInt(baseMoney * difficultyRate * levelRate);
+            return getMoney;
         }
     }
 }
