@@ -31,3 +31,6 @@ MonoBehaviour:
     power: 1.24
     guard: 0.397
     stamina: 0.35
+  parts:
+  - {fileID: 11400000, guid: 6b46826b2354059469158162c99432ee, type: 2}
+  - {fileID: 11400000, guid: 5c37e89a34db3234b86addc11d21055f, type: 2}
