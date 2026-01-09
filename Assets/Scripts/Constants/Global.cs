@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Constants.Global
 {
     [System.Serializable]
-    public class CharacterStatus
+    public sealed class CharacterStatus
     {
         public float attackPower = 1f;
         public float maxHealth = 10f;
@@ -25,7 +25,7 @@ namespace Constants.Global
 
         // 精神強度など精神に関するデータ
         [System.Serializable]
-        public class MentalData
+        public sealed class MentalData
         {
             public string faceline = "()";
             public int maxMental = 3;
@@ -33,7 +33,7 @@ namespace Constants.Global
     }
 
     [System.Serializable]
-    public class KAOMOJI
+    public sealed class KAOMOJI
     {
         public const float ColiderXSize = 0.1f;      // コライダーの当たり判定の幅を調整
         public KaomojiPartData eyes;
@@ -44,7 +44,7 @@ namespace Constants.Global
     }
 
     [System.Serializable]
-    public class KaomojiPart
+    public sealed class KaomojiPart
     {
         /// <summary>
         /// 顔文字のパーツが持つステータスはこんだけ
@@ -60,7 +60,7 @@ namespace Constants.Global
 
         // レベルごとの効果値
         [System.Serializable]
-        public class Speed
+        public sealed class Speed
         {
             [Range(1, 7)] public int level;
             [Range(-0.5f, 0.5f)] public float value;
@@ -68,7 +68,7 @@ namespace Constants.Global
         }
 
         [System.Serializable]
-        public class Power
+        public sealed class Power
         {
             [Range(1, 7)] public int level;
             [Range(-0.7f, 0.7f)] public float value;
@@ -76,7 +76,7 @@ namespace Constants.Global
         }
 
         [System.Serializable]
-        public class Guard
+        public sealed class Guard
         {
             [Range(1, 7)] public int level;
             [Range(-0.05f, 0.05f)] public float value;
@@ -84,7 +84,7 @@ namespace Constants.Global
         }
 
         [System.Serializable]
-        public class Stamina
+        public sealed class Stamina
         {
             [Range(1, 7)] public int level;
             [Range(-0.2f, 0.2f)] public float value;
@@ -93,15 +93,26 @@ namespace Constants.Global
         
     }
 
-    public class Wave
+    /// <summary>
+    /// 顔文字記号データの所持数
+    /// </summary>
+    [System.Serializable]
+    public sealed class HasKaomojiParts
+    {
+        public int amount;
+        public KaomojiPartData part;
+    }
+
+    public sealed class Wave
     {
         public ENUM.Difficulty difficulty;
         public List<Element> elements = new List<Element>();
+        public List<HasKaomojiParts> dropKaomojiParts = new List<HasKaomojiParts>();
 
         /// <summary>
         /// 1Waveごとのデータ
         /// </summary>
-        public class Element
+        public sealed class Element
         {
             // 出現する敵データ
             public List<EnemyData> datas = new List<EnemyData>();
