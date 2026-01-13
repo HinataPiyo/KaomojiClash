@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Constants.Global;
-using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ResultUIControl : MonoBehaviour
 {
-    const float UPDATE_TEXT_SPEED = 0.05f;
+    const float UPDATE_TEXT_SPEED = 0.04f;
     const string TITLE_NAME = "RESULT";
     [SerializeField] GameObject getItem_Prefab;
     [SerializeField] Transform getItem_Parent;
@@ -22,11 +20,11 @@ public class ResultUIControl : MonoBehaviour
     [SerializeField] TextMeshProUGUI t_TextLevel;
     [SerializeField] ResultGetMoney getMoney;
     
-    [SerializeField] float fadeSpeed = 1f;
+    [SerializeField] ResultGetExpControl getExp;
     CanvasGroup canvasGroup;
 
-    List<ResultGetItem> items = new List<ResultGetItem>();
 
+    List<ResultGetItem> items = new List<ResultGetItem>();
 
     void Awake()
     {
@@ -57,8 +55,6 @@ public class ResultUIControl : MonoBehaviour
     /// </summary>
     IEnumerator ResultGetItemRoutine(Wave wave)
     {
-        yield return new WaitForSeconds(0.5f);
-
         List<HasKaomojiParts> drop = wave.dropKaomojiParts;
         foreach(HasKaomojiParts hasPart in drop)
         {
@@ -66,15 +62,16 @@ public class ResultUIControl : MonoBehaviour
             ResultGetItem getItem = item.GetComponent<ResultGetItem>();
             getItem.Initialize(hasPart);    // 初期化
             items.Add(getItem);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
             getItem.StartUIRoutine();       // UIを更新
         }
 
         getMoney.Initialize(wave.getMoney);        // 獲得金額を表示
-        yield return new WaitForSeconds(1f);
-        AudioManager.I.PlaySE("EndResult");
+        yield return new WaitForSeconds(0.8f);
+        AudioManager.I.PlaySE("GetMoney");
 
-        StartCoroutine(EndResultRoutine());
+        yield return new WaitForSeconds(1.5f);
+        getExp.StartEXPRoutine(wave.getExp);
     }
 
     /// <summary>
@@ -103,27 +100,9 @@ public class ResultUIControl : MonoBehaviour
     }
 
     /// <summary>
-    /// リザルトの表示を終了するときの処理
-    /// フェードアウト
-    /// </summary>
-    IEnumerator EndResultRoutine()
-    {
-        yield return new WaitForSeconds(5f);
-
-        float elapsed = 0f;
-        while(elapsed < fadeSpeed)
-        {
-            elapsed += Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsed / fadeSpeed);
-            yield return null;
-        }
-        DisablePanel();        
-    }
-
-    /// <summary>
     /// 表示を終了する処理をまとめた関数
     /// </summary>
-    void DisablePanel()
+    public void DisablePanel()
     {
         canvasGroup.alpha = 0f;
         foreach(ResultGetItem item in items)

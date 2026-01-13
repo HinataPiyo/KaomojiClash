@@ -83,8 +83,10 @@ public class EnemySpawnController : MonoBehaviour
     {
         int index = Random.Range(0, enemy_DB.EnemyData.Length);
         int level = Calculation.GetLevelByDifficulty(difficulty);
+        float exp = Calculation.GetExperienceByDifficultyAndLevel(difficulty, level);
         EnemyData copy = Instantiate(enemy_DB.EnemyData[index]);
         copy.E_Status.SetLevel(level);
+        copy.E_Status.SetExperience(exp);
         return copy;
     }
 

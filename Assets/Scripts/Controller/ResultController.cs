@@ -31,4 +31,19 @@ public class ResultController : MonoBehaviour
     {
         resultUI.ApplyResultUI(wave, level);
     }
+
+    /// <summary>
+    /// 現在装備中の記号パーツに経験値を付与する
+    /// </summary>
+    public void GetExpToMyParts(float totalExp)
+    {
+        foreach(KaomojiPartData part in Context.I.KaomojiPartDatas())
+        {
+            // 経験値を反映させていく
+            part.Data.levelDetail.AddExperience(totalExp);
+        }
+
+        // 記号全体のステータスを更新する
+        Context.I.UpdatePlayerStatus();
+    }
 }

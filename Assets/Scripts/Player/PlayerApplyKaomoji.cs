@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using Constants.Global;
+using System.Collections.Generic;
 
 public class PlayerApplyKaomoji : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class PlayerApplyKaomoji : MonoBehaviour
     public float Power { get; private set; }
     public float Guard { get; private set; }
     public float Stamina { get; private set; }
+
+    public List<KaomojiPartData> KaomojiPartDatas { get; private set; } = new List<KaomojiPartData>();
+
 
 
     public void Initialize(PlayerData data)
@@ -62,14 +66,31 @@ public class PlayerApplyKaomoji : MonoBehaviour
         foreach(var part in datas)
         {
             if(part == null) continue;
+            KaomojiPartData copy = Instantiate(part);
+            KaomojiPartDatas.Add(copy);       // 装備中の記号パーツデータを保持しておく
 
             // SOが設定されていなければ0を返す
-            Speed += part.Data == null ? 0f : part.Data.speed.GetParameterByLevel();
-            Power += part.Data == null ? 0f : part.Data.power.GetParameterByLevel();
-            Guard += part.Data == null ? 0f : part.Data.guard.GetParameterByLevel();
-            Stamina += part.Data == null ? 0f : part.Data.stamina.GetParameterByLevel();
+            Speed += part.Data == null ? 0f : part.Data.speed.GetParameterByLevel(0);
+            Power += part.Data == null ? 0f : part.Data.power.GetParameterByLevel(0);
+            Guard += part.Data == null ? 0f : part.Data.guard.GetParameterByLevel(0);
+            Stamina += part.Data == null ? 0f : part.Data.stamina.GetParameterByLevel(0);
         }
+    }
 
+    /// <summary>
+    /// 記号全体のステータスを更新する
+    /// </summary>
+    public void UpdateTotalParameter()
+    {
+        Speed = Power = Guard = Stamina = 0f;
+        foreach(var part in KaomojiPartDatas)
+        {
+            int level = part.Data.levelDetail.Level;
+            Speed += part.Data.speed.GetParameterByLevel(level);
+            Power += part.Data.power.GetParameterByLevel(level);
+            Guard += part.Data.guard.GetParameterByLevel(level);
+            Stamina += part.Data.stamina.GetParameterByLevel(level);
+        }
     }
 
     /// <summary>

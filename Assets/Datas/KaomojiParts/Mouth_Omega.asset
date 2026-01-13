@@ -12,19 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb1bcfc0d329534bb6adb7af69bb262, type: 3}
   m_Name: Mouth_Omega
   m_EditorClassIdentifier: 
+  dorpProbability: 0.3
   partType: 1
   data:
     partName: "\u30AA\u30E1\u30AC"
     part: "\u03C9"
     speed:
-      level: 1
       value: 0.2
+      growthRateType: 3
     power:
-      level: 1
       value: 0.7
+      growthRateType: 3
     guard:
-      level: 1
       value: 0.05
+      growthRateType: 3
     stamina:
-      level: 1
       value: 0.2
+      growthRateType: 3

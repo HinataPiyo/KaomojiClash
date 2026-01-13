@@ -21,6 +21,9 @@ public class EnemyData : CharacterData
         [Header("ステータスの強さ")] 
         int level = 1;
 
+        [Header("所持経験値")]
+        float experience;
+
         [Header("デフォルトステータス")]
         [Range(-2f, 2f)] public float speed;
         [Range(-3f, 3f)] public float power;
@@ -33,6 +36,9 @@ public class EnemyData : CharacterData
             if(value > 0) level = value;
             else level = 1;     // 下限を1にする
         }
+
+        public float GetExperience() => experience;
+        public void SetExperience(float value) => experience = value;
     }
 
 }

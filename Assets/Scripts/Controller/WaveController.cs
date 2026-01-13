@@ -59,10 +59,12 @@ public class WaveController : MonoBehaviour
     public void CreateWaveData(EnemyData firstEnemy, ENUM.Difficulty difficulty)
     {
         Wave w = new Wave();
-        w.difficulty = difficulty;
+        ENUM.Difficulty dif = difficulty;
+        w.difficulty = dif;
         int waveCount = 0;
         int getMoney = 0;
-        int dif_Amount = GetOneWaveEnemyAmount(w.difficulty);     // 難易度に応じて敵の量を設定
+        float getExp = 0;
+        int dif_Amount = GetOneWaveEnemyAmount(dif);     // 難易度に応じて敵の量を設定
 
         // 現在 3Wave分作成
         for(int ii = 0; ii < 3; ii++)
@@ -79,42 +81,24 @@ public class WaveController : MonoBehaviour
             for(int ii = 0; ii < enemyAmount; ii++)
             {
                 // 難易度に応じて敵のレベルが決まる
-                EnemyData select = enemySpawn.SelectEnemyData(w.difficulty);
-                GetDropParts(w.dropKaomojiParts, select);       // ドロップ内容を決める
+                EnemyData select = enemySpawn.SelectEnemyData(dif);
+                dropCtrl.GetDropParts(w.dropKaomojiParts, select);       // ドロップ内容を決める
                 elem.datas.Add(select);
-                getMoney += Calculation.GetMoneyByDifficultyAndLevel(w.difficulty, select.E_Status.GetLevel());     // 獲得金を計算
+
+                int lv = select.E_Status.GetLevel();
+
+                getMoney += Calculation.GetMoneyByDifficultyAndLevel(dif, lv);          // 獲得金を計算
+                getExp += Calculation.GetExperienceByDifficultyAndLevel(dif, lv);       // 獲得経験値を計算
             }
 
             waveCount++;
         }
 
         w.getMoney = getMoney;      // 獲得金を保持
+        w.getExp = getExp;          // 獲得経験値を保持
 
         // WaveDataを作成し終わったらエンカウントした敵にWaveDataを再度Setする
         firstEnemy.SetWaveData(w);
-    }
-
-    /// <summary>
-    /// Wave生成時にドロップ内容も決めておく
-    /// </summary>
-    public void GetDropParts(List<HasKaomojiParts> dropParts, EnemyData data)
-    {
-        List<KaomojiPartData> parts = dropCtrl.GetDorpParts(data.Parts);
-
-        if(parts.Count == 0) return;
-
-        foreach(KaomojiPartData part in parts)
-        {
-            HasKaomojiParts existing = dropParts.Find(hp => hp.part == part);
-            if(existing != null)
-            {
-                existing.amount++;
-            }
-            else
-            {
-                dropParts.Add(new HasKaomojiParts { amount = 1, part = part });
-            }
-        }
     }
 
     /// <summary>
@@ -124,6 +108,7 @@ public class WaveController : MonoBehaviour
     {
         resultCtrl.DropsToInventory(wave.dropKaomojiParts);         // ドロップ品をインベントリに格納
         resultCtrl.GetMoneyToHasMoney(wave.getMoney);               // 所持金を更新
+        resultCtrl.GetExpToMyParts(wave.getExp);                    // 経験値を反映
         resultCtrl.ApplyResultUI(wave, level);
     }
 

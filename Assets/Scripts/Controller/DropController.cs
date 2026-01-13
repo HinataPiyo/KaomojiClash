@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Constants.Global;
 using UnityEngine;
 
 public class DropController : MonoBehaviour
@@ -20,5 +21,28 @@ public class DropController : MonoBehaviour
         }
 
         return dorpParts;
+    }
+
+    /// <summary>
+    /// Wave生成時にドロップ内容も決めておく
+    /// </summary>
+    public void GetDropParts(List<HasKaomojiParts> dropParts, EnemyData data)
+    {
+        List<KaomojiPartData> parts = GetDorpParts(data.Parts);
+
+        if(parts.Count == 0) return;
+
+        foreach(KaomojiPartData part in parts)
+        {
+            HasKaomojiParts existing = dropParts.Find(hp => hp.part == part);
+            if(existing != null)
+            {
+                existing.amount++;
+            }
+            else
+            {
+                dropParts.Add(new HasKaomojiParts { amount = 1, part = part });
+            }
+        }
     }
 }

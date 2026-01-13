@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ENUM;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 namespace Constants.Global
@@ -52,52 +53,90 @@ namespace Constants.Global
         /// </summary>
         public string partName;
         public string part;
-        
+        public LevelDetail levelDetail;
+            
         // %で計算(例: 0.1なら10%UP)
         [Tooltip("移動速度に影響")] public Speed speed;
         [Tooltip("攻撃力に影響")] public Power power;
         [Tooltip("防御力に影響")] public Guard guard;
         [Tooltip("体力に影響")] public Stamina stamina;
 
+        [System.Serializable]
+        public class LevelDetail
+        {
+            [SerializeField] GrowthRateType growthRateType;
+            public int Level { get; private set; } = 1;
+            public float Exp { get; private set; } = 0f;
+
+            public void AddExperience(float exp)
+            {
+                Exp += exp;
+                CheckLevelUp();     // レベルアップの確認
+            }
+
+            public void CheckLevelUp()
+            {
+                if(Exp >= Calculation.GetNeedExpBorderByLevelAndGrowthRateType(Level, growthRateType))
+                {
+                    Level++;
+                    Exp = 0f;
+                }
+            }
+
+            public float GetNeedExpBorder()
+            {
+                return Calculation.GetNeedExpBorderByLevelAndGrowthRateType(Level, growthRateType);
+            }
+        }
+        
+
         // レベルごとの効果値
         [System.Serializable]
         public sealed class Speed : IKaomojiPartParameter
         {
-            public int Level { get; private set; }
             [Range(-0.5f, 0.5f)] public float value;
             [SerializeField] GrowthRateType growthRateType;
-            public void AddLevel() { Level ++; }
-            public float GetParameterByLevel() => value * Level * (1 + Calculation.GetGrowthRate(growthRateType));
+            public float GetParameterByLevel(int level)
+            {
+                if(level <= 1) return value;
+                return level * (1 + Calculation.GetGrowthRate(growthRateType)) * value;
+            }
         }
 
         [System.Serializable]
         public sealed class Power : IKaomojiPartParameter
         {
-            public int Level { get; private set; }
             [Range(-0.7f, 0.7f)] public float value;
             [SerializeField] GrowthRateType growthRateType;
-            public void AddLevel() { Level ++; }
-            public float GetParameterByLevel() => value * Level * (1 + Calculation.GetGrowthRate(growthRateType));
+            public float GetParameterByLevel(int level)
+            {
+                if(level <= 1) return value;
+                return level * (1 + Calculation.GetGrowthRate(growthRateType)) * value;
+            }
         }
 
         [System.Serializable]
         public sealed class Guard : IKaomojiPartParameter
         {
-            public int Level { get; private set; }
             [Range(-0.05f, 0.05f)] public float value;
             [SerializeField] GrowthRateType growthRateType;
-            public void AddLevel() { Level ++; }
-            public float GetParameterByLevel() => value * Level * (1 + Calculation.GetGrowthRate(growthRateType));
+            public float GetParameterByLevel(int level)
+            {
+                if(level <= 1) return value;
+                return level * (1 + Calculation.GetGrowthRate(growthRateType)) * value;
+            }
         }
 
         [System.Serializable]
         public sealed class Stamina : IKaomojiPartParameter
         {
-            public int Level { get; private set; }
             [Range(-0.2f, 0.2f)] public float value;
             [SerializeField] GrowthRateType growthRateType;
-            public void AddLevel() { Level ++; }
-            public float GetParameterByLevel() => value * Level * (1 + Calculation.GetGrowthRate(growthRateType));
+            public float GetParameterByLevel(int level)
+            {
+                if(level <= 1) return value;
+                return level * (1 + Calculation.GetGrowthRate(growthRateType)) * value;
+            }
         }
         
     }
@@ -118,6 +157,7 @@ namespace Constants.Global
         public List<Element> elements = new List<Element>();
         public List<HasKaomojiParts> dropKaomojiParts = new List<HasKaomojiParts>();
         public int getMoney;
+        public float getExp;
 
         /// <summary>
         /// 1Waveごとのデータ
@@ -203,7 +243,40 @@ namespace Constants.Global
                 default:
                     return 0.0f;
             }
-        } 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static float GetExperienceByDifficultyAndLevel(Difficulty difficulty, int level)
+        {
+            int baseExp = 10;
+            float difficultyRate = 1.0f + (int)difficulty * 0.25f;
+            float levelRate      = 1.0f + level * 0.05f;
+
+            float exp = baseExp * difficultyRate * levelRate;
+            return exp;
+        }
+
+        public static float GetNeedExpBorderByLevelAndGrowthRateType(int level, GrowthRateType type)
+        {
+            float baseBoderExp = 500f;
+            switch(type)
+            {
+                case GrowthRateType.VeryLow:
+                    return baseBoderExp * 1.4f * level;
+                case GrowthRateType.Low:
+                    return baseBoderExp * 1.2f * level;
+                case GrowthRateType.Normal:
+                    return baseBoderExp * 1.0f * level;
+                case GrowthRateType.High:
+                    return baseBoderExp * 0.8f * level;
+                case GrowthRateType.VeryHigh:
+                    return baseBoderExp * 0.6f * level;
+                default:
+                    return 0.0f;
+            }
+        }
     }
 }
 
