@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ENUM;
 using UnityEngine;
 
 namespace Constants.Global
@@ -60,35 +61,43 @@ namespace Constants.Global
 
         // レベルごとの効果値
         [System.Serializable]
-        public sealed class Speed
+        public sealed class Speed : IKaomojiPartParameter
         {
-            [Range(1, 7)] public int level;
+            public int Level { get; private set; }
             [Range(-0.5f, 0.5f)] public float value;
-            public float GetSpeedByLevel() => level * value;
+            [SerializeField] GrowthRateType growthRateType;
+            public void AddLevel() { Level ++; }
+            public float GetParameterByLevel() => value * Level * (1 + Calculation.GetGrowthRate(growthRateType));
         }
 
         [System.Serializable]
-        public sealed class Power
+        public sealed class Power : IKaomojiPartParameter
         {
-            [Range(1, 7)] public int level;
+            public int Level { get; private set; }
             [Range(-0.7f, 0.7f)] public float value;
-            public float GetPowerByLevel() => level * value;
+            [SerializeField] GrowthRateType growthRateType;
+            public void AddLevel() { Level ++; }
+            public float GetParameterByLevel() => value * Level * (1 + Calculation.GetGrowthRate(growthRateType));
         }
 
         [System.Serializable]
-        public sealed class Guard
+        public sealed class Guard : IKaomojiPartParameter
         {
-            [Range(1, 7)] public int level;
+            public int Level { get; private set; }
             [Range(-0.05f, 0.05f)] public float value;
-            public float GetGuardByLevel() => level * value;
+            [SerializeField] GrowthRateType growthRateType;
+            public void AddLevel() { Level ++; }
+            public float GetParameterByLevel() => value * Level * (1 + Calculation.GetGrowthRate(growthRateType));
         }
 
         [System.Serializable]
-        public sealed class Stamina
+        public sealed class Stamina : IKaomojiPartParameter
         {
-            [Range(1, 7)] public int level;
+            public int Level { get; private set; }
             [Range(-0.2f, 0.2f)] public float value;
-            public float GetStaminaByLevel() => level * value;
+            [SerializeField] GrowthRateType growthRateType;
+            public void AddLevel() { Level ++; }
+            public float GetParameterByLevel() => value * Level * (1 + Calculation.GetGrowthRate(growthRateType));
         }
         
     }
@@ -105,7 +114,7 @@ namespace Constants.Global
 
     public sealed class Wave
     {
-        public ENUM.Difficulty difficulty;
+        public Difficulty difficulty;
         public List<Element> elements = new List<Element>();
         public List<HasKaomojiParts> dropKaomojiParts = new List<HasKaomojiParts>();
         public int getMoney;
@@ -127,34 +136,34 @@ namespace Constants.Global
         /// </summary>
         /// <param name="difficulty"></param>
         /// <returns></returns>
-        public static int GetLevelByDifficulty(ENUM.Difficulty difficulty)
+        public static int GetLevelByDifficulty(Difficulty difficulty)
         {
             switch(difficulty)
             {
-                case ENUM.Difficulty.Easy:
+                case Difficulty.Easy:
                     return Random.Range(1, 3);
-                case ENUM.Difficulty.Normal:
+                case Difficulty.Normal:
                     return Random.Range(2, 4);
-                case ENUM.Difficulty.Hard:
+                case Difficulty.Hard:
                     return Random.Range(3, 6);
-                case ENUM.Difficulty.Extreme:
+                case Difficulty.Extreme:
                     return Random.Range(5, 8);
                 default:
                     return 0;
             }
         }
 
-        public static Color GetColorByDifficulty(ENUM.Difficulty difficulty)
+        public static Color GetColorByDifficulty(Difficulty difficulty)
         {
             switch(difficulty)
             {
-                case ENUM.Difficulty.Easy:
+                case Difficulty.Easy:
                     return Color.green;
-                case ENUM.Difficulty.Normal:
+                case Difficulty.Normal:
                     return Color.yellow;
-                case ENUM.Difficulty.Hard:
+                case Difficulty.Hard:
                     return new Color32(255, 100, 0, 255);
-                case ENUM.Difficulty.Extreme:
+                case Difficulty.Extreme:
                     return Color.red;
                 default:
                     return Color.white;
@@ -164,7 +173,7 @@ namespace Constants.Global
         /// <summary>
         /// レベルや難易度に応じて獲得金額を調整する
         /// </summary>
-        public static int GetMoneyByDifficultyAndLevel(ENUM.Difficulty difficulty, int level)
+        public static int GetMoneyByDifficultyAndLevel(Difficulty difficulty, int level)
         {
             int baseMoney = 5;
             float difficultyRate = 1.0f + (int)difficulty * 0.1f;
@@ -173,6 +182,28 @@ namespace Constants.Global
             int getMoney = Mathf.FloorToInt(baseMoney * difficultyRate * levelRate);
             return getMoney;
         }
+
+        /// <summary>
+        /// 記号のレベルアップ時の成長率を取得する関数
+        /// </summary>
+        public static float GetGrowthRate(GrowthRateType type)
+        {
+            switch(type)
+            {
+                case GrowthRateType.VeryLow:
+                    return 0.05f;
+                case GrowthRateType.Low:
+                    return 0.1f;
+                case GrowthRateType.Normal:
+                    return 0.2f;
+                case GrowthRateType.High:
+                    return 0.3f;
+                case GrowthRateType.VeryHigh:
+                    return 0.4f;
+                default:
+                    return 0.0f;
+            }
+        } 
     }
 }
 
@@ -184,4 +215,6 @@ namespace ENUM
     { None = -1, Start, Now, End }
     public enum Difficulty
     { Easy, Normal, Hard, Extreme, Max }
+    public enum GrowthRateType
+    { VeryLow, Low, Normal, High, VeryHigh }
 }

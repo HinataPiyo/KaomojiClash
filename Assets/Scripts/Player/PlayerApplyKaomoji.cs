@@ -64,10 +64,10 @@ public class PlayerApplyKaomoji : MonoBehaviour
             if(part == null) continue;
 
             // SOが設定されていなければ0を返す
-            Speed += part.Data == null ? 0f : part.Data.speed.GetSpeedByLevel();
-            Power += part.Data == null ? 0f : part.Data.power.GetPowerByLevel();
-            Guard += part.Data == null ? 0f : part.Data.guard.GetGuardByLevel();
-            Stamina += part.Data == null ? 0f : part.Data.stamina.GetStaminaByLevel();
+            Speed += part.Data == null ? 0f : part.Data.speed.GetParameterByLevel();
+            Power += part.Data == null ? 0f : part.Data.power.GetParameterByLevel();
+            Guard += part.Data == null ? 0f : part.Data.guard.GetParameterByLevel();
+            Stamina += part.Data == null ? 0f : part.Data.stamina.GetParameterByLevel();
         }
 
     }
