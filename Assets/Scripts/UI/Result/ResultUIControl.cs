@@ -71,7 +71,7 @@ public class ResultUIControl : MonoBehaviour
         AudioManager.I.PlaySE("GetMoney");
 
         yield return new WaitForSeconds(1.5f);
-        getExp.StartEXPRoutine(wave.getExp);
+        getExp.StartEXPRoutine(wave);
     }
 
     /// <summary>

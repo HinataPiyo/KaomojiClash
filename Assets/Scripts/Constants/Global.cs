@@ -71,21 +71,40 @@ namespace Constants.Global
             public void AddExperience(float exp)
             {
                 Exp += exp;
-                CheckLevelUp();     // レベルアップの確認
+                CheckLevelUp(); // 引数は不要
             }
 
+            // 複数レベルアップ対応
             public void CheckLevelUp()
             {
-                if(Exp >= Calculation.GetNeedExpBorderByLevelAndGrowthRateType(Level, growthRateType))
+                // 無限ループ防止：必要経験値が0以下を返す設計は不可
+                int safety = 1000;
+
+                /*
+                    経験値テーブルが壊れていて needExp = 0 を返した場合
+                        → while (Exp >= need) が永久ループする
+                        → ゲームがフリーズ
+                */
+                while (safety-- > 0)
                 {
+                    float need = GetNeedExpBorder(Level);
+
+                    if (need <= 0f)
+                    {
+                        // テーブル不正。ここは例外でもログでも良い
+                        break;
+                    }
+
+                    if (Exp < need) break;
+
+                    Exp -= need;  // ここが重要：getExpではなく必要量を引く
                     Level++;
-                    Exp = 0f;
                 }
             }
 
-            public float GetNeedExpBorder()
+            public float GetNeedExpBorder(int level)
             {
-                return Calculation.GetNeedExpBorderByLevelAndGrowthRateType(Level, growthRateType);
+                return Calculation.GetNeedExpBorderByLevelAndGrowthRateType(level, growthRateType);
             }
         }
         
@@ -158,6 +177,9 @@ namespace Constants.Global
         public List<HasKaomojiParts> dropKaomojiParts = new List<HasKaomojiParts>();
         public int getMoney;
         public float getExp;
+        public List<int> befor_level = new List<int>();
+        public List<float> befor_exp = new List<float>();
+
 
         /// <summary>
         /// 1Waveごとのデータ
@@ -250,7 +272,7 @@ namespace Constants.Global
         /// </summary>
         public static float GetExperienceByDifficultyAndLevel(Difficulty difficulty, int level)
         {
-            int baseExp = 10;
+            int baseExp = 100;
             float difficultyRate = 1.0f + (int)difficulty * 0.25f;
             float levelRate      = 1.0f + level * 0.05f;
 
@@ -261,6 +283,8 @@ namespace Constants.Global
         public static float GetNeedExpBorderByLevelAndGrowthRateType(int level, GrowthRateType type)
         {
             float baseBoderExp = 500f;
+            if(level == 1) return baseBoderExp;
+
             switch(type)
             {
                 case GrowthRateType.VeryLow:
@@ -276,6 +300,26 @@ namespace Constants.Global
                 default:
                     return 0.0f;
             }
+        }
+
+        public static string GetKaomojiPartTypeName(KaomojiPartType type)
+        {
+            switch(type)
+            {
+                case KaomojiPartType.Eyes:
+                    return "目";
+                case KaomojiPartType.Mouth:
+                    return "口";
+                case KaomojiPartType.Hands:
+                    return "手";
+                case KaomojiPartType.Decoration_First:
+                    return "装飾1";
+                case KaomojiPartType.Decoration_Second:
+                    return "装飾2";
+                default:
+                    return "";
+            }
+            
         }
     }
 }

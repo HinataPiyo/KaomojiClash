@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Constants.Global;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class ResultGetExpControl : MonoBehaviour
     
     [SerializeField] GameObject getExp_Prefab;
     [SerializeField] Transform getExp_Parent;
-    [SerializeField] float fadeSpeed = 1f;
+    float fadeSpeed = 0.5f;
     CanvasGroup canvasGroup;
 
     List<ResultGetExp> items = new List<ResultGetExp>();
@@ -22,9 +23,9 @@ public class ResultGetExpControl : MonoBehaviour
         canvasGroup.alpha = 0f;
     }
 
-    public void StartEXPRoutine(float totalExp)
+    public void StartEXPRoutine(Wave wave)
     {
-        StartCoroutine(ExperienceRoutine(totalExp));
+        StartCoroutine(ExperienceRoutine(wave));
     }
 
     /// <summary>
@@ -32,18 +33,18 @@ public class ResultGetExpControl : MonoBehaviour
     /// </summary>
     /// <param name="totalExp"></param>
     /// <returns></returns>
-    IEnumerator ExperienceRoutine(float totalExp)
+    IEnumerator ExperienceRoutine(Wave wave)
     {
-        t_GetExp.text = "+" + totalExp.ToString("#,###");
+        t_GetExp.text = "+" + wave.getExp.ToString("#,###");
 
         moveUI.MoveLeft(360, 1f);
         
         KaomojiPartData[] parts = Context.I.KaomojiPartDatas();
-        foreach(KaomojiPartData part in parts)
+        for(int ii = 0; ii < parts.Length; ii++)
         {
             GameObject item = Instantiate(getExp_Prefab, getExp_Parent);
             ResultGetExp getExp = item.GetComponent<ResultGetExp>();
-            getExp.Initialize(part, totalExp);
+            getExp.Initialize(parts[ii], wave.getExp, wave.befor_level[ii], wave.befor_exp[ii]);
             items.Add(getExp);
         }
 

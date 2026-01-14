@@ -106,9 +106,12 @@ public class WaveController : MonoBehaviour
     /// </summary>
     void Result(Wave wave, int level)
     {
+        // 戦闘終了時即時反映
         resultCtrl.DropsToInventory(wave.dropKaomojiParts);         // ドロップ品をインベントリに格納
         resultCtrl.GetMoneyToHasMoney(wave.getMoney);               // 所持金を更新
-        resultCtrl.GetExpToMyParts(wave.getExp);                    // 経験値を反映
+        resultCtrl.GetExpToMyParts(wave);                           // 経験値を反映
+
+        // 演出UIを表示
         resultCtrl.ApplyResultUI(wave, level);
     }
 
