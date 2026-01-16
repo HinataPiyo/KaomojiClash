@@ -1,0 +1,43 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_SelectKaomojiPart" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_SelectKaomojiPart.uxml?fileID=9197481963319205126&amp;guid=594cd669804274b45a202dab10dfe720&amp;type=3#Temp_SelectKaomojiPart" />
+    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/KaomojiPartsList_Style.uss?fileID=7433441132597879392&amp;guid=ff314dcc4812dce4ebbc732a4107d133&amp;type=3#KaomojiPartsList_Style" />
+    <ui:VisualElement name="root" class="panel" style="flex-grow: 1;">
+        <ui:ScrollView mode="Vertical" horizontal-scroller-visibility="Hidden">
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+            <ui:Instance template="Temp_SelectKaomojiPart" />
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>
