@@ -629,7 +629,7 @@ MonoBehaviour:
   t_KaomojiPartType: {fileID: 8882589150750470785}
   fastSpeed: 2.5
   slowSpeed: 0.6
-  slowDownRange: 20
+  slowDownRange: 0.2
   slowCurve:
     serializedVersion: 2
     m_Curve:

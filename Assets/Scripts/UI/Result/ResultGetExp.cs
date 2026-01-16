@@ -17,8 +17,8 @@ public class ResultGetExp : MonoBehaviour
     [Header("Animation (distance-based)")]
     [SerializeField] float fastSpeed = 2.5f;   // 前半速度（slider.maxValue/秒 の係数）
     [SerializeField] float slowSpeed = 0.6f;   // 終盤速度
-    [Tooltip("target に近いと判定する残りExp量。レベル幅が大きく変動するなら割合指定に切替推奨。")]
-    [SerializeField] float slowDownRange = 20f;
+    [Tooltip("target に近いと判定する残りExp量の割合（0～1）。例: 0.2 = 残り20%から減速開始")]
+    [SerializeField, Range(0f, 1f)] float slowDownRange = 0.2f;
     [SerializeField] AnimationCurve slowCurve = null; // nullなら内蔵カーブを使用
 
     [Header("Option")]
@@ -109,8 +109,9 @@ public class ResultGetExp : MonoBehaviour
             float current = slider.value;
             float remaining = target - current;
 
-            // 残りが slowDownRange 以内に入ったら 0→1 に遷移して減速へ
-            float k = 1f - Mathf.Clamp01(remaining / Mathf.Max(0.0001f, slowDownRange));
+            // 残りが slowDownRange（割合）以内に入ったら 0→1 に遷移して減速へ
+            float rangeInExp = slider.maxValue * slowDownRange;
+            float k = 1f - Mathf.Clamp01(remaining / Mathf.Max(0.0001f, rangeInExp));
             float easedK = slowCurve.Evaluate(k);
 
             float speed = Mathf.Lerp(fastSpeed, slowSpeed, easedK);

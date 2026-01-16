@@ -60,7 +60,7 @@ public class ResultGetExpControl : MonoBehaviour
     /// </summary>
     IEnumerator EndResultRoutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         float elapsed = 0f;
         while(elapsed < fadeSpeed)
