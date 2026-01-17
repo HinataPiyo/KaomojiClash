@@ -12,19 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb1bcfc0d329534bb6adb7af69bb262, type: 3}
   m_Name: Eye_Caret
   m_EditorClassIdentifier: 
+  dorpProbability: 0.3
   partType: 0
   data:
     partName: "\u30AD\u30E3\u30EC\u30C3\u30C8"
     part: ^^
     speed:
-      level: 7
       value: 0.3
+      growthRateType: 2
     power:
-      level: 1
       value: 0.7
+      growthRateType: 3
     guard:
-      level: 1
       value: 0.05
+      growthRateType: 2
     stamina:
-      level: 1
       value: 0.2
+      growthRateType: 2

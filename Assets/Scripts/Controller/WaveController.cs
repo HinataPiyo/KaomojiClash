@@ -1,6 +1,8 @@
 using UnityEngine;
 using Constants.Global;
 using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
 
 
 public class WaveController : MonoBehaviour
@@ -8,6 +10,9 @@ public class WaveController : MonoBehaviour
     public static readonly float EnemyAmountIncreaseValue = 0.6f;
     [SerializeField] EnemySpawnController enemySpawn;
     [SerializeField] WaveDataUIControl waveDataCtrl;
+    [SerializeField] DropController dropCtrl;
+    [SerializeField] ResultController resultCtrl;
+
 
     int waveCount;
     public bool IsWaving { get; private set; }
@@ -24,7 +29,10 @@ public class WaveController : MonoBehaviour
         IsWaving = true;        // Wave開始
         EnemyData encountEnemy = enemy.GetComponent<EnemyController>().EnemyData;
         int maxWaveCount = encountEnemy.Wave.elements.Count;
-        waveDataCtrl.SetWaveData(encountEnemy.Wave, encountEnemy.E_Status.GetLevel());
+
+        int level = encountEnemy.E_Status.GetLevel();
+        Wave wave = encountEnemy.Wave;
+        waveDataCtrl.SetWaveData(wave, level);
 
         for(int ii = 0; ii < maxWaveCount; ii++)
         {
@@ -36,6 +44,8 @@ public class WaveController : MonoBehaviour
         }
 
         BattleFlowManager.I.EndBattle();        // 戦闘終了
+        Result(wave, level);
+
         waveCount = 0;
         IsWaving = false;       // Wave終了
     }
@@ -44,14 +54,17 @@ public class WaveController : MonoBehaviour
     /// WaveDataを作成しEnemyDataに保持させておく
     /// ※ EnemyDataは敵生成時にCopyされている(元のSOには干渉しない)
     /// </summary>
-    /// <param name="firstEnemy">エンカウントした敵の情報</param>
+    /// <param name="firstEnemy">エンカウント可能な敵の情報</param>
     /// <param name="firstEnemyLevel">(現)敵のレベル（難易度）は生成時に決まるので引数で受け取る</param>
     public void CreateWaveData(EnemyData firstEnemy, ENUM.Difficulty difficulty)
     {
         Wave w = new Wave();
-        w.difficulty = difficulty;
+        ENUM.Difficulty dif = difficulty;
+        w.difficulty = dif;
         int waveCount = 0;
-        int dif_Amount = GetOneWaveEnemyAmount(w.difficulty);     // 難易度に応じて敵の量を設定
+        int getMoney = 0;
+        float getExp = 0;
+        int dif_Amount = GetOneWaveEnemyAmount(dif);     // 難易度に応じて敵の量を設定
 
         // 現在 3Wave分作成
         for(int ii = 0; ii < 3; ii++)
@@ -64,19 +77,42 @@ public class WaveController : MonoBehaviour
         {
             // 1Waveごとの設定
             float increase = EnemyAmountIncreaseValue * waveCount;
-            int enemyAmount = Mathf.CeilToInt(dif_Amount * (increase + 1));
+            int enemyAmount = Mathf.CeilToInt(dif_Amount * (increase + 1));     // 敵の量を設定
             for(int ii = 0; ii < enemyAmount; ii++)
             {
                 // 難易度に応じて敵のレベルが決まる
-                EnemyData select = enemySpawn.SelectEnemyData(w.difficulty);
-                elem.datas.Add(select);              
+                EnemyData select = enemySpawn.SelectEnemyData(dif);
+                dropCtrl.GetDropParts(w.dropKaomojiParts, select);       // ドロップ内容を決める
+                elem.datas.Add(select);
+
+                int lv = select.E_Status.GetLevel();
+
+                getMoney += Calculation.GetMoneyByDifficultyAndLevel(dif, lv);          // 獲得金を計算
+                getExp += Calculation.GetExperienceByDifficultyAndLevel(dif, lv);       // 獲得経験値を計算
             }
 
             waveCount++;
         }
 
+        w.getMoney = getMoney;      // 獲得金を保持
+        w.getExp = getExp;          // 獲得経験値を保持
+
         // WaveDataを作成し終わったらエンカウントした敵にWaveDataを再度Setする
         firstEnemy.SetWaveData(w);
+    }
+
+    /// <summary>
+    /// リザルト処理
+    /// </summary>
+    void Result(Wave wave, int level)
+    {
+        // 戦闘終了時即時反映
+        resultCtrl.DropsToInventory(wave.dropKaomojiParts);         // ドロップ品をインベントリに格納
+        resultCtrl.GetMoneyToHasMoney(wave.getMoney);               // 所持金を更新
+        resultCtrl.GetExpToMyParts(wave);                           // 経験値を反映
+
+        // 演出UIを表示
+        resultCtrl.ApplyResultUI(wave, level);
     }
 
     /// <summary>

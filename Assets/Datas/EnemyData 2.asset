@@ -23,7 +23,7 @@ MonoBehaviour:
     mentalData:
       faceline: ()
       maxMental: 3
-  kaomoji_Body: \(^_^\)
+  kaomoji_Body: "(>\u03C9<)"
   launchDuration: 0.2
   findPlayerRadius: 2
   e_Status:
@@ -31,3 +31,6 @@ MonoBehaviour:
     power: 1
     guard: 0.397
     stamina: 0.31
+  parts:
+  - {fileID: 11400000, guid: d2e6efceab6ac1d419e577356b7d48f7, type: 2}
+  - {fileID: 11400000, guid: 0899cf25843677842bf92cc5b4a28eec, type: 2}

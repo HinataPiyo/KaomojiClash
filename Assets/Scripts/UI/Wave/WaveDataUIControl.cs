@@ -42,7 +42,9 @@ public class WaveDataUIControl : MonoBehaviour
 
     public void SetDifficultyText(ENUM.Difficulty difficulty)
     {
-        this.difficulty.text = difficulty.ToString();
+        // Uppercaseを用いて小文字を全て大文字に変換する
+        this.difficulty.text = difficulty.ToString().ToUpper();;
+        this.difficulty.style.color = Calculation.GetColorByDifficulty(difficulty);
     }
 
     public void SetLevelText(int level)

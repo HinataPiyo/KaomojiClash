@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using ENUM;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Context : MonoBehaviour
@@ -6,8 +8,8 @@ public class Context : MonoBehaviour
     public static Context I { get; private set; }
 
     [SerializeField] GameObject player;         public GameObject Player => player;
-
-    [SerializeField] WallController wallCtrl;
+    PlayerApplyKaomoji playerApply;
+    public KaomojiPartData[] KaomojiPartDatas() => playerApply.KaomojiPartDatas.ToArray();
     public BattleStat BattleStat { get; private set; } = BattleStat.None;
 
 
@@ -17,6 +19,16 @@ public class Context : MonoBehaviour
         {
             I = this;
         }
+
+        playerApply = player.GetComponent<PlayerApplyKaomoji>();
+    }
+
+    /// <summary>
+    /// 記号全体のステータスを更新する
+    /// </summary>
+    public void UpdatePlayerStatus()
+    {
+        playerApply.UpdateTotalParameter();
     }
 
     /// <summary>

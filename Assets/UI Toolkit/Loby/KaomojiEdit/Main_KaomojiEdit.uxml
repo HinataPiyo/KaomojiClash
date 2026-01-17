@@ -1,0 +1,18 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_Back" src="project://database/Assets/UI%20Toolkit/Temp_Back.uxml?fileID=9197481963319205126&amp;guid=e207c51f9886e84438a49daef40d9089&amp;type=3#Temp_Back" />
+    <ui:Template name="Module_SelectedDisplay" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Module_SelectedDisplay.uxml?fileID=9197481963319205126&amp;guid=5cdc710046eb20249a6f2cd41dae93ba&amp;type=3#Module_SelectedDisplay" />
+    <ui:Template name="Module_SelectedKaomojiPartStatusParamater" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Module_SelectedKaomojiPartStatusParamater.uxml?fileID=9197481963319205126&amp;guid=549ceafb68283024d99e3170a29b69c0&amp;type=3#Module_SelectedKaomojiPartStatusParamater" />
+    <ui:Template name="Module_Search" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Module_Search.uxml?fileID=9197481963319205126&amp;guid=3c014ee7aee68e44cbdc547181f535af&amp;type=3#Module_Search" />
+    <ui:Template name="Module_SelectKaomojiParts" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Module_SelectKaomojiParts.uxml?fileID=9197481963319205126&amp;guid=db1be3d6ac857114c89550f3a82ab74d&amp;type=3#Module_SelectKaomojiParts" />
+    <ui:Template name="Module_FaceLine" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Module_FaceLine.uxml?fileID=9197481963319205126&amp;guid=eef0bf9cb839bdb4abbbfeb1444bed2d&amp;type=3#Module_FaceLine" />
+    <ui:Template name="Module_SelectKaomojiType" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Module_SelectKaomojiType.uxml?fileID=9197481963319205126&amp;guid=95c5c951182531a499701b5fe7f3f535&amp;type=3#Module_SelectKaomojiType" />
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:Instance template="Temp_Back" name="Temp_Back" style="position: absolute; top: 2%; right: 3%;" />
+        <ui:Instance template="Module_SelectedDisplay" name="SelectedDisplay" style="width: 40%; height: 45%; position: absolute; top: 5%; left: 30%;" />
+        <ui:Instance template="Module_SelectedKaomojiPartStatusParamater" name="SelectedKaomojiPartStatusParamater" style="position: absolute; height: 47%; width: 25%; right: 3%; top: 10%;" />
+        <ui:Instance template="Module_Search" name="Search" style="position: absolute; width: 40%; top: 51%; left: 30%;" />
+        <ui:Instance template="Module_SelectKaomojiParts" name="SelectKaomojiParts" style="position: absolute; bottom: 2%; right: 3%; height: 40%; width: 80%;" />
+        <ui:Instance template="Module_FaceLine" name="FaceLine" style="height: 47%; width: 25%; position: absolute; top: 10%; left: 3%;" />
+        <ui:Instance template="Module_SelectKaomojiType" name="SelectKaomojiType" style="position: absolute; bottom: 2%; left: 3%; height: 40%; width: 13%;" />
+    </ui:VisualElement>
+</ui:UXML>

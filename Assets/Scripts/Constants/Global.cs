@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using ENUM;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 namespace Constants.Global
 {
     [System.Serializable]
-    public class CharacterStatus
+    public sealed class CharacterStatus
     {
         public float attackPower = 1f;
         public float maxHealth = 10f;
@@ -25,7 +27,7 @@ namespace Constants.Global
 
         // 精神強度など精神に関するデータ
         [System.Serializable]
-        public class MentalData
+        public sealed class MentalData
         {
             public string faceline = "()";
             public int maxMental = 3;
@@ -33,7 +35,7 @@ namespace Constants.Global
     }
 
     [System.Serializable]
-    public class KAOMOJI
+    public sealed class KAOMOJI
     {
         public const float ColiderXSize = 0.1f;      // コライダーの当たり判定の幅を調整
         public KaomojiPartData eyes;
@@ -44,64 +46,145 @@ namespace Constants.Global
     }
 
     [System.Serializable]
-    public class KaomojiPart
+    public sealed class KaomojiPart
     {
         /// <summary>
         /// 顔文字のパーツが持つステータスはこんだけ
         /// </summary>
         public string partName;
         public string part;
-        
+        public LevelDetail levelDetail;
+            
         // %で計算(例: 0.1なら10%UP)
         [Tooltip("移動速度に影響")] public Speed speed;
         [Tooltip("攻撃力に影響")] public Power power;
         [Tooltip("防御力に影響")] public Guard guard;
         [Tooltip("体力に影響")] public Stamina stamina;
 
+        [System.Serializable]
+        public class LevelDetail
+        {
+            [SerializeField] GrowthRateType growthRateType;
+            public int Level { get; private set; } = 1;
+            public float Exp { get; private set; } = 0f;
+
+            public void AddExperience(float exp)
+            {
+                Exp += exp;
+                CheckLevelUp(); // 引数は不要
+            }
+
+            // 複数レベルアップ対応
+            public void CheckLevelUp()
+            {
+                // 無限ループ防止：必要経験値が0以下を返す設計は不可
+                int safety = 1000;
+
+                /*
+                    経験値テーブルが壊れていて needExp = 0 を返した場合
+                        → while (Exp >= need) が永久ループする
+                        → ゲームがフリーズ
+                */
+                while (safety-- > 0)
+                {
+                    float need = GetNeedExpBorder(Level);
+
+                    if (need <= 0f)
+                    {
+                        // テーブル不正。ここは例外でもログでも良い
+                        break;
+                    }
+
+                    if (Exp < need) break;
+
+                    Exp -= need;  // ここが重要：getExpではなく必要量を引く
+                    Level++;
+                }
+            }
+
+            public float GetNeedExpBorder(int level)
+            {
+                return Calculation.GetNeedExpBorderByLevelAndGrowthRateType(level, growthRateType);
+            }
+        }
+        
+
         // レベルごとの効果値
         [System.Serializable]
-        public class Speed
+        public sealed class Speed : IKaomojiPartParameter
         {
-            [Range(1, 7)] public int level;
             [Range(-0.5f, 0.5f)] public float value;
-            public float GetSpeedByLevel() => level * value;
+            [SerializeField] GrowthRateType growthRateType;
+            public float GetParameterByLevel(int level)
+            {
+                if(level <= 1) return value;
+                return level * (1 + Calculation.GetGrowthRate(growthRateType)) * value;
+            }
         }
 
         [System.Serializable]
-        public class Power
+        public sealed class Power : IKaomojiPartParameter
         {
-            [Range(1, 7)] public int level;
             [Range(-0.7f, 0.7f)] public float value;
-            public float GetPowerByLevel() => level * value;
+            [SerializeField] GrowthRateType growthRateType;
+            public float GetParameterByLevel(int level)
+            {
+                if(level <= 1) return value;
+                return level * (1 + Calculation.GetGrowthRate(growthRateType)) * value;
+            }
         }
 
         [System.Serializable]
-        public class Guard
+        public sealed class Guard : IKaomojiPartParameter
         {
-            [Range(1, 7)] public int level;
             [Range(-0.05f, 0.05f)] public float value;
-            public float GetGuardByLevel() => level * value;
+            [SerializeField] GrowthRateType growthRateType;
+            public float GetParameterByLevel(int level)
+            {
+                if(level <= 1) return value;
+                return level * (1 + Calculation.GetGrowthRate(growthRateType)) * value;
+            }
         }
 
         [System.Serializable]
-        public class Stamina
+        public sealed class Stamina : IKaomojiPartParameter
         {
-            [Range(1, 7)] public int level;
             [Range(-0.2f, 0.2f)] public float value;
-            public float GetStaminaByLevel() => level * value;
+            [SerializeField] GrowthRateType growthRateType;
+            public float GetParameterByLevel(int level)
+            {
+                if(level <= 1) return value;
+                return level * (1 + Calculation.GetGrowthRate(growthRateType)) * value;
+            }
         }
         
     }
 
-    public class Wave
+    /// <summary>
+    /// 顔文字記号データの所持数
+    /// </summary>
+    [System.Serializable]
+    public sealed class HasKaomojiParts
     {
-        public ENUM.Difficulty difficulty;
+        public int amount;
+        public KaomojiPartData part;
+    }
+
+    public sealed class Wave
+    {
+        public Difficulty difficulty;
         public List<Element> elements = new List<Element>();
+        public List<HasKaomojiParts> dropKaomojiParts = new List<HasKaomojiParts>();
+        public int getMoney;
+        public float getExp;
+        public List<int> befor_level = new List<int>();
+        public List<float> befor_exp = new List<float>();
+
 
         /// <summary>
         /// 1Waveごとのデータ
         /// </summary>
-        public class Element
+        public sealed class Element
         {
             // 出現する敵データ
             public List<EnemyData> datas = new List<EnemyData>();
@@ -115,38 +198,128 @@ namespace Constants.Global
         /// </summary>
         /// <param name="difficulty"></param>
         /// <returns></returns>
-        public static int GetLevelByDifficulty(ENUM.Difficulty difficulty)
+        public static int GetLevelByDifficulty(Difficulty difficulty)
         {
             switch(difficulty)
             {
-                case ENUM.Difficulty.Easy:
+                case Difficulty.Easy:
                     return Random.Range(1, 3);
-                case ENUM.Difficulty.Normal:
+                case Difficulty.Normal:
                     return Random.Range(2, 4);
-                case ENUM.Difficulty.Hard:
+                case Difficulty.Hard:
                     return Random.Range(3, 6);
-                case ENUM.Difficulty.Extreme:
+                case Difficulty.Extreme:
                     return Random.Range(5, 8);
                 default:
                     return 0;
             }
         }
 
-        public static Color GetColorByDifficulty(ENUM.Difficulty difficulty)
+        public static Color GetColorByDifficulty(Difficulty difficulty)
         {
             switch(difficulty)
             {
-                case ENUM.Difficulty.Easy:
+                case Difficulty.Easy:
                     return Color.green;
-                case ENUM.Difficulty.Normal:
+                case Difficulty.Normal:
                     return Color.yellow;
-                case ENUM.Difficulty.Hard:
+                case Difficulty.Hard:
                     return new Color32(255, 100, 0, 255);
-                case ENUM.Difficulty.Extreme:
+                case Difficulty.Extreme:
                     return Color.red;
                 default:
                     return Color.white;
             }
+        }
+
+        /// <summary>
+        /// レベルや難易度に応じて獲得金額を調整する
+        /// </summary>
+        public static int GetMoneyByDifficultyAndLevel(Difficulty difficulty, int level)
+        {
+            int baseMoney = 5;
+            float difficultyRate = 1.0f + (int)difficulty * 0.1f;
+            float levelRate      = 1.0f + level * 0.05f;
+
+            int getMoney = Mathf.FloorToInt(baseMoney * difficultyRate * levelRate);
+            return getMoney;
+        }
+
+        /// <summary>
+        /// 記号のレベルアップ時の成長率を取得する関数
+        /// </summary>
+        public static float GetGrowthRate(GrowthRateType type)
+        {
+            switch(type)
+            {
+                case GrowthRateType.VeryLow:
+                    return 0.05f;
+                case GrowthRateType.Low:
+                    return 0.1f;
+                case GrowthRateType.Normal:
+                    return 0.2f;
+                case GrowthRateType.High:
+                    return 0.3f;
+                case GrowthRateType.VeryHigh:
+                    return 0.4f;
+                default:
+                    return 0.0f;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static float GetExperienceByDifficultyAndLevel(Difficulty difficulty, int level)
+        {
+            int baseExp = 100;
+            float difficultyRate = 1.0f + (int)difficulty * 0.25f;
+            float levelRate      = 1.0f + level * 0.05f;
+
+            float exp = baseExp * difficultyRate * levelRate;
+            return exp;
+        }
+
+        public static float GetNeedExpBorderByLevelAndGrowthRateType(int level, GrowthRateType type)
+        {
+            float baseBoderExp = 500f;
+            if(level == 1) return baseBoderExp;
+
+            switch(type)
+            {
+                case GrowthRateType.VeryLow:
+                    return baseBoderExp * 1.4f * level;
+                case GrowthRateType.Low:
+                    return baseBoderExp * 1.2f * level;
+                case GrowthRateType.Normal:
+                    return baseBoderExp * 1.0f * level;
+                case GrowthRateType.High:
+                    return baseBoderExp * 0.8f * level;
+                case GrowthRateType.VeryHigh:
+                    return baseBoderExp * 0.6f * level;
+                default:
+                    return 0.0f;
+            }
+        }
+
+        public static string GetKaomojiPartTypeName(KaomojiPartType type)
+        {
+            switch(type)
+            {
+                case KaomojiPartType.Eyes:
+                    return "目";
+                case KaomojiPartType.Mouth:
+                    return "口";
+                case KaomojiPartType.Hands:
+                    return "手";
+                case KaomojiPartType.Decoration_First:
+                    return "装飾1";
+                case KaomojiPartType.Decoration_Second:
+                    return "装飾2";
+                default:
+                    return "";
+            }
+            
         }
     }
 }
@@ -159,4 +332,6 @@ namespace ENUM
     { None = -1, Start, Now, End }
     public enum Difficulty
     { Easy, Normal, Hard, Extreme, Max }
+    public enum GrowthRateType
+    { VeryLow, Low, Normal, High, VeryHigh }
 }

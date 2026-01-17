@@ -7,9 +7,10 @@ public class EnemyData : CharacterData
 {
     // 本体の顔文字   
     [SerializeField] string kaomoji_Body;       public string Kaomoji_Body => kaomoji_Body;
-    public float launchDuration = 0.5f;
+    [SerializeField] float launchDuration = 0.5f;    public float LaunchDuration => launchDuration;
     [SerializeField] float findPlayerRadius = 2f;    public float FindPlayerRadius => findPlayerRadius;
     [SerializeField] EnemyStatus e_Status;      public EnemyStatus E_Status => e_Status;
+    [SerializeField] KaomojiPartData[] parts;   public KaomojiPartData[] Parts => parts;
 
     public Wave Wave { get; private set; } = new Wave();
     public void SetWaveData(Wave w) => Wave = w;
@@ -19,6 +20,9 @@ public class EnemyData : CharacterData
     {
         [Header("ステータスの強さ")] 
         int level = 1;
+
+        [Header("所持経験値")]
+        float experience;
 
         [Header("デフォルトステータス")]
         [Range(-2f, 2f)] public float speed;
@@ -32,6 +36,9 @@ public class EnemyData : CharacterData
             if(value > 0) level = value;
             else level = 1;     // 下限を1にする
         }
+
+        public float GetExperience() => experience;
+        public void SetExperience(float value) => experience = value;
     }
 
 }

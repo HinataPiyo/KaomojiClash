@@ -31,8 +31,9 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void SetLevelAndDifficultyText(int level, ENUM.Difficulty difficulty)
+    public void SetEnemyWorldUI(int level, ENUM.Difficulty difficulty)
     {
+        applyKaomoji.ChangeMinimapIconColor(difficulty);
         applyKaomoji.SetLevelAndDifficultyText(level, difficulty);
     }
 
