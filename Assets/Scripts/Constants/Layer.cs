@@ -5,4 +5,5 @@ public static class Layer
     public const string Player = "Player";
     public const string WALL = "Wall";
     // IPadで編集してみた
+    // Pushできてるかの確認
 }
