@@ -4,5 +4,9 @@ using UnityEngine;
 public class KaomojiPartsDatabase : ScriptableObject
 {
     [SerializeField] KaomojiPartData[] parts;
-    public KaomojiPartData[] Parts => parts;
+    public KaomojiPartData[] GetAllParts() => parts;
+    public KaomojiPartData[] GetPartsByType(ENUM.KaomojiPartType type)
+    {
+        return System.Array.FindAll(parts, part => part.PartType == type);
+    }
 }

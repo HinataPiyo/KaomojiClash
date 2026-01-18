@@ -12,19 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb1bcfc0d329534bb6adb7af69bb262, type: 3}
   m_Name: Eye_GreaterThan&LessThan
   m_EditorClassIdentifier: 
+  dorpProbability: 0.3
   partType: 0
   data:
     partName: "\u5927\u306A\u308A\u5C0F\u306A\u308A"
     part: '><'
+    levelDetail:
+      growthRateType: 0
     speed:
-      level: 7
       value: 0.3
+      growthRateType: 0
     power:
-      level: 1
-      value: 0.7
+      value: 0.271
+      growthRateType: 2
     guard:
-      level: 1
-      value: 0.05
+      value: 0.0115
+      growthRateType: 3
     stamina:
-      level: 1
       value: 0.2
+      growthRateType: 1

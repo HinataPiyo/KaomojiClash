@@ -80,7 +80,7 @@ public class PlayerMovement : Movement
             float powerRate = Mathf.Clamp01(dragVector.magnitude / data.Status.maxDragDistance);
             float launchSpeed = data.Status.default_LaunchPower * powerRate;
 
-            Launch(launchDir * launchSpeed * (1f + totalStatus.Speed));
+            Launch(launchDir * launchSpeed * (1f + Context.I.PlayerData.Kaomoji.Speed));
             CameraZoom.I.SetCameraOrthographic(Context.I.BattleStat);
             shootDirectionArrow.Del();
         }

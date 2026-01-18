@@ -1,0 +1,22 @@
+.button {
+    background-color: color.white;
+    transition-duration: 0.2s;
+    scale: 1;
+    transition-timing-function: ease-out;
+}
+
+.button:hover {
+    background-color: rgb(255, 230, 109);
+    transition-duration: 0.2s, 0.3s;
+    scale: 1.05;
+    transition-timing-function: ease-out, ease-out-elastic;
+    transition-property: all, scale;
+}
+
+.button:active {
+    background-color: rgb(255, 107, 107);
+    transition-timing-function: ease-out, ease-out-back;
+    scale: 0.97;
+    transition-duration: 0.2s, 0.3s;
+    transition-property: all, scale;
+}

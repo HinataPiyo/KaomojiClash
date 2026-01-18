@@ -10,12 +10,12 @@ public class PlayerMental : Mental
         totalStatus = GetComponent<PlayerApplyKaomoji>();
         statusUI = FindAnyObjectByType<StatusUIControl>();
         statusUI.UpdateMental(data.Status.mentalData.maxMental);
-        statusUI.SetMaxHealth(data.Status.maxHealth * (1f + totalStatus.Stamina));
+        statusUI.SetMaxHealth(data.Status.maxHealth * (1f + Context.I.PlayerData.Kaomoji.Stamina));
     }
 
     public override void TakeDamage(float damage)
     {
-        float reductDamage = damage * (1f - totalStatus.Guard);
+        float reductDamage = damage * (1f - Context.I.PlayerData.Kaomoji.Guard);
         float finalDamage = Mathf.Max(1f, reductDamage); // 最低1ダメージ保証
         currentHealth -= finalDamage;     // 最低1ダメージ保証
 

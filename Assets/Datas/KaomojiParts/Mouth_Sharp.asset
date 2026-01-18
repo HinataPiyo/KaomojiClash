@@ -12,19 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb1bcfc0d329534bb6adb7af69bb262, type: 3}
   m_Name: Mouth_Sharp
   m_EditorClassIdentifier: 
+  dorpProbability: 0.3
   partType: 1
   data:
     partName: "\u30B7\u30E3\u30FC\u30D7"
     part: "\uFF03"
+    levelDetail:
+      growthRateType: 0
     speed:
-      level: 1
-      value: 0.2
+      value: -0.181
+      growthRateType: 3
     power:
-      level: 1
-      value: 0.7
+      value: 0.248
+      growthRateType: 2
     guard:
-      level: 1
-      value: 0.05
+      value: 0.001
+      growthRateType: 1
     stamina:
-      level: 1
       value: 0.2
+      growthRateType: 4

@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
     <ui:VisualElement name="root" style="flex-grow: 1;">
         <ui:VisualElement name="box" class="icon" style="flex-grow: 1; justify-content: center;">
-            <ui:Label text="+" name="value" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 14px; padding-left: 0;" />
+            <ui:Label text="@@" name="icon-value" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 10px; padding-left: 0; font-size: 38px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

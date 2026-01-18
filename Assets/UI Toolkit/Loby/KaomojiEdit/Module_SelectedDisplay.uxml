@@ -9,7 +9,7 @@
             <ui:Label text="(^ω^)" name="value" style="-unity-text-align: middle-center; font-size: 76px;" />
         </ui:VisualElement>
         <ui:VisualElement name="status-paramater" style="position: absolute; height: 210px; width: 280px; right: 0%; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
-            <ui:Instance template="Temp_StatusParamater" name="Temp_StattusParamater_KaomojiEdit" class="kaomoji-edit kaomojiedit unity-progress-bar" style="flex-grow: 1;" />
+            <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" class="kaomoji-edit kaomojiedit unity-progress-bar" style="flex-grow: 1;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
