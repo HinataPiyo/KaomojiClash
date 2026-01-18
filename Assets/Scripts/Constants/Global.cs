@@ -113,8 +113,10 @@ namespace Constants.Global
         [System.Serializable]
         public sealed class Speed : IKaomojiPartParameter
         {
-            [Range(-0.5f, 0.5f)] public float value;
-            [SerializeField] GrowthRateType growthRateType;
+            public const float MIN_VALUE = -0.5f;
+            public const float MAX_VALUE = 0.5f;
+            [Range(MIN_VALUE, MAX_VALUE), SerializeField] float value;
+            [SerializeField] GrowthRateType growthRateType;     public GrowthRateType GrowthRateType => growthRateType;
             public float GetParameterByLevel(int level)
             {
                 if(level <= 1) return value;
@@ -125,8 +127,10 @@ namespace Constants.Global
         [System.Serializable]
         public sealed class Power : IKaomojiPartParameter
         {
-            [Range(-0.7f, 0.7f)] public float value;
-            [SerializeField] GrowthRateType growthRateType;
+            public const float MIN_VALUE = -0.7f;
+            public const float MAX_VALUE = 0.7f;
+            [Range(MIN_VALUE, MAX_VALUE), SerializeField] float value;
+            [SerializeField] GrowthRateType growthRateType;     public GrowthRateType GrowthRateType => growthRateType;
             public float GetParameterByLevel(int level)
             {
                 if(level <= 1) return value;
@@ -137,8 +141,10 @@ namespace Constants.Global
         [System.Serializable]
         public sealed class Guard : IKaomojiPartParameter
         {
-            [Range(-0.05f, 0.05f)] public float value;
-            [SerializeField] GrowthRateType growthRateType;
+            public const float MIN_VALUE = -0.05f;
+            public const float MAX_VALUE = 0.05f;
+            [Range(MIN_VALUE, MAX_VALUE), SerializeField] float value;
+            [SerializeField] GrowthRateType growthRateType;     public GrowthRateType GrowthRateType => growthRateType;
             public float GetParameterByLevel(int level)
             {
                 if(level <= 1) return value;
@@ -149,8 +155,10 @@ namespace Constants.Global
         [System.Serializable]
         public sealed class Stamina : IKaomojiPartParameter
         {
-            [Range(-0.2f, 0.2f)] public float value;
-            [SerializeField] GrowthRateType growthRateType;
+            public const float MIN_VALUE = -0.2f;
+            public const float MAX_VALUE = 0.2f;
+            [Range(MIN_VALUE, MAX_VALUE), SerializeField] float value;
+            [SerializeField] GrowthRateType growthRateType;     public GrowthRateType GrowthRateType => growthRateType;
             public float GetParameterByLevel(int level)
             {
                 if(level <= 1) return value;
@@ -321,6 +329,70 @@ namespace Constants.Global
             }
             
         }
+
+#region StatusParamater
+
+        public static string GetGrowthRateStar(GrowthRateType type)
+        {
+            switch(type)
+            {
+                case GrowthRateType.None:
+                    return "-";
+                case GrowthRateType.VeryLow:
+                    return "☆☆☆☆★";
+                case GrowthRateType.Low:
+                    return "☆☆☆★★";
+                case GrowthRateType.Normal:
+                    return "☆☆★★★";
+                case GrowthRateType.High:
+                    return "☆★★★★";
+                case GrowthRateType.VeryHigh:
+                    return "★★★★★";
+                default:
+                    return "☆☆☆☆☆";
+            }
+        }
+
+        public static Color GetStatusTypeColorByType(StatusType type)
+        {
+            Color color;
+            switch(type)
+            {
+                case StatusType.Speed:
+                    ColorUtility.TryParseHtmlString("#06D6A0", out color);
+                    return color;
+                case StatusType.Power:
+                    ColorUtility.TryParseHtmlString("#EF476F", out color);
+                    return color;
+                case StatusType.Guard:
+                    ColorUtility.TryParseHtmlString("#118AB2", out color);
+                    return color;
+                case StatusType.Stamina:
+                    ColorUtility.TryParseHtmlString("#FFD166", out color);
+                    return color;
+                default:
+                    return Color.white;
+            }
+        }
+
+        public static string GetStatusTypeNameByType(StatusType type)
+        {
+            switch(type)
+            {
+                case StatusType.Speed:
+                    return "スピード";
+                case StatusType.Power:
+                    return "パワー";
+                case StatusType.Guard:
+                    return "ガード";
+                case StatusType.Stamina:
+                    return "スタミナ";
+                default:
+                    return "";
+            }
+        }
+
+#endregion
     }
 }
 
@@ -333,5 +405,7 @@ namespace ENUM
     public enum Difficulty
     { Easy, Normal, Hard, Extreme, Max }
     public enum GrowthRateType
-    { VeryLow, Low, Normal, High, VeryHigh }
+    { None = -1, VeryLow, Low, Normal, High, VeryHigh }
+    public enum StatusType
+    { None = -1, Speed, Power, Guard, Stamina, Max}
 }

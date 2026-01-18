@@ -6,28 +6,28 @@
     <ui:VisualElement name="root" style="flex-grow: 1;">
         <ui:VisualElement name="box" style="flex-grow: 1;">
             <ui:VisualElement name="type-growthrate" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
-                <ui:Label text="スピード" name="Type" class="type" />
+                <ui:Label text="スピード" name="type" class="type" />
                 <ui:Label text="★★★★★" name="growthrate" class="growthrate" />
             </ui:VisualElement>
-            <ui:ProgressBar value="22" name="speed-progressbar" class="speed-progressbar" />
+            <ui:ProgressBar name="speed-progressbar" high-value="100" value="22" class="speed-progressbar" />
         </ui:VisualElement>
         <ui:VisualElement name="box" style="flex-grow: 1;">
             <ui:VisualElement name="type-growthrate" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
-                <ui:Label text="パワー" name="Type" class="type" />
+                <ui:Label text="パワー" name="type" class="type" />
                 <ui:Label text="★★★★★" name="growthrate" class="growthrate" />
             </ui:VisualElement>
             <ui:ProgressBar value="22" name="power-progressbar" class="power-progressbar" />
         </ui:VisualElement>
         <ui:VisualElement name="box" style="flex-grow: 1;">
             <ui:VisualElement name="type-growthrate" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
-                <ui:Label text="ガード" name="Type" class="type" />
+                <ui:Label text="ガード" name="type" class="type" />
                 <ui:Label text="★★★★★" name="growthrate" class="growthrate" />
             </ui:VisualElement>
             <ui:ProgressBar value="22" name="guard-progressbar" class="guard-progressbar" />
         </ui:VisualElement>
         <ui:VisualElement name="box" style="flex-grow: 1;">
             <ui:VisualElement name="type-growthrate" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
-                <ui:Label text="スタミナ" name="Type" class="type" />
+                <ui:Label text="スタミナ" name="type" class="type" />
                 <ui:Label text="★★★★★" name="growthrate" class="growthrate" />
             </ui:VisualElement>
             <ui:ProgressBar value="22" name="stamina-progressbar" class="stamina-progressbar" />

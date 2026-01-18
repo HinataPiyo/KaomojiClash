@@ -10,21 +10,24 @@ namespace UI.KaomojiBuild
         /// moduleの名前
         /// </summary>
         const string MODULE_SELECT_KAOMOJI_PARTS = "SelectKaomojiParts";
+        const string MODULE_SELECTED_KAOMOJI_PART_STATUS_PARAMATER = "SelectedKaomojiPartStatusParamater";
 
         /// <summary>
         /// キャッシュ
         /// </summary>
         UIDocument uiDocument;
-        SelectKaomojiParts selectKaomojiPartsModule;
+        public SelectKaomojiParts module_SKP { get; private set; }
+        public SelectedKaomojiPartStatusParamater module_SKP_StatusParamater { get; private set; }
 
         void Awake()
         {
             uiDocument = GetComponent<UIDocument>();
-            VisualElement root = uiDocument.rootVisualElement;
 
-            selectKaomojiPartsModule = GetComponent<SelectKaomojiParts>();
+            module_SKP = GetComponent<SelectKaomojiParts>();
+            module_SKP_StatusParamater = GetComponent<SelectedKaomojiPartStatusParamater>();
 
-            Initialize(selectKaomojiPartsModule, MODULE_SELECT_KAOMOJI_PARTS);
+            Initialize(module_SKP, MODULE_SELECT_KAOMOJI_PARTS);
+            Initialize(module_SKP_StatusParamater, MODULE_SELECTED_KAOMOJI_PART_STATUS_PARAMATER);
         }
 
         /// <summary>

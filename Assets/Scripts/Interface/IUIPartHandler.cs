@@ -1,5 +1,5 @@
 public interface IUIPartHandler
 {
-    void AssignPart(KaomojiPartData data);
+    void AssignPart(KaomojiPartData part);
     void Reset();
 }

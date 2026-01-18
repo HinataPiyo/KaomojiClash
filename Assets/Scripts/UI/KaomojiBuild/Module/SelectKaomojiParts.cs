@@ -10,8 +10,15 @@ namespace UI.KaomojiBuild.Module
     {
         [SerializeField] KaomojiPartsDatabase partsDatabase;
         [SerializeField] VisualTreeAsset temp_SelectKaomojiParts;
+
+        KaomojiBuildModulesController modulesCtrl;
         VisualElement moduleRoot;
         ScrollView list_view;
+
+        void Awake()
+        {
+            modulesCtrl = GetComponent<KaomojiBuildModulesController>();
+        }
 
         /// <summary>
         /// Managerクラスからこの関数が実行されRoot要素が渡される
@@ -42,6 +49,7 @@ namespace UI.KaomojiBuild.Module
                 Debug.Log($"選択されたパーツ: {part.Data.part}");
                 // ここにパーツ選択時の処理を追加
                 // SelectedKaomojiPartStatuParamater　にDataを渡す
+                modulesCtrl.module_SKP_StatusParamater.AssignPart(part);
             };
 
             list_view.contentContainer.Add(elem);

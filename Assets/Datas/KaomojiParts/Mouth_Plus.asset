@@ -17,15 +17,17 @@ MonoBehaviour:
   data:
     partName: Plus
     part: +
+    levelDetail:
+      growthRateType: 0
     speed:
-      level: 1
-      value: 0
+      value: 0.298
+      growthRateType: 0
     power:
-      level: 1
-      value: 0
+      value: -0.26
+      growthRateType: 1
     guard:
-      level: 1
-      value: 0
+      value: 0.0223
+      growthRateType: 0
     stamina:
-      level: 1
-      value: 0
+      value: 0.051
+      growthRateType: 3

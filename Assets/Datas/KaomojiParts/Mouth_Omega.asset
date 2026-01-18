@@ -17,15 +17,17 @@ MonoBehaviour:
   data:
     partName: "\u30AA\u30E1\u30AC"
     part: "\u03C9"
+    levelDetail:
+      growthRateType: 0
     speed:
-      value: 0.2
-      growthRateType: 3
+      value: -0.29
+      growthRateType: 1
     power:
-      value: 0.7
-      growthRateType: 3
+      value: 0.219
+      growthRateType: 2
     guard:
-      value: 0.05
+      value: 0.0119
       growthRateType: 3
     stamina:
-      value: 0.2
-      growthRateType: 3
+      value: 0.101
+      growthRateType: 4

@@ -12,19 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb1bcfc0d329534bb6adb7af69bb262, type: 3}
   m_Name: Eye_AtMark
   m_EditorClassIdentifier: 
+  dorpProbability: 0.3
   partType: 0
   data:
     partName: "\u30A2\u30C3\u30C8\u30DE\u30FC\u30AF"
     part: "\uFF20\uFF20"
+    levelDetail:
+      growthRateType: 0
     speed:
-      level: 1
       value: 0.3
+      growthRateType: 0
     power:
-      level: 1
-      value: 0.7
+      value: 0.47
+      growthRateType: 1
     guard:
-      level: 1
       value: 0.05
+      growthRateType: 3
     stamina:
-      level: 1
       value: 0.2
+      growthRateType: 0

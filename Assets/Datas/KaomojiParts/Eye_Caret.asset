@@ -17,6 +17,8 @@ MonoBehaviour:
   data:
     partName: "\u30AD\u30E3\u30EC\u30C3\u30C8"
     part: ^^
+    levelDetail:
+      growthRateType: 0
     speed:
       value: 0.3
       growthRateType: 2
@@ -25,7 +27,7 @@ MonoBehaviour:
       growthRateType: 3
     guard:
       value: 0.05
-      growthRateType: 2
+      growthRateType: 0
     stamina:
       value: 0.2
       growthRateType: 2

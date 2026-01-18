@@ -6,7 +6,9 @@
     <ui:Template name="Module_SelectKaomojiParts" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Module_SelectKaomojiParts.uxml?fileID=9197481963319205126&amp;guid=db1be3d6ac857114c89550f3a82ab74d&amp;type=3#Module_SelectKaomojiParts" />
     <ui:Template name="Module_FaceLine" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Module_FaceLine.uxml?fileID=9197481963319205126&amp;guid=eef0bf9cb839bdb4abbbfeb1444bed2d&amp;type=3#Module_FaceLine" />
     <ui:Template name="Module_SelectKaomojiType" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Module_SelectKaomojiType.uxml?fileID=9197481963319205126&amp;guid=95c5c951182531a499701b5fe7f3f535&amp;type=3#Module_SelectKaomojiType" />
+    <ui:Template name="Temp_Help" src="project://database/Assets/UI%20Toolkit/Temp_Help.uxml?fileID=9197481963319205126&amp;guid=988c6b9b861e7904e97e93d77ca2411a&amp;type=3#Temp_Help" />
     <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:Instance template="Temp_Help" name="Temp_Help" style="position: absolute; top: 2%; left: 3%;" />
         <ui:Instance template="Temp_Back" name="Temp_Back" style="position: absolute; top: 2%; right: 3%;" />
         <ui:Instance template="Module_SelectedDisplay" name="SelectedDisplay" style="width: 40%; height: 45%; position: absolute; top: 5%; left: 30%;" />
         <ui:Instance template="Module_SelectedKaomojiPartStatusParamater" name="SelectedKaomojiPartStatusParamater" style="position: absolute; height: 47%; width: 25%; right: 3%; top: 10%;" />

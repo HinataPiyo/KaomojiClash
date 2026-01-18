@@ -17,15 +17,17 @@ MonoBehaviour:
   data:
     partName: Dakuten
     part: "\u309B"
+    levelDetail:
+      growthRateType: 0
     speed:
-      level: 1
-      value: 0
+      value: -0.269
+      growthRateType: 0
     power:
-      level: 1
-      value: 0
+      value: 0.405
+      growthRateType: 2
     guard:
-      level: 1
-      value: 0
+      value: 0.014
+      growthRateType: 0
     stamina:
-      level: 1
-      value: 0
+      value: 0.113
+      growthRateType: 3
