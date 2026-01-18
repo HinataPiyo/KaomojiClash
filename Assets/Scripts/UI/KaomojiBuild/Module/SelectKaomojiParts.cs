@@ -29,11 +29,7 @@ namespace UI.KaomojiBuild.Module
             list_view = moduleRoot.Q<ScrollView>();
             Reset();
 
-            // テスト
-            foreach (var part in partsDatabase.GetAllParts())
-            {
-                AssignPart(part);
-            }
+            SortByType(ENUM.KaomojiPartType.Eyes);      // 初期表示は目パーツで
         }
 
         /// <summary>
@@ -50,6 +46,7 @@ namespace UI.KaomojiBuild.Module
                 // ここにパーツ選択時の処理を追加
                 // SelectedKaomojiPartStatuParamater　にDataを渡す
                 modulesCtrl.module_SKP_StatusParamater.AssignPart(part);
+                modulesCtrl.module_SD.AssignPart(part);     // ! 一旦ボタンを押下しただけで反映されるようにする
             };
 
             list_view.contentContainer.Add(elem);

@@ -6,11 +6,14 @@ namespace UI.KaomojiBuild
 {
     public class KaomojiBuildModulesController : MonoBehaviour
     {
+        [SerializeField] PlayerData playerData;    public PlayerData PlayerData => playerData;
+
         /// <summary>
         /// moduleの名前
         /// </summary>
         const string MODULE_SELECT_KAOMOJI_PARTS = "SelectKaomojiParts";
         const string MODULE_SELECT_KAOMOJI_TYPE = "SelectKaomojiType";
+        const string MODULE_SELECTED_DISPLAY = "SelectedDisplay";
         const string MODULE_SELECTED_KAOMOJI_PART_STATUS_PARAMATER = "SelectedKaomojiPartStatusParamater";
 
         /// <summary>
@@ -20,6 +23,7 @@ namespace UI.KaomojiBuild
         public SelectKaomojiParts module_SKP { get; private set; }
         public SelectKaomojiType module_SKT { get; private set; }
         public SelectedKaomojiPartStatusParamater module_SKP_StatusParamater { get; private set; }
+        public SelectedDisplay module_SD { get; private set; }
 
         void Awake()
         {
@@ -27,10 +31,12 @@ namespace UI.KaomojiBuild
 
             module_SKP = GetComponent<SelectKaomojiParts>();
             module_SKT = GetComponent<SelectKaomojiType>();
+            module_SD = GetComponent<SelectedDisplay>();
             module_SKP_StatusParamater = GetComponent<SelectedKaomojiPartStatusParamater>();
 
             Initialize(module_SKP, MODULE_SELECT_KAOMOJI_PARTS);
             Initialize(module_SKT, MODULE_SELECT_KAOMOJI_TYPE);
+            Initialize(module_SD, MODULE_SELECTED_DISPLAY);
             Initialize(module_SKP_StatusParamater, MODULE_SELECTED_KAOMOJI_PART_STATUS_PARAMATER);
         }
 

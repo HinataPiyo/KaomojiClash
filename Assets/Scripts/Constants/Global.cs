@@ -43,6 +43,96 @@ namespace Constants.Global
         public KaomojiPartData hands;
         public KaomojiPartData decoration_first;
         public KaomojiPartData decoration_second;
+
+
+        // 総合ステータス
+        public float Speed { get; private set; }
+        public float Power { get; private set; }
+        public float Guard { get; private set; }
+        public float Stamina { get; private set; }
+
+        public KaomojiPartData[] GetAllPartsData() => new KaomojiPartData[]
+        { eyes, mouth, hands, decoration_first, decoration_second };
+
+        public void SetPartDataByType(KaomojiPartData partData)
+        {
+            switch(partData.PartType)
+            {
+                case KaomojiPartType.Eyes:
+                    eyes = partData;
+                    break;
+                case KaomojiPartType.Mouth:
+                    mouth = partData;
+                    break;
+                case KaomojiPartType.Hands:
+                    hands = partData;
+                    break;
+                case KaomojiPartType.Decoration_First:
+                    decoration_first = partData;
+                    break;
+                case KaomojiPartType.Decoration_Second:
+                    decoration_second = partData;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 顔文字の組み立て
+        /// </summary>
+        /// <returns>設定された顔文字のPartsを合体させたもの</returns>
+        public string BuildKaomoji(CharacterStatus.MentalData mentalData)
+        {
+            string _left_faceline = SeparatePart(mentalData?.faceline, 0);
+            string _right_faceline = SeparatePart(mentalData?.faceline, 1);
+            string _left_eye = SeparatePart(eyes?.Data.part, 0);
+            string _right_eye = SeparatePart(eyes?.Data.part, 1);
+            string _mouth = mouth?.Data.part;
+            // string left_hands = SeparatePart(K.hands.Data.part, 0);
+            // string right_hands = SeparatePart(K.hands.Data.part, 1);
+
+            string merged = _left_faceline + _left_eye + _mouth + _right_eye + _right_faceline;
+            return merged;
+        }
+
+        /// <summary>
+        /// 記号全体のステータスを更新する
+        /// </summary>
+        public void UpdateTotalParameter()
+        {
+            KaomojiPartData[] datas = new KaomojiPartData[]
+            { eyes, mouth, hands, decoration_first, decoration_second};
+
+            Speed = Power = Guard = Stamina = 0f;
+            foreach(var part in datas)
+            {
+                // 記号が割り当てられてなければスキップ
+                if (part == null || part.Data == null) continue;
+                
+                int level = part.Data.levelDetail.Level;
+                Speed += part.Data.speed.GetParameterByLevel(level);
+                Power += part.Data.power.GetParameterByLevel(level);
+                Guard += part.Data.guard.GetParameterByLevel(level);
+                Stamina += part.Data.stamina.GetParameterByLevel(level);
+            }
+        }
+
+        /// <summary>
+        /// パーツの左右分割
+        /// </summary>
+        /// <param name="part">SOで設定した記号</param>
+        /// <param name="index">左右どちらか(0=左側、1=右側)</param>
+        /// <returns></returns>
+        public string SeparatePart(string part, int index)
+        {
+            // index: 0=左側、1=右側
+            // partがnullまたは空文字、indexが範囲外の場合は空文字を返す
+            if(string.IsNullOrEmpty(part) || part.Length <= index)
+            {
+                return "";
+            }
+
+            return part[index].ToString();
+        }
     }
 
     [System.Serializable]

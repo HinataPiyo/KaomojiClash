@@ -10,7 +10,6 @@ namespace UI.KaomojiBuild.Module
     /// </summary>
     public class SelectedKaomojiPartStatusParamater : MonoBehaviour, IUIModuleHandler, IUIPartHandler
     {
-        const string TEMP_STATUS_PARAMATER = "Temp_StatusParamater";
         StatusParamater statusParamater;
 
         Label partType;     // 部位
@@ -19,7 +18,7 @@ namespace UI.KaomojiBuild.Module
 
         public void Initialize(VisualElement moduleRoot)
         {
-            VisualElement statusRoot = moduleRoot.Q(TEMP_STATUS_PARAMATER);
+            VisualElement statusRoot = moduleRoot.Q(StatusParamater.TEMP_STATUS_PARAMATER);
             statusParamater = new StatusParamater();
             statusParamater.Initialize(statusRoot);
 

@@ -15,8 +15,8 @@ MonoBehaviour:
   dorpProbability: 0.3
   partType: 0
   data:
-    partName: Dakuten
-    part: "\u309B"
+    partName: "\u6FC1\u70B9"
+    part: "\u309B\u309B"
     levelDetail:
       growthRateType: 0
     speed:

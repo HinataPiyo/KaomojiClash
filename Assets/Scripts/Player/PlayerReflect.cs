@@ -3,12 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Combo))]
 public class PlayerReflect : Reflect
 {
-    PlayerApplyKaomoji totalStatus;
     [SerializeField] Combo combo;
-    void Start()
-    {
-        totalStatus = GetComponent<PlayerApplyKaomoji>();
-    }
 
     protected override void OnCollisionEnter2D(Collision2D col)
     {
@@ -30,7 +25,7 @@ public class PlayerReflect : Reflect
             {
                 Mental enemyHealth = col.collider.GetComponent<Mental>();
                 combo.IncreaseCombo();
-                float finalPower = data.Status.attackPower * combo.CurrentAmplifyer * (1f + totalStatus.Power);
+                float finalPower = data.Status.attackPower * combo.CurrentAmplifyer * (1f + Context.I.PlayerData.Kaomoji.Power);
                 enemyHealth.TakeDamage(finalPower);
                 HitStop.I.StartHitStop();
                 AudioManager.I.PlaySEReflect();

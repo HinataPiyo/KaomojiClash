@@ -10,6 +10,7 @@ namespace UI.KaomojiBuild.Template
     /// </summary>
     public class StatusParamater
     {
+        public const string TEMP_STATUS_PARAMATER = "Temp_StatusParamater";
         /// <summary>
         /// ステータス要素のクラス
         /// </summary>
@@ -57,21 +58,21 @@ namespace UI.KaomojiBuild.Template
                 progressElement ??= progressBar.Q(className: "unity-progress-bar__progress");
             }
 
-            void SetInitProgress(ENUM.StatusType statusType)
+            public void SetInitProgress(ENUM.StatusType statusType, float magnification = 1f)
             {
                 switch (statusType)
                 {
                     case ENUM.StatusType.Speed:
-                        InitProgress(KaomojiPart.Speed.MIN_VALUE, KaomojiPart.Speed.MAX_VALUE);
+                        InitProgress(KaomojiPart.Speed.MIN_VALUE * magnification, KaomojiPart.Speed.MAX_VALUE * magnification);
                         break;
                     case ENUM.StatusType.Power:
-                        InitProgress(KaomojiPart.Power.MIN_VALUE, KaomojiPart.Power.MAX_VALUE);
+                        InitProgress(KaomojiPart.Power.MIN_VALUE * magnification, KaomojiPart.Power.MAX_VALUE * magnification);
                         break;
                     case ENUM.StatusType.Guard:
-                        InitProgress(KaomojiPart.Guard.MIN_VALUE, KaomojiPart.Guard.MAX_VALUE);
+                        InitProgress(KaomojiPart.Guard.MIN_VALUE * magnification, KaomojiPart.Guard.MAX_VALUE * magnification);
                         break;
                     case ENUM.StatusType.Stamina:
-                        InitProgress(KaomojiPart.Stamina.MIN_VALUE, KaomojiPart.Stamina.MAX_VALUE);
+                        InitProgress(KaomojiPart.Stamina.MIN_VALUE * magnification, KaomojiPart.Stamina.MAX_VALUE * magnification);
                         break;
                     default:
                         break;
@@ -104,6 +105,11 @@ namespace UI.KaomojiBuild.Template
             {
                 this.growthRateType = growthRateType;
                 growthRate.text = Calculation.GetGrowthRateStar(growthRateType);
+            }
+
+            public void DisableGrowthRate()
+            {
+                growthRate.text = string.Empty;
             }
 
             public void Reset()
@@ -162,6 +168,39 @@ namespace UI.KaomojiBuild.Template
                     case ENUM.StatusType.Stamina:
                         elem.SetProgress(stamina.GetParameterByLevel(1));
                         elem.SetGrowthRateType(stamina.GrowthRateType);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 合計ステータスを表示する
+        /// </summary>
+        public void TotalShowStatus(float speed, float power, float guard, float stamina)
+        {
+            for (int i = 0; i < elements.Length; i++)
+            {
+                Element elem = elements[i];
+                elem.DisableGrowthRate();
+                switch (elem.statusType)
+                {
+                    case ENUM.StatusType.Speed:
+                        elem.SetInitProgress(ENUM.StatusType.Speed, 10f);
+                        elem.SetProgress(speed);
+                        break;
+                    case ENUM.StatusType.Power:
+                        elem.SetInitProgress(ENUM.StatusType.Power, 10f);
+                        elem.SetProgress(power);
+                        break;
+                    case ENUM.StatusType.Guard:
+                        elem.SetInitProgress(ENUM.StatusType.Guard, 10f);
+                        elem.SetProgress(guard);
+                        break;
+                    case ENUM.StatusType.Stamina:
+                        elem.SetInitProgress(ENUM.StatusType.Stamina, 10f);
+                        elem.SetProgress(stamina);
                         break;
                     default:
                         break;

@@ -8,8 +8,8 @@ public class Context : MonoBehaviour
     public static Context I { get; private set; }
 
     [SerializeField] GameObject player;         public GameObject Player => player;
-    PlayerApplyKaomoji playerApply;
-    public KaomojiPartData[] KaomojiPartDatas() => playerApply.KaomojiPartDatas.ToArray();
+    [SerializeField] PlayerData playerData;     public PlayerData PlayerData => playerData;
+    public KaomojiPartData[] KaomojiPartDatas() => PlayerData.Kaomoji.GetAllPartsData();
     public BattleStat BattleStat { get; private set; } = BattleStat.None;
 
 
@@ -19,8 +19,6 @@ public class Context : MonoBehaviour
         {
             I = this;
         }
-
-        playerApply = player.GetComponent<PlayerApplyKaomoji>();
     }
 
     /// <summary>
@@ -28,7 +26,7 @@ public class Context : MonoBehaviour
     /// </summary>
     public void UpdatePlayerStatus()
     {
-        playerApply.UpdateTotalParameter();
+        playerData.Kaomoji.UpdateTotalParameter();
     }
 
     /// <summary>
