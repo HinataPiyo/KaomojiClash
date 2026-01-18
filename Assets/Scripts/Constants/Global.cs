@@ -339,17 +339,17 @@ namespace Constants.Global
                 case GrowthRateType.None:
                     return "-";
                 case GrowthRateType.VeryLow:
-                    return "☆☆☆☆★";
+                    return "★";
                 case GrowthRateType.Low:
-                    return "☆☆☆★★";
+                    return "★★";
                 case GrowthRateType.Normal:
-                    return "☆☆★★★";
+                    return "★★★";
                 case GrowthRateType.High:
-                    return "☆★★★★";
+                    return "★★★★";
                 case GrowthRateType.VeryHigh:
                     return "★★★★★";
                 default:
-                    return "☆☆☆☆☆";
+                    return "";
             }
         }
 

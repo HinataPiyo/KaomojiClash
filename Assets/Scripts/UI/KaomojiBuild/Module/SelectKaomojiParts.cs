@@ -56,6 +56,19 @@ namespace UI.KaomojiBuild.Module
         }
 
         /// <summary>
+        /// 指定したタイプのパーツのみを表示する
+        /// </summary>
+        /// <param name="type">顔文字の部位</param>
+        public void SortByType(ENUM.KaomojiPartType type)
+        {
+            list_view.Clear();
+            foreach (var part in partsDatabase.GetPartsByType(type))
+            {
+                AssignPart(part);
+            }
+        }
+
+        /// <summary>
         /// 表示をリセットする
         /// </summary>
         public void Reset()
