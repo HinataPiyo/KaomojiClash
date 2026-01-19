@@ -15,7 +15,7 @@ MonoBehaviour:
   dorpProbability: 0.3
   partType: 1
   data:
-    partName: Plus
+    partName: "\u30D7\u30E9\u30B9"
     part: +
     levelDetail:
       growthRateType: 0

@@ -57,8 +57,9 @@ namespace UI.KaomojiBuild.Module
         void UpdateStatusDisplay()
         {
             KAOMOJI K = modulesCtrl.PlayerData.Kaomoji;
+            int equippedPartsCount = K.GetEquippedPartsCount();
             K.UpdateTotalParameter();
-            statusParamater.TotalShowStatus(K.Speed, K.Power, K.Guard, K.Stamina);
+            statusParamater.TotalShowStatus(K.Speed, K.Power, K.Guard, K.Stamina, equippedPartsCount);
         }
 
         public void Reset()

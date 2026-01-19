@@ -178,7 +178,7 @@ namespace UI.KaomojiBuild.Template
         /// <summary>
         /// 合計ステータスを表示する
         /// </summary>
-        public void TotalShowStatus(float speed, float power, float guard, float stamina)
+        public void TotalShowStatus(float speed, float power, float guard, float stamina, int equippedPartsCount = 0)
         {
             for (int i = 0; i < elements.Length; i++)
             {
@@ -187,19 +187,19 @@ namespace UI.KaomojiBuild.Template
                 switch (elem.statusType)
                 {
                     case ENUM.StatusType.Speed:
-                        elem.SetInitProgress(ENUM.StatusType.Speed, 10f);
+                        elem.SetInitProgress(ENUM.StatusType.Speed, equippedPartsCount);
                         elem.SetProgress(speed);
                         break;
                     case ENUM.StatusType.Power:
-                        elem.SetInitProgress(ENUM.StatusType.Power, 10f);
+                        elem.SetInitProgress(ENUM.StatusType.Power, equippedPartsCount);
                         elem.SetProgress(power);
                         break;
                     case ENUM.StatusType.Guard:
-                        elem.SetInitProgress(ENUM.StatusType.Guard, 10f);
+                        elem.SetInitProgress(ENUM.StatusType.Guard, equippedPartsCount);
                         elem.SetProgress(guard);
                         break;
                     case ENUM.StatusType.Stamina:
-                        elem.SetInitProgress(ENUM.StatusType.Stamina, 10f);
+                        elem.SetInitProgress(ENUM.StatusType.Stamina, equippedPartsCount);
                         elem.SetProgress(stamina);
                         break;
                     default:
