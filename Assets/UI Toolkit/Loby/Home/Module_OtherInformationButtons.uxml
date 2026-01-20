@@ -1,0 +1,18 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_NormalButton" src="project://database/Assets/UI%20Toolkit/Temp_NormalButton.uxml?fileID=9197481963319205126&amp;guid=bf58c023254df574cbec7ab19b33f609&amp;type=3#Temp_NormalButton" />
+    <Style src="project://database/Assets/UI%20Toolkit/Loby/Home/Style/OtherButton_Style.uss?fileID=7433441132597879392&amp;guid=078c7b79c9c25a74ea050803311d0f70&amp;type=3#OtherButton_Style" />
+    <ui:VisualElement name="root" style="flex-grow: 1; flex-direction: row; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+        <ui:Instance template="Temp_NormalButton" name="Temp_OtherButton" class="other-button">
+            <AttributeOverrides element-name="Button" text="図鑑" />
+        </ui:Instance>
+        <ui:Instance template="Temp_NormalButton" name="Temp_OtherButton" class="other-button">
+            <AttributeOverrides element-name="Button" text="ショップ" />
+        </ui:Instance>
+        <ui:Instance template="Temp_NormalButton" name="Temp_OtherButton" class="other-button">
+            <AttributeOverrides element-name="Button" text="実績" />
+        </ui:Instance>
+        <ui:Instance template="Temp_NormalButton" name="Temp_OtherButton" class="other-button">
+            <AttributeOverrides element-name="Button" text="設定" />
+        </ui:Instance>
+    </ui:VisualElement>
+</ui:UXML>
