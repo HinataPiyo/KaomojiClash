@@ -1,5 +1,4 @@
 using UnityEngine;
-using UI.Base;
 
 namespace UI.Main
 {
@@ -17,6 +16,7 @@ namespace UI.Main
             public GameObject panelObject;
         }
 
+        [SerializeField] ENUM.Panel initialPanel = ENUM.Panel.Home;
         [SerializeField] PanelInfo[] panels;
 
         void Awake()
@@ -26,7 +26,7 @@ namespace UI.Main
                 I = this;
             }
 
-            Change(ENUM.Panel.KaomojiBuild);
+            Change(initialPanel);
         }
 
         /// <summary>
