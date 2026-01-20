@@ -20,7 +20,7 @@ namespace UI.KaomojiBuild.Module
         public void Initialize(VisualElement moduleRoot)
         {
             statusParamater = new StatusParamater();
-            statusParamater.Initialize(moduleRoot.Q(StatusParamater.TEMP_STATUS_PARAMATER));
+            statusParamater.Initialize(moduleRoot);
             kaomoji = moduleRoot.Q<VisualElement>("face").Q<Label>("value");
 
             Reset();

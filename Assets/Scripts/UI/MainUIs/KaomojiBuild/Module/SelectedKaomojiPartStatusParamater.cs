@@ -18,9 +18,8 @@ namespace UI.KaomojiBuild.Module
 
         public void Initialize(VisualElement moduleRoot)
         {
-            VisualElement statusRoot = moduleRoot.Q(StatusParamater.TEMP_STATUS_PARAMATER);
             statusParamater = new StatusParamater();
-            statusParamater.Initialize(statusRoot);
+            statusParamater.Initialize(moduleRoot);
 
             VisualElement selected_part_info = moduleRoot.Q("selected-part-info");
             partType = selected_part_info.Q<Label>("type-value");

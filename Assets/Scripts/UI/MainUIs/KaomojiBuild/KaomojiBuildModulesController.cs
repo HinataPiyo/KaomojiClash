@@ -1,13 +1,11 @@
+using UI.Base;
 using UI.KaomojiBuild.Module;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.KaomojiBuild
 {
-    public class KaomojiBuildModulesController : MonoBehaviour
+    public class KaomojiBuildModulesController : ModuleControllerBase
     {
-        [SerializeField] PlayerData playerData;    public PlayerData PlayerData => playerData;
-
         /// <summary>
         /// moduleの名前
         /// </summary>
@@ -38,33 +36,17 @@ namespace UI.KaomojiBuild
             module_SKP_StatusParamater = GetComponent<SelectedKaomojiPartStatusParamater>();
         }
 
-        void Start()
-        {
-            Initialize(module_SKP, MODULE_SELECT_KAOMOJI_PARTS);
-            Initialize(module_SKT, MODULE_SELECT_KAOMOJI_TYPE);
-            Initialize(module_SD, MODULE_SELECTED_DISPLAY);
-            Initialize(module_FL, MODULE_FACE_LINE);
-            Initialize(module_SKP_StatusParamater, MODULE_SELECTED_KAOMOJI_PART_STATUS_PARAMATER);
-        }
-
         /// <summary>
         /// 各モジュールの初期化を行う
         /// </summary>
-        /// <param name="uI">Moduleの初期化に必要なInterface</param>
-        /// <param name="name">UIBuilderで設定している名前</param>
-        void Initialize(IUIModuleHandler uI, string name)
+        void Start()
         {
             VisualElement root = uiDocument.rootVisualElement;
-            VisualElement moduleRoot = root.Q(name);
-
-            if (moduleRoot != null)
-            {
-                uI.Initialize(moduleRoot);
-            }
-            else
-            {
-                Debug.LogError($"[ {name} ] モジュールのルート要素が見つかりません。");
-            }
+            Initialize(module_SKP, MODULE_SELECT_KAOMOJI_PARTS, root);
+            Initialize(module_SKT, MODULE_SELECT_KAOMOJI_TYPE, root);
+            Initialize(module_SD, MODULE_SELECTED_DISPLAY, root);
+            Initialize(module_FL, MODULE_FACE_LINE, root);
+            Initialize(module_SKP_StatusParamater, MODULE_SELECTED_KAOMOJI_PART_STATUS_PARAMATER, root);
         }
     }
 }

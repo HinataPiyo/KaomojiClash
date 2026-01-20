@@ -125,12 +125,13 @@ namespace UI.KaomojiBuild.Template
         /// 初期化
         /// </summary>
         /// <param name="tempRoot">StatusParamaterが使用されているRoot</param>
-        public void Initialize(VisualElement tempRoot)
+        public void Initialize(VisualElement moduleRoot)
         {
             // 初期化のロジックをここに実装
 
             // box内のVisualElementを取得してelements配列を初期化
-            VisualElement[] elems = tempRoot.Query<VisualElement>("box").ToList().ToArray();
+            VisualElement root = moduleRoot.Q<VisualElement>(TEMP_STATUS_PARAMATER);
+            VisualElement[] elems = root.Query<VisualElement>("box").ToList().ToArray();
             elements = new Element[elems.Length];       // 配列のサイズを設定
 
             for (int i = 0; i < elems.Length; i++)
