@@ -41,7 +41,13 @@ namespace UI.KaomojiBuild
         /// </summary>
         void Start()
         {
+            Initialize();
+        }
+            
+        protected override void Initialize()
+        {
             VisualElement root = uiDocument.rootVisualElement;
+            CreateBackButton(root);
             Initialize(module_SKP, MODULE_SELECT_KAOMOJI_PARTS, root);
             Initialize(module_SKT, MODULE_SELECT_KAOMOJI_TYPE, root);
             Initialize(module_SD, MODULE_SELECTED_DISPLAY, root);

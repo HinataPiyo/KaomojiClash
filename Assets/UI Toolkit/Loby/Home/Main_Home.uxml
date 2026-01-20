@@ -8,7 +8,7 @@
     <ui:VisualElement name="root" style="flex-grow: 1;">
         <ui:Instance template="Module_KaomojiPreview" name="KaomojiPreview" style="position: absolute; right: 3%; top: 13%; width: 45%;" />
         <ui:Instance template="Module_ArenaInformation" name="ArenaInformation" style="position: absolute; width: 45%; height: 60%; top: 10%; left: 3%;" />
-        <ui:Instance template="Module_BuildButtons" name="KaomojiBuildButtons" style="position: absolute; right: 3%; top: 45%; width: 45%; height: 25%;" />
+        <ui:Instance template="Module_BuildButtons" name="BuildButtons" style="position: absolute; right: 3%; top: 45%; width: 45%; height: 25%;" />
         <ui:Instance template="Module_OtherInformation" name="OtherInformationButtons" style="position: absolute; bottom: 4%; right: 3%; width: 60%; height: 20%;" />
         <ui:Instance template="Temp_NormalButton" name="PracticeButton" style="position: absolute; bottom: 3%; left: 5%; width: 30%; height: 23%;">
             <AttributeOverrides element-name="Button" text="練習" />

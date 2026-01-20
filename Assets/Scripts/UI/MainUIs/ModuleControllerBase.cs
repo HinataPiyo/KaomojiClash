@@ -3,9 +3,10 @@ using UnityEngine.UIElements;
 
 namespace UI.Base
 {
-    public class ModuleControllerBase : MonoBehaviour
+    public abstract class ModuleControllerBase : MonoBehaviour
     {
         [SerializeField] protected PlayerData playerData;
+        public BackPanelButton BackButton { get; private set; }
         public PlayerData PlayerData => playerData;
         
         /// <summary>
@@ -26,5 +27,18 @@ namespace UI.Base
                 Debug.LogError($"[ {name} ] モジュールのルート要素が見つかりません。");
             }
         }
+
+        protected void CreateBackButton(VisualElement root)
+        {
+            // 前のパネルを設定する
+            BackButton = new BackPanelButton(ENUM.Panel.Home, root);
+        }
+
+        /// <summary>
+        /// UIDocumentの再構築: GameObjectを非アクティブ→アクティブにした際
+        /// UIDocumentが再構築されるため各モジュールの初期化を行う
+        /// </summary>
+        protected abstract void Initialize();
+        void OnEnable() => Initialize();
     }
 }

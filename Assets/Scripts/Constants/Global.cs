@@ -533,4 +533,6 @@ namespace ENUM
     { None = -1, VeryLow, Low, Normal, High, VeryHigh }
     public enum StatusType
     { None = -1, Speed, Power, Guard, Stamina, Max}
+    public enum Panel
+    { None = -1, Home, KaomojiBuild, ArenaBuild, Shop, Max}
 }
