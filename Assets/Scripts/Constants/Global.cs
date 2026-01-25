@@ -535,4 +535,6 @@ namespace ENUM
     { None = -1, Speed, Power, Guard, Stamina, Max}
     public enum Panel
     { None = -1, Home, KaomojiBuild, ArenaBuild, Shop, Max}
+    public enum Scene
+    { None = -1, Title, Home, Battle, Max}
 }
