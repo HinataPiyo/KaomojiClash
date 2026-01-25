@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Temp_TextIcon" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_TextIcon.uxml?fileID=9197481963319205126&amp;guid=2aacb48f987e79e4abce682dca2d7b84&amp;type=3#Temp_TextIcon" />
-    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/FaceLine_Style.uss?fileID=7433441132597879392&amp;guid=7a6cbc6b6e67aad458215c33a8bba60d&amp;type=3#FaceLine_Style" />
     <ui:VisualElement name="root" class="panel" style="flex-grow: 1;">
         <ui:VisualElement name="info" style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; flex-direction: row;">
@@ -12,15 +12,15 @@
                 <ui:Label text="精神強度が0上昇する" name="description-value" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 22px; white-space: normal; letter-spacing: -2px;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="condition" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; margin-top: 7px; margin-right: 7px; margin-bottom: 7px; margin-left: 7px; justify-content: flex-start; flex-grow: 1;">
+        <ui:VisualElement name="condition" class="condition">
             <ui:Label text="レベル 1" name="level" class="level" />
             <ui:Label text="○○の記号が装備されていればメンタルが上昇する。" name="body" class="body" />
         </ui:VisualElement>
-        <ui:VisualElement name="condition" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; margin-top: 7px; margin-right: 7px; margin-bottom: 7px; margin-left: 7px; justify-content: flex-start; flex-grow: 1;">
+        <ui:VisualElement name="condition" class="condition">
             <ui:Label text="レベル 1" name="level" class="level" />
             <ui:Label text="○○の記号が装備されていればメンタルが上昇する。" name="body" class="body" />
         </ui:VisualElement>
-        <ui:VisualElement name="condition" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; margin-top: 7px; margin-right: 7px; margin-bottom: 7px; margin-left: 7px; justify-content: flex-start; flex-grow: 1;">
+        <ui:VisualElement name="condition" class="condition">
             <ui:Label text="レベル 1" name="level" class="level" />
             <ui:Label text="○○の記号が装備されていればメンタルが上昇する。" name="body" class="body" />
         </ui:VisualElement>
