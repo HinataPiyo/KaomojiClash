@@ -7,6 +7,7 @@ namespace UI.Base
     {
         [SerializeField] protected PlayerData playerData;
         public BackPanelButton BackButton { get; private set; }
+        public Main.HasMoney HasMoneyDisplay { get; private set; }
         public PlayerData PlayerData => playerData;
         
         /// <summary>
@@ -14,7 +15,7 @@ namespace UI.Base
         /// </summary>
         /// <param name="uI">Moduleの初期化に必要なInterface</param>
         /// <param name="name">UIBuilderで設定している名前</param>
-        protected virtual void Initialize(IUIModuleHandler uI, string name, VisualElement root)
+        protected void Initialize(IUIModuleHandler uI, string name, VisualElement root)
         {
             VisualElement moduleRoot = root.Q(name);
 
@@ -32,6 +33,11 @@ namespace UI.Base
         {
             // 前のパネルを設定する
             BackButton = new BackPanelButton(ENUM.Panel.Home, root);
+        }
+        
+        protected void CreateHasMoney(VisualElement root)
+        {
+            HasMoneyDisplay = new Main.HasMoney(root);
         }
 
         /// <summary>
