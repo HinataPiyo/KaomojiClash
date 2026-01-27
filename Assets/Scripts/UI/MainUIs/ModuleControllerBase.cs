@@ -29,12 +29,22 @@ namespace UI.Base
             }
         }
 
+        /// <summary>
+        /// 戻るボタンの作成
+        /// 必要な時にこの関数を呼び出すだけでOK
+        /// </summary>
+        /// <param name="root">PanelのRoot</param>
         protected void CreateBackButton(VisualElement root)
         {
             // 前のパネルを設定する
             BackButton = new BackPanelButton(ENUM.Panel.Home, root);
         }
         
+        /// <summary>
+        /// 所持金表示の作成
+        /// 必要な時にこの関数を呼び出すだけでOK
+        /// </summary>
+        /// <param name="root">PanelのRoot</param>
         protected void CreateHasMoney(VisualElement root)
         {
             HasMoneyDisplay = new Main.HasMoney(root);

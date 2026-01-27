@@ -12,17 +12,13 @@ namespace UI.Home.Module
 
         Label kaomoji_preview;
 
-        void Awake()
-        {
-            homeCtrl = GetComponentInParent<HomeModulesController>();
-        }
-
         /// <summary>
         /// モジュールの初期化を行う
         /// </summary>
         /// <param name="moduleRoot">ControllerからModuleのRootを渡す</param>
         public void Initialize(VisualElement moduleRoot)
         {
+            homeCtrl = GetComponent<HomeModulesController>();
             statusParamater = new StatusParamater();
             statusParamater.Initialize(moduleRoot);
 

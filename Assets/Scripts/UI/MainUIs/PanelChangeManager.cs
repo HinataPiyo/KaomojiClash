@@ -25,7 +25,10 @@ namespace UI.Main
             {
                 I = this;
             }
+        }
 
+        void Start()
+        {
             Change(initialPanel);
         }
 
