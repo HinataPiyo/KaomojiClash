@@ -4,7 +4,7 @@
     margin-bottom: 0;
     margin-left: 0;
     font-size: 22px;
-    -unity-text-align: middle-left;
+    -unity-text-align: middle-center;
     -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
     padding-left: 0;
     padding-top: 0;
