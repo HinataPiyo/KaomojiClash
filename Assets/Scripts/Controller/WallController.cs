@@ -16,12 +16,19 @@ public class WallController : MonoBehaviour
         currentWall = Instantiate(wall, createPos, Quaternion.identity);
         AudioManager.I.PlaySE("SetWall");
         CameraShake.I.ApplyShake(1, 2f, 0.5f);
+        CreateArenaItems();     // 壁生成時にアイテムも生成
     }
 
     public Wall GetWall()
     {
         if(currentWall == null) return null;
         return currentWall.GetComponent<Wall>();
+    }
+
+    public void CreateArenaItems()
+    {
+        Wall wall = GetWall();
+        wall.CreateArenaItem();
     }
 
     /// <summary>

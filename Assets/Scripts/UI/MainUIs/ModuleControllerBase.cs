@@ -55,6 +55,6 @@ namespace UI.Base
         /// UIDocumentが再構築されるため各モジュールの初期化を行う
         /// </summary>
         protected abstract void Initialize();
-        void OnEnable() => Initialize();
+        protected virtual void OnEnable() => Initialize();
     }
 }

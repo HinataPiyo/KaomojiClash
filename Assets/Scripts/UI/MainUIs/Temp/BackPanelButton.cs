@@ -19,6 +19,7 @@ namespace UI
     {
         const string BACK_BUTTON = "Temp_Back";
         public ENUM.Panel BeforPanel { get; private set;}
+        Button button;
 
         /// <summary>
         /// このクラスが生成された時に前のパネル情報をセットする
@@ -27,7 +28,7 @@ namespace UI
         public BackPanelButton(ENUM.Panel befor, VisualElement root)
         {
             BeforPanel = befor;
-            Button button = root.Q<VisualElement>(BACK_BUTTON).Q<Button>();
+            button = root.Q<VisualElement>(BACK_BUTTON).Q<Button>();
             button.clicked += Click;
             Debug.Log("BuckPanelButtonが生成されました");
         }
@@ -36,6 +37,11 @@ namespace UI
         {
             PanelChangeManager.I.Change(BeforPanel);
             Debug.Log("戻るボタンが押下されました");
+        }
+
+        public void IsIntaractable(bool isEnable)
+        {
+            button.SetEnabled(isEnable);
         }
     }
 }
