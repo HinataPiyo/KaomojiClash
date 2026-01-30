@@ -35,15 +35,18 @@ public class ResultGetExpControl : MonoBehaviour
     /// <returns></returns>
     IEnumerator ExperienceRoutine(Wave wave)
     {
-        t_GetExp.text = "+" + wave.getExp.ToString("#,###");
+        t_GetExp.text = "+" + wave.getExp.ToString("N0");
 
         moveUI.MoveLeft(360, 1f);
         
         KaomojiPartData[] parts = Context.I.KaomojiPartDatas();
         for(int ii = 0; ii < parts.Length; ii++)
         {
+            if(parts[ii] == null) continue;     // 特定の部位にパーツが存在しない場合はスキップ
+
             GameObject item = Instantiate(getExp_Prefab, getExp_Parent);
             ResultGetExp getExp = item.GetComponent<ResultGetExp>();
+            // !PartsがNullの可能性がある
             getExp.Initialize(parts[ii], wave.getExp, wave.befor_level[ii], wave.befor_exp[ii]);
             items.Add(getExp);
         }

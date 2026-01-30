@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Loby/ArenaBuild/Style/Temp_ArenaCanSetPositionBox_Button.uss?fileID=7433441132597879392&amp;guid=67f24d0d749552746b623e501fd8dc5e&amp;type=3#Temp_ArenaCanSetPositionBox_Button" />
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:Button icon-image="project://database/Assets/Sprites/KnockBack_Object_0.png?fileID=21300000&amp;guid=1f98c9a61460fd34faf1356b7e7a0f83&amp;type=3#KnockBack_Object_0" class="button" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,36 +1,36 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Temp_StatusParamater_Type.uss?fileID=7433441132597879392&amp;guid=28e676ebba2b62d47b92d39711872319&amp;type=3#Temp_StatusParamater_Type" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Temp_StatusParamater_ProgressBar.uss?fileID=7433441132597879392&amp;guid=93e0d985331441f43b550fdd8e99fc43&amp;type=3#Temp_StatusParamater_ProgressBar" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Temp_StatusParamater_GrowthRate.uss?fileID=7433441132597879392&amp;guid=67c8b8c6a1fbec74baf63632d59054cd&amp;type=3#Temp_StatusParamater_GrowthRate" />
     <ui:VisualElement name="root" style="flex-grow: 1;">
-        <ui:VisualElement name="box" style="flex-grow: 1;">
-            <ui:VisualElement name="type-growthrate" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+        <ui:VisualElement name="box" style="flex-grow: 1; justify-content: space-between;">
+            <ui:VisualElement name="type-growthrate" style="flex-grow: 0; flex-direction: row; justify-content: space-between;">
                 <ui:Label text="スピード" name="type" class="type" />
                 <ui:Label text="★★★★★" name="growthrate" class="growthrate" />
             </ui:VisualElement>
-            <ui:ProgressBar name="speed-progressbar" high-value="100" value="22" class="speed-progressbar" />
+            <ui:ProgressBar name="speed-progressbar" high-value="100" value="22" class="speed-progressbar kaomojiedit" style="flex-grow: 1;" />
         </ui:VisualElement>
-        <ui:VisualElement name="box" style="flex-grow: 1;">
-            <ui:VisualElement name="type-growthrate" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+        <ui:VisualElement name="box" style="flex-grow: 1; justify-content: space-between;">
+            <ui:VisualElement name="type-growthrate" style="flex-grow: 0; flex-direction: row; justify-content: space-between;">
                 <ui:Label text="パワー" name="type" class="type" />
                 <ui:Label text="★★★★★" name="growthrate" class="growthrate" />
             </ui:VisualElement>
-            <ui:ProgressBar value="22" name="power-progressbar" class="power-progressbar" />
+            <ui:ProgressBar value="22" name="power-progressbar" class="power-progressbar kaomojiedit" style="flex-grow: 1;" />
         </ui:VisualElement>
-        <ui:VisualElement name="box" style="flex-grow: 1;">
-            <ui:VisualElement name="type-growthrate" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+        <ui:VisualElement name="box" style="flex-grow: 1; justify-content: space-between;">
+            <ui:VisualElement name="type-growthrate" style="flex-grow: 0; flex-direction: row; justify-content: space-between;">
                 <ui:Label text="ガード" name="type" class="type" />
-                <ui:Label text="★★★★★" name="growthrate" class="growthrate" />
+                <ui:Label text="★★★★★" name="growthrate" class="kaomojiedit-text growthrate" />
             </ui:VisualElement>
-            <ui:ProgressBar value="22" name="guard-progressbar" class="guard-progressbar" />
+            <ui:ProgressBar value="22" name="guard-progressbar" class="guard-progressbar kaomojiedit" style="flex-grow: 1;" />
         </ui:VisualElement>
-        <ui:VisualElement name="box" style="flex-grow: 1;">
-            <ui:VisualElement name="type-growthrate" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+        <ui:VisualElement name="box" style="flex-grow: 1; justify-content: space-between;">
+            <ui:VisualElement name="type-growthrate" style="flex-grow: 0; flex-direction: row; justify-content: space-between;">
                 <ui:Label text="スタミナ" name="type" class="type" />
                 <ui:Label text="★★★★★" name="growthrate" class="growthrate" />
             </ui:VisualElement>
-            <ui:ProgressBar value="22" name="stamina-progressbar" class="stamina-progressbar" />
+            <ui:ProgressBar value="22" name="stamina-progressbar" class="stamina-progressbar kaomojiedit" style="flex-grow: 1;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

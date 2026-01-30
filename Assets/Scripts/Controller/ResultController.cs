@@ -24,7 +24,7 @@ public class ResultController : MonoBehaviour
     /// <param name="getMoney"></param>
     public void GetMoneyToHasMoney(int getMoney)
     {
-        MoneyManager.I.AddMoney(getMoney);
+        Money.Add(getMoney);
     }
 
     public void ApplyResultUI(Wave wave, int level)
@@ -40,6 +40,7 @@ public class ResultController : MonoBehaviour
     {
         foreach(KaomojiPartData part in Context.I.KaomojiPartDatas())
         {
+            if(part == null) continue;
             KaomojiPart.LevelDetail detail = part.Data.levelDetail;
 
             // レベルアップ前の値を保持しておく

@@ -15,7 +15,7 @@ public class ResultGetMoney : MonoBehaviour
     public void Initialize(int getMoney)
     {
         // 1,000の様な表示の仕方にする
-        t_GetMoney.text = getMoney.ToString("#,###") + "円";
+        t_GetMoney.text = getMoney.ToString("N0") + "円";
         gameObject.SetActive(true);
         transform.SetAsLastSibling();       // 子オブジェクトの最後尾へ移動
     }

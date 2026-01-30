@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "KaomojiPartsDatabase", menuName = "KaomojiPartsDatabase")]
+[CreateAssetMenu(fileName = "KaomojiPartsDatabase", menuName = "Database/KaomojiPartsDatabase")]
 public class KaomojiPartsDatabase : ScriptableObject
 {
     [SerializeField] KaomojiPartData[] parts;

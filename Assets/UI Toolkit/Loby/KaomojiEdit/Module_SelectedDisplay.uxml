@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Temp_StatusParamater" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_StatusParamater.uxml?fileID=9197481963319205126&amp;guid=6387f6a48380b774ba9990e3e904175f&amp;type=3#Temp_StatusParamater" />
-    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Temp_StatusParamater_Type.uss?fileID=7433441132597879392&amp;guid=28e676ebba2b62d47b92d39711872319&amp;type=3#Temp_StatusParamater_Type" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Temp_StatusParamater_GrowthRate.uss?fileID=7433441132597879392&amp;guid=67c8b8c6a1fbec74baf63632d59054cd&amp;type=3#Temp_StatusParamater_GrowthRate" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Temp_StatusParamater_ProgressBar.uss?fileID=7433441132597879392&amp;guid=93e0d985331441f43b550fdd8e99fc43&amp;type=3#Temp_StatusParamater_ProgressBar" />
@@ -9,7 +9,7 @@
             <ui:Label text="(^ω^)" name="value" style="-unity-text-align: middle-center; font-size: 76px;" />
         </ui:VisualElement>
         <ui:VisualElement name="status-paramater" style="position: absolute; height: 210px; width: 280px; right: 0%; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
-            <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" class="kaomoji-edit kaomojiedit unity-progress-bar" style="flex-grow: 1;" />
+            <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" class="display" style="flex-grow: 1;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

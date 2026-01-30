@@ -18,6 +18,7 @@ public class EnemySpawnController : MonoBehaviour
 
     void Start()
     {
+        enemy_DB = AreaManager.I.CurrentAreaData.AreaBuild.spawnDatabase;
         FirstSpawnEnemy(spawnAmount);
     }
 

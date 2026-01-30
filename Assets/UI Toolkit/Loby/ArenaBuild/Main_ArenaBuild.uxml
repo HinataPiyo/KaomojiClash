@@ -1,0 +1,26 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_BackButton" src="project://database/Assets/UI%20Toolkit/Temp_BackButton.uxml?fileID=9197481963319205126&amp;guid=e207c51f9886e84438a49daef40d9089&amp;type=3#Temp_BackButton" />
+    <ui:Template name="Temp_HasMoney" src="project://database/Assets/UI%20Toolkit/Temp_HasMoney.uxml?fileID=9197481963319205126&amp;guid=6dab5f65ea67fcd45a1388a94afe85f1&amp;type=3#Temp_HasMoney" />
+    <ui:Template name="Temp_HelpButton" src="project://database/Assets/UI%20Toolkit/Temp_HelpButton.uxml?fileID=9197481963319205126&amp;guid=988c6b9b861e7904e97e93d77ca2411a&amp;type=3#Temp_HelpButton" />
+    <ui:Template name="Module_SelectItemList" src="project://database/Assets/UI%20Toolkit/Loby/ArenaBuild/Module_SelectItemList.uxml?fileID=9197481963319205126&amp;guid=67f6cfc5cce9eb5488e0ebb242024dd9&amp;type=3#Module_SelectItemList" />
+    <ui:Template name="Temp_PanelTitle" src="project://database/Assets/UI%20Toolkit/Temp_PanelTitle.uxml?fileID=9197481963319205126&amp;guid=52afa353dd48a804da6a1e916ae98f5d&amp;type=3#Temp_PanelTitle" />
+    <ui:VisualElement name="root" picking-mode="Ignore" style="flex-grow: 1;">
+        <ui:Instance template="Temp_BackButton" name="Temp_Back" style="position: absolute; right: 3%; top: 14%;" />
+        <ui:Instance template="Temp_HasMoney" name="Temp_HasMoney" style="position: absolute; top: 3%; right: 3%;" />
+        <ui:Instance template="Temp_HelpButton" name="Temp_HelpButton" style="position: absolute; top: 3%; left: 3%;" />
+        <ui:VisualElement name="TotalInformation" style="position: absolute; height: 100px; width: 440px; top: 13%; left: 57%; flex-direction: row;">
+            <ui:VisualElement name="total-price-box" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; width: 65%; margin-top: 2px; margin-right: 2px; margin-bottom: 2px; margin-left: 2px;">
+                <ui:Label text="合計使用料" name="text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 4px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); font-size: 23px; -unity-text-align: middle-left;" />
+                <ui:Label text="12,345円" name="value" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 7px; padding-right: 7px; padding-bottom: 0; padding-left: 7px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); font-size: 48px; -unity-text-align: lower-right; position: absolute; right: 0%; bottom: 0%; width: 100%; height: 67%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="total-set-item-count" style="flex-grow: 1; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; margin-top: 2px; margin-right: 2px; margin-bottom: 2px; margin-left: 2px;">
+                <ui:Label text="設置数" name="text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 4px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); font-size: 23px; -unity-text-align: middle-left;" />
+                <ui:Label text="1/2" name="value" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 7px; padding-right: 7px; padding-bottom: 0; padding-left: 7px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); font-size: 48px; -unity-text-align: lower-right; position: absolute; right: 0%; bottom: 0%; width: 100%; height: 67%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Instance template="Module_SelectItemList" name="SelectItemList" style="position: absolute; width: 35%; height: 71%; right: 8%; bottom: 6%;" />
+        <ui:Instance template="Temp_PanelTitle" name="Temp_PanelTitle" style="position: absolute; top: 2%; align-self: center;">
+            <AttributeOverrides element-name="value" text="アリーナビルド" />
+        </ui:Instance>
+    </ui:VisualElement>
+</ui:UXML>

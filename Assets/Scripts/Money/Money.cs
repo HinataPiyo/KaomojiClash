@@ -1,12 +1,12 @@
-public class Money
+public static class Money
 {
-    public int HasMoney { get; private set; }
-    public void Add(int add)
+    public static int HasMoney { get; private set; }  = 0;
+    public static void Add(int add)
     {
         HasMoney += add;
     }
 
-    public void Sub(int sub)
+    public static void Sub(int sub)
     {
         if(HasMoney < sub)
         {

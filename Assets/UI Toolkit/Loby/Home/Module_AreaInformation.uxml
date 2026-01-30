@@ -1,0 +1,28 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_NormalButton" src="project://database/Assets/UI%20Toolkit/Temp_NormalButton.uxml?fileID=9197481963319205126&amp;guid=bf58c023254df574cbec7ab19b33f609&amp;type=3#Temp_NormalButton" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Loby/Home/Style/AreaInformation_Style.uss?fileID=7433441132597879392&amp;guid=9cd0f55b051d64b49b6e6773a25a5f6f&amp;type=3#AreaInformation_Style" />
+    <ui:VisualElement name="root" class="panel" style="flex-grow: 1;">
+        <ui:VisualElement name="title-box" style="flex-grow: 1; position: absolute; left: 5%; top: 5%; width: 55%; height: 15%; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); justify-content: center;">
+            <ui:Label text="文字平原" name="value" style="-unity-text-align: middle-center; font-size: 36px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="difficulty-box" style="position: absolute; right: 0%; top: 5%; width: 35%; height: 15%;">
+            <ui:Label text="難易度" name="text" style="-unity-font-style: normal; font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); position: absolute; top: -5%;" />
+            <ui:Label text="EXTREAM" name="value" style="-unity-font-style: normal; font-size: 38px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: middle-center; flex-grow: 1; top: 15px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="spawn-enemy-list" style="flex-grow: 1; position: absolute; left: 5%; top: 23%; width: 90%; height: 50%; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); justify-content: center; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+            <ui:ScrollView style="flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="culture-level-box" style="flex-grow: 1; position: absolute; width: 55%; height: 10%; left: 5%; bottom: 15%; justify-content: space-between; flex-direction: row;">
+            <ui:Label text="文化圏レベル" name="text" class="text" />
+            <ui:Label text="0" name="value" class="text" />
+        </ui:VisualElement>
+        <ui:VisualElement name="kaomoji-density-box" style="flex-grow: 1; position: absolute; width: 55%; height: 10%; left: 5%; bottom: 5%; justify-content: space-between; flex-direction: row;">
+            <ui:Label text="顔文字密度" name="text" class="text" />
+            <ui:Label text="+60％" name="value" class="text" />
+        </ui:VisualElement>
+        <ui:Instance template="Temp_NormalButton" name="PlayButton" style="position: absolute; bottom: 3%; right: 3%; height: 22%; width: 35%;">
+            <AttributeOverrides element-name="Button" text="出撃" />
+        </ui:Instance>
+    </ui:VisualElement>
+</ui:UXML>

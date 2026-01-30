@@ -1,3 +1,31 @@
+.display .kaomojiedit .unity-progress-bar__container {
+    min-height: auto;
+    max-height: none;
+    height: 79%;
+}
+
+.display .kaomojiedit .unity-progress-bar__background {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.display .kaomojiedit .unity-progress-bar__progress {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
 .stamina-progressbar .unity-progress-bar__progress {
     background-color: rgb(255, 209, 102);
 }
@@ -14,13 +42,7 @@
     background-color: rgb(239, 71, 111);
 }
 
-.kaomoji-edit .unity-progress-bar__container {
-    min-height: auto;
-    max-height: none;
-    height: 90%;
-}
-
-.kaomoji-edit .unity-progress-bar {
+.kaomojiedit .unity-progress-bar__progress {
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
@@ -29,4 +51,21 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.kaomojiedit .unity-progress-bar__background {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.kaomojiedit .unity-progress-bar__container {
+    min-height: auto;
+    max-height: none;
+    height: 100%;
 }

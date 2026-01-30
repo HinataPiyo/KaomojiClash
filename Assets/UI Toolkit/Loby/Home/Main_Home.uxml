@@ -1,0 +1,24 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_HelpButton" src="project://database/Assets/UI%20Toolkit/Temp_HelpButton.uxml?fileID=9197481963319205126&amp;guid=988c6b9b861e7904e97e93d77ca2411a&amp;type=3#Temp_HelpButton" />
+    <ui:Template name="Temp_PanelTitle" src="project://database/Assets/UI%20Toolkit/Temp_PanelTitle.uxml?fileID=9197481963319205126&amp;guid=52afa353dd48a804da6a1e916ae98f5d&amp;type=3#Temp_PanelTitle" />
+    <ui:Template name="Module_KaomojiPreview" src="project://database/Assets/UI%20Toolkit/Loby/Home/Module_KaomojiPreview.uxml?fileID=9197481963319205126&amp;guid=f1d6664235f5bc249aa347769068424f&amp;type=3#Module_KaomojiPreview" />
+    <ui:Template name="Module_ArenaInformation" src="project://database/Assets/UI%20Toolkit/Loby/Home/Module_AreaInformation.uxml?fileID=9197481963319205126&amp;guid=2661e77e3e51a6b468436605504acec2&amp;type=3#Module_AreaInformation" />
+    <ui:Template name="Module_BuildButtons" src="project://database/Assets/UI%20Toolkit/Loby/Home/Module_BuildButtons.uxml?fileID=9197481963319205126&amp;guid=d0a0e00a416cdcb419bc7ac5187ce5fe&amp;type=3#Module_BuildButtons" />
+    <ui:Template name="Module_OtherInformation" src="project://database/Assets/UI%20Toolkit/Loby/Home/Module_OtherInformationButtons.uxml?fileID=9197481963319205126&amp;guid=289554271b5dd3b4fbfe0576bac5d2d3&amp;type=3#Module_OtherInformationButtons" />
+    <ui:Template name="Temp_NormalButton" src="project://database/Assets/UI%20Toolkit/Temp_NormalButton.uxml?fileID=9197481963319205126&amp;guid=bf58c023254df574cbec7ab19b33f609&amp;type=3#Temp_NormalButton" />
+    <ui:Template name="Temp_HasMoney" src="project://database/Assets/UI%20Toolkit/Temp_HasMoney.uxml?fileID=9197481963319205126&amp;guid=6dab5f65ea67fcd45a1388a94afe85f1&amp;type=3#Temp_HasMoney" />
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:Instance template="Temp_HelpButton" name="Temp_HelpButton" style="position: absolute; top: 3%; left: 3%;" />
+        <ui:Instance template="Temp_PanelTitle" name="Temp_PanelTitle" style="align-self: center; top: 2%;">
+            <AttributeOverrides element-name="value" text="ホーム" />
+        </ui:Instance>
+        <ui:Instance template="Module_KaomojiPreview" name="KaomojiPreview" style="position: absolute; right: 3%; top: 13%; width: 45%;" />
+        <ui:Instance template="Module_ArenaInformation" name="AreaInformation" style="position: absolute; width: 48%; height: 58%; top: 13%; left: 3%;" />
+        <ui:Instance template="Module_BuildButtons" name="BuildButtons" style="position: absolute; right: 3%; top: 45%; width: 45%; height: 28%;" />
+        <ui:Instance template="Module_OtherInformation" name="OtherInformationButtons" style="position: absolute; bottom: 3%; right: 3%; width: 60%; height: 23%;" />
+        <ui:Instance template="Temp_NormalButton" name="PracticeButton" style="position: absolute; bottom: 3%; left: 5%; width: 30%; height: 23%;">
+            <AttributeOverrides element-name="Button" text="練習" />
+        </ui:Instance>
+        <ui:Instance template="Temp_HasMoney" name="Temp_HasMoney" style="position: absolute; right: 3%; top: 3%;" />
+    </ui:VisualElement>
+</ui:UXML>

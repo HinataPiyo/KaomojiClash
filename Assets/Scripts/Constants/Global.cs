@@ -30,7 +30,28 @@ namespace Constants.Global
         public sealed class MentalData
         {
             public string faceline = "()";
-            public int maxMental = 3;
+            public string name = "括弧";
+            public int maxMental = 0;
+
+            public string GetEffectDescription()
+            {
+                return $"精神強度が{maxMental}上昇する。";
+            }
+
+            public static string GetConditionBodyByLevel(int level)
+            {
+                switch(level)
+                {
+                    case 1:
+                        return "手を装備している。";
+                    case 2:
+                        return "装飾1を装備している。";
+                    case 3:
+                        return "装飾2を装備している。";
+                    default:
+                        return "";
+                }
+            }
         }
     }
 
@@ -53,6 +74,20 @@ namespace Constants.Global
 
         public KaomojiPartData[] GetAllPartsData() => new KaomojiPartData[]
         { eyes, mouth, hands, decoration_first, decoration_second };
+
+        public int GetEquippedPartsCount()
+        {
+            int count = 0;
+            KaomojiPartData[] parts = GetAllPartsData();
+            foreach(var part in parts)
+            {
+                if(part != null)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
 
         public void SetPartDataByType(KaomojiPartData partData)
         {
@@ -483,6 +518,13 @@ namespace Constants.Global
         }
 
 #endregion
+
+        public static readonly Dictionary<ArenaItemGradeType, string> GradeTypeName = new Dictionary<ArenaItemGradeType, string>
+        {
+            { ArenaItemGradeType.None, "NORMAL" },
+            { ArenaItemGradeType.MK_ONE, "MK-1" },
+            { ArenaItemGradeType.MK_TWO, "MK-2" },
+        };
     }
 }
 
@@ -498,4 +540,12 @@ namespace ENUM
     { None = -1, VeryLow, Low, Normal, High, VeryHigh }
     public enum StatusType
     { None = -1, Speed, Power, Guard, Stamina, Max}
+    public enum Panel
+    { None = -1, Home, KaomojiBuild, ArenaBuild, Shop, Max}
+    public enum Scene
+    { None = -1, Title, Home, Battle, Max}
+    public enum ArenaItemGradeType
+    { None = -1, MK_ONE, MK_TWO, Max }
+    public enum ArenaBuildType
+    { None = -1, Placeable, Automatic, Max }
 }
