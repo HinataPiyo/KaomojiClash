@@ -518,6 +518,13 @@ namespace Constants.Global
         }
 
 #endregion
+
+        public static readonly Dictionary<ArenaItemGradeType, string> GradeTypeName = new Dictionary<ArenaItemGradeType, string>
+        {
+            { ArenaItemGradeType.None, "NORMAL" },
+            { ArenaItemGradeType.MK_ONE, "MK-1" },
+            { ArenaItemGradeType.MK_TWO, "MK-2" },
+        };
     }
 }
 
@@ -537,4 +544,8 @@ namespace ENUM
     { None = -1, Home, KaomojiBuild, ArenaBuild, Shop, Max}
     public enum Scene
     { None = -1, Title, Home, Battle, Max}
+    public enum ArenaItemGradeType
+    { None = -1, MK_ONE, MK_TWO, Max }
+    public enum ArenaBuildType
+    { None = -1, Placeable, Automatic, Max }
 }
