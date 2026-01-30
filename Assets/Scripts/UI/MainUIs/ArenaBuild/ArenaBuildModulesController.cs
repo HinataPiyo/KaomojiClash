@@ -15,15 +15,21 @@ namespace UI.ArenaBuild
 
 
         public SelectItemList module_SL{ get; private set; }
-        public ArenaItemData SelectedArenaItemData { get; set; } = null;
+        public ArenaItemData SelectedArenaItemData { get; set; } = null;        // 選択中のアリーナアイテムデータ
 
-        public bool IsSetting { get; private set; } = false;
+        public bool IsSetting { get; private set; } = false;        // 設定モードか削除モードかどうか
 
+        /// <summary>
+        /// 選択中のアリーナアイテムデータをnullにする
+        /// </summary>
         public void SelectedArenaItemDataNull()
         {
             SelectedArenaItemData = null;
         }
 
+        /// <summary>
+        /// 設定モードの切り替え
+        /// </summary>
         public void ChangeIsSetting(bool setting)
         {
             IsSetting = setting;
