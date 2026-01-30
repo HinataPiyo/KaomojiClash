@@ -4,7 +4,7 @@
     <ui:Template name="Temp_HelpButton" src="project://database/Assets/UI%20Toolkit/Temp_HelpButton.uxml?fileID=9197481963319205126&amp;guid=988c6b9b861e7904e97e93d77ca2411a&amp;type=3#Temp_HelpButton" />
     <ui:Template name="Module_SelectItemList" src="project://database/Assets/UI%20Toolkit/Loby/ArenaBuild/Module_SelectItemList.uxml?fileID=9197481963319205126&amp;guid=67f6cfc5cce9eb5488e0ebb242024dd9&amp;type=3#Module_SelectItemList" />
     <ui:Template name="Temp_PanelTitle" src="project://database/Assets/UI%20Toolkit/Temp_PanelTitle.uxml?fileID=9197481963319205126&amp;guid=52afa353dd48a804da6a1e916ae98f5d&amp;type=3#Temp_PanelTitle" />
-    <ui:VisualElement name="root" style="flex-grow: 1;">
+    <ui:VisualElement name="root" picking-mode="Ignore" style="flex-grow: 1;">
         <ui:Instance template="Temp_BackButton" name="Temp_Back" style="position: absolute; right: 3%; top: 14%;" />
         <ui:Instance template="Temp_HasMoney" name="Temp_HasMoney" style="position: absolute; top: 3%; right: 3%;" />
         <ui:Instance template="Temp_HelpButton" name="Temp_HelpButton" style="position: absolute; top: 3%; left: 3%;" />
