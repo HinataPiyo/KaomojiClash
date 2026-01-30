@@ -42,6 +42,7 @@ namespace UI.ArenaBuild
 
             ButtonsOnClick();
             ButtonsSetIntaractable();       // ボタンの相互作用可能性を更新
+            UpdateTotalInfo();
         }
 
         /// <summary>
@@ -86,10 +87,27 @@ namespace UI.ArenaBuild
 
                     // ボタンの相互作用可能性を更新
                     ButtonsSetIntaractable();
+                    // 合計情報を更新
+                    UpdateTotalInfo();
                 });
             }
         }
 
+        /// <summary>
+        /// 合計情報の更新
+        /// </summary>
+        void UpdateTotalInfo()
+        {
+            ArenaItemSettingData settingData = wall.ArenaItemSettingData;
+            int totalPrice = settingData.CalculateTotalPrice();
+            int currentItemCount = settingData.GetCurrentSetItemCount();
+            int maxSetItemCount = settingData.MaxSetItemCount;
+            ctrl.UpdateTotalInfo(totalPrice, currentItemCount, maxSetItemCount);
+        }
+
+        /// <summary>
+        /// ボタンの相互作用可能性を更新
+        /// </summary>
         void ButtonsSetIntaractable()
         {
             bool isMax = wall.ArenaItemSettingData.CheckMaxSettingItems();

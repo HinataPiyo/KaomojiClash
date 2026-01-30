@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 1743287662}
   - component: {fileID: 1743287664}
   - component: {fileID: 1743287665}
+  - component: {fileID: 1743287666}
   m_Layer: 5
   m_Name: ArenaBuild
   m_TagString: Untagged
@@ -691,7 +692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
   arenaItemBoxController: {fileID: 1908212731}
-  wall: {fileID: 0}
+  wall: {fileID: 625710723}
 --- !u!114 &1743287665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,6 +708,18 @@ MonoBehaviour:
   arenaItemDatabase: {fileID: 11400000, guid: 5b6e0a2c1d8bc67478cc931726c6a7bb, type: 2}
   temp_SelectArenaItem: {fileID: 9197481963319205126, guid: 42ed4aa9bae8c7849984a1f6340c0d3d, type: 3}
   arenaItemBoxController: {fileID: 1908212731}
+--- !u!114 &1743287666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743287661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c77a3353b535a840a4fa9a56abce334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1908212726
 GameObject:
   m_ObjectHideFlags: 0

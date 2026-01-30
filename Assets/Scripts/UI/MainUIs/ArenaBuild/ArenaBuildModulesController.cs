@@ -12,9 +12,11 @@ namespace UI.ArenaBuild
         
         UIDocument uiDocs;
         const string SELECT_ITEM_LIST_MODULE = "SelectItemList";
+        const string TOTAL_INFORMATION_MODULE = "TotalInformation";
 
 
         public SelectItemList module_SL{ get; private set; }
+        public TotalInformation module_TI { get; private set; }
         public ArenaItemData SelectedArenaItemData { get; set; } = null;        // 選択中のアリーナアイテムデータ
 
         public bool IsSetting { get; private set; } = false;        // 設定モードか削除モードかどうか
@@ -52,6 +54,7 @@ namespace UI.ArenaBuild
         {
             uiDocs = GetComponent<UIDocument>();
             module_SL = GetComponent<SelectItemList>();
+            module_TI = GetComponent<TotalInformation>();
         }
 
         void Start()
@@ -65,6 +68,19 @@ namespace UI.ArenaBuild
             CreateHasMoney(root);
             CreateBackButton(root);
             Initialize(module_SL, SELECT_ITEM_LIST_MODULE, root);
+            Initialize(module_TI, TOTAL_INFORMATION_MODULE, root);
+        }
+
+        /// <summary>
+        /// TotalInformationモジュールの情報更新
+        /// </summary>
+        /// <param name="totalPrice">アリーナにセッティングされたアイテムの合計使用料</param>
+        /// <param name="setItemCount">現在セットしている数</param>
+        /// <param name="maxSetItemCount">最大セット数</param>
+        public void UpdateTotalInfo(int totalPrice, int setItemCount, int maxSetItemCount)
+        {
+            module_TI.UpdatePrice(totalPrice);
+            module_TI.UpdateMaxSetItemCount(setItemCount, maxSetItemCount);
         }
 
         void OnDisable()

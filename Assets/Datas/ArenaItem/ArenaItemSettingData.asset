@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914c4f41c0062294cbd8b977c17eff1a, type: 3}
   m_Name: ArenaItemSettingData
   m_EditorClassIdentifier: 
-  maxSettingItems: 2
+  maxSetItemCount: 2

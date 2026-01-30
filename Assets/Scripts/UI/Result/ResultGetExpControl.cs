@@ -35,7 +35,7 @@ public class ResultGetExpControl : MonoBehaviour
     /// <returns></returns>
     IEnumerator ExperienceRoutine(Wave wave)
     {
-        t_GetExp.text = "+" + wave.getExp.ToString("#,###");
+        t_GetExp.text = "+" + wave.getExp.ToString("N0");
 
         moveUI.MoveLeft(360, 1f);
         

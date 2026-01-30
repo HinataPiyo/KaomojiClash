@@ -12,16 +12,16 @@ public abstract class ArenaItemData : ScriptableObject
     public Vector2 SetPosition { get; set; } = Vector2.zero;
 
     public abstract string GetDiscription();
-    public float GetPrice()
+    public int GetPrice()
     {
         switch(GradeType)
         {
             case ENUM.ArenaItemGradeType.None:
                 return price;
             case ENUM.ArenaItemGradeType.MK_ONE:
-                return price * 1.5f;
+                return Mathf.FloorToInt(price * 1.5f);
             case ENUM.ArenaItemGradeType.MK_TWO:
-                return price * 2f;
+                return Mathf.FloorToInt(price * 2f);
             default:
                 return price;
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ArenaItemSettingData", menuName = "ArenaItemSettingData", order = 0)]
 public class ArenaItemSettingData : ScriptableObject
 {
-    [SerializeField] int maxSettingItems = 1;   // 最大設定数(2個まで)
+    [SerializeField] int maxSetItemCount = 1;   public int MaxSetItemCount => maxSetItemCount;      // 最大設定数(2個まで)
     public class Entry
     {
         public ArenaItemData itemData;
@@ -51,7 +51,7 @@ public class ArenaItemSettingData : ScriptableObject
             if(entry.itemData != null)
             {
                 count++;
-                if(count >= maxSettingItems)
+                if(count >= MaxSetItemCount)
                 {
                     return true;
                 }
@@ -124,6 +124,42 @@ public class ArenaItemSettingData : ScriptableObject
                 break;
             }
         }
+    }
+
+    /// <summary>
+    /// 設定されているアイテムの値段の合計値を取得する
+    /// </summary>
+    /// <returns></returns>
+    public int CalculateTotalPrice()
+    {
+        int totalPrice = 0;
+        foreach(Entry entry in ArenaItemDatas)
+        {
+            if(entry.itemData != null)
+            {
+                totalPrice += entry.itemData.GetPrice();
+            }
+        }
+
+        Debug.Log("CalculateTotalPrice: " + totalPrice);
+        return totalPrice;
+    }
+
+    /// <summary>
+    /// 現在設定されているアイテム数を取得
+    /// </summary>
+    public int GetCurrentSetItemCount()
+    {
+        int count = 0;
+        foreach(Entry entry in ArenaItemDatas)
+        {
+            if(entry.itemData != null)
+            {
+                count++;
+            }
+        }
+
+        return count;
     }
     
 }
