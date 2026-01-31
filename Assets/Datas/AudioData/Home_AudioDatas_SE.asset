@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - tag: OnClick
-    clip: {fileID: 8300000, guid: 37206e8dfdcadf248a05ff70464dddb9, type: 3}
+    clip: {fileID: 8300000, guid: 17ac13e07e6dcaa4dbfd86fd17486f19, type: 3}
   - tag: BackOnClick
     clip: {fileID: 8300000, guid: 33cb93ffbc16ac54ab3b4594a7019a36, type: 3}
   - tag: ArenaItemAdd
