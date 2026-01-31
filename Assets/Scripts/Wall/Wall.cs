@@ -14,6 +14,8 @@ public class Wall : MonoBehaviour
     [SerializeField] ArenaItemSettingData arenaItemSettingData;     // アリーナに設置するアイテムデータ管理SO
     public ArenaItemSettingData ArenaItemSettingData => arenaItemSettingData;
 
+    List<GameObject> spawnedItems = new List<GameObject>();
+
     /// <summary>
     /// アリーナに設置するアイテムを生成する
     /// </summary>
@@ -26,8 +28,21 @@ public class Wall : MonoBehaviour
             int boxNumber = entry.settingBoxNumber;
 
             Vector2 spawnPos = CanSetPositions[boxNumber].position;
-            Instantiate(itemData.Item_Prefab, spawnPos, Quaternion.identity);
+            GameObject obj = Instantiate(itemData.Item_Prefab, spawnPos, Quaternion.identity);
+            spawnedItems.Add(obj);
         }
+    }
+
+    /// <summary>
+    /// アリーナに設置したアイテムを全て破棄する
+    /// </summary>
+    public void ClearArenaItems()
+    {
+        for(int ii = 0; ii < spawnedItems.Count; ii++)
+        {
+            Destroy(spawnedItems[ii]);
+        }
+        spawnedItems.Clear();
     }
 
     /// <summary>

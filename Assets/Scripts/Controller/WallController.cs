@@ -3,7 +3,7 @@ using UnityEngine;
 public class WallController : MonoBehaviour
 {
     [SerializeField] GameObject wall;
-    GameObject currentWall;
+    Wall currentWall;
 
     /// <summary>
     /// 壁を生成する
@@ -13,7 +13,8 @@ public class WallController : MonoBehaviour
     public void CreateWall(Vector2 player, Vector2 enemy)
     {
         Vector2 createPos = Vector2.Lerp(player, enemy, 0.5f);        // プレイヤーと敵との距離の中心を取得
-        currentWall = Instantiate(wall, createPos, Quaternion.identity);
+        GameObject obj = Instantiate(wall, createPos, Quaternion.identity);
+        currentWall = obj.GetComponent<Wall>();
         AudioManager.I.PlaySE("SetWall");
         CameraShake.I.ApplyShake(1, 2f, 0.5f);
         CreateArenaItems();     // 壁生成時にアイテムも生成
@@ -22,13 +23,13 @@ public class WallController : MonoBehaviour
     public Wall GetWall()
     {
         if(currentWall == null) return null;
-        return currentWall.GetComponent<Wall>();
+        return currentWall;
     }
 
     public void CreateArenaItems()
     {
-        Wall wall = GetWall();
-        wall.CreateArenaItem();
+        if(currentWall == null) return;
+        currentWall.CreateArenaItem();
     }
 
     /// <summary>
@@ -36,6 +37,8 @@ public class WallController : MonoBehaviour
     /// </summary>
     public void DestroyWall()
     {
-        Destroy(currentWall);
+        if(currentWall == null) return;
+        currentWall.ClearArenaItems();   // 破棄前にアイテムも破棄
+        Destroy(currentWall.gameObject);
     }
 }
