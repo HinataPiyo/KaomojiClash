@@ -18,7 +18,8 @@ public class EnemySpawnController : MonoBehaviour
 
     void Start()
     {
-        enemy_DB = AreaManager.I.CurrentAreaData.AreaBuild.spawnDatabase;
+        // AreaManagerがない場合はSerialideFieldで設定したDBを使用
+        if(AreaManager.I != null) enemy_DB = AreaManager.I.CurrentAreaData.AreaBuild.spawnDatabase;
         FirstSpawnEnemy(spawnAmount);
     }
 
