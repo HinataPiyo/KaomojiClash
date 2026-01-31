@@ -24,6 +24,7 @@ public class Wall : MonoBehaviour
         for(int ii = 0; ii < arenaItemSettingData.ArenaItemDatas.Count; ii++)
         {
             ArenaItemSettingData.Entry entry = arenaItemSettingData.ArenaItemDatas[ii];
+            if(entry.itemData == null) continue;
             ArenaItemData itemData = entry.itemData;
             int boxNumber = entry.settingBoxNumber;
 

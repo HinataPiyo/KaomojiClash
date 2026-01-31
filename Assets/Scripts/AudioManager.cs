@@ -1,4 +1,5 @@
 using System.Collections;
+using ENUM;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -16,6 +17,18 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         if(I == null) { I = this; }
+    }
+
+    void Start()
+    {
+        if(SceneChangeManager.CurrentScene == Scene.Home)
+        {
+            PlayBGM("Home");
+        }
+        else if(SceneChangeManager.CurrentScene == Scene.Battle)
+        {
+            PlayBGM("EndBattle");
+        }
     }
 
     public void PlaySEReflect()

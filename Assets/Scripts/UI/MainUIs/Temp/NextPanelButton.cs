@@ -29,7 +29,7 @@ namespace UI
         void Click()
         {
             PanelChangeManager.I.Change(NextPanel);
-            Debug.Log("NextPanelButtonが押下されました");
+            AudioManager.I.PlaySE("OnClick");
         }
     }
 }

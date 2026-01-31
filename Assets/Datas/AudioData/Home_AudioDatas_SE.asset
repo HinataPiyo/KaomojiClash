@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286ac1266d8183840b8e38d272b8db0b, type: 3}
+  m_Name: Home_AudioDatas_SE
+  m_EditorClassIdentifier: 
+  clips:
+  - tag: OnClick
+    clip: {fileID: 8300000, guid: 37206e8dfdcadf248a05ff70464dddb9, type: 3}
+  - tag: BackOnClick
+    clip: {fileID: 8300000, guid: 33cb93ffbc16ac54ab3b4594a7019a36, type: 3}
+  - tag: ArenaItemAdd
+    clip: {fileID: 8300000, guid: bcd4baba545462a4eaa32914f37ec8aa, type: 3}
+  - tag: ArenaItemRemove
+    clip: {fileID: 8300000, guid: 51b3f2bc171a91a4e9ecf1ffe8ee2f4d, type: 3}
+  - tag: ArenaItemSelect
+    clip: {fileID: 8300000, guid: 669a632eff2e8484a80351f6e21f2cb5, type: 3}

@@ -36,7 +36,7 @@ namespace UI
         void Click()
         {
             PanelChangeManager.I.Change(BeforPanel);
-            Debug.Log("戻るボタンが押下されました");
+            AudioManager.I.PlaySE("BackOnClick");
         }
 
         public void IsIntaractable(bool isEnable)

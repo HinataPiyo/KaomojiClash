@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286ac1266d8183840b8e38d272b8db0b, type: 3}
+  m_Name: Battle_AudioDatas_SE
+  m_EditorClassIdentifier: 
+  clips:
+  - tag: Reflect_0
+    clip: {fileID: 8300000, guid: b9269c7b2e5a59247a9adbbde94204d6, type: 3}
+  - tag: Reflect_1
+    clip: {fileID: 8300000, guid: e2f02ffe0d303f44f8bd16a84e526ec6, type: 3}
+  - tag: Reflect_2
+    clip: {fileID: 8300000, guid: b8071359d7d057742bd793352a4d587c, type: 3}
+  - tag: K.O.
+    clip: {fileID: 8300000, guid: 2a4d3530273e2114c9893eca718eb762, type: 3}
+  - tag: MentalBreak
+    clip: {fileID: 8300000, guid: 17008e227b2f25b4388ad2ac6ee36df1, type: 3}
+  - tag: SetWall
+    clip: {fileID: 8300000, guid: e5b98a6a5bdb3954e9547779a2d64c26, type: 3}
+  - tag: GameOver
+    clip: {fileID: 8300000, guid: ebfc34a8579f322429e050ab7090ffe9, type: 3}
+  - tag: BattleEnd
+    clip: {fileID: 8300000, guid: 8e2ac060ce8e5d64eb5b3cb7a02f8330, type: 3}
+  - tag: Encount
+    clip: {fileID: 8300000, guid: 852bc2fbeac2ccf4889c4f9470662a62, type: 3}
+  - tag: READY
+    clip: {fileID: 8300000, guid: a6a516b548636cd42ae0cf9cd207edfa, type: 3}
+  - tag: FIGHT
+    clip: {fileID: 8300000, guid: 0a88524dd08f79049af41887822d7c20, type: 3}
+  - tag: GetMoney
+    clip: {fileID: 8300000, guid: 61fc2b54cf121ab4190e10fad8abf952, type: 3}
+  - tag: ShowGetItem
+    clip: {fileID: 8300000, guid: 37118c02d729d7c4495b671016e77c22, type: 3}
+  - tag: TextWriting
+    clip: {fileID: 8300000, guid: 93f4bb7c1ea74434b836ebb1a48bf9ab, type: 3}
