@@ -79,6 +79,7 @@ namespace UI.ArenaBuild
         /// <param name="maxSetItemCount">最大セット数</param>
         public void UpdateTotalInfo(int totalPrice, int setItemCount, int maxSetItemCount)
         {
+            if(module_TI == null) return;
             module_TI.UpdatePrice(totalPrice);
             module_TI.UpdateMaxSetItemCount(setItemCount, maxSetItemCount);
         }

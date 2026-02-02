@@ -887,7 +887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1743287662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1239,7 +1239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2145156314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,6 +1323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b206aca0a7b78f4290702f78d8035d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaDatabase: {fileID: 11400000, guid: 0daa39e10d6247240aa677fe48a40353, type: 2}
+  temp_SapawnKaomoji: {fileID: 9197481963319205126, guid: 3512cfe8d967c744cacc147068a01c6d, type: 3}
+  temp_CultureLevelEntry: {fileID: 9197481963319205126, guid: cff91a78a2ea20147a14069cef50ecf4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -4,5 +4,5 @@ using Constants;
 [CreateAssetMenu(fileName = "AreaData", menuName = "AreaData")]
 public class AreaData : ScriptableObject
 {
-    [SerializeField] AreaBuild area;       public AreaBuild AreaBuild => area;
+    [SerializeField] AreaBuild area;       public AreaBuild Build => area;
 }

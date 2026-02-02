@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3569af90a185f4f428fb519bf25634c7, type: 3}
-  m_Name: Area1_AreaData
+  m_Script: {fileID: 11500000, guid: 0e5842c694ebeac42a4da1a138c5efdd, type: 3}
+  m_Name: AreaDatabase
   m_EditorClassIdentifier: 
-  area:
-    spawnDatabase: {fileID: 11400000, guid: 08058e89a0c24d242ae65817d6f47562, type: 2}
-    cultureLevel: 1
-    kaomojiDensity: 0
+  areas:
+  - {fileID: 11400000, guid: 33410e957b5f97744ab7c3417abd03e9, type: 2}
+  - {fileID: 11400000, guid: 33410e957b5f97744ab7c3417abd03e9, type: 2}

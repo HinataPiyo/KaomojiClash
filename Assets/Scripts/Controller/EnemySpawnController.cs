@@ -19,7 +19,7 @@ public class EnemySpawnController : MonoBehaviour
     void Start()
     {
         // AreaManagerがない場合はSerialideFieldで設定したDBを使用
-        if(AreaManager.I != null) enemy_DB = AreaManager.I.CurrentAreaData.AreaBuild.spawnDatabase;
+        if(AreaManager.I != null) enemy_DB = AreaManager.I.CurrentAreaData.Build.spawnDatabase;
         FirstSpawnEnemy(spawnAmount);
     }
 
@@ -83,10 +83,10 @@ public class EnemySpawnController : MonoBehaviour
     /// </summary>
     public EnemyData SelectEnemyData(ENUM.Difficulty difficulty)
     {
-        int index = Random.Range(0, enemy_DB.EnemyData.Length);
+        int index = Random.Range(0, enemy_DB.GetAllEnemyData().Length);
         int level = Calculation.GetLevelByDifficulty(difficulty);
         float exp = Calculation.GetExperienceByDifficultyAndLevel(difficulty, level);
-        EnemyData copy = Instantiate(enemy_DB.EnemyData[index]);
+        EnemyData copy = Instantiate(enemy_DB.GetAllEnemyData()[index]);
         copy.E_Status.SetLevel(level);
         copy.E_Status.SetExperience(exp);
         return copy;

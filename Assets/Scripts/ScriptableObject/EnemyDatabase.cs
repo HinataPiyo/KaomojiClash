@@ -4,5 +4,5 @@ using UnityEngine;
 public class EnemyDatabase : ScriptableObject
 {
     [SerializeField] EnemyData[] enemyDatas;
-    public EnemyData[] EnemyData => enemyDatas;
+    public EnemyData[] GetAllEnemyData() => enemyDatas;
 }
