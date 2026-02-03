@@ -1,4 +1,4 @@
-namespace Data.ArenaItem
+namespace ArenaItem.Data
 {
     using UnityEngine;
     

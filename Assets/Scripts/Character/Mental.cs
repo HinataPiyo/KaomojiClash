@@ -8,8 +8,7 @@ public abstract class Mental : MonoBehaviour
     [SerializeField] protected int currentMental;
     protected TextMeshPro kaomoji;
     protected CharacterDieEffect dieEffect;
-    
-
+    protected float maxHealth;
     Movement movement;
 
     void Awake()
@@ -27,7 +26,8 @@ public abstract class Mental : MonoBehaviour
     public void Initialize(float stamina, CharacterData data)
     {
         this.data = data;
-        currentHealth = data.Status.health * (1f + stamina);
+        maxHealth = data.Status.health * (1f + stamina);
+        currentHealth = maxHealth;
         currentMental = data.Status.mentalData.maxMental;
     }
 

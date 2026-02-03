@@ -1,8 +1,10 @@
 using UnityEngine;
 
-public class PlayerMental : Mental 
+public class PlayerMental : Mental, IHeal
 {
     StatusUIControl statusUI;
+
+    public float GetMaxHealthAmount => maxHealth;
 
     void Start()
     {
@@ -51,5 +53,20 @@ public class PlayerMental : Mental
         // プレイヤー固有の死亡処理をここに追加可能
         statusUI.UpdateHealth(currentHealth);
         base.Die();
+    }
+
+    /// <summary>
+    /// 回復処理
+    /// </summary>
+    /// <param name="amount">回復量</param>
+    public void Heal(float amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > data.Status.health)
+        {
+            currentHealth = data.Status.health;
+        }
+
+        statusUI.UpdateHealth(currentHealth);
     }
 }
