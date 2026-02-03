@@ -20,7 +20,7 @@ MonoBehaviour:
     levelDetail:
       growthRateType: 0
     speed:
-      value: -0.269
+      value: 0.06
       growthRateType: 0
     power:
       value: 0.405

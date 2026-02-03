@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae91c5907439043479a4e353d3b638d8, type: 3}
+  m_Name: Area2_EnemyData 3
+  m_EditorClassIdentifier: 
+  status:
+    speed: 2.6
+    health: 19
+    power: 5
+    maxDragDistance: 3
+    minLaunchDistance: 0.1
+    landingCooldown: 1.3
+    reflectPower: 1.5
+    mentalData: {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
+  guard: 1
+  launchDuration: 0.3
+  kaomoji:
+    eyes: {fileID: 11400000, guid: d2e6efceab6ac1d419e577356b7d48f7, type: 2}
+    mouth: {fileID: 11400000, guid: c1471b614d1995549b86328892e90c1b, type: 2}
+    hands: {fileID: 0}
+    decoration_first: {fileID: 0}
+    decoration_second: {fileID: 0}
+  findPlayerRadius: 2
