@@ -30,7 +30,6 @@ namespace UI
             BeforPanel = befor;
             button = root.Q<VisualElement>(BACK_BUTTON).Q<Button>();
             button.clicked += Click;
-            Debug.Log("BuckPanelButtonが生成されました");
         }
 
         void Click()

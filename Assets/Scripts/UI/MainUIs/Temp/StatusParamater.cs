@@ -35,21 +35,10 @@ namespace UI.KaomojiBuild.Template
             /// <param name="number">何番目かのIndex</param>
             public void Initialize(VisualElement root, int number)
             {
-                if (root == null)
-                {
-                    Debug.LogError("StatusParamater.Element.Initialize: root is null.");
-                    return;
-                }
                 statusType = (ENUM.StatusType)number;
-                Debug.Log("Type: " + statusType.ToString() + "は初期化しました");
                 growthRateType = ENUM.GrowthRateType.None;
 
                 progressBar = root.Q<ProgressBar>();
-                if (progressBar == null)
-                {
-                    Debug.LogError("StatusParamater.Element.Initialize: ProgressBar not found.");
-                    return;
-                }
 
                 progressElement = progressBar.Q<VisualElement>(className: PROGRESS_CLASS_NAME);
                 defaultColor = Calculation.GetStatusTypeColorByType(statusType);
@@ -160,27 +149,10 @@ namespace UI.KaomojiBuild.Template
         /// <param name="tempRoot">StatusParamaterが使用されているRoot</param>
         public void Initialize(VisualElement moduleRoot)
         {
-            if (moduleRoot == null)
-            {
-                Debug.LogError("StatusParamater.Initialize: moduleRoot is null.");
-                return;
-            }
-            // 初期化のロジックをここに実装
-
             // box内のVisualElementを取得してelements配列を初期化
             VisualElement root = moduleRoot.Q<VisualElement>(TEMP_STATUS_PARAMATER);
-            if (root == null)
-            {
-                Debug.LogError($"StatusParamater.Initialize: [{TEMP_STATUS_PARAMATER}] not found.");
-                return;
-            }
 
             VisualElement[] elems = root.Query<VisualElement>(BOX_NAME).ToList().ToArray();
-            if (elems.Length == 0)
-            {
-                Debug.LogError("StatusParamater.Initialize: no box elements found.");
-                return;
-            }
             elements = new Element[elems.Length];       // 配列のサイズを設定
 
             for (int i = 0; i < elems.Length; i++)

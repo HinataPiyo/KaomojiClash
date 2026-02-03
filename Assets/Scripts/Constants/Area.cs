@@ -20,7 +20,6 @@ namespace Constants
         public static float GetCultureLevelMultiplier(int cultureLevel)
         {
             float multiplier = BaseCultureLevelMultiplier + ((cultureLevel - 1) * 0.15f);
-            Debug.Log($"Culture Level Multiplier: {multiplier} (Level: {cultureLevel})");
             return multiplier;
         }
 
