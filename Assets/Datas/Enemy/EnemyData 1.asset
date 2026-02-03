@@ -20,9 +20,7 @@ MonoBehaviour:
     minLaunchDistance: 0.1
     landingCooldown: 2
     reflectPower: 1.5
-    mentalData:
-      faceline: ()
-      maxMental: 3
+    mentalData: {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
   kaomoji_Body: (@+@)
   launchDuration: 1
   findPlayerRadius: 2

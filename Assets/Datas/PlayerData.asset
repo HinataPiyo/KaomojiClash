@@ -20,9 +20,7 @@ MonoBehaviour:
     minLaunchDistance: 0.1
     landingCooldown: 0.25
     reflectPower: 1.2
-    mentalData:
-      faceline: ()
-      maxMental: 0
+    mentalData: {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
   kaomoji:
     eyes: {fileID: 11400000, guid: 2b93afa8f8b295048b5d6cd3986e4149, type: 2}
     mouth: {fileID: 11400000, guid: 0899cf25843677842bf92cc5b4a28eec, type: 2}

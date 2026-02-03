@@ -24,35 +24,6 @@ namespace Constants.Global
 
         [Header("MentalPower")]
         public MentalData mentalData;
-
-        // 精神強度など精神に関するデータ
-        [System.Serializable]
-        public sealed class MentalData
-        {
-            public string faceline = "()";
-            public string name = "括弧";
-            public int maxMental = 0;
-
-            public string GetEffectDescription()
-            {
-                return $"精神強度が{maxMental}上昇する。";
-            }
-
-            public static string GetConditionBodyByLevel(int level)
-            {
-                switch(level)
-                {
-                    case 1:
-                        return "手を装備している。";
-                    case 2:
-                        return "装飾1を装備している。";
-                    case 3:
-                        return "装飾2を装備している。";
-                    default:
-                        return "";
-                }
-            }
-        }
     }
 
     [System.Serializable]
@@ -115,7 +86,7 @@ namespace Constants.Global
         /// 顔文字の組み立て
         /// </summary>
         /// <returns>設定された顔文字のPartsを合体させたもの</returns>
-        public string BuildKaomoji(CharacterStatus.MentalData mentalData)
+        public string BuildKaomoji(MentalData mentalData)
         {
             string _left_faceline = SeparatePart(mentalData?.faceline, 0);
             string _right_faceline = SeparatePart(mentalData?.faceline, 1);
