@@ -26,11 +26,6 @@ namespace UI.Home
             Money.Add(100000);      // !テスト用初期所持金
         }
 
-        void Start()
-        {
-            Initialize();
-        }
-
         protected override void Initialize()
         {
             VisualElement root = uiDocs.rootVisualElement;

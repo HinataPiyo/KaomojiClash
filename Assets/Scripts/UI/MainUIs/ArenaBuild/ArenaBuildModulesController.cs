@@ -56,12 +56,6 @@ namespace UI.ArenaBuild
             module_SL = GetComponent<SelectItemList>();
             module_TI = GetComponent<TotalInformation>();
         }
-
-        void Start()
-        {
-            Initialize();
-        }
-
         protected override void Initialize()
         {
             VisualElement root = uiDocs.rootVisualElement;

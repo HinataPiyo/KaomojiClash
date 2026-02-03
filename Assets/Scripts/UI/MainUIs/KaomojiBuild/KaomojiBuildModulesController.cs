@@ -35,14 +35,6 @@ namespace UI.KaomojiBuild
             module_FL = GetComponent<FaceLine>();
             module_SKP_StatusParamater = GetComponent<SelectedKaomojiPartStatusParamater>();
         }
-
-        /// <summary>
-        /// 各モジュールの初期化を行う
-        /// </summary>
-        void Start()
-        {
-            Initialize();
-        }
             
         protected override void Initialize()
         {
