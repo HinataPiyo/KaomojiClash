@@ -27,7 +27,7 @@ public abstract class Mental : MonoBehaviour
     public void Initialize(float stamina, CharacterData data)
     {
         this.data = data;
-        currentHealth = data.Status.maxHealth * (1f + stamina);
+        currentHealth = data.Status.health * (1f + stamina);
         currentMental = data.Status.mentalData.maxMental;
     }
 

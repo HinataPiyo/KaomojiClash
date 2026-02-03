@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using Constants.Global;
+using Constants;
 
 /// <summary>
 /// 雑魚敵用（通常の顔文字を用いる際に使用）

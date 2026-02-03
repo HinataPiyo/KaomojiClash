@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: EnemyData 1
   m_EditorClassIdentifier: 
   status:
-    attackPower: 6
-    maxHealth: 500
-    default_LaunchPower: 3
+    speed: 2.5
+    health: 10
+    power: 2
     maxDragDistance: 3
     minLaunchDistance: 0.1
     landingCooldown: 2
     reflectPower: 1.5
     mentalData: {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
-  kaomoji_Body: (@+@)
+  kaomoji_Body: (@@)
   launchDuration: 1
   findPlayerRadius: 2
   e_Status:

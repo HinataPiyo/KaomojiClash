@@ -1,5 +1,5 @@
 using UnityEngine;
-using Constants.Global;
+using Constants;
 
 [CreateAssetMenu(fileName = "KaomojiPartData", menuName = "KaomojiPartData", order = 0)]
 public class KaomojiPartData : ScriptableObject

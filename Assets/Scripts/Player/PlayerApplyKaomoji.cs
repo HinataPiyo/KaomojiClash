@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
-using Constants.Global;
-using System.Collections.Generic;
+using Constants;
 
 public class PlayerApplyKaomoji : MonoBehaviour
 {

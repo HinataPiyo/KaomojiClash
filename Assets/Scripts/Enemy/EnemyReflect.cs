@@ -27,7 +27,7 @@ public class EnemyReflect : Reflect, IEnemyInitialize
             if (CanApplyDamage(otherRb))
             {
                 Mental player = col.collider.GetComponent<Mental>();
-                float finalPower = data.Status.attackPower * (1f + e_Data.E_Status.power);
+                float finalPower = data.Status.power * (1f + e_Data.E_Status.power);
                 player.TakeDamage(finalPower);
                 AudioManager.I.PlaySEReflect();
             }

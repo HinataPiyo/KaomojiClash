@@ -3,6 +3,7 @@ using Constants.Global;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Constants;
 
 public class ResultGetItem : MonoBehaviour
 {

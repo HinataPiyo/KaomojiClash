@@ -1,4 +1,4 @@
-using Constants.Global;
+using Constants;
 using UI.KaomojiBuild.Template;
 using UnityEngine;
 using UnityEngine.UIElements;

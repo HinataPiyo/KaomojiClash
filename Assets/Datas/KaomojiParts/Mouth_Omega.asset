@@ -21,7 +21,7 @@ MonoBehaviour:
       growthRateType: 0
     speed:
       value: -0.076
-      growthRateType: 1
+      growthRateType: 2
     power:
       value: 0.219
       growthRateType: 2

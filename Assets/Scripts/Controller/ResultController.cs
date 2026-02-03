@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Constants.Global;
+using Constants;
 using UnityEngine;
 
 public class ResultController : MonoBehaviour

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Constants.Global;
+using Constants;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "PlayerData")]
 public class PlayerData : CharacterData 

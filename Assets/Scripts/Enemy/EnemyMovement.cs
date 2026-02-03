@@ -77,7 +77,7 @@ public class EnemyMovement : Movement, IEnemyInitialize
 
             // 距離に応じて速度をスケール
             float powerRate = Mathf.Clamp01(dragVector.magnitude / data.Status.maxDragDistance);
-            float launchSpeed = data.Status.default_LaunchPower * powerRate;
+            float launchSpeed = data.Status.speed * powerRate;
 
             CameraZoom.I.SetCameraOrthographic(Context.I.BattleStat);
             shootDirectionArrow.Del();

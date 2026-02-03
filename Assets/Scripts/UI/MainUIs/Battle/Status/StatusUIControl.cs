@@ -36,17 +36,17 @@ public class StatusUIControl : MonoBehaviour
 #endregion
 
 #region Health
-    public void SetMaxHealth(float maxHealth)
+    public void SetMaxHealth(float health)
     {
-        healthBar.highValue = maxHealth;
-        healthBar.value = maxHealth;
-        healthBar.title = $"{maxHealth}/{maxHealth}";
+        healthBar.highValue = health;
+        healthBar.value = health;
+        healthBar.title = health.ToString("N0") + "/" + health.ToString("N0");
     }
 
     public void UpdateHealth(float currentHealth)
     {
         healthBar.value = currentHealth;
-        healthBar.title = $"{currentHealth}/{healthBar.highValue}";
+        healthBar.title = currentHealth.ToString("N0") + "/" + healthBar.highValue.ToString("N0");
     }
 #endregion
 
