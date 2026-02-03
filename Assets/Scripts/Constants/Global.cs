@@ -37,27 +37,6 @@ namespace Constants.Global
 
     public static class Calculation
     {
-        /// <summary>
-        /// 難易度に応じてレベルを取得する
-        /// </summary>
-        /// <param name="difficulty"></param>
-        /// <returns></returns>
-        public static int GetLevelByDifficulty(Difficulty difficulty)
-        {
-            switch(difficulty)
-            {
-                case Difficulty.Easy:
-                    return Random.Range(1, 3);
-                case Difficulty.Normal:
-                    return Random.Range(2, 4);
-                case Difficulty.Hard:
-                    return Random.Range(3, 6);
-                case Difficulty.Extreme:
-                    return Random.Range(5, 8);
-                default:
-                    return 0;
-            }
-        }
 
         /// <summary>
         /// 難易度に応じて色を取得する

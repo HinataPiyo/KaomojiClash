@@ -1,3 +1,4 @@
+using Constants;
 using UnityEngine;
 
 public class AreaManager : MonoBehaviour
@@ -30,5 +31,25 @@ public class AreaManager : MonoBehaviour
         }
 
         CurrentAreaData = areaDatas[index];
+    }
+
+    /// <summary>
+    /// 文化圏レベルに応じたステータスパラメーターを取得する
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="baseValue"></param>
+    /// <returns></returns>
+    public float GetStatusParamByCultureLevel(ENUM.StatusType type, float baseValue)
+    {
+        switch(type)
+        {
+            case ENUM.StatusType.Speed:
+            case ENUM.StatusType.Power:
+            case ENUM.StatusType.Guard:
+            case ENUM.StatusType.Stamina:
+                return baseValue * AreaBuild.GetCultureLevelMultiplier(CurrentAreaData.Build.cultureLevel);
+            default:
+                return baseValue;
+        }
     }
 }

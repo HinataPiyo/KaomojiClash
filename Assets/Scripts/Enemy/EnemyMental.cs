@@ -7,12 +7,12 @@ public class EnemyMental : Mental, IEnemyInitialize
     public void EnemyInitialize(EnemyData data)
     {
         e_Data = data;
-        currentHealth = data.Status.health * (1f + e_Data.E_Status.stamina);
+        currentHealth = AreaManager.I.GetStatusParamByCultureLevel(ENUM.StatusType.Stamina, data.Status.health);
     }
 
     public override void TakeDamage(float damage)
     {
-        float reduct = damage * (1f - e_Data.E_Status.guard);
+        float reduct = damage - AreaManager.I.GetStatusParamByCultureLevel(ENUM.StatusType.Guard, e_Data.guard);
         currentHealth -= Mathf.Max(1f, reduct);     // 最低1ダメージ保証
 
         WorldCanvasManager.I.ShowDamageText(transform.position, damage, Color.yellow);
@@ -27,7 +27,7 @@ public class EnemyMental : Mental, IEnemyInitialize
                 if(currentHealth < 1f) currentHealth = 1f;    // 最低1は確保
                 // 分離エフェクトなどをここで実行可能
                 // 注意:CharacterDieText に SetSeparateText が存在しないため既存の SetText を呼ぶ
-                dieEffect.SetSeparateText(e_Data.Kaomoji_Body);
+                dieEffect.SetSeparateText(e_Data.Kaomoji.BuildKaomoji(e_Data.Status.mentalData));
                 return;
             }
 

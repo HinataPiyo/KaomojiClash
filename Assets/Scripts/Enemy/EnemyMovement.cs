@@ -33,7 +33,7 @@ public class EnemyMovement : Movement, IEnemyInitialize
         isInput = true;
 
         // 発射までの待機時間
-        yield return new WaitForSeconds(data.LaunchDuration);
+        yield return new WaitForSeconds(data.launchDuration);
         isLaunch = true;
     }
     /// <summary>
@@ -81,7 +81,7 @@ public class EnemyMovement : Movement, IEnemyInitialize
 
             CameraZoom.I.SetCameraOrthographic(Context.I.BattleStat);
             shootDirectionArrow.Del();
-            Launch(launchDir * launchSpeed * (1f + data.E_Status.speed));
+            Launch(launchDir * launchSpeed * AreaManager.I.GetStatusParamByCultureLevel(ENUM.StatusType.Speed, data.Status.speed));
 
             isLaunch = false;
         }

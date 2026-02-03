@@ -58,7 +58,8 @@ public class EnemySpawnController : MonoBehaviour
             GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), SelectEnemyData(dif));
             EnemyController eCtrl = e.GetComponent<EnemyController>();
             waveCtrl.CreateWaveData(eCtrl.EnemyData, dif);
-            eCtrl.SetEnemyWorldUI(eCtrl.EnemyData.E_Status.GetLevel(), dif);
+            int avgLevel = Constants.AreaBuild.GetEnemyAverageLevelByWaveDifficulty(AreaManager.I.CurrentAreaData.Build.cultureLevel, dif);
+            eCtrl.SetEnemyWorldUI(avgLevel, dif);       // 最初の敵のUIを設定（平均レベルと難易度）
         }
     }
 
@@ -84,11 +85,7 @@ public class EnemySpawnController : MonoBehaviour
     public EnemyData SelectEnemyData(ENUM.Difficulty difficulty)
     {
         int index = Random.Range(0, enemy_DB.GetAllEnemyData().Length);
-        int level = Calculation.GetLevelByDifficulty(difficulty);
-        float exp = Calculation.GetExperienceByDifficultyAndLevel(difficulty, level);
         EnemyData copy = Instantiate(enemy_DB.GetAllEnemyData()[index]);
-        copy.E_Status.SetLevel(level);
-        copy.E_Status.SetExperience(exp);
         return copy;
     }
 

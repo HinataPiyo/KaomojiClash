@@ -18,6 +18,7 @@ namespace UI.Home.Module
         Label kamojiDensity;
         ScrollView spawnKaomojiList;
         Label nature;
+        int currentAreaIndex = 0;
 
         public void Initialize(VisualElement root)
         {
@@ -37,8 +38,9 @@ namespace UI.Home.Module
                 int index = ii; // クロージャ対策
                 VisualElement cultureEntry = temp_CultureLevelEntry.Instantiate();
                 Button b = cultureEntry.Q<Button>();
-                b.clicked += () => UpdateAreaInformation(areaDatabase.GetAllAreas()[index], areaNumber: index);
-                b.text = "レベル" + index.ToString();
+                AreaData areaData = areaDatabase.GetAllAreas()[index];
+                b.clicked += () => UpdateAreaInformation(areaData);
+                b.text = "レベル" + areaData.Build.cultureLevel.ToString();     // 文化圏レベルを表示
                 cultureLevelList.Add(cultureEntry);
             }
 
@@ -50,6 +52,7 @@ namespace UI.Home.Module
         /// </summary>
         void PlayButtonOnClick()
         {
+            AreaManager.I.SetCurrentAreaData(currentAreaIndex);
             SceneChangeManager.I.ChangeScene(ENUM.Scene.Battle);
         }
 
@@ -57,16 +60,19 @@ namespace UI.Home.Module
         /// エリア情報の更新
         /// </summary>
         /// <param name="areaData">エリアデータ</param>
-        void UpdateAreaInformation(AreaData data, int areaNumber = 0)
+        void UpdateAreaInformation(AreaData data)
         {
-            cultureLevel.text = areaNumber.ToString();
-            average.text = "1" + "5"; // 仮
+            currentAreaIndex = data.Build.cultureLevel - 1;
+            cultureLevel.text = data.Build.cultureLevel.ToString();     // 文化圏レベルを表示
+            average.text = AreaBuild.GetEnemyAverageLevel(data.Build.cultureLevel).ToString();      // 敵の平均レベルを表示
             kamojiDensity.text = (data.Build.kaomojiDensity * 100f).ToString("F1") + "%";
+
+            // 出現する顔文字リストの更新
             spawnKaomojiList.Clear();
             foreach(EnemyData enemy in data.Build.spawnDatabase.GetAllEnemyData())
             {
                 VisualElement kaomojiEntry = temp_SapawnKaomoji.Instantiate();
-                kaomojiEntry.Q<Label>("value").text = enemy.Kaomoji_Body;
+                kaomojiEntry.Q<Label>("value").text = enemy.Kaomoji.BuildKaomoji(enemy.Status.mentalData);
                 spawnKaomojiList.Add(kaomojiEntry);
             }
             nature.text = "なし"; // 仮
