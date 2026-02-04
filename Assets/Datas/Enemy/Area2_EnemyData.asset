@@ -24,8 +24,8 @@ MonoBehaviour:
   guard: 1
   launchDuration: 0.3
   kaomoji:
+    mouth: {fileID: 0}
     eyes: {fileID: 11400000, guid: aecd1206a7556994c81501ef15c2734c, type: 2}
-    mouth: {fileID: 11400000, guid: 5c37e89a34db3234b86addc11d21055f, type: 2}
     hands: {fileID: 0}
     decoration_first: {fileID: 0}
     decoration_second: {fileID: 0}

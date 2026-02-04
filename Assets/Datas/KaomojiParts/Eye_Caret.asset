@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Eye_Caret
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
-  partType: 0
+  partType: 1
   data:
     partName: "\u30AD\u30E3\u30EC\u30C3\u30C8"
     part: ^^

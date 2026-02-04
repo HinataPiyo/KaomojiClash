@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: AreaDatabase
   m_EditorClassIdentifier: 
   areas:
-  - {fileID: 11400000, guid: 33410e957b5f97744ab7c3417abd03e9, type: 2}
-  - {fileID: 11400000, guid: 9d5c322fca95cf14fa447d948b371d27, type: 2}
+  - isCleared: 1
+    data: {fileID: 11400000, guid: 33410e957b5f97744ab7c3417abd03e9, type: 2}
+  - isCleared: 0
+    data: {fileID: 11400000, guid: 9d5c322fca95cf14fa447d948b371d27, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Eye_Dakuten
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
-  partType: 0
+  partType: 1
   data:
     partName: "\u6FC1\u70B9"
     part: "\u309B\u309B"

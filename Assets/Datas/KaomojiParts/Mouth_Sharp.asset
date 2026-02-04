@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mouth_Sharp
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
-  partType: 1
+  partType: 0
   data:
     partName: "\u30B7\u30E3\u30FC\u30D7"
     part: "\uFF03"

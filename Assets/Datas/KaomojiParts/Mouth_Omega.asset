@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: Mouth_Omega
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
-  partType: 1
+  partType: 0
   data:
     partName: "\u30AA\u30E1\u30AC"
     part: "\u03C9"
     levelDetail:
       growthRateType: 0
     speed:
-      value: -0.076
-      growthRateType: 2
+      value: 0.2
+      growthRateType: 4
     power:
-      value: 0.219
+      value: 0.3
       growthRateType: 2
     guard:
-      value: 0.0119
-      growthRateType: 3
+      value: 0.006
+      growthRateType: 0
     stamina:
-      value: 0.101
-      growthRateType: 4
+      value: 0.1
+      growthRateType: 2

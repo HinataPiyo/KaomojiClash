@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c419391b607ab624a9bf709912f47f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaDB: {fileID: 11400000, guid: 0daa39e10d6247240aa677fe48a40353, type: 2}
 --- !u!114 &454582377
 MonoBehaviour:
   m_ObjectHideFlags: 0

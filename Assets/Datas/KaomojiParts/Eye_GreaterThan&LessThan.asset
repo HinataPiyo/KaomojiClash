@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Eye_GreaterThan&LessThan
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
-  partType: 0
+  partType: 1
   data:
     partName: "\u5927\u306A\u308A\u5C0F\u306A\u308A"
     part: '><'
