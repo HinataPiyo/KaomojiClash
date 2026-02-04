@@ -3996,11 +3996,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy_DB: {fileID: 11400000, guid: 08058e89a0c24d242ae65817d6f47562, type: 2}
   enemy_Prefab: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
+  spawnAmount: 7
+  fieldAreaSize: {x: 45, y: 45}
   wallCtrl: {fileID: 796114082}
   waveCtrl: {fileID: 1781551793}
   targetGroupCtrl: {fileID: 898216140}
-  spawnAmount: 10
-  fieldAreaSize: {x: 45, y: 45}
 --- !u!114 &1800827689
 MonoBehaviour:
   m_ObjectHideFlags: 0
