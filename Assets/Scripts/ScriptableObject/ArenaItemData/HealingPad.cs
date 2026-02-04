@@ -27,11 +27,11 @@ namespace ArenaItem.Data
             switch(GradeType)
             {
                 case ENUM.ArenaItemGradeType.None:
-                    return maxHealth * healMultiplier;
+                    return maxHealth * healMultiplier * 0.5f;
                 case ENUM.ArenaItemGradeType.MK_ONE:
-                    return maxHealth * (healMultiplier  * 1.25f);
+                    return maxHealth * healMultiplier * 0.25f;
                 case ENUM.ArenaItemGradeType.MK_TWO:
-                    return maxHealth * (healMultiplier * 1.5f);
+                    return maxHealth * healMultiplier;
                 default:
                     return 0f;
             }
