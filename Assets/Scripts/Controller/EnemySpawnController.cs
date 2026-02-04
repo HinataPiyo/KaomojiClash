@@ -8,7 +8,6 @@ public class EnemySpawnController : MonoBehaviour
     [Header("敵の元Prefab"), SerializeField] GameObject enemy_Prefab;
 
     [Header("INFO")]
-    [Tooltip("最初の敵の出現数"), SerializeField] int spawnAmount = 7;
     [Tooltip("エリアの大きさ"), SerializeField] Vector2 fieldAreaSize;
 
     [Header("戦闘時の囲いを制御するスクリプト"), SerializeField] WallController wallCtrl;
@@ -59,7 +58,7 @@ public class EnemySpawnController : MonoBehaviour
             for(int i = 0; i < spawnAmount; i++)
             {
                 Difficulty dif = enemy_DB.GetAmountByDifficulties()[q].difficulty;
-                GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), SelectEnemyData(dif));
+                GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), SelectEnemyData());
                 EnemyController eCtrl = e.GetComponent<EnemyController>();
                 waveCtrl.CreateWaveData(eCtrl.EnemyData, dif);
                 int avgLevel = Constants.AreaBuild.GetEnemyAverageLevelByWaveDifficulty(AreaManager.I.CurrentAreaData.Build.cultureLevel, dif);
@@ -88,7 +87,7 @@ public class EnemySpawnController : MonoBehaviour
     /// <summary>
     /// 敵のデータベースからランダムに抽選する
     /// </summary>
-    public EnemyData SelectEnemyData(Difficulty difficulty)
+    public EnemyData SelectEnemyData()
     {
         int index = Random.Range(0, enemy_DB.GetAllEnemyData().Length);
         EnemyData copy = Instantiate(enemy_DB.GetAllEnemyData()[index]);
