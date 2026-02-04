@@ -22,8 +22,6 @@ namespace UI.Home
             module_KP = GetComponent<KaomojiPreview>();
             module_BB = GetComponent<BuildButtons>();
             module_AI = GetComponent<AreaInformation>();
-
-            Money.Add(100000);      // !テスト用初期所持金
         }
 
         protected override void Initialize()

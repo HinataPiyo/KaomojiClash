@@ -3,7 +3,7 @@ namespace UI.Battle
     using UI.Base;
     using UnityEngine.UIElements;
 
-    public class BattleMosuleController : ModuleControllerBase
+    public class BattleModulesController : ModuleControllerBase
     {
         UIDocument uiDoc;
 

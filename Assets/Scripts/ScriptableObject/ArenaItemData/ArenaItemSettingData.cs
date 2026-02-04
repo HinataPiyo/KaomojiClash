@@ -13,6 +13,20 @@ public class ArenaItemSettingData : ScriptableObject
 
     public List<Entry> ArenaItemDatas { get; private set; } = new List<Entry>();
 
+    public int GetUsageFee()
+    {
+        int totalPrice = 0;
+        foreach(Entry entry in ArenaItemDatas)
+        {
+            if(entry.itemData != null)
+            {
+                totalPrice += entry.itemData.GetPrice();
+            }
+        }
+
+        return totalPrice;
+    }
+
 
     /// <summary>
     /// アリーナに設置するアイテムデータを追加する

@@ -1,9 +1,16 @@
 using UnityEngine;
+using UI.Battle;
 
 public class WallController : MonoBehaviour
 {
     [SerializeField] GameObject wall;
     Wall currentWall;
+    BattleModulesController battleUI;
+
+    void Awake()
+    {
+        battleUI = FindAnyObjectByType<BattleModulesController>();
+    }
 
     /// <summary>
     /// 壁を生成する
@@ -18,6 +25,7 @@ public class WallController : MonoBehaviour
         AudioManager.I.PlaySE("SetWall");
         CameraShake.I.ApplyShake(1, 2f, 0.5f);
         CreateArenaItems();     // 壁生成時にアイテムも生成
+        PayUsageFee();
     }
 
     public Wall GetWall()
@@ -26,6 +34,9 @@ public class WallController : MonoBehaviour
         return currentWall;
     }
 
+    /// <summary>
+    /// 壁にArenaItemを生成
+    /// </summary>
     public void CreateArenaItems()
     {
         if(currentWall == null) return;
@@ -40,5 +51,15 @@ public class WallController : MonoBehaviour
         if(currentWall == null) return;
         currentWall.ClearArenaItems();   // 破棄前にアイテムも破棄
         Destroy(currentWall.gameObject);
+    }
+
+    /// <summary>
+    /// ArenaItemの使用料を支払う
+    /// </summary>
+    public void PayUsageFee()
+    {
+        int fee = currentWall.ArenaItemSettingData.GetUsageFee();
+        Money.Sub(fee);
+        battleUI.HasMoneyDisplay.UpdateMoney();
     }
 }
