@@ -7,6 +7,9 @@ public class WorldCanvasManager : MonoBehaviour
     [Header("ダメージテキスト")]
     [SerializeField] GameObject damageTextPrefab;
     [SerializeField] Vector2 damageTextOffset;
+    [Header("回復テキスト")]
+    [SerializeField] GameObject healTextPrefab;
+    [SerializeField] Vector2 healTextOffset;
 
     [Header("射撃方向矢印")]
     [SerializeField] GameObject arrowPrefab;
@@ -31,7 +34,18 @@ public class WorldCanvasManager : MonoBehaviour
         Vector2 newPos = position + (Vector3)damageTextOffset;
         GameObject obj = Instantiate(damageTextPrefab, newPos, Quaternion.identity, transform);
         CharacterDamageText damageText = obj.GetComponent<CharacterDamageText>();
-        damageText.SetDamage(damage, color);
+        damageText.SetValueWithColor(damage, color);
+    }
+
+    /// <summary>
+    /// 回復テキストを表示
+    /// </summary>
+    public void ShowHealText(Vector3 position, float healAmount)
+    {
+        Vector2 newPos = position + (Vector3)healTextOffset;
+        GameObject obj = Instantiate(healTextPrefab, newPos, Quaternion.identity, transform);
+        CharacterDamageText healText = obj.GetComponent<CharacterDamageText>();
+        healText.SetValue(healAmount);
     }
 
     /// <summary>

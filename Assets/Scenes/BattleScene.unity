@@ -3996,7 +3996,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy_DB: {fileID: 11400000, guid: 08058e89a0c24d242ae65817d6f47562, type: 2}
   enemy_Prefab: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
-  spawnAmount: 7
   fieldAreaSize: {x: 45, y: 45}
   wallCtrl: {fileID: 796114082}
   waveCtrl: {fileID: 1781551793}
@@ -4396,6 +4395,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageTextPrefab: {fileID: 4030348778515424144, guid: 39f589ea9558c0947a7ce98e3642a6ee, type: 3}
   damageTextOffset: {x: 0, y: 0.5}
+  healTextPrefab: {fileID: 4030348778515424144, guid: 3501dd8d990ecab4a912301d717ae84a, type: 3}
+  healTextOffset: {x: 0, y: 0.5}
   arrowPrefab: {fileID: 1854561144591636534, guid: 3f06c4c36b4e00f4d8383c1d5c1795f3, type: 3}
   clashEffectPrefab: {fileID: 7864013070479386715, guid: 5a2d8d8ebfcc7134a809e817f20db69e, type: 3}
 --- !u!1 &2027351328

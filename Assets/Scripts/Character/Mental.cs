@@ -23,12 +23,13 @@ public abstract class Mental : MonoBehaviour
     /// </summary>
     /// <param name="stamina"></param>
     /// <param name="data"></param>
-    public void Initialize(float stamina, CharacterData data)
+    public virtual void Initialize(float stamina, CharacterData data)
     {
         this.data = data;
         maxHealth = data.Status.health * (1f + stamina);
         currentHealth = maxHealth;
         currentMental = data.Status.mentalData.maxMental;
+        Debug.Log("stamina: " + stamina + ", maxHealth: " + maxHealth);
     }
 
     public abstract void TakeDamage(float damage);

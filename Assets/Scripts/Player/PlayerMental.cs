@@ -6,11 +6,16 @@ public class PlayerMental : Mental, IHeal
 
     public float GetMaxHealthAmount => maxHealth;
 
-    void Start()
+    void Awake()
     {
         statusUI = FindAnyObjectByType<StatusUIControl>();
+    }
+
+    public override void Initialize(float stamina, CharacterData data)
+    {
+        base.Initialize(stamina, data);
         statusUI.UpdateMental(data.Status.mentalData.maxMental);
-        statusUI.SetMaxHealth(data.Status.health * (1f + Context.I.PlayerData.Kaomoji.Stamina));
+        statusUI.SetMaxHealth(maxHealth);
     }
 
     public override void TakeDamage(float damage)
@@ -62,9 +67,10 @@ public class PlayerMental : Mental, IHeal
     public void Heal(float amount)
     {
         currentHealth += amount;
-        if (currentHealth > data.Status.health)
+        WorldCanvasManager.I.ShowHealText(transform.position, amount);
+        if (currentHealth > maxHealth)
         {
-            currentHealth = data.Status.health;
+            currentHealth = maxHealth;
         }
 
         statusUI.UpdateHealth(currentHealth);

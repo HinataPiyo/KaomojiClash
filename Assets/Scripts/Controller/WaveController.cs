@@ -84,7 +84,7 @@ public class WaveController : MonoBehaviour
             for(int ii = 0; ii < enemyAmount; ii++)
             {
                 // 難易度に応じて敵のレベルが決まる
-                EnemyData select = enemySpawn.SelectEnemyData(dif);
+                EnemyData select = enemySpawn.SelectEnemyData();
                 dropCtrl.GetDropParts(w.dropKaomojiParts, select);       // ドロップ内容を決める
                 elem.datas.Add(select);
 

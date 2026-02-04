@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Text (TMP)
+  m_Name: HealText
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -51,7 +51,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: damage_text
+  m_Name: heal_text
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -64,7 +64,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 00ba3b77b415e144f92ab060f90e2a3d, type: 2}
+  m_Motion: {fileID: 7400000, guid: d7587c41aba42c3448bc46b54c63eff8, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

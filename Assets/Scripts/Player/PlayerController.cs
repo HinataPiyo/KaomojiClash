@@ -3,14 +3,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerData data;    public PlayerData PlayerData => data;
+    Combo combo;
+    PlayerMovement movement;
+    PlayerApplyKaomoji applyKaomoji;
 
     void Awake()
     {
         // Mentalの初期化はPlayerApplyKaomoji内で実行している
         
-        Combo combo = GetComponent<Combo>();
-        PlayerMovement movement = GetComponent<PlayerMovement>();
-        PlayerApplyKaomoji applyKaomoji = GetComponent<PlayerApplyKaomoji>();
+        combo = GetComponent<Combo>();
+        movement = GetComponent<PlayerMovement>();
+        applyKaomoji = GetComponent<PlayerApplyKaomoji>();
+    }
+
+    void Start()
+    {
         applyKaomoji.Initialize(data);
         combo.Initialize(data);
         movement.Initialize(data);
