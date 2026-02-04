@@ -19,6 +19,8 @@ public class Context : MonoBehaviour
         {
             I = this;
         }
+        
+        UpdatePlayerStatus();
     }
 
     /// <summary>

@@ -29,5 +29,5 @@ MonoBehaviour:
       value: 0.0152
       growthRateType: 4
     stamina:
-      value: -0.017
+      value: 0.022
       growthRateType: 2

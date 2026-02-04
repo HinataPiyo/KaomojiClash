@@ -23,7 +23,7 @@ MonoBehaviour:
       value: 0.298
       growthRateType: 0
     power:
-      value: -0.26
+      value: 0.059
       growthRateType: 1
     guard:
       value: 0.0223

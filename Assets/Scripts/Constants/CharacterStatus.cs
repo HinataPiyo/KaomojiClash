@@ -123,6 +123,39 @@ namespace Constants
         }
 
         /// <summary>
+        /// 各ステータスの初期パラメータを取得
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+
+        public float GetInitialParam(StatusType type)
+        {
+            float value = 0f;
+            foreach(var part in GetAllPartsData())
+            {
+                // 記号が割り当てられてなければスキップ
+                if (part == null) continue;
+                switch(type)
+                {
+                    case StatusType.Speed:
+                        value += part.Data.speed.GetInitialParam();
+                        break;
+                    case StatusType.Power:
+                        value += part.Data.power.GetInitialParam();
+                        break;
+                    case StatusType.Guard:
+                        value += part.Data.guard.GetInitialParam();
+                        break;
+                    case StatusType.Stamina:
+                        value += part.Data.stamina.GetInitialParam();
+                        break;
+                }
+            }
+
+            return value;
+        }
+
+        /// <summary>
         /// パーツの左右分割
         /// </summary>
         /// <param name="part">SOで設定した記号</param>
@@ -218,6 +251,8 @@ namespace Constants
                 if(level <= 1) return value;
                 return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
             }
+
+            public float GetInitialParam() => value;
         }
 
         [System.Serializable]
@@ -233,6 +268,8 @@ namespace Constants
                 // まず増加量を計算
                 return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
             }
+            
+            public float GetInitialParam() => value;
         }
 
         [System.Serializable]
@@ -247,6 +284,8 @@ namespace Constants
                 if(level <= 1) return value;
                 return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
             }
+
+            public float GetInitialParam() => value;
         }
 
         [System.Serializable]
@@ -261,6 +300,8 @@ namespace Constants
                 if(level <= 1) return value;
                 return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
             }
+
+            public float GetInitialParam() => value;
         }
         
     }

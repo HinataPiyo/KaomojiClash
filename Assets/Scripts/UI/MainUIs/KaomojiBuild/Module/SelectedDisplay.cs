@@ -2,6 +2,7 @@ using Constants;
 using UI.KaomojiBuild.Template;
 using UnityEngine;
 using UnityEngine.UIElements;
+using ENUM;
 
 namespace UI.KaomojiBuild.Module
 {
@@ -57,9 +58,9 @@ namespace UI.KaomojiBuild.Module
         void UpdateStatusDisplay()
         {
             KAOMOJI K = modulesCtrl.PlayerData.Kaomoji;
-            int equippedPartsCount = K.GetEquippedPartsCount();
-            K.UpdateTotalParameter();
-            statusParamater.TotalShowStatus(K.Speed, K.Power, K.Guard, K.Stamina, equippedPartsCount);
+            int equipmentCount = K.GetEquippedPartsCount();
+            statusParamater.TotalShowStatus(K.GetInitialParam(StatusType.Speed), K.GetInitialParam(StatusType.Power),
+                                            K.GetInitialParam(StatusType.Guard), K.GetInitialParam(StatusType.Stamina), equipmentCount);
         }
 
         public void Reset()

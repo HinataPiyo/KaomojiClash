@@ -2,6 +2,7 @@ using Constants;
 using UI.KaomojiBuild.Template;
 using UnityEngine;
 using UnityEngine.UIElements;
+using ENUM;
 
 namespace UI.Home.Module
 {    
@@ -36,10 +37,10 @@ namespace UI.Home.Module
             string builtKaomoji = K.BuildKaomoji(homeCtrl.PlayerData.Status.mentalData);
             kaomoji_preview.text = builtKaomoji;
 
-            K.UpdateTotalParameter();       // 合体後のステータスパラメータを更新
             int equipmentCount = K.GetEquippedPartsCount();     // 装備されている記号パーツの数を取得s
             // ステータス表示も更新(Progressbar)
-            statusParamater.TotalShowStatus(K.Speed, K.Power, K.Guard, K.Stamina, equipmentCount);
+            statusParamater.TotalShowStatus(K.GetInitialParam(StatusType.Speed), K.GetInitialParam(StatusType.Power),
+                                            K.GetInitialParam(StatusType.Guard), K.GetInitialParam(StatusType.Stamina), equipmentCount);
         }
     }
 }
