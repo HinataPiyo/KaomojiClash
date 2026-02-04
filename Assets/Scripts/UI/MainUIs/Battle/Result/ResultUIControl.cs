@@ -55,7 +55,7 @@ public class ResultUIControl : MonoBehaviour
     /// </summary>
     IEnumerator ResultGetItemRoutine(Wave wave)
     {
-        List<HasKaomojiParts> drop = wave.dropKaomojiParts;
+        List<HasKaomojiParts> drop = wave.dropKaomojiParts;;
         foreach(HasKaomojiParts hasPart in drop)
         {
             GameObject item = Instantiate(getItem_Prefab, getItem_Parent);

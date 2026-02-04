@@ -9,7 +9,7 @@ public class DropController : MonoBehaviour
     /// </summary>
     /// <param name="parts"></param>
     /// <returns></returns>
-    public List<KaomojiPartData> GetDorpParts(KaomojiPartData[] parts)
+    List<KaomojiPartData> GetDorpParts(KaomojiPartData[] parts)
     {
         List<KaomojiPartData> dorpParts = new List<KaomojiPartData>();
 
