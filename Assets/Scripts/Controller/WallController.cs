@@ -5,12 +5,6 @@ public class WallController : MonoBehaviour
 {
     [SerializeField] GameObject wall;
     Wall currentWall;
-    BattleModulesController battleUI;
-
-    void Awake()
-    {
-        battleUI = FindAnyObjectByType<BattleModulesController>();
-    }
 
     /// <summary>
     /// 壁を生成する
@@ -60,6 +54,6 @@ public class WallController : MonoBehaviour
     {
         int fee = currentWall.ArenaItemSettingData.GetUsageFee();
         Money.Sub(fee);
-        battleUI.HasMoneyDisplay.UpdateMoney();
+        Context.I.UpdateMoneyDisplay();
     }
 }

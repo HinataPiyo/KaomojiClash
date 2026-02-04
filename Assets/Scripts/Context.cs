@@ -1,4 +1,5 @@
 using ENUM;
+using UI.Battle;
 using UnityEngine;
 
 public class Context : MonoBehaviour
@@ -7,6 +8,7 @@ public class Context : MonoBehaviour
 
     [SerializeField] GameObject player;         public GameObject Player => player;
     [SerializeField] PlayerData playerData;     public PlayerData PlayerData => playerData;
+    [SerializeField] BattleModulesController battleModuleCtrl;
     public KaomojiPartData[] KaomojiPartDatas() => PlayerData.Kaomoji.GetAllPartsData();
     public BattleStat BattleStat { get; private set; } = BattleStat.None;
 
@@ -34,5 +36,10 @@ public class Context : MonoBehaviour
     public void ChangeStat(BattleStat stat)
     {
         BattleStat = stat;
+    }
+
+    public void UpdateMoneyDisplay()
+    {
+        battleModuleCtrl.HasMoneyDisplay.UpdateMoney();
     }
 }

@@ -965,6 +965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1170213470}
   playerData: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
+  battleModuleCtrl: {fileID: 728756202}
 --- !u!1 &444254684
 GameObject:
   m_ObjectHideFlags: 0

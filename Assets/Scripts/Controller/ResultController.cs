@@ -26,6 +26,7 @@ public class ResultController : MonoBehaviour
     public void GetMoneyToHasMoney(int getMoney)
     {
         Money.Add(getMoney);
+        Context.I.UpdateMoneyDisplay();
     }
 
     public void ApplyResultUI(Wave wave, int level)
