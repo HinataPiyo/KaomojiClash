@@ -247,7 +247,7 @@ namespace Constants.Global
 namespace ENUM
 {
     public enum KaomojiPartType
-    { Eyes, Mouth, Hands, Decoration_First, Decoration_Second }
+    { Mouth, Eyes, Hands, Decoration_First, Decoration_Second }
     public enum BattleStat
     { None = -1, Start, Now, End }
     public enum Difficulty

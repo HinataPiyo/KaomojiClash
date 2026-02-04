@@ -30,8 +30,8 @@ namespace Constants
     public sealed class KAOMOJI
     {
         public const float ColiderXSize = 0.1f;      // コライダーの当たり判定の幅を調整
-        public KaomojiPartData eyes;
         public KaomojiPartData mouth;
+        public KaomojiPartData eyes;
         public KaomojiPartData hands;
         public KaomojiPartData decoration_first;
         public KaomojiPartData decoration_second;
@@ -44,7 +44,7 @@ namespace Constants
         public float Stamina { get; private set; }
 
         public KaomojiPartData[] GetAllPartsData() => new KaomojiPartData[]
-        { eyes, mouth, hands, decoration_first, decoration_second };
+        { mouth, eyes, hands, decoration_first, decoration_second };
 
         public int GetEquippedPartsCount()
         {
