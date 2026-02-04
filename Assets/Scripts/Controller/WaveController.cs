@@ -3,6 +3,7 @@ using Constants.Global;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using ENUM;
 
 
 public class WaveController : MonoBehaviour
@@ -28,23 +29,27 @@ public class WaveController : MonoBehaviour
     {
         IsWaving = true;        // Wave開始
         EnemyData encountEnemy = enemy.GetComponent<EnemyController>().EnemyData;
-        int maxWaveCount = encountEnemy.Wave.elements.Count;
+        Wave wave = encountEnemy.Wave;          // Enemyに保持されているWaveDataを取得
+        Difficulty dif = wave.difficulty;
 
-        int level = encountEnemy.E_Status.GetLevel();
-        Wave wave = encountEnemy.Wave;
-        waveDataCtrl.SetWaveData(wave, level);
+        int maxWaveCount = wave.elements.Count;         // Waveの最大数
+        int cultureLevel = AreaManager.I.CurrentAreaData.Build.cultureLevel;        // 文化圏レベル
+        float cultureMultiplier = Constants.AreaBuild.GetCultureLevelMultiplier(cultureLevel);  // 文化圏レベルに応じた倍率
+        int avgLevel = Constants.AreaBuild.GetEnemyAverageLevelByWaveDifficulty(cultureLevel, wave.difficulty);      // 難易度に応じた敵の平均レベルを取得
+
+        waveDataCtrl.SetWaveData(wave, cultureLevel, cultureMultiplier, avgLevel);      // UIにWaveDataを反映
 
         for(int ii = 0; ii < maxWaveCount; ii++)
         {
             waveCount = ii;
             waveDataCtrl.SetWaveCountText(waveCount);
-            enemySpawn.SpawnEnemyInWall(waveCount, encountEnemy);       // 敵を生成したのち
+            enemySpawn.SpawnEnemyInWall(waveCount, encountEnemy, dif);       // 敵を生成したのち
             waveDataCtrl.SetEnemyCountText(BattleFlowManager.I.BattleEnemies.Count);    // UIに反映
             yield return new WaitUntil(() => BattleFlowManager.I.NoneEnemy());
         }
 
         BattleFlowManager.I.EndBattle();        // 戦闘終了
-        Result(wave, level);
+        Result(wave, avgLevel);
 
         waveCount = 0;
         IsWaving = false;       // Wave終了
@@ -81,14 +86,15 @@ public class WaveController : MonoBehaviour
             for(int ii = 0; ii < enemyAmount; ii++)
             {
                 // 難易度に応じて敵のレベルが決まる
-                EnemyData select = enemySpawn.SelectEnemyData(dif);
+                EnemyData select = enemySpawn.SelectEnemyData();
                 dropCtrl.GetDropParts(w.dropKaomojiParts, select);       // ドロップ内容を決める
                 elem.datas.Add(select);
 
-                int lv = select.E_Status.GetLevel();
+                int cultureLevel = AreaManager.I.CurrentAreaData.Build.cultureLevel;        // 文化圏レベル
+                int avgLevel = Constants.AreaBuild.GetEnemyAverageLevelByWaveDifficulty(cultureLevel, dif);     // 難易度と文化圏レベルに応じた敵の平均レベルを取得
 
-                getMoney += Calculation.GetMoneyByDifficultyAndLevel(dif, lv);          // 獲得金を計算
-                getExp += Calculation.GetExperienceByDifficultyAndLevel(dif, lv);       // 獲得経験値を計算
+                getMoney += Calculation.GetMoneyByDifficultyAndLevel(dif, avgLevel);          // 獲得金を計算
+                getExp += Calculation.GetExperienceByDifficultyAndLevel(dif, avgLevel);       // 獲得経験値を計算
             }
 
             waveCount++;

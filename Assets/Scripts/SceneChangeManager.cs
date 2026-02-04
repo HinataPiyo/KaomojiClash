@@ -13,6 +13,10 @@ public class SceneChangeManager : MonoBehaviour
         { Scene.Battle, "BattleScene" },
     };
 
+    public static Scene CurrentScene { get; private set; }
+    public const Scene InitScene = Scene.Home;
+
+
     void Awake()
     {
         if(I == null)
@@ -26,6 +30,14 @@ public class SceneChangeManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        if(CurrentScene != InitScene)
+        {
+            ChangeScene(InitScene);
+        }
+    }
+
     /// <summary>
     /// シーンを変更する
     /// </summary>
@@ -34,6 +46,7 @@ public class SceneChangeManager : MonoBehaviour
     {
         if(SceneNameDict.ContainsKey(scene))
         {
+            CurrentScene = scene;
             UnityEngine.SceneManagement.SceneManager.LoadScene(SceneNameDict[scene]);
         }
         else

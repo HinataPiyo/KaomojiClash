@@ -10,14 +10,14 @@ public class CharacterDamageText : MonoBehaviour
         mesh = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    /// <summary>
-    /// ダメージ数値を設定
-    /// </summary>
-    /// <param name="damage"></param>
-    public void SetDamage(float damage, Color32 color)
+    public void SetValueWithColor(float val, Color32 color)
     {
         mesh.color = color;
-        // mesh.text = damage.ToString("0.##");
-        mesh.text = damage.ToString("F0");
+        mesh.text = val.ToString("F0");
+    }
+
+    public void SetValue(float val)
+    {
+        mesh.text = val.ToString("F0");
     }
 }

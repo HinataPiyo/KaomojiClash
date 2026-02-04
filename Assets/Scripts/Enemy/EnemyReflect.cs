@@ -1,12 +1,16 @@
+using Constants.Global;
 using UnityEngine;
+using ENUM;
 
 public class EnemyReflect : Reflect, IEnemyInitialize
 {
     EnemyData e_Data;
+    public Difficulty dif { get; private set; }
 
-    public void EnemyInitialize(EnemyData data)
+    public void EnemyInitialize(EnemyData data, Difficulty dif)
     {
         e_Data = data;
+        this.dif = dif;
     }
 
     protected override void OnCollisionEnter2D(Collision2D col)
@@ -27,8 +31,9 @@ public class EnemyReflect : Reflect, IEnemyInitialize
             if (CanApplyDamage(otherRb))
             {
                 Mental player = col.collider.GetComponent<Mental>();
-                float finalPower = data.Status.attackPower * (1f + e_Data.E_Status.power);
-                player.TakeDamage(finalPower);
+                float power = AreaManager.I.GetStatusParamByCultureLevel(StatusType.Power, e_Data.Status.power)
+                            * Calculation.GetDifficultyRate(dif);
+                player.TakeDamage(power);
                 AudioManager.I.PlaySEReflect();
             }
         }

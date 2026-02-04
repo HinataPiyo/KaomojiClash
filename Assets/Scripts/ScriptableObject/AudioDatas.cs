@@ -11,11 +11,11 @@ public class AudioDatas : ScriptableObject
         public AudioClip clip;
     }
 
-    [SerializeField] List<Clip> seClips = new List<Clip>();
+    [SerializeField] List<Clip> clips = new List<Clip>();
 
     public AudioClip GetAudioClip(string tag)
     {
-        foreach (var clip in seClips)
+        foreach (var clip in clips)
         {
             if (clip.tag == tag)
             {

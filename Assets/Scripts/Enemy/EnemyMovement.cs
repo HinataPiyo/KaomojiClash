@@ -1,5 +1,6 @@
 using System.Collections;
-using Unity.VisualScripting;
+using Constants.Global;
+using ENUM;
 using UnityEngine;
 
 public class EnemyMovement : Movement, IEnemyInitialize
@@ -12,10 +13,12 @@ public class EnemyMovement : Movement, IEnemyInitialize
 
     Coroutine launchRoutine;
 
+    public Difficulty dif { get; private set; }
 
-    public void EnemyInitialize(EnemyData data)
+    public void EnemyInitialize(EnemyData data, Difficulty dif)
     {
         this.data = data;
+        this.dif = dif;
         isInput = false;
         isLaunch = false;
     }
@@ -33,7 +36,7 @@ public class EnemyMovement : Movement, IEnemyInitialize
         isInput = true;
 
         // 発射までの待機時間
-        yield return new WaitForSeconds(data.LaunchDuration);
+        yield return new WaitForSeconds(data.launchDuration);
         isLaunch = true;
     }
     /// <summary>
@@ -77,11 +80,13 @@ public class EnemyMovement : Movement, IEnemyInitialize
 
             // 距離に応じて速度をスケール
             float powerRate = Mathf.Clamp01(dragVector.magnitude / data.Status.maxDragDistance);
-            float launchSpeed = data.Status.default_LaunchPower * powerRate;
+            float launchSpeed = data.Status.speed * powerRate;
 
             CameraZoom.I.SetCameraOrthographic(Context.I.BattleStat);
             shootDirectionArrow.Del();
-            Launch(launchDir * launchSpeed * (1f + data.E_Status.speed));
+            float speed = AreaManager.I.GetStatusParamByCultureLevel(StatusType.Speed, data.Status.speed) 
+                        * Calculation.GetDifficultyRate(dif);
+            Launch(launchDir * launchSpeed * speed);
 
             isLaunch = false;
         }

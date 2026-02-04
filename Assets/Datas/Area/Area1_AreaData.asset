@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Area1_AreaData
   m_EditorClassIdentifier: 
   area:
-    name: "\u5F31\u8089\u5F37\u98DF\u306A\u4E16\u754C"
-    difficulty: 0
     spawnDatabase: {fileID: 11400000, guid: 08058e89a0c24d242ae65817d6f47562, type: 2}
-    cultureLevel: 0
+    cultureLevel: 1
     kaomojiDensity: 0

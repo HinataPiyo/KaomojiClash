@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Eye_Dakuten
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
-  partType: 0
+  partType: 1
   data:
     partName: "\u6FC1\u70B9"
     part: "\u309B\u309B"
     levelDetail:
       growthRateType: 0
     speed:
-      value: -0.269
+      value: 0.06
       growthRateType: 0
     power:
       value: 0.405

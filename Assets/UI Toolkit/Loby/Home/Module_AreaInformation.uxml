@@ -1,27 +1,44 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_AreaSpawnEnemy" src="project://database/Assets/UI%20Toolkit/Loby/Home/Template/Temp_AreaSpawnEnemy.uxml?fileID=9197481963319205126&amp;guid=3512cfe8d967c744cacc147068a01c6d&amp;type=3#Temp_AreaSpawnEnemy" />
+    <ui:Template name="Temp_AreaCultureTireButton" src="project://database/Assets/UI%20Toolkit/Loby/Home/Template/Temp_AreaCultureTireButton.uxml?fileID=9197481963319205126&amp;guid=cff91a78a2ea20147a14069cef50ecf4&amp;type=3#Temp_AreaCultureTireButton" />
     <ui:Template name="Temp_NormalButton" src="project://database/Assets/UI%20Toolkit/Temp_NormalButton.uxml?fileID=9197481963319205126&amp;guid=bf58c023254df574cbec7ab19b33f609&amp;type=3#Temp_NormalButton" />
     <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/Home/Style/AreaInformation_Style.uss?fileID=7433441132597879392&amp;guid=9cd0f55b051d64b49b6e6773a25a5f6f&amp;type=3#AreaInformation_Style" />
-    <ui:VisualElement name="root" class="panel" style="flex-grow: 1;">
-        <ui:VisualElement name="title-box" style="flex-grow: 1; position: absolute; left: 5%; top: 5%; width: 55%; height: 15%; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); justify-content: center;">
-            <ui:Label text="文字平原" name="value" style="-unity-text-align: middle-center; font-size: 36px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;);" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
+    <ui:VisualElement name="root" class="panel" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="culture-tire-list-box" style="width: 0%; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; flex-grow: 1;">
+            <ui:Label text="文化圏レベル" name="title" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: middle-center; font-size: 22px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-style: bold;" />
+            <ui:ScrollView horizontal-scroller-visibility="Hidden" style="flex-grow: 1;" />
         </ui:VisualElement>
-        <ui:VisualElement name="difficulty-box" style="position: absolute; right: 0%; top: 5%; width: 35%; height: 15%;">
-            <ui:Label text="難易度" name="text" style="-unity-font-style: normal; font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); position: absolute; top: -5%;" />
-            <ui:Label text="EXTREAM" name="value" style="-unity-font-style: normal; font-size: 38px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: middle-center; flex-grow: 1; top: 15px;" />
+        <ui:VisualElement name="info-box" style="flex-grow: 1; margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;">
+            <ui:VisualElement name="top-box" style="flex-direction: row; height: 18%; justify-content: flex-start;">
+                <ui:VisualElement name="culture-level-box" class="icon" style="width: 28%; margin-top: 6px; margin-right: 6px; margin-bottom: 6px; margin-left: 6px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;">
+                    <ui:Label text="文化圏レベル" name="title" style="font-size: 22px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: upper-left; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 4px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: bold;" />
+                    <ui:Label text="1" name="value" style="font-size: 36px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: lower-right; padding-top: 0; padding-right: 7px; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-left: 0; -unity-font-style: normal; position: absolute; right: 2%; bottom: 3%; margin-bottom: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="average-level-box" class="icon" style="margin-top: 6px; margin-right: 6px; margin-bottom: 6px; margin-left: 6px; flex-grow: 1; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;">
+                    <ui:Label text="平均レベル" name="title" style="font-size: 22px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: upper-left; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 4px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: bold;" />
+                    <ui:Label text="99~120" name="value" style="font-size: 36px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: lower-right; padding-top: 0; padding-right: 7px; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-left: 0; -unity-font-style: normal; position: absolute; right: 2%; bottom: 3%; margin-bottom: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="kaomoji-density-box" class="icon" style="margin-top: 6px; margin-right: 6px; margin-bottom: 6px; margin-left: 6px; flex-grow: 1; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;">
+                    <ui:Label text="顔文字密度" name="title" style="font-size: 22px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: upper-left; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 4px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: bold;" />
+                    <ui:Label text="200%" name="value" style="font-size: 36px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: lower-right; padding-top: 0; padding-right: 7px; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-left: 0; -unity-font-style: normal; position: absolute; right: 2%; bottom: 3%; margin-bottom: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="center-box" class="icon" style="flex-grow: 1; margin-top: 6px; margin-right: 6px; margin-bottom: 6px; margin-left: 6px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;">
+                <ui:Label text="出現顔文字" name="title" style="font-size: 22px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: upper-left; -unity-font-style: bold; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 7px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+                <ui:ScrollView horizontal-scroller-visibility="Hidden" class="kaomoji-list" style="flex-grow: 1;">
+                    <ui:Instance template="Temp_AreaSpawnEnemy" />
+                    <ui:Instance template="Temp_AreaSpawnEnemy" />
+                    <ui:Instance template="Temp_AreaCultureTireButton" />
+                </ui:ScrollView>
+            </ui:VisualElement>
+            <ui:VisualElement name="bottom-box" class="icon" style="height: 25%; width: 53%; margin-top: 6px; margin-right: 6px; margin-bottom: 6px; margin-left: 6px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;">
+                <ui:Label text="エリアの性質" name="nature-title" style="font-size: 22px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-font-style: bold; -unity-text-align: upper-left; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 4px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+                <ui:Label text="たまに嵐が巻き起こる&#10;戦闘時、持続ダメージを受ける" name="nature-value" style="font-size: 22px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-font-style: normal; -unity-text-align: middle-center; flex-grow: 1; padding-bottom: 9px; white-space: normal;" />
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="spawn-enemy-list" style="flex-grow: 1; position: absolute; left: 5%; top: 23%; width: 90%; height: 50%; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); justify-content: center; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
-            <ui:ScrollView style="flex-grow: 1;" />
-        </ui:VisualElement>
-        <ui:VisualElement name="culture-level-box" style="flex-grow: 1; position: absolute; width: 55%; height: 10%; left: 5%; bottom: 15%; justify-content: space-between; flex-direction: row;">
-            <ui:Label text="文化圏レベル" name="text" class="text" />
-            <ui:Label text="0" name="value" class="text" />
-        </ui:VisualElement>
-        <ui:VisualElement name="kaomoji-density-box" style="flex-grow: 1; position: absolute; width: 55%; height: 10%; left: 5%; bottom: 5%; justify-content: space-between; flex-direction: row;">
-            <ui:Label text="顔文字密度" name="text" class="text" />
-            <ui:Label text="+60％" name="value" class="text" />
-        </ui:VisualElement>
-        <ui:Instance template="Temp_NormalButton" name="PlayButton" style="position: absolute; bottom: 3%; right: 3%; height: 22%; width: 35%;">
+        <ui:Instance template="Temp_NormalButton" name="PlayButton" style="position: absolute; bottom: 4%; right: 3%; height: 22%; width: 30%;">
             <AttributeOverrides element-name="Button" text="出撃" />
         </ui:Instance>
     </ui:VisualElement>

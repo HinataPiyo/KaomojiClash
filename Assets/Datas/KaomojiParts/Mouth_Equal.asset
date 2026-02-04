@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mouth_Equal
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
-  partType: 1
+  partType: 0
   data:
     partName: "\u30A4\u30B3\u30FC\u30EB"
     part: =
@@ -29,5 +29,5 @@ MonoBehaviour:
       value: 0.0152
       growthRateType: 4
     stamina:
-      value: -0.017
+      value: 0.022
       growthRateType: 2

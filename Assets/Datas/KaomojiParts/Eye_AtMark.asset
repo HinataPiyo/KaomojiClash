@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Eye_AtMark
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
-  partType: 0
+  partType: 1
   data:
     partName: "\u30A2\u30C3\u30C8\u30DE\u30FC\u30AF"
     part: "\uFF20\uFF20"

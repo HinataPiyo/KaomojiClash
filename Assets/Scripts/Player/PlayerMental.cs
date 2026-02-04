@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public class PlayerMental : Mental 
+public class PlayerMental : Mental, IHeal
 {
-    PlayerApplyKaomoji totalStatus;
     StatusUIControl statusUI;
 
-    void Start()
+    public float GetMaxHealthAmount => maxHealth;
+
+    void Awake()
     {
-        totalStatus = GetComponent<PlayerApplyKaomoji>();
         statusUI = FindAnyObjectByType<StatusUIControl>();
+    }
+
+    public override void Initialize(float stamina, CharacterData data)
+    {
+        base.Initialize(stamina, data);
         statusUI.UpdateMental(data.Status.mentalData.maxMental);
-        statusUI.SetMaxHealth(data.Status.maxHealth * (1f + Context.I.PlayerData.Kaomoji.Stamina));
+        statusUI.SetMaxHealth(maxHealth);
     }
 
     public override void TakeDamage(float damage)
@@ -31,7 +36,7 @@ public class PlayerMental : Mental
             {
                 currentMental--;
                 statusUI.UpdateMental(currentMental);
-                currentHealth = data.Status.maxHealth * ((float)(currentMental + 1) / (data.Status.mentalData.maxMental + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
+                currentHealth = data.Status.health * ((float)(currentMental + 1) / (data.Status.mentalData.maxMental + 1));   // 分離時は精神力を割合で回復（整数除算を防ぐため float にキャスト）
                 if(currentHealth < 1f) currentHealth = 1f;    // 最低1は確保
                 // 分離エフェクトなどをここで実行可能
                 // 注意:CharacterDieText に SetSeparateText が存在しないため既存の SetText を呼ぶ
@@ -53,5 +58,21 @@ public class PlayerMental : Mental
         // プレイヤー固有の死亡処理をここに追加可能
         statusUI.UpdateHealth(currentHealth);
         base.Die();
+    }
+
+    /// <summary>
+    /// 回復処理
+    /// </summary>
+    /// <param name="amount">回復量</param>
+    public void Heal(float amount)
+    {
+        currentHealth += amount;
+        WorldCanvasManager.I.ShowHealText(transform.position, amount);
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        statusUI.UpdateHealth(currentHealth);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Constants.Global;
+using Constants;
 using UnityEngine;
 
 public class ResultController : MonoBehaviour
@@ -25,6 +26,7 @@ public class ResultController : MonoBehaviour
     public void GetMoneyToHasMoney(int getMoney)
     {
         Money.Add(getMoney);
+        Context.I.UpdateMoneyDisplay();
     }
 
     public void ApplyResultUI(Wave wave, int level)

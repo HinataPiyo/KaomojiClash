@@ -1,6 +1,6 @@
 public static class Money
 {
-    public static int HasMoney { get; private set; }  = 0;
+    public static int HasMoney { get; private set; }  = 1000;
     public static void Add(int add)
     {
         HasMoney += add;

@@ -29,7 +29,7 @@ namespace UI.KaomojiBuild.Module
             list_view = moduleRoot.Q<ScrollView>();
             Reset();
 
-            SortByType(ENUM.KaomojiPartType.Eyes);      // 初期表示は目パーツで
+            SortByType(ENUM.KaomojiPartType.Mouth);      // 初期表示
         }
 
         /// <summary>

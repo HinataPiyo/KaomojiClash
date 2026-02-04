@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286ac1266d8183840b8e38d272b8db0b, type: 3}
+  m_Name: Battle_AudioDatas_BGM
+  m_EditorClassIdentifier: 
+  clips:
+  - tag: StartBattle
+    clip: {fileID: 8300000, guid: 35f7055784acc0a4e87a3866eba74fca, type: 3}
+  - tag: EndBattle
+    clip: {fileID: 8300000, guid: 5c1b3ba96273ce64c9547aaec22fe152, type: 3}

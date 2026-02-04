@@ -57,6 +57,7 @@ namespace UI.ArenaBuild.Module
             {
                 ctrl.ChangeIsSetting(true);   // 設定モードに変更
                 ctrl.SelectedArenaItemData = itemData;
+                AudioManager.I.PlaySE("ArenaItemSelect");
             });
             scrollView_ItemList.Add(elem);
         }

@@ -1,6 +1,7 @@
 using UI.KaomojiBuild.Template;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Constants;
 using Constants.Global;
 
 namespace UI.KaomojiBuild.Module

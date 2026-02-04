@@ -26,13 +26,20 @@ public class WaveDataUIControl : MonoBehaviour
         panel.style.display = DisplayStyle.None;
     }
 
-    public void SetWaveData(Wave wave, int level)
+    /// <summary>
+    /// WaveDataをUIに反映する
+    /// </summary>
+    /// <param name="wave">WaveData</param>
+    /// <param name="cultureLevel">文化圏レベル</param>
+    /// <param name="cultureMultiplier">ステータスを強化する倍率</param>
+    /// <param name="avgLevel">平均レベル</param>
+    public void SetWaveData(Wave wave, int cultureLevel, float cultureMultiplier, int avgLevel)
     {
         panel.style.display = DisplayStyle.Flex;
-        SetDifficultyText(wave.difficulty);
-        SetLevelText(level);
-        SetWaveCountText(1);
-        SetEnemyCountText(BattleFlowManager.I.BattleEnemies.Count);
+        SetDifficultyText(wave.difficulty);     // 難易度
+        SetLevelText(avgLevel);                 // 文化圏レベルに応じた敵の平均レベルを表示
+        SetWaveCountText(1);                    // Wave数
+        SetEnemyCountText(BattleFlowManager.I.BattleEnemies.Count); // 敵の数
     }
 
     public void DisablePanel()

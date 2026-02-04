@@ -1,3 +1,11 @@
+.culture-level-list .unity-scroll-view__content-container {
+    flex-grow: 1;
+}
+
+.kaomoji-list .unity-scroll-view__content-container {
+    flex-direction: row;
+}
+
 .text {
     margin-top: 0;
     margin-right: 0;

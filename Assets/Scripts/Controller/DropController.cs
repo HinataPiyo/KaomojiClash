@@ -9,12 +9,13 @@ public class DropController : MonoBehaviour
     /// </summary>
     /// <param name="parts"></param>
     /// <returns></returns>
-    public List<KaomojiPartData> GetDorpParts(KaomojiPartData[] parts)
+    List<KaomojiPartData> GetDorpParts(KaomojiPartData[] parts)
     {
         List<KaomojiPartData> dorpParts = new List<KaomojiPartData>();
 
         foreach(KaomojiPartData part in parts)
         {
+            if(part == null) continue;      // 部位が設定されていない場合はスルー
             bool isDorp = Random.value < part.DropProbability;
             if(!isDorp) continue;
             dorpParts.Add(part);
@@ -28,7 +29,7 @@ public class DropController : MonoBehaviour
     /// </summary>
     public void GetDropParts(List<HasKaomojiParts> dropParts, EnemyData data)
     {
-        List<KaomojiPartData> parts = GetDorpParts(data.Parts);
+        List<KaomojiPartData> parts = GetDorpParts(data.Kaomoji.GetAllPartsData());
 
         if(parts.Count == 0) return;
 

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Constants.Global;
+using Constants;
 
 public class CharacterData : ScriptableObject
 {

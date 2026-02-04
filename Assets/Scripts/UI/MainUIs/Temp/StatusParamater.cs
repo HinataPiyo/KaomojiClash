@@ -1,6 +1,6 @@
 using UnityEngine.UIElements;
 using Constants.Global;
-using Unity.VisualScripting;
+using Constants;
 using UnityEngine;
 
 namespace UI.KaomojiBuild.Template
@@ -11,6 +11,10 @@ namespace UI.KaomojiBuild.Template
     public class StatusParamater
     {
         public const string TEMP_STATUS_PARAMATER = "Temp_StatusParamater";
+        const string BOX_NAME = "box";
+        const string TYPE_LABEL_NAME = "type";
+        const string GROWTH_RATE_LABEL_NAME = "growthrate";
+        const string PROGRESS_CLASS_NAME = "unity-progress-bar__progress";
         /// <summary>
         /// ステータス要素のクラス
         /// </summary>
@@ -35,27 +39,39 @@ namespace UI.KaomojiBuild.Template
                 growthRateType = ENUM.GrowthRateType.None;
 
                 progressBar = root.Q<ProgressBar>();
-                progressElement = progressBar.Q<VisualElement>(className: "unity-progress-bar__progress");
+
+                progressElement = progressBar.Q<VisualElement>(className: PROGRESS_CLASS_NAME);
                 defaultColor = Calculation.GetStatusTypeColorByType(statusType);
-                progressElement.style.backgroundColor = new StyleColor(defaultColor);
+                if (progressElement != null)
+                {
+                    progressElement.style.backgroundColor = new StyleColor(defaultColor);
+                }
 
-                type = root.Q<Label>("type");
-                growthRate = root.Q<Label>("growthrate");
+                type = root.Q<Label>(TYPE_LABEL_NAME);
+                growthRate = root.Q<Label>(GROWTH_RATE_LABEL_NAME);
 
-                type.text = Calculation.GetStatusTypeNameByType(statusType);
-                growthRate.text = Calculation.GetGrowthRateStar(growthRateType);
+                if (type != null)
+                {
+                    type.text = Calculation.GetStatusTypeNameByType(statusType);
+                }
+
+                if (growthRate != null)
+                {
+                    growthRate.text = Calculation.GetGrowthRateStar(growthRateType);
+                }
 
                 SetInitProgress(statusType);
             }
 
             public void InitProgress(float min, float max)
             {
-                // 表示は絶対値なので 0〜最大絶対値 に固定
+                if (progressBar == null) return;
+
                 progressBar.lowValue = 0f;
                 progressBar.highValue = Mathf.Max(Mathf.Abs(min), Mathf.Abs(max));
+                progressBar.value = 0f;  // ← この行を追加（初期値を0に設定）
 
-                // 内部要素取得（1回だけ）
-                progressElement ??= progressBar.Q(className: "unity-progress-bar__progress");
+                progressElement ??= progressBar.Q(className: PROGRESS_CLASS_NAME);
             }
 
             public void SetInitProgress(ENUM.StatusType statusType, float magnification = 1f)
@@ -104,12 +120,18 @@ namespace UI.KaomojiBuild.Template
             public void SetGrowthRateType(ENUM.GrowthRateType growthRateType)
             {
                 this.growthRateType = growthRateType;
-                growthRate.text = Calculation.GetGrowthRateStar(growthRateType);
+                if (growthRate != null)
+                {
+                    growthRate.text = Calculation.GetGrowthRateStar(growthRateType);
+                }
             }
 
             public void DisableGrowthRate()
             {
-                growthRate.text = string.Empty;
+                if (growthRate != null)
+                {
+                    growthRate.text = string.Empty;
+                }
             }
 
             public void Reset()
@@ -127,11 +149,10 @@ namespace UI.KaomojiBuild.Template
         /// <param name="tempRoot">StatusParamaterが使用されているRoot</param>
         public void Initialize(VisualElement moduleRoot)
         {
-            // 初期化のロジックをここに実装
-
             // box内のVisualElementを取得してelements配列を初期化
             VisualElement root = moduleRoot.Q<VisualElement>(TEMP_STATUS_PARAMATER);
-            VisualElement[] elems = root.Query<VisualElement>("box").ToList().ToArray();
+
+            VisualElement[] elems = root.Query<VisualElement>(BOX_NAME).ToList().ToArray();
             elements = new Element[elems.Length];       // 配列のサイズを設定
 
             for (int i = 0; i < elems.Length; i++)
@@ -149,6 +170,8 @@ namespace UI.KaomojiBuild.Template
         KaomojiPart.Guard guard, KaomojiPart.Stamina stamina)
         {
             // ステータス表示のロジックをここに実装
+            if (elements == null || elements.Length == 0) return;
+
             for (int i = 0; i < elements.Length; i++)
             {
                 Element elem = elements[i];
@@ -181,6 +204,8 @@ namespace UI.KaomojiBuild.Template
         /// </summary>
         public void TotalShowStatus(float speed, float power, float guard, float stamina, int equippedPartsCount = 0)
         {
+            if (elements == null || elements.Length == 0) return;
+
             for (int i = 0; i < elements.Length; i++)
             {
                 Element elem = elements[i];
@@ -212,6 +237,8 @@ namespace UI.KaomojiBuild.Template
         public void Reset()
         {
             // ステータスリセットのロジックをここに実装
+            if (elements == null || elements.Length == 0) return;
+
             foreach (Element elem in elements)
             {
                 elem.Reset();

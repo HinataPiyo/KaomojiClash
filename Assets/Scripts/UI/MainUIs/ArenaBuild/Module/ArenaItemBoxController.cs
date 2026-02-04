@@ -78,11 +78,13 @@ namespace UI.ArenaBuild
                         box.SetData(ctrl.SelectedArenaItemData);
                         ctrl.ChangeIsSetting(false);            // 削除モードに変更
                         ctrl.SelectedArenaItemDataNull();       // 選択データをnullに戻す
+                        AudioManager.I.PlaySE("ArenaItemAdd");
                     }
                     else
                     {
                         box.Remove();
                         settingData.RemoveDataByBoxNumber(boxNumber);
+                        AudioManager.I.PlaySE("ArenaItemRemove");
                     }
 
                     // ボタンの相互作用可能性を更新
