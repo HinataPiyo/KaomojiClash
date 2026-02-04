@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ENUM;
+using UnityEditor.Embree;
 using UnityEngine;
 
 namespace Constants.Global
@@ -57,6 +58,26 @@ namespace Constants.Global
                     return Color.red;
                 default:
                     return Color.white;
+            }
+        }
+
+        /// <summary>
+        /// 難易度に応じて倍率を取得する
+        /// </summary>
+        public static float GetDifficultyRate(Difficulty difficulty)
+        {
+            switch(difficulty)
+            {
+                case Difficulty.Easy:
+                    return 0.95f;
+                case Difficulty.Normal:
+                    return 1.0f;
+                case Difficulty.Hard:
+                    return 1.15f;
+                case Difficulty.Extreme:
+                    return 1.25f;
+                default:
+                    return 1.0f;
             }
         }
 

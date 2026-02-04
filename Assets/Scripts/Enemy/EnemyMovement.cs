@@ -1,5 +1,6 @@
 using System.Collections;
-using Unity.VisualScripting;
+using Constants.Global;
+using ENUM;
 using UnityEngine;
 
 public class EnemyMovement : Movement, IEnemyInitialize
@@ -12,10 +13,12 @@ public class EnemyMovement : Movement, IEnemyInitialize
 
     Coroutine launchRoutine;
 
+    public Difficulty dif { get; private set; }
 
-    public void EnemyInitialize(EnemyData data)
+    public void EnemyInitialize(EnemyData data, Difficulty dif)
     {
         this.data = data;
+        this.dif = dif;
         isInput = false;
         isLaunch = false;
     }
@@ -81,7 +84,9 @@ public class EnemyMovement : Movement, IEnemyInitialize
 
             CameraZoom.I.SetCameraOrthographic(Context.I.BattleStat);
             shootDirectionArrow.Del();
-            Launch(launchDir * launchSpeed * AreaManager.I.GetStatusParamByCultureLevel(ENUM.StatusType.Speed, data.Status.speed));
+            float speed = AreaManager.I.GetStatusParamByCultureLevel(StatusType.Speed, data.Status.speed) 
+                        * Calculation.GetDifficultyRate(dif);
+            Launch(launchDir * launchSpeed * speed);
 
             isLaunch = false;
         }

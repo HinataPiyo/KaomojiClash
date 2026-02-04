@@ -3,6 +3,7 @@ using Constants.Global;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using ENUM;
 
 
 public class WaveController : MonoBehaviour
@@ -29,6 +30,7 @@ public class WaveController : MonoBehaviour
         IsWaving = true;        // Wave開始
         EnemyData encountEnemy = enemy.GetComponent<EnemyController>().EnemyData;
         Wave wave = encountEnemy.Wave;          // Enemyに保持されているWaveDataを取得
+        Difficulty dif = wave.difficulty;
 
         int maxWaveCount = wave.elements.Count;         // Waveの最大数
         int cultureLevel = AreaManager.I.CurrentAreaData.Build.cultureLevel;        // 文化圏レベル
@@ -41,7 +43,7 @@ public class WaveController : MonoBehaviour
         {
             waveCount = ii;
             waveDataCtrl.SetWaveCountText(waveCount);
-            enemySpawn.SpawnEnemyInWall(waveCount, encountEnemy);       // 敵を生成したのち
+            enemySpawn.SpawnEnemyInWall(waveCount, encountEnemy, dif);       // 敵を生成したのち
             waveDataCtrl.SetEnemyCountText(BattleFlowManager.I.BattleEnemies.Count);    // UIに反映
             yield return new WaitUntil(() => BattleFlowManager.I.NoneEnemy());
         }

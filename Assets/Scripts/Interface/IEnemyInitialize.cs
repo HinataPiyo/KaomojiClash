@@ -1,4 +1,7 @@
+using ENUM;
+
 public interface IEnemyInitialize
 {
-    void EnemyInitialize(EnemyData data);
+    Difficulty dif { get; }
+    void EnemyInitialize(EnemyData data, Difficulty dif);
 }

@@ -27,7 +27,7 @@ public class EnemySpawnController : MonoBehaviour
     /// 壁の内側に敵を生成させる
     /// </summary>
     /// <param name="count">生成量</param>
-    public void SpawnEnemyInWall(int waveCount, EnemyData firstEnemyData)
+    public void SpawnEnemyInWall(int waveCount, EnemyData firstEnemyData, Difficulty dif)
     {
         // 現在生成されている壁から生成範囲を取得
         Wall wall = wallCtrl.GetWall();
@@ -37,7 +37,7 @@ public class EnemySpawnController : MonoBehaviour
         foreach(EnemyData data in firstEnemyData.Wave.elements[waveCount].datas)
         {
             // WaveControllerでFirstEnemyに入れたWaveDataの中にあるEnemyDataをSpawn()関数に入れ実行
-            GameObject e = Spawn(RandomPosition(wall.CenterPosition, spawnAreaSize), data);
+            GameObject e = Spawn(RandomPosition(wall.CenterPosition, spawnAreaSize), data, dif);
             BattleFlowManager.I.BattleEnemies.Add(e.transform);
             targetGroupCtrl.AddTarget(e.transform);
         }
@@ -58,7 +58,7 @@ public class EnemySpawnController : MonoBehaviour
             for(int i = 0; i < spawnAmount; i++)
             {
                 Difficulty dif = enemy_DB.GetAmountByDifficulties()[q].difficulty;
-                GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), SelectEnemyData());
+                GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), SelectEnemyData(), dif);
                 EnemyController eCtrl = e.GetComponent<EnemyController>();
                 waveCtrl.CreateWaveData(eCtrl.EnemyData, dif);
                 int avgLevel = Constants.AreaBuild.GetEnemyAverageLevelByWaveDifficulty(AreaManager.I.CurrentAreaData.Build.cultureLevel, dif);
@@ -99,10 +99,10 @@ public class EnemySpawnController : MonoBehaviour
     /// </summary>
     /// <param name="pos">出現位置</param>
     /// <param name="data">敵のデータ</param>
-    GameObject Spawn(Vector2 pos, EnemyData data)
+    GameObject Spawn(Vector2 pos, EnemyData data, Difficulty dif)
     {
         GameObject enemy = Instantiate(enemy_Prefab, pos, Quaternion.identity);
-        enemy.GetComponent<EnemyController>().EnemyInitialize(data);
+        enemy.GetComponent<EnemyController>().EnemyInitialize(data, dif);
         enemy.GetComponent<EnemyMovement>().InitLaunchRoutine();
 
         CurrentEnemies.Add(enemy);

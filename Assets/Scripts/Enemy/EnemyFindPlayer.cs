@@ -6,10 +6,12 @@ public class EnemyFindPlayer : MonoBehaviour, IEnemyInitialize
 {
     EnemyData data;
     public bool IsEncount { get; private set; }
+    public Difficulty dif { get; private set; }
 
-    public void EnemyInitialize(EnemyData data)
+    public void EnemyInitialize(EnemyData data, Difficulty dif)
     {
         this.data = data;
+        this.dif = dif;
     }
 
     void Update()

@@ -10,7 +10,7 @@ namespace Constants
         [Header("文化圏レベル")] public int cultureLevel;            // 文化圏レベル
         [Header("顔文字密度(%)")] public float kaomojiDensity;        // 顔文字密度(%表記)
 
-        static readonly float BaseCultureLevelMultiplier = 0.85f;   // 基本文化圏レベル倍率
+        static readonly float BaseCultureLevelMultiplier = 1f;   // 基本文化圏レベル倍率
 
         /// <summary>
         /// 文化圏レベルに応じたマルチプライヤーを取得する
@@ -47,7 +47,7 @@ namespace Constants
                 case Difficulty.Easy:
                     return Mathf.Max(1, GetEnemyAverageLevel(cultureLevel) - 2);
                 case Difficulty.Normal:
-                    return GetEnemyAverageLevel(cultureLevel);
+                    return GetEnemyAverageLevel(cultureLevel) + 1;
                 case Difficulty.Hard:
                     return GetEnemyAverageLevel(cultureLevel) + 2;
                 case Difficulty.Extreme:

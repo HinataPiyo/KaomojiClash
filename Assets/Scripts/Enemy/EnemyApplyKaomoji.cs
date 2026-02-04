@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using Constants.Global;
 using Constants;
+using ENUM;
 
 /// <summary>
 /// 雑魚敵用（通常の顔文字を用いる際に使用）
@@ -16,10 +17,12 @@ public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
     
     EnemyData data;
     string current_Kaomoji;     // 現在の顔文字
+    public Difficulty dif { get; private set; }
 
-    public void EnemyInitialize(EnemyData data)
+    public void EnemyInitialize(EnemyData data, Difficulty dif)
     {
         this.data = data;
+        this.dif = dif;
         KAOMOJI K = data.Kaomoji;
         K.UpdateTotalParameter();
         current_Kaomoji = K.BuildKaomoji(data.Status.mentalData);

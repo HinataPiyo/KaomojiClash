@@ -1,18 +1,27 @@
 using System;
+using Constants.Global;
+using ENUM;
 using UnityEngine;
 
 public class EnemyMental : Mental, IEnemyInitialize
 {
     EnemyData e_Data;
-    public void EnemyInitialize(EnemyData data)
+    public Difficulty dif { get; private set; }
+
+    public void EnemyInitialize(EnemyData data, Difficulty dif)
     {
         e_Data = data;
-        currentHealth = AreaManager.I.GetStatusParamByCultureLevel(ENUM.StatusType.Stamina, data.Status.health);
+        this.dif = dif;
+        float helth = AreaManager.I.GetStatusParamByCultureLevel(StatusType.Stamina, data.Status.health)
+                            * Calculation.GetDifficultyRate(dif);
+        currentHealth = helth;
     }
 
     public override void TakeDamage(float damage)
     {
-        float reduct = damage - AreaManager.I.GetStatusParamByCultureLevel(ENUM.StatusType.Guard, e_Data.guard);
+        float guard = AreaManager.I.GetStatusParamByCultureLevel(StatusType.Guard, e_Data.guard)
+                            * Calculation.GetDifficultyRate(dif);
+        float reduct = damage - guard;
         currentHealth -= Mathf.Max(1f, reduct);     // 最低1ダメージ保証
 
         WorldCanvasManager.I.ShowDamageText(transform.position, damage, Color.yellow);

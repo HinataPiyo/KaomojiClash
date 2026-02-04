@@ -1,3 +1,4 @@
+using ENUM;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -6,6 +7,7 @@ public class EnemyController : MonoBehaviour
     EnemyFindPlayer findPlayer;
     EnemyApplyKaomoji applyKaomoji;
     public EnemyData EnemyData => data;
+    public Difficulty Difficulty { get; private set; }      // 自身の難易度を保持しておく
 
     void Awake()
     {
@@ -13,9 +15,10 @@ public class EnemyController : MonoBehaviour
         findPlayer = GetComponent<EnemyFindPlayer>();
     }
 
-    public void EnemyInitialize(EnemyData data)
+    public void EnemyInitialize(EnemyData data, Difficulty dif)
     {
         if(EnemyData == null) this.data = data;
+        Difficulty = dif;
         
         IEnemyInitialize[] enemyInit = GetComponents<IEnemyInitialize>();
         ICharacterInitialize[] charaInit = GetComponents<ICharacterInitialize>();
@@ -27,7 +30,7 @@ public class EnemyController : MonoBehaviour
 
         foreach (var item in enemyInit)
         {
-            item.EnemyInitialize(data);
+            item.EnemyInitialize(data, dif);
         }
     }
 
