@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
+    <Style src="project://database/Assets/Development/Temp_ArenaItem.uss?fileID=7433441132597879392&amp;guid=9adf832bbd915ce4b9c40b94216b2f32&amp;type=3#Temp_ArenaItem" />
+    <ui:VisualElement name="root" class="icon" style="width: 150px; height: 150px;">
+        <ui:VisualElement name="icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/ArenaObject/KnockBack_Object_0.png?fileID=21300000&amp;guid=1f98c9a61460fd34faf1356b7e7a0f83&amp;type=3#KnockBack_Object_0&quot;);" />
+        <ui:ProgressBar value="22" title="20/100" style="position: absolute; bottom: 0%; width: 90%; align-self: center; height: 10%; font-size: 28px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;);" />
+    </ui:VisualElement>
+</ui:UXML>

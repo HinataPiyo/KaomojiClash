@@ -1,0 +1,11 @@
+.text-title {
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+    font-size: 32px;
+    -unity-text-align: lower-left;
+}
+
+.text-value {
+    -unity-text-align: middle-right;
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+    font-size: 52px;
+}
