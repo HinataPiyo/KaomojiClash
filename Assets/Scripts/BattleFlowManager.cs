@@ -14,13 +14,12 @@ public class BattleFlowManager : MonoBehaviour
     [SerializeField] WallController wallCtrl;
     [SerializeField] EnemySpawnController enemySpawnCtrl;
     [SerializeField] WaveController waveCtrl;
-    [SerializeField] WaveDataUIControl waveDataCtrl;
     [SerializeField] TargetGroupController targetGroupCtrl;
 
     [SerializeField] GameObject encountEffect;
     [SerializeField] GameObject startWaveEffect;
 
-
+    WaveDataUIControl waveDataCtrl;
     public List<Transform> BattleEnemies { get; private set; } = new List<Transform>();
     public bool NoneEnemy() => BattleEnemies.Count == 0;
 
@@ -42,11 +41,11 @@ public class BattleFlowManager : MonoBehaviour
         Transform player = Context.I.Player.transform;
         Context.I.ChangeStat(BattleStat.Start);
         BattleEnemies.Add(enemy);
-        wallCtrl.CreateWall(player.position, enemy.position);
         targetGroupCtrl.AddTarget(enemy);
         GameObject effect = EncountEffect(player.position, enemy.position);
 
-        waveCtrl.WaveStart(enemy);
+        Vector2 centerPos = wallCtrl.CreateWall(player.position, enemy.position);
+        waveDataCtrl = waveCtrl.WaveStart(enemy, centerPos);
 
         Debug.Log("エンカウントした敵の難易度 : " + enemy.GetComponent<EnemyController>().EnemyData.Wave.difficulty.ToString());
         AudioManager.I.PlayBGM(string.Empty);       // BGMを止める

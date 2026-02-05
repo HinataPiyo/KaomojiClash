@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    // 壁の内側に生成できる範囲
+    [Header("壁の内側に生成できる範囲")]
     [SerializeField] Vector2 spawnArea;
-    [SerializeField] Transform canSetPositionsParent;
+
+    [SerializeField] GameObject waveDataUIPrefab;
     public Vector2 SpawnArea => spawnArea;
     public Vector2 CenterPosition => transform.position;
 
-    // 壁の内側に設置可能な位置一覧
+    [Header("壁の内側に設置可能な位置一覧")]
     [SerializeField] Transform[] canSetPositions;       public Transform[] CanSetPositions => canSetPositions;
-    [SerializeField] ArenaItemSettingData arenaItemSettingData;     // アリーナに設置するアイテムデータ管理SO
+    [Header("アリーナに設置するアイテム設定データ")]
+    [SerializeField] ArenaItemSettingData arenaItemSettingData;
     public ArenaItemSettingData ArenaItemSettingData => arenaItemSettingData;
 
     List<GameObject> spawnedItems = new List<GameObject>();
