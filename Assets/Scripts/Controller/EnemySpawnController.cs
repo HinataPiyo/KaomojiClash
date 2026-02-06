@@ -15,6 +15,8 @@ public class EnemySpawnController : MonoBehaviour
     [Header("CameraのTargetingを制御するスクリプト"), SerializeField] TargetGroupController targetGroupCtrl;
     public List<GameObject> CurrentEnemies { get; private set; } = new List<GameObject>();
 
+    public bool IsAllEnemyDefeated() => CurrentEnemies.Count == 0;
+
 
     void Start()
     {

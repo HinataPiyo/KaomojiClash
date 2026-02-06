@@ -12,6 +12,17 @@ public class ArenaItemSettingData : ScriptableObject
     }
 
     public List<Entry> ArenaItemDatas { get; private set; } = new List<Entry>();
+    public ArenaItemData[] GetArenaItemDatas()
+    {
+        ArenaItemData[] datas = new ArenaItemData[ArenaItemDatas.Count];
+        for(int i = 0; i < ArenaItemDatas.Count; i++)
+        {
+            datas[i] = ArenaItemDatas[i].itemData;
+        }
+        return datas;
+    }
+
+    
 
     public int GetUsageFee()
     {

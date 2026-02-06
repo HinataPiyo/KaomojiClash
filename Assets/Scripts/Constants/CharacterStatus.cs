@@ -46,6 +46,15 @@ namespace Constants
         public KaomojiPartData[] GetAllPartsData() => new KaomojiPartData[]
         { mouth, eyes, hands, decoration_first, decoration_second };
 
+        public void AllResetPartsLevel()
+        {
+            KaomojiPartData[] parts = GetAllPartsData();
+            foreach(var part in parts)
+            {
+                part?.Data.levelDetail.ResetLevel();
+            }
+        }
+
         public int GetEquippedPartsCount()
         {
             int count = 0;
@@ -189,6 +198,18 @@ namespace Constants
         [Tooltip("攻撃力に影響")] public Power power;
         [Tooltip("防御力に影響")] public Guard guard;
         [Tooltip("体力に影響")] public Stamina stamina;
+        [SerializeField] int maxDup = 50;      // 最大重複数
+        public int CurrentDup { get; private set; } = 0;  // 現在の重複数
+        public int MaxDup => maxDup;
+        public void AddDup(int amount)
+        {
+            CurrentDup += amount;
+            // if(CurrentDup > maxDup)
+            // {
+            //     CurrentDup = maxDup;
+            // }
+        }
+        public bool IsMaxDup() => CurrentDup >= maxDup;
 
         [System.Serializable]
         public class LevelDetail
@@ -234,6 +255,12 @@ namespace Constants
             public float GetNeedExpBorder(int level)
             {
                 return Calculation.GetNeedExpBorderByLevelAndGrowthRateType(level, growthRateType);
+            }
+
+            public void ResetLevel()
+            {
+                Level = 1;
+                Exp = 0f;
             }
         }
         

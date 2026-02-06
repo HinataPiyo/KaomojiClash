@@ -82,6 +82,10 @@ public class BattleFlowManager : MonoBehaviour
         
         Context.I.ChangeStat(BattleStat.None);
         AudioManager.I.PlayBGM("EndBattle");
+
+        bool isAllEnemyDefeated = enemySpawnCtrl.IsAllEnemyDefeated();      // 全ての敵を倒しているかどうかを確認
+        if(isAllEnemyDefeated) Context.I.StageClear();         // 全ての敵を倒していたらTotalResultを再生
+        
     }
 
     /// <summary>

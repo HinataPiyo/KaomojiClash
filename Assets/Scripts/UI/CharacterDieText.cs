@@ -11,6 +11,7 @@ public class CharacterDieEffect : MonoBehaviour
     /// <param name="allText">顔文字</param>
     public void SetText(string allText)
     {
+        if(string.IsNullOrEmpty(allText)) return;
         char[] split = allText.ToCharArray();
 
         for(int ii = 0; ii < split.Length; ii++)

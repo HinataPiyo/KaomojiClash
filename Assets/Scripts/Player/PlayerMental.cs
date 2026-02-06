@@ -58,6 +58,8 @@ public class PlayerMental : Mental, IHeal
         // プレイヤー固有の死亡処理をここに追加可能
         statusUI.UpdateHealth(currentHealth);
         base.Die();
+
+        Context.I.StageFailed();    // ゲームオーバー処理を呼び出す
     }
 
     /// <summary>

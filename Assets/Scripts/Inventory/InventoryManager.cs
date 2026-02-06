@@ -4,7 +4,7 @@ using Constants.Global;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager I { get; private set;}
-    Inventory inv;
+    public Inventory inv { get; private set; }
 
     void Awake()
     {

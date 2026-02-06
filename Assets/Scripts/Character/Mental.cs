@@ -35,10 +35,10 @@ public abstract class Mental : MonoBehaviour
 
     protected virtual void Die()
     {
-        dieEffect.SetText(kaomoji.text);
+        dieEffect?.SetText(kaomoji?.text);
         AudioManager.I.PlaySE("K.O.");
         // 矢印が残らないように破棄する
-        if(movement.ShootDirectionArrow != null) movement.ShootDirectionArrow.Del();
+        if(movement?.ShootDirectionArrow != null) movement.ShootDirectionArrow.Del();
         // 死亡処理（例: オブジェクトの破壊、アニメーションの再生など）
         Destroy(gameObject);
     }
