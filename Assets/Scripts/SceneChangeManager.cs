@@ -32,10 +32,10 @@ public class SceneChangeManager : MonoBehaviour
 
     void Start()
     {
-        // if(CurrentScene != InitScene)
-        // {
-        //     ChangeScene(InitScene);
-        // }
+        if(CurrentScene != InitScene)
+        {
+            ChangeScene(InitScene);
+        }
     }
 
     /// <summary>

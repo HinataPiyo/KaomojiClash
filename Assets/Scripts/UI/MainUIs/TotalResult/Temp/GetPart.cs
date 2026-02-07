@@ -16,8 +16,11 @@ namespace UI.TotalResult.Temp
             icon.text = p.part.Data.part;
             name_value.text = p.part.Data.partName;
             count_value.text = $"x{p.amount}";
+            p.part.Data.AddDup(p.amount);       // ここでパーツの被り数を増やす
+            dupBar.title = $"{p.part.Data.CurrentDup}/{p.part.Data.MaxDup}";
             dupBar.highValue = p.part.Data.MaxDup;
             dupBar.value = p.part.Data.CurrentDup;
+
         }
     }
 }

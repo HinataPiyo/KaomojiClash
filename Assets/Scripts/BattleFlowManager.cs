@@ -41,7 +41,7 @@ public class BattleFlowManager : MonoBehaviour
         Transform player = Context.I.Player.transform;
         Context.I.ChangeStat(BattleStat.Start);
         BattleEnemies.Add(enemy);
-        targetGroupCtrl.AddTarget(enemy);
+        targetGroupCtrl.AddTarget(enemy, true);
         GameObject effect = EncountEffect(player.position, enemy.position);
 
         Vector2 centerPos = wallCtrl.CreateWall(player.position, enemy.position);
@@ -84,7 +84,11 @@ public class BattleFlowManager : MonoBehaviour
         AudioManager.I.PlayBGM("EndBattle");
 
         bool isAllEnemyDefeated = enemySpawnCtrl.IsAllEnemyDefeated();      // 全ての敵を倒しているかどうかを確認
-        if(isAllEnemyDefeated) Context.I.StageClear();         // 全ての敵を倒していたらTotalResultを再生
+        if(isAllEnemyDefeated)
+        {
+            
+            Context.I.StageClear();         // 全ての敵を倒していたらTotalResultを再生
+        }
         
     }
 

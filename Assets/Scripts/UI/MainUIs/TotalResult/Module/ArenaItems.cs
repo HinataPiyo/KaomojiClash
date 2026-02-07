@@ -17,6 +17,8 @@ namespace UI.TotalResult.Module
         {
             foreach (var data in datas)
             {
+                // 使用上、装備する際AreaItemをはすじたらRemoveじゃなくてnullにするので、必然的にここで弾く必要がある
+                if(data == null) continue;
                 VisualElement tempRoot = temp_ArenaItem.Instantiate();
                 new Temp.ArenaItem(tempRoot, data.Item_Icon, data.UsageCount, data.GetMaxUsageCountByGrade());
                 arenaItemList.Add(tempRoot);

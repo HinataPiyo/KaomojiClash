@@ -10,13 +10,13 @@ public class TargetGroupController : MonoBehaviour
         targetGroup = GetComponent<CinemachineTargetGroup>();
     }
 
-    public void AddTarget(Transform target)
+    public void AddTarget(Transform target, bool firstEnemy = false)
     {
         CinemachineTargetGroup.Target t = new CinemachineTargetGroup.Target
         {
             Object = target,
             Weight = 1f,
-            Radius = 0.5f
+            Radius = firstEnemy ? 1.2f : 0.5f
         };
 
         targetGroup.Targets.Add(t);

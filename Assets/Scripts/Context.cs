@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Constants;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using System.Collections;
 
 public class Context : MonoBehaviour
 {
@@ -73,17 +74,39 @@ public class Context : MonoBehaviour
         battleModuleCtrl.HasMoneyDisplay.UpdateMoney();
     }
 
+    /// <summary>
+    /// ステージクリア時の処理
+    /// </summary>
     public void StageClear()
     {
-        ChangeStat(BattleStat.TotalResult);
-        totalResult_Director.playableAsset = totalResult_Timelines[0];
-        totalResult_Director.Play();
+        ChangeStat(BattleStat.StageClear);
+        StartCoroutine(WaitStartResult());
     }
 
+    /// <summary>
+    /// ステージ失敗時の処理
+    /// </summary>
     public void StageFailed()
     {
         ChangeStat(BattleStat.StageFailed);
-        totalResult_Director.playableAsset = totalResult_Timelines[1];
+        StartCoroutine(WaitStartResult());
+    }
+
+    IEnumerator WaitStartResult()
+    {
+        switch(BattleStat)
+        {
+            case BattleStat.StageClear:
+                yield return new WaitForSeconds(5f);
+                AudioManager.I.StopBGM();
+                totalResult_Director.playableAsset = totalResult_Timelines[0];
+                break;
+            case BattleStat.StageFailed:
+                yield return new WaitForSeconds(1f);
+                totalResult_Director.playableAsset = totalResult_Timelines[1];
+                break;
+        }
+
         totalResult_Director.Play();
     }
 

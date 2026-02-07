@@ -17,3 +17,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 325b5a862fb540948b8bebfa18947dca, type: 2}
   - {fileID: 11400000, guid: df3e7877d2611cc4aa7858c8b3e832e4, type: 2}
   - {fileID: 11400000, guid: 4668e6b0b240c5f45b793bfff5808a63, type: 2}
+  amountByDifficulties:
+  - difficulty: 0
+    amount: 1
+  - difficulty: 1
+    amount: 0
+  - difficulty: 2
+    amount: 0
+  - difficulty: 3
+    amount: 0

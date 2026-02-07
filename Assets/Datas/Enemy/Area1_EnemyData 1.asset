@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Area1_EnemyData 1
   m_EditorClassIdentifier: 
   status:
-    speed: 2.5
+    speed: 2.1
     health: 10
     power: 2
     maxDragDistance: 3
