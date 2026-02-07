@@ -1,9 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="Module_FewAreaInfo" src="project://database/Assets/Development/TotalResult/Module_FewAreaInfo.uxml?fileID=9197481963319205126&amp;guid=b7ec525b862292a4d98977ab18e9bbc1&amp;type=3#Module_FewAreaInfo" />
-    <ui:Template name="Module_TotalGetParts" src="project://database/Assets/Development/TotalResult/Module_TotalGetParts.uxml?fileID=9197481963319205126&amp;guid=39def0d60abcad64eb5615d2f91ef03e&amp;type=3#Module_TotalGetParts" />
-    <ui:Template name="Module_KaomojiCompositions" src="project://database/Assets/Development/TotalResult/Module_KaomojiCompositions.uxml?fileID=9197481963319205126&amp;guid=3fdf520d6a88258458078eb83aaa0191&amp;type=3#Module_KaomojiCompositions" />
-    <ui:Template name="Module_ArenaItems" src="project://database/Assets/Development/TotalResult/Module_ArenaItems.uxml?fileID=9197481963319205126&amp;guid=1c35243ce036117418eedd66a8c69382&amp;type=3#Module_ArenaItems" />
-    <ui:Template name="Module_TotalGetMoneyAndDecMoney" src="project://database/Assets/Development/TotalResult/Module_TotalGetMoneyAndDecMoney.uxml?fileID=9197481963319205126&amp;guid=d159a5478493270459e98bdaa622c65f&amp;type=3#Module_TotalGetMoneyAndDecMoney" />
+    <ui:Template name="Module_FewAreaInfo" src="project://database/Assets/UI%20Toolkit/TotalResult/Module_FewAreaInfo.uxml?fileID=9197481963319205126&amp;guid=b7ec525b862292a4d98977ab18e9bbc1&amp;type=3#Module_FewAreaInfo" />
+    <ui:Template name="Module_TotalGetParts" src="project://database/Assets/UI%20Toolkit/TotalResult/Module_TotalGetParts.uxml?fileID=9197481963319205126&amp;guid=39def0d60abcad64eb5615d2f91ef03e&amp;type=3#Module_TotalGetParts" />
+    <ui:Template name="Module_KaomojiCompositions" src="project://database/Assets/UI%20Toolkit/TotalResult/Module_KaomojiCompositions.uxml?fileID=9197481963319205126&amp;guid=3fdf520d6a88258458078eb83aaa0191&amp;type=3#Module_KaomojiCompositions" />
+    <ui:Template name="Module_ArenaItems" src="project://database/Assets/UI%20Toolkit/TotalResult/Module_ArenaItems.uxml?fileID=9197481963319205126&amp;guid=1c35243ce036117418eedd66a8c69382&amp;type=3#Module_ArenaItems" />
+    <ui:Template name="Module_TotalGetMoneyAndDecMoney" src="project://database/Assets/UI%20Toolkit/TotalResult/Module_TotalGetMoneyAndDecMoney.uxml?fileID=9197481963319205126&amp;guid=d159a5478493270459e98bdaa622c65f&amp;type=3#Module_TotalGetMoneyAndDecMoney" />
     <ui:Template name="Temp_NormalButton" src="project://database/Assets/UI%20Toolkit/Temp_NormalButton.uxml?fileID=9197481963319205126&amp;guid=bf58c023254df574cbec7ab19b33f609&amp;type=3#Temp_NormalButton" />
     <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
     <ui:VisualElement name="root" class="panel" style="flex-grow: 0; top: 15%; align-self: center; width: 80%; height: 70%; background-color: rgb(250, 250, 250);">
@@ -14,7 +14,7 @@
         <ui:Instance template="Module_TotalGetMoneyAndDecMoney" name="TotalGetMoneyAndDecMoney" style="position: absolute; bottom: 5%; right: 5%; width: 45%; height: 26%;" />
     </ui:VisualElement>
     <ui:VisualElement name="buttons" style="position: absolute; bottom: 3%; width: 45%; left: 25%; flex-direction: row; justify-content: space-around;">
-        <ui:Instance template="Temp_NormalButton" name="Temp_Replay" style="width: 300px; height: 100px;">
+        <ui:Instance template="Temp_NormalButton" name="Temp_Retry" style="width: 300px; height: 100px;">
             <AttributeOverrides element-name="Button" text="再挑戦" />
         </ui:Instance>
         <ui:Instance template="Temp_NormalButton" name="Temp_BackHome" style="width: 300px; height: 100px;">

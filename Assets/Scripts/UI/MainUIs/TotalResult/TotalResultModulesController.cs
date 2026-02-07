@@ -5,6 +5,7 @@ namespace UI.TotalResult
     using UI.Base;
     using UI.TotalResult.Module;
     using UnityEngine.UIElements;
+    using System.ComponentModel.Design.Serialization;
 
     public class TotalResultModulesController : ModuleControllerBase
     {
@@ -21,6 +22,10 @@ namespace UI.TotalResult
         public TotalGetAndDecMoney module_TGADM { get; private set; }
         public TotalGetParts module_TGP { get; private set; }
         public ArenaItems module_AI { get; private set; }
+
+        Button btn_Retry;
+        Button btn_ToHome;
+
         
 
         void Awake()
@@ -48,6 +53,26 @@ namespace UI.TotalResult
             Initialize(module_TGADM, MODULE_TOTAL_GET_AND_DEC_MONEY, root);
             Initialize(module_TGP, MODULE_TOTAL_GET_PARTS, root);
             Initialize(module_AI, MODULE_ARENA_ITEMS, root);
+
+            ButtonSetup();
+        }
+
+        void ButtonSetup()
+        {
+            VisualElement root = uiDoc.rootVisualElement;
+            btn_Retry = root.Q<VisualElement>("Temp_Retry").Q<Button>();
+            btn_ToHome = root.Q<VisualElement>("Temp_BackHome").Q<Button>();
+
+            btn_Retry.clicked += () => 
+            {
+                SceneChangeManager.I.ChangeScene(ENUM.Scene.Battle);
+                Debug.Log("Retry Button Clicked");
+            };
+            btn_ToHome.clicked += () =>
+            {
+                SceneChangeManager.I.ChangeScene(ENUM.Scene.Home);
+                Debug.Log("To Title Button Clicked");
+            };
         }
 
         public void EnableResultPanel()
