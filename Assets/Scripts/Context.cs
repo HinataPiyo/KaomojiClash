@@ -7,6 +7,7 @@ using UI.TotalResult.Module;
 using System.Collections.Generic;
 using Constants;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class Context : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Context : MonoBehaviour
 
     [Header("TotalResult用のデータ")]
     [SerializeField] PlayableDirector totalResult_Director;
+    [SerializeField] TimelineAsset[] totalResult_Timelines;
     [SerializeField] TotalResultModulesController totalResultModuleCtrl;
     [SerializeField] ArenaItemSettingData arenaItemSettingData;   public ArenaItemSettingData ArenaItemSettingData => arenaItemSettingData;
     public KaomojiPartData[] KaomojiPartDatas() => PlayerData.Kaomoji.GetAllPartsData();
@@ -74,12 +76,14 @@ public class Context : MonoBehaviour
     public void StageClear()
     {
         ChangeStat(BattleStat.TotalResult);
+        totalResult_Director.playableAsset = totalResult_Timelines[0];
         totalResult_Director.Play();
     }
 
     public void StageFailed()
     {
         ChangeStat(BattleStat.StageFailed);
+        totalResult_Director.playableAsset = totalResult_Timelines[1];
         totalResult_Director.Play();
     }
 
