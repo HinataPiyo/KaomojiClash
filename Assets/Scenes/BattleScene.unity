@@ -797,7 +797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &275355769
 Transform:
   m_ObjectHideFlags: 0
@@ -1238,7 +1238,9 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
   battleModuleCtrl: {fileID: 728756202}
   totalResult_Director: {fileID: 1752409385}
-  totalResult_Timelines: []
+  totalResult_Timelines:
+  - {fileID: 11400000, guid: 16d7c07c3d5943540a7e9f98e44b122d, type: 2}
+  - {fileID: 11400000, guid: 08aae33a3305537458f236f6e2659455, type: 2}
   totalResultModuleCtrl: {fileID: 275355775}
   arenaItemSettingData: {fileID: 11400000, guid: edae56eb1f2a478419b698952e4985e6, type: 2}
 --- !u!114 &408325805
@@ -3240,7 +3242,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 2
@@ -4735,7 +4737,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4177526783
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 2
@@ -4944,7 +4946,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1752409382}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 16d7c07c3d5943540a7e9f98e44b122d, type: 2}
+  m_PlayableAsset: {fileID: 0}
   m_InitialState: 0
   m_WrapMode: 0
   m_DirectorUpdateMode: 1
@@ -5087,7 +5089,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 2
