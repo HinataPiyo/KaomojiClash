@@ -1,13 +1,13 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Development/TotalGetMoneyAndDecMoney.uss?fileID=7433441132597879392&amp;guid=af7b9c13be899da49b77b3c99a2fbffd&amp;type=3#TotalGetMoneyAndDecMoney" />
+    <Style src="project://database/Assets/UI%20Toolkit/TotalResult/Style/TotalGetMoneyAndDecMoney.uss?fileID=7433441132597879392&amp;guid=af7b9c13be899da49b77b3c99a2fbffd&amp;type=3#TotalGetMoneyAndDecMoney" />
     <ui:VisualElement name="root" style="flex-grow: 1; justify-content: space-between;">
         <ui:VisualElement name="dec-box" style="border-bottom-width: 5px; border-bottom-color: rgb(0, 0, 0); flex-direction: row; justify-content: space-between;">
             <ui:Label text="合計消費金額" name="title" class="text-title" />
-            <ui:Label text="123,456,789円" name="value" class="text-value" />
+            <ui:Label text="123,456,789円" name="value" class="text-value" style="color: rgb(230, 57, 70);" />
         </ui:VisualElement>
         <ui:VisualElement name="get-box" style="border-bottom-width: 5px; border-bottom-color: rgb(0, 0, 0); flex-direction: row; justify-content: space-between;">
             <ui:Label text="合計獲得金額" name="title" class="text-title" />
-            <ui:Label text="123,456,789円" name="value" class="text-value" />
+            <ui:Label text="123,456,789円" name="value" class="text-value" style="color: rgb(252, 191, 73);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

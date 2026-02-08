@@ -69,6 +69,9 @@ public class Context : MonoBehaviour
         BattleStat = stat;
     }
 
+    /// <summary>
+    /// 所持金表示の更新
+    /// </summary>
     public void UpdateMoneyDisplay()
     {
         battleModuleCtrl.HasMoneyDisplay.UpdateMoney();
@@ -92,6 +95,10 @@ public class Context : MonoBehaviour
         StartCoroutine(WaitStartResult());
     }
 
+    /// <summary>
+    /// 最後の敵を倒した際にResultが流れるので終わるまで待機するため
+    /// </summary>
+    /// <returns></returns>
     IEnumerator WaitStartResult()
     {
         switch(BattleStat)

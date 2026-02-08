@@ -33,6 +33,7 @@ public class Wall : MonoBehaviour
             Vector2 spawnPos = CanSetPositions[boxNumber].position;
             GameObject obj = Instantiate(itemData.Item_Prefab, spawnPos, Quaternion.identity);
             spawnedItems.Add(obj);
+            Context.I.TR_Params.ApplyDecMoney(itemData.GetPrice());      // TotalResult用のデータに加算
         }
     }
 
