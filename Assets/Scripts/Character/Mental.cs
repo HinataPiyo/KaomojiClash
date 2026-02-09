@@ -18,27 +18,14 @@ public abstract class Mental : MonoBehaviour
         movement = GetComponent<Movement>();
     }
 
-    /// <summary>
-    /// この関数はPlayerApplyKaomojiから実行する
-    /// </summary>
-    /// <param name="stamina"></param>
-    /// <param name="data"></param>
-    public virtual void Initialize(float stamina, CharacterData data)
-    {
-        this.data = data;
-        maxHealth = data.Status.health * (1f + stamina);
-        currentHealth = maxHealth;
-        currentMental = data.Status.mentalData.maxMental;
-    }
-
     public abstract void TakeDamage(float damage);
 
     protected virtual void Die()
     {
-        dieEffect.SetText(kaomoji.text);
+        dieEffect?.SetText(kaomoji?.text);
         AudioManager.I.PlaySE("K.O.");
         // 矢印が残らないように破棄する
-        if(movement.ShootDirectionArrow != null) movement.ShootDirectionArrow.Del();
+        if(movement?.ShootDirectionArrow != null) movement.ShootDirectionArrow.Del();
         // 死亡処理（例: オブジェクトの破壊、アニメーションの再生など）
         Destroy(gameObject);
     }

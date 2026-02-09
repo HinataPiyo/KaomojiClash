@@ -10,19 +10,22 @@ public class WaveController : MonoBehaviour
 {
     public static readonly float EnemyAmountIncreaseValue = 0.6f;
     [SerializeField] EnemySpawnController enemySpawn;
-    [SerializeField] WaveDataUIControl waveDataCtrl;
     [SerializeField] DropController dropCtrl;
     [SerializeField] ResultController resultCtrl;
 
+    WaveDataUIControl waveDataCtrl;
 
     int waveCount;
     public bool IsWaving { get; private set; }
 
 
 
-    public void WaveStart(Transform enemy)
+    public WaveDataUIControl WaveStart(Transform enemy, Vector2 center)
     {
+        waveDataCtrl = WorldCanvasBackManager.I.CreateWaveDataUI(center);
         StartCoroutine(WaveLoop(enemy));
+
+        return waveDataCtrl;
     }
 
     IEnumerator WaveLoop(Transform enemy)
@@ -37,7 +40,7 @@ public class WaveController : MonoBehaviour
         float cultureMultiplier = Constants.AreaBuild.GetCultureLevelMultiplier(cultureLevel);  // 文化圏レベルに応じた倍率
         int avgLevel = Constants.AreaBuild.GetEnemyAverageLevelByWaveDifficulty(cultureLevel, wave.difficulty);      // 難易度に応じた敵の平均レベルを取得
 
-        waveDataCtrl.SetWaveData(wave, cultureLevel, cultureMultiplier, avgLevel);      // UIにWaveDataを反映
+        waveDataCtrl.SetWaveData(wave, avgLevel);      // UIにWaveDataを反映
 
         for(int ii = 0; ii < maxWaveCount; ii++)
         {
@@ -112,6 +115,8 @@ public class WaveController : MonoBehaviour
     /// </summary>
     void Result(Wave wave, int level)
     {
+        waveDataCtrl.DisablePanel();        // WaveDataUIを非表示にする
+
         // 戦闘終了時即時反映
         resultCtrl.DropsToInventory(wave.dropKaomojiParts);         // ドロップ品をインベントリに格納
         resultCtrl.GetMoneyToHasMoney(wave.getMoney);               // 所持金を更新

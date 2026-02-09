@@ -11,7 +11,7 @@ public class WallController : MonoBehaviour
     /// </summary>
     /// <param name="player"></param>
     /// <param name="enemy"></param>
-    public void CreateWall(Vector2 player, Vector2 enemy)
+    public Vector2 CreateWall(Vector2 player, Vector2 enemy)
     {
         Vector2 createPos = Vector2.Lerp(player, enemy, 0.5f);        // プレイヤーと敵との距離の中心を取得
         GameObject obj = Instantiate(wall, createPos, Quaternion.identity);
@@ -20,6 +20,8 @@ public class WallController : MonoBehaviour
         CameraShake.I.ApplyShake(1, 2f, 0.5f);
         CreateArenaItems();     // 壁生成時にアイテムも生成
         PayUsageFee();
+
+        return createPos;
     }
 
     public Wall GetWall()

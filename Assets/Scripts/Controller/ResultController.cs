@@ -27,8 +27,14 @@ public class ResultController : MonoBehaviour
     {
         Money.Add(getMoney);
         Context.I.UpdateMoneyDisplay();
+        Context.I.TR_Params.ApplyGetMoney(getMoney);        // TotalResult用のデータに加算
     }
 
+
+    /// <summary>
+    /// リザルトUIに反映させる
+    /// </summary>
+    /// <param name="level"></param>
     public void ApplyResultUI(Wave wave, int level)
     {
         resultUI.ApplyResultUI(wave, level);
@@ -56,6 +62,6 @@ public class ResultController : MonoBehaviour
         }
 
         // 記号全体のステータスを更新する
-        Context.I.UpdatePlayerStatus();
+        Context.I.RefreshPlayerStatus();
     }
 }

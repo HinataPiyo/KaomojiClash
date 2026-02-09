@@ -1,0 +1,18 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
+    <Style src="project://database/Assets/Development/FewAreaInfo.uss?fileID=7433441132597879392&amp;guid=d6e2516c87208474bb28cd6e9615f477&amp;type=3#FewAreaInfo" />
+    <ui:VisualElement name="root" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="culture-level-box" class="icon" style="flex-grow: 1;">
+            <ui:Label text="文化圏レベル" name="title" style="position: absolute; -unity-text-align: middle-right; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); top: 0%; left: 0%; font-size: 26px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 5px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            <ui:Label text="99" name="value" class="text-value" style="right: 0%; bottom: 0%; position: absolute;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="average-level-box" class="icon" style="flex-grow: 1;">
+            <ui:Label text="平均レベル" name="title" style="position: absolute; -unity-text-align: middle-right; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); top: 0%; left: 0%; font-size: 26px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 5px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            <ui:Label text="99" name="value" class="text-value" style="right: 0%; bottom: 0%; position: absolute;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="kaomoji-density-box" class="icon" style="flex-grow: 1;">
+            <ui:Label text="顔文字密度" name="title" style="position: absolute; -unity-text-align: middle-right; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); top: 0%; left: 0%; font-size: 26px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 5px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            <ui:Label text="200％" name="value" class="text-value" style="right: 0%; bottom: 0%; position: absolute;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

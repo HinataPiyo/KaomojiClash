@@ -16,3 +16,4 @@ MonoBehaviour:
     spawnDatabase: {fileID: 11400000, guid: 08058e89a0c24d242ae65817d6f47562, type: 2}
     cultureLevel: 1
     kaomojiDensity: 0
+  isClear: 1

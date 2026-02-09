@@ -12,6 +12,7 @@ public class PlayerTargetUI : MonoBehaviour
 
     void Update()
     {
+        if(!Context.I.IsPlayerArive()) return;
         Vector2 pos = player.position + (Vector3)offset;
         transform.position = pos;
     }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Constants;
 
-[CreateAssetMenu(fileName = "KaomojiPartData", menuName = "KaomojiPartData", order = 0)]
+[CreateAssetMenu(fileName = "KaomojiPartData", menuName = "Kaomoji/KaomojiPartData")]
 public class KaomojiPartData : ScriptableObject
 {
     [Range(0.01f, 0.8f), SerializeField] float dorpProbability = 0.3f;      public float DropProbability => dorpProbability;

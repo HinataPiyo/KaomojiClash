@@ -3,14 +3,16 @@ namespace Constants
     using Constants.Global;
     using UnityEngine;
     using ENUM;
+    using System.Collections.Generic;
+
     [System.Serializable]
     public sealed class CharacterStatus
     {
         [Header("初期ステータス")]
-        [Header("速さ"), Range(1f, 20f)] public float speed = 10f;
-        [Header("体力")] public float health = 10f;
-        [Header("攻撃力")] public float power = 1f;
-        // Gurdは記号の合計値で求めるので初期ステータスを決める段階では不要
+        [Tooltip("速さ"), Range(1f, 20f)] public float speed = 10f;
+        [Tooltip("体力")] public float health = 10f;
+        [Tooltip("攻撃力")] public float power = 1f;
+        [Tooltip("防御力")] public float guard = 1f;
 
         [Header("Movement")]
         public float maxDragDistance = 3f;       // ドラッグ最大距離
@@ -25,7 +27,47 @@ namespace Constants
         [Header("MentalPower")]
         public MentalData mentalData;
     }
+    
+    [System.Serializable]
+    public class Status
+    {
+        public class Params
+        {
+            // 総合ステータス
+            public float speed;
+            public float power;
+            public float guard;
+            public float stamina;
+        }
 
+        public Params m_params { get; private set; } = new Params();
+
+        /// <summary>
+        /// 記号全体のステータスを更新する
+        /// レベルに応じた値を加算していく
+        /// 記号ステータスのパーセント値を基礎ステータスに乗算して値を算出する
+        /// </summary>
+        public Params UpdateTotalPartsParameter(KaomojiPartData[] datas)
+        {
+            m_params.speed = m_params.power = m_params.guard = m_params.stamina = 0f;
+            foreach(var part in datas)
+            {
+                // 記号が割り当てられてなければスキップ
+                if (part == null || part.Data == null) continue;
+                
+                int level = part.Data.levelDetail.Level;
+                m_params.speed += part.Data.speed.GetParameterByLevel(level);
+                m_params.power += part.Data.power.GetParameterByLevel(level);
+                m_params.guard += part.Data.guard.GetParameterByLevel(level);
+                m_params.stamina += part.Data.stamina.GetParameterByLevel(level);
+            }
+
+            return m_params;
+        }
+    }
+
+    
+    
     [System.Serializable]
     public sealed class KAOMOJI
     {
@@ -36,15 +78,32 @@ namespace Constants
         public KaomojiPartData decoration_first;
         public KaomojiPartData decoration_second;
 
-
-        // 総合ステータス
-        public float Speed { get; private set; }
-        public float Power { get; private set; }
-        public float Guard { get; private set; }
-        public float Stamina { get; private set; }
-
         public KaomojiPartData[] GetAllPartsData() => new KaomojiPartData[]
         { mouth, eyes, hands, decoration_first, decoration_second };
+
+        public void AllResetPartsLevel()
+        {
+            KaomojiPartData[] parts = GetAllPartsData();
+            foreach(var part in parts)
+            {
+                part?.Data.levelDetail.ResetLevel();
+            }
+        }
+
+        public List<SkillTag[]> GetAllSkillTags()
+        {
+            List<SkillTag[]> allTags = new List<SkillTag[]>();
+            KaomojiPartData[] parts = GetAllPartsData();
+            foreach(var part in parts)
+            {
+                if(part != null)
+                {
+                    allTags.Add(part.Data.SkillTags);
+                }
+            }
+
+            return allTags;
+        }
 
         public int GetEquippedPartsCount()
         {
@@ -101,33 +160,8 @@ namespace Constants
         }
 
         /// <summary>
-        /// 記号全体のステータスを更新する
-        /// </summary>
-        public void UpdateTotalParameter()
-        {
-            KaomojiPartData[] datas = new KaomojiPartData[]
-            { eyes, mouth, hands, decoration_first, decoration_second};
-
-            Speed = Power = Guard = Stamina = 0f;
-            foreach(var part in datas)
-            {
-                // 記号が割り当てられてなければスキップ
-                if (part == null || part.Data == null) continue;
-                
-                int level = part.Data.levelDetail.Level;
-                Speed += part.Data.speed.GetParameterByLevel(level);
-                Power += part.Data.power.GetParameterByLevel(level);
-                Guard += part.Data.guard.GetParameterByLevel(level);
-                Stamina += part.Data.stamina.GetParameterByLevel(level);
-            }
-        }
-
-        /// <summary>
         /// 各ステータスの初期パラメータを取得
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-
         public float GetInitialParam(StatusType type)
         {
             float value = 0f;
@@ -148,6 +182,34 @@ namespace Constants
                         break;
                     case StatusType.Stamina:
                         value += part.Data.stamina.GetInitialParam();
+                        break;
+                }
+            }
+
+            return value;
+        }
+
+        public float GetTotalParamByType(StatusType type)
+        {
+            float value = 0f;
+            foreach(var part in GetAllPartsData())
+            {
+                // 記号が割り当てられてなければスキップ
+                if (part == null) continue;
+                int level = part.Data.levelDetail.Level;
+                switch(type)
+                {
+                    case StatusType.Speed:
+                        value += part.Data.speed.GetParameterByLevel(level);
+                        break;
+                    case StatusType.Power:
+                        value += part.Data.power.GetParameterByLevel(level);
+                        break;
+                    case StatusType.Guard:
+                        value += part.Data.guard.GetParameterByLevel(level);
+                        break;
+                    case StatusType.Stamina:
+                        value += part.Data.stamina.GetParameterByLevel(level);
                         break;
                 }
             }
@@ -189,6 +251,31 @@ namespace Constants
         [Tooltip("攻撃力に影響")] public Power power;
         [Tooltip("防御力に影響")] public Guard guard;
         [Tooltip("体力に影響")] public Stamina stamina;
+        [SerializeField] int maxDup = 50;               // 最大重複数
+        [SerializeField] bool isInitDisplay = false;    // UIに表示するかどうか
+        [SerializeField] SkillTag[] skillTag;           // このパーツに対応するスキルタグ
+        public SkillTag[] SkillTags => skillTag;
+
+        
+        /// <summary>
+        /// 初期表示するかどうか
+        /// </summary>
+        public bool GetIsInitDisplayUI() => isInitDisplay;
+        public int CurrentDup { get; private set; } = 0;  // 現在の重複数
+        public int MaxDup => maxDup;
+        public void AddDup(int amount)
+        {
+            CurrentDup += amount;
+            // if(CurrentDup > maxDup)
+            // {
+            //     CurrentDup = maxDup;
+            // }
+        }
+
+        /// <summary>
+        /// 最大重複数に達しているかどうか
+        /// </summary>
+        public bool IsMaxDup() => CurrentDup >= maxDup;
 
         [System.Serializable]
         public class LevelDetail
@@ -234,6 +321,12 @@ namespace Constants
             public float GetNeedExpBorder(int level)
             {
                 return Calculation.GetNeedExpBorderByLevelAndGrowthRateType(level, growthRateType);
+            }
+
+            public void ResetLevel()
+            {
+                Level = 1;
+                Exp = 0f;
             }
         }
         

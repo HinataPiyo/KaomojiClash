@@ -1,6 +1,7 @@
 using Constants.Global;
 using UnityEngine;
 using ENUM;
+using NUnit.Framework.Constraints;
 
 public class EnemyReflect : Reflect, IEnemyInitialize
 {
@@ -33,7 +34,9 @@ public class EnemyReflect : Reflect, IEnemyInitialize
                 Mental player = col.collider.GetComponent<Mental>();
                 float power = AreaManager.I.GetStatusParamByCultureLevel(StatusType.Power, e_Data.Status.power)
                             * Calculation.GetDifficultyRate(dif);
-                player.TakeDamage(power);
+
+                if(!Context.I.IsPlayerArive()) return;
+                player?.TakeDamage(power);
                 AudioManager.I.PlaySEReflect();
             }
         }

@@ -31,3 +31,7 @@ MonoBehaviour:
     stamina:
       value: 0.1
       growthRateType: 2
+    maxDup: 50
+    isInitDisplay: 1
+    skillTag:
+    - {fileID: 11400000, guid: 1ec76cdd47c7dc7418f3ac9d93703e15, type: 2}

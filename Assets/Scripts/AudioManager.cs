@@ -60,6 +60,11 @@ public class AudioManager : MonoBehaviour
         bgmFadeCoroutine = StartCoroutine(BGMFadeTransition(tag));
     }
 
+    public void StopBGM()
+    {
+        PlayBGM(string.Empty);
+    }
+
     private IEnumerator BGMFadeTransition(string tag)
     {
         // 前の BGM がある場合はフェードアウト
@@ -78,6 +83,22 @@ public class AudioManager : MonoBehaviour
             bgmSource.Play();
             // フェードイン
             yield return StartCoroutine(FadeIn(bgmSource, bgmFadeDuration));
+        }
+    }
+
+    /// <summary>
+    /// TimeLineでこの関数を呼び出す
+    /// </summary>
+    public void StartTotalResultBGM()
+    {
+        switch(Context.I.BattleStat)
+        {
+            case BattleStat.StageClear:
+                PlayBGM("TotalResult_StageClear");
+                break;
+            case BattleStat.StageFailed:
+                PlayBGM("TotalResult_StageFailed");
+                break;
         }
     }
 

@@ -6,7 +6,6 @@ public class MinimapCamera : MonoBehaviour
     {
         if (!Context.I.Player)
         {
-            Debug.Log("[MinimapCamera] Playerが見つかりません");
             return;
         }
 

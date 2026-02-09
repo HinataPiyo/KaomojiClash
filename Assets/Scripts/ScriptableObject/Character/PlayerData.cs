@@ -1,7 +1,7 @@
 using UnityEngine;
 using Constants;
 
-[CreateAssetMenu(fileName = "PlayerData", menuName = "PlayerData")]
+[CreateAssetMenu(fileName = "PlayerData", menuName = "Character/PlayerData")]
 public class PlayerData : CharacterData 
 {
     [SerializeField] KAOMOJI kaomoji;

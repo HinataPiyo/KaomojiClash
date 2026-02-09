@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using ENUM;
-using UnityEditor.Embree;
 using UnityEngine;
 
 namespace Constants.Global
@@ -249,7 +248,7 @@ namespace ENUM
     public enum KaomojiPartType
     { Mouth, Eyes, Hands, Decoration_First, Decoration_Second }
     public enum BattleStat
-    { None = -1, Start, Now, End }
+    { None = -1, Start, Now, End, StageClear, StageFailed }
     public enum Difficulty
     { Easy, Normal, Hard, Extreme, Max }
     public enum GrowthRateType

@@ -1,0 +1,16 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
+    <Style src="project://database/Assets/Development/Temp_GetPart.uss?fileID=7433441132597879392&amp;guid=a0a1ec8e92ca67b4cabd3e5ac8893597&amp;type=3#Temp_GetPart" />
+    <ui:VisualElement name="root" style="flex-direction: row;">
+        <ui:VisualElement name="icon-box" class="icon" style="width: 80px; height: 80px;">
+            <ui:Label text="@" name="value" style="flex-grow: 1; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-text-align: middle-center; font-size: 48px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 11px; padding-left: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="info-box" style="flex-grow: 1; flex-direction: column; justify-content: space-evenly;">
+            <ui:Label text="ダブルクォーテーション" name="name-value" class="text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            <ui:ProgressBar value="22" title="22/100" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 26px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 30%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="count-box" style="width: 17%;">
+            <ui:Label text="+99" name="value" class="text" style="-unity-text-align: middle-center; flex-grow: 1; font-size: 42px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

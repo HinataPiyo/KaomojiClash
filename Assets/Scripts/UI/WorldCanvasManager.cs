@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WorldCanvasManager : MonoBehaviour
@@ -71,6 +70,4 @@ public class WorldCanvasManager : MonoBehaviour
     {
         Instantiate(clashEffectPrefab, position, Quaternion.identity, transform);
     }
-
-
 }

@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using Constants.Global;
+using NUnit.Framework;
 using UnityEngine;
 
 public sealed class Inventory
 {
     List<HasKaomojiParts> parts = new List<HasKaomojiParts>();
+
+    public HasKaomojiParts[] GetAllPartsData()
+    {
+        return parts.ToArray();
+    }
 
     public void AllItemCheck()
     {

@@ -38,13 +38,13 @@ namespace UI.Home.Module
                 int index = ii; // クロージャ対策
                 VisualElement cultureEntry = temp_CultureLevelEntry.Instantiate();
                 Button b = cultureEntry.Q<Button>();
-                AreaData areaData = areaDatabase.GetAllAreas()[index].data;
+                AreaData areaData = areaDatabase.GetAllAreas()[index];
                 b.clicked += () => UpdateAreaInformation(areaData);
                 b.text = "レベル" + areaData.Build.cultureLevel.ToString();     // 文化圏レベルを表示
                 cultureLevelList.Add(cultureEntry);
             }
 
-            UpdateAreaInformation(areaDatabase.GetAllAreas()[0].data);
+            UpdateAreaInformation(areaDatabase.GetAllAreas()[0]);       // 最初はレベル1の情報を表示
         }
 
         /// <summary>
