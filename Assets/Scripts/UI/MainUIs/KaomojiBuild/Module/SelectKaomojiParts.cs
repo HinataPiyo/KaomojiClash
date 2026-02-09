@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -39,7 +40,10 @@ namespace UI.KaomojiBuild.Module
         {
             VisualElement elem = temp_SelectKaomojiParts.Instantiate();
             Button button = elem.Q<Button>();
-            button.text = part.Data.part;
+            Label body = elem.Q<Label>();
+            ProgressBar progress = elem.Q<ProgressBar>();
+
+            body.text = part.Data.part;
             button.clicked += () =>
             {
                 Debug.Log($"選択されたパーツ: {part.Data.part}");
@@ -49,7 +53,28 @@ namespace UI.KaomojiBuild.Module
                 modulesCtrl.module_SD.AssignPart(part);     // ! 一旦ボタンを押下しただけで反映されるようにする
             };
 
-            list_view.contentContainer.Add(elem);
+            // 表示非表示の制御
+            bool isMaxDup = part.Data.IsMaxDup();
+
+            // 初期表示用のフラグが立っている場合
+            if(part.Data.GetIsInitDisplayUI())
+            {
+                isMaxDup = true;    // 強制的に表示
+                progress.highValue = 1;  // 最大値を1にしておく
+                progress.value = 1;
+            }
+            else
+            {
+                progress.highValue = part.Data.MaxDup;
+                progress.value = part.Data.CurrentDup;
+            }
+
+            elem.SetEnabled(isMaxDup);      // DupCountが最大に達していれば表示
+            
+            if(isMaxDup) progress.title = $"{part.Data.CurrentDup}";        // 最大に達していれば現在の所持数だけ表示
+            else progress.title = $"{part.Data.CurrentDup} / {part.Data.MaxDup}";
+
+            list_view.Add(elem);
         }
 
         /// <summary>
@@ -59,7 +84,17 @@ namespace UI.KaomojiBuild.Module
         public void SortByType(ENUM.KaomojiPartType type)
         {
             list_view.Clear();
-            foreach (var part in partsDatabase.GetPartsByType(type))
+            var parts = partsDatabase.GetPartsByType(type).ToList();
+            
+            // Enabled=Trueのものを前に、Falseのものを後ろにソート
+            parts.Sort((a, b) =>
+            {
+                bool aEnabled = a.Data.IsMaxDup() || a.Data.GetIsInitDisplayUI();
+                bool bEnabled = b.Data.IsMaxDup() || b.Data.GetIsInitDisplayUI();
+                return bEnabled.CompareTo(aEnabled);  // trueを前に
+            });
+            
+            foreach (var part in parts)
             {
                 AssignPart(part);
             }

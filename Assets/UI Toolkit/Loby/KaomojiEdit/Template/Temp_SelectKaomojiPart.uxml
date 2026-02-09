@@ -1,7 +1,11 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
-    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Button_Style.uss?fileID=7433441132597879392&amp;guid=cf483f165268f6a48968445de3ff5bc4&amp;type=3#Button_Style" />
-    <ui:VisualElement name="root" style="width: 160px; height: 130px; margin-top: 3px; margin-right: 3px; margin-bottom: 3px; margin-left: 3px;">
-        <ui:Button text="@@" name="button" class="button icon" style="padding-top: 0; padding-right: 0; padding-bottom: 12px; padding-left: 0; font-size: 64px; flex-grow: 1; margin-top: 5px; margin-right: 5px; margin-bottom: 0; margin-left: 5px;" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Button_Style.uss?fileID=7433441132597879392&amp;guid=cf483f165268f6a48968445de3ff5bc4&amp;type=3#Button_Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/SelectKaomojiPart_Style.uss?fileID=7433441132597879392&amp;guid=d73d8ee0258b34f4a9b995248a35f5d9&amp;type=3#SelectKaomojiPart_Style" />
+    <ui:VisualElement name="root" style="margin-top: 3px; margin-right: 3px; margin-bottom: 3px; margin-left: 3px;">
+        <ui:Button name="button" class="button icon" style="margin-top: 5px; margin-right: 5px; margin-bottom: 0; margin-left: 5px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; justify-content: space-between; flex-grow: 1; width: 140px; height: 128px;">
+            <ui:Label text="@@" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); font-size: 52px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            <ui:ProgressBar value="22" title="22/100" style="height: 28%; font-size: 22px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;);" />
+        </ui:Button>
     </ui:VisualElement>
 </ui:UXML>

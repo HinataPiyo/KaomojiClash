@@ -31,3 +31,5 @@ MonoBehaviour:
     stamina:
       value: 0.051
       growthRateType: 3
+    maxDup: 50
+    isInitDisplay: 1

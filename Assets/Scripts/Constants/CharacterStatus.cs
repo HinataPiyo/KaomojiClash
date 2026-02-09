@@ -199,6 +199,12 @@ namespace Constants
         [Tooltip("防御力に影響")] public Guard guard;
         [Tooltip("体力に影響")] public Stamina stamina;
         [SerializeField] int maxDup = 50;      // 最大重複数
+        [SerializeField] bool isInitDisplay = false;   // UIに表示するかどうか
+        
+        /// <summary>
+        /// 初期表示するかどうか
+        /// </summary>
+        public bool GetIsInitDisplayUI() => isInitDisplay;
         public int CurrentDup { get; private set; } = 0;  // 現在の重複数
         public int MaxDup => maxDup;
         public void AddDup(int amount)
