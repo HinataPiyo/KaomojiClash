@@ -84,6 +84,7 @@ public class Context : MonoBehaviour
     {
         ChangeStat(BattleStat.StageClear);
         StartCoroutine(WaitStartResult());
+        AreaManager.I.CurrentAreaData.ChangeClear();        // ステージクリア済みにする
     }
 
     /// <summary>
