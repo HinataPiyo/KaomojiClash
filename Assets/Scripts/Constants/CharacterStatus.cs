@@ -209,6 +209,10 @@ namespace Constants
             //     CurrentDup = maxDup;
             // }
         }
+
+        /// <summary>
+        /// 最大重複数に達しているかどうか
+        /// </summary>
         public bool IsMaxDup() => CurrentDup >= maxDup;
 
         [System.Serializable]

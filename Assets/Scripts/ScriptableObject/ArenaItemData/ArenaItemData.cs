@@ -34,6 +34,18 @@ public abstract class ArenaItemData : ScriptableObject
     {
         GradeType = gradeType;
     }
+    
+    /// <summary>
+    /// 使用回数を増加させる
+    /// </summary>
+    public void ApplyUsageCountUp()
+    {
+        UsageCount ++;
+        if(UsageCount < 0)
+        {
+            UsageCount = 0;
+        }
+    }
 
     public int GetMaxUsageCountByGrade()
     {

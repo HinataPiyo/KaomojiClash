@@ -1,7 +1,7 @@
 using UnityEngine;
 using Constants;
 
-[CreateAssetMenu(fileName = "AreaData", menuName = "AreaData")]
+[CreateAssetMenu(fileName = "AreaData", menuName = "Arena/AreaData")]
 public class AreaData : ScriptableObject
 {
     [SerializeField] AreaBuild area;       public AreaBuild Build => area;

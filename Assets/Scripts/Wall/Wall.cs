@@ -34,6 +34,7 @@ public class Wall : MonoBehaviour
             GameObject obj = Instantiate(itemData.Item_Prefab, spawnPos, Quaternion.identity);
             spawnedItems.Add(obj);
             Context.I.TR_Params.ApplyDecMoney(itemData.GetPrice());      // TotalResult用のデータに加算
+            itemData.ApplyUsageCountUp();       // 使用回数を増加
         }
     }
 

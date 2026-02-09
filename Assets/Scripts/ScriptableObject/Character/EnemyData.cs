@@ -3,7 +3,7 @@ using Constants;
 using Constants.Global;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyData", menuName = "EnemyData")]
+[CreateAssetMenu(fileName = "EnemyData", menuName = "Character/nemyData")]
 public class EnemyData : CharacterData 
 {
     public float guard;
