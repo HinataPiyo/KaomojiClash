@@ -8,17 +8,22 @@ public class PlayerApplyKaomoji : MonoBehaviour
     [SerializeField] CapsuleCollider2D col;
 
     PlayerData data;
+    [SerializeField] PlayerUpgradeService upgradeService;
     string current_Kaomoji;     // 現在の顔文字
+
+    public Status.Params BaseStatus { get; private set; } = new Status.Params();
+    public Status.Params GetUpgradedStatus() => upgradeService.UpgradedStatus;
+    public void RefreshUpgradedStatus() => upgradeService.RecalculateUpgrades();
 
     public void Initialize(PlayerData data)
     {
         this.data = data;
         KAOMOJI K = data.Kaomoji;
-        K.UpdateTotalParameter();
+        upgradeService.Initialize(data, K.GetAllSkillTags());
         current_Kaomoji = K.BuildKaomoji(data.Status.mentalData);
         faceText.text = current_Kaomoji;
         SetColliderSize();
-        GetComponent<Mental>().Initialize(K.Stamina, data);
+        GetComponent<PlayerMental>().Initialize(data);
     }
 
     /// <summary>

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Combo : MonoBehaviour
 {
@@ -37,6 +38,12 @@ public class Combo : MonoBehaviour
         // StrengthMin..StrengthMax の範囲を 0..1 に正規化して UI に渡す
         float normalizedAmplifyer = Mathf.InverseLerp(p_data.StrengthMinAmplifyer, p_data.StrengthMaxAmplifyer, CurrentAmplifyer);
         comboUI.UpdateComboUI(comboCount, normalizedAmplifyer);
+    }
+
+
+    public float GetPowerMultiplier(float power)
+    {
+        return CurrentAmplifyer * power;
     }
 
     /// <summary>

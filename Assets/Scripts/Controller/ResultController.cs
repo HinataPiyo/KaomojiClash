@@ -62,6 +62,6 @@ public class ResultController : MonoBehaviour
         }
 
         // 記号全体のステータスを更新する
-        Context.I.UpdatePlayerStatus();
+        Context.I.RefreshPlayerStatus();
     }
 }

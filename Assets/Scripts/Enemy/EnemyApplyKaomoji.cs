@@ -24,7 +24,6 @@ public class EnemyApplyKaomoji : MonoBehaviour, IEnemyInitialize
         this.data = data;
         this.dif = dif;
         KAOMOJI K = data.Kaomoji;
-        K.UpdateTotalParameter();
         current_Kaomoji = K.BuildKaomoji(data.Status.mentalData);
         faceText.text = current_Kaomoji;
         SetColliderSize();

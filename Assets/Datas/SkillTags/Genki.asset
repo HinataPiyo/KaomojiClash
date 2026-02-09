@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aaab9332f5bed34f8d9548554c64947, type: 3}
+  m_Name: Genki
+  m_EditorClassIdentifier: 
+  displayName: "\u5143\u6C17"
+  maxStacks: 5
+  stackModifiers:
+  - stat: 3
+    add: 10
+    mul: 1
+  - stat: 3
+    add: 30
+    mul: 1
+  - stat: 3
+    add: 60
+    mul: 1
+  - stat: 3
+    add: 80
+    mul: 1.02
+  - stat: 3
+    add: 80
+    mul: 1.02

@@ -11,16 +11,20 @@ public class PlayerMental : Mental, IHeal
         statusUI = FindAnyObjectByType<StatusUIControl>();
     }
 
-    public override void Initialize(float stamina, CharacterData data)
+    public void Initialize(PlayerData data)
     {
-        base.Initialize(stamina, data);
+        this.data = data;
+        maxHealth = Context.I.GetPlayerStamina();
+        currentHealth = maxHealth;
+        currentMental = data.Status.mentalData.maxMental;
+
         statusUI.UpdateMental(data.Status.mentalData.maxMental);
         statusUI.SetMaxHealth(maxHealth);
     }
 
     public override void TakeDamage(float damage)
     {
-        float reductDamage = damage * (1f - Context.I.PlayerData.Kaomoji.Guard);
+        float reductDamage = damage * Constants.DamageCalc.CalcTakenDamage(damage, Context.I.GetPlayerGuard());     
         float finalDamage = Mathf.Max(1f, reductDamage); // 最低1ダメージ保証
         currentHealth -= finalDamage;     // 最低1ダメージ保証
 

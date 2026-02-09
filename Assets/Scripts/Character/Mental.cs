@@ -18,19 +18,6 @@ public abstract class Mental : MonoBehaviour
         movement = GetComponent<Movement>();
     }
 
-    /// <summary>
-    /// この関数はPlayerApplyKaomojiから実行する
-    /// </summary>
-    /// <param name="stamina"></param>
-    /// <param name="data"></param>
-    public virtual void Initialize(float stamina, CharacterData data)
-    {
-        this.data = data;
-        maxHealth = data.Status.health * (1f + stamina);
-        currentHealth = maxHealth;
-        currentMental = data.Status.mentalData.maxMental;
-    }
-
     public abstract void TakeDamage(float damage);
 
     protected virtual void Die()

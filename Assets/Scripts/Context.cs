@@ -2,9 +2,6 @@ using ENUM;
 using UI.Battle;
 using UI.TotalResult;
 using UnityEngine;
-using Constants.Global;
-using UI.TotalResult.Module;
-using System.Collections.Generic;
 using Constants;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -23,9 +20,19 @@ public class Context : MonoBehaviour
     [SerializeField] TimelineAsset[] totalResult_Timelines;
     [SerializeField] TotalResultModulesController totalResultModuleCtrl;
     [SerializeField] ArenaItemSettingData arenaItemSettingData;   public ArenaItemSettingData ArenaItemSettingData => arenaItemSettingData;
+
+
     public KaomojiPartData[] KaomojiPartDatas() => PlayerData.Kaomoji.GetAllPartsData();
     public BattleStat BattleStat { get; private set; } = BattleStat.None;
     public bool IsPlayerArive() => player  != null;
+
+
+    public PlayerApplyKaomoji PlayerKaomojiApply { get; private set; }
+    public float GetPlayerStamina() => PlayerKaomojiApply.GetUpgradedStatus().stamina;
+    public float GetPlayerPower() => PlayerKaomojiApply.GetUpgradedStatus().power;
+    public float GetPlayerSpeed() => PlayerKaomojiApply.GetUpgradedStatus().speed;
+    public float GetPlayerGuard() => PlayerKaomojiApply.GetUpgradedStatus().guard;
+
 
     /// <summary>
     /// TotalResult用パラメータ
@@ -49,15 +56,15 @@ public class Context : MonoBehaviour
             I = this;
         }
         
-        UpdatePlayerStatus();
+        PlayerKaomojiApply = player.GetComponent<PlayerApplyKaomoji>();
     }
 
     /// <summary>
     /// 記号全体のステータスを更新する
     /// </summary>
-    public void UpdatePlayerStatus()
+    public void RefreshPlayerStatus()
     {
-        playerData.Kaomoji.UpdateTotalParameter();
+        PlayerKaomojiApply.RefreshUpgradedStatus();
     }
 
     /// <summary>
