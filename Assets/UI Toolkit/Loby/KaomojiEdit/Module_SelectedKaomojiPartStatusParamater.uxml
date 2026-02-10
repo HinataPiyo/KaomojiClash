@@ -1,22 +1,33 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Temp_TextIcon" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_TextIcon.uxml?fileID=9197481963319205126&amp;guid=2aacb48f987e79e4abce682dca2d7b84&amp;type=3#Temp_TextIcon" />
     <ui:Template name="Temp_StatusParamater" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_StatusParamater.uxml?fileID=9197481963319205126&amp;guid=6387f6a48380b774ba9990e3e904175f&amp;type=3#Temp_StatusParamater" />
-    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
-    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
+    <ui:Template name="Temp_SkillTag" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_SkillTag.uxml?fileID=9197481963319205126&amp;guid=52c89602454a572499b5a51723bc1964&amp;type=3#Temp_SkillTag" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/SelectedKaomojiPartStatusParamater.uss?fileID=7433441132597879392&amp;guid=613a1d8e8b85c924ba8dcf55bb917ba7&amp;type=3#SelectedKaomojiPartStatusParamater" />
     <ui:VisualElement name="root" class="panel" style="flex-grow: 1; flex-direction: column;">
         <ui:Label text="- 選択された記号" name="title" style="font-size: 26px; left: 5%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; top: 2%; -unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;);" />
-        <ui:VisualElement name="selected-part-info" style="flex-direction: row; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; align-items: flex-start; margin-top: 9px; margin-right: 9px; margin-bottom: 0; margin-left: 9px;">
+        <ui:VisualElement name="selected-part-info" style="flex-direction: row; align-items: flex-start; top: 1%;">
             <ui:Instance template="Temp_TextIcon" name="Temp_TextIcon" style="width: 120px; height: 120px;" />
             <ui:VisualElement name="info" style="flex-grow: 0;">
-                <ui:Label text="部位" name="type" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                <ui:Label text="部位" name="type" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 16px; -unity-font-style: bold;" />
                 <ui:Label text="目" name="type-value" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 22px;" />
-                <ui:Label text="名前" name="name" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                <ui:Label text="名前" name="name" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 16px; -unity-font-style: bold;" />
                 <ui:Label text="ダブルクォーテーション" name="name-value" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 22px;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="status-parameter" style="flex-grow: 1; padding-top: 7px; padding-right: 7px; padding-bottom: 7px; padding-left: 7px;">
-            <ui:Label text="-&#x9;&#x9;STATUS&#x9;&#x9;-" name="title" style="-unity-text-align: middle-center; font-size: 22px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSans-Medium.ttf?fileID=12800000&amp;guid=dd05f783902e4db489e81bd5786c223a&amp;type=3#NotoSans-Medium&quot;); -unity-font-style: normal; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
-            <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" />
+        <ui:VisualElement name="part-skill-tags" style="flex-grow: 1;">
+            <ui:Label text="-スキル" name="title" style="-unity-text-align: upper-left; font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-font-style: bold; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 10px;" />
+            <ui:VisualElement name="skill-tags-box" style="flex-grow: 1; flex-direction: row;">
+                <ui:Instance template="Temp_SkillTag" />
+                <ui:Instance template="Temp_SkillTag">
+                    <AttributeOverrides element-name="name" text="筋肉増強" />
+                </ui:Instance>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="status-parameter" style="padding-top: 7px; padding-right: 7px; padding-bottom: 7px; padding-left: 7px; height: 50%;">
+            <ui:Label text="- ステータス" name="title" style="-unity-text-align: upper-left; font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-font-style: bold; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 3px; margin-right: 3px; margin-bottom: 3px; margin-left: 3px;" />
+            <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" class="paramater" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

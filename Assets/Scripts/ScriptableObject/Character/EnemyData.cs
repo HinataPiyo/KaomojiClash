@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyData", menuName = "Character/nemyData")]
 public class EnemyData : CharacterData 
 {
-    public float guard;
     public float launchDuration;    // 発射までの待機時間
     // 本体の顔文字   
     [Tooltip("ここでは顔の構成のみを決める"), SerializeField] KAOMOJI kaomoji;     public KAOMOJI Kaomoji => kaomoji;

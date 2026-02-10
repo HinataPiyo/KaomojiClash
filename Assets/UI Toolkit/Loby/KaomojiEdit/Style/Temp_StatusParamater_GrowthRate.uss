@@ -1,9 +1,12 @@
 .growthrate {
-    margin-right: 4px;
     padding-top: 0;
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
     font-size: 22px;
-    -unity-text-align: middle-left;
+    -unity-text-align: upper-right;
+    margin-top: 0;
+    margin-right: 4px;
+    margin-bottom: 0;
+    margin-left: 0;
 }
