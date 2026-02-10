@@ -1,13 +1,14 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Temp_StatusParamater" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_StatusParamater.uxml?fileID=9197481963319205126&amp;guid=6387f6a48380b774ba9990e3e904175f&amp;type=3#Temp_StatusParamater" />
     <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Loby/Home/Style/KaomojiPreview.uss?fileID=7433441132597879392&amp;guid=9217f441d6fee1449bb144bc1438e05b&amp;type=3#KaomojiPreview" />
     <ui:VisualElement name="root" class="panel" style="flex-grow: 1; flex-direction: row; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
         <ui:Label text="プレビュー" style="position: absolute; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); font-size: 36px; top: 2%; left: 2%;" />
         <ui:VisualElement name="kaomoji-preview" style="flex-grow: 1; justify-content: center;">
             <ui:Label text="(^ω^)" name="value" style="-unity-text-align: middle-center; font-size: 62px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;);" />
         </ui:VisualElement>
         <ui:VisualElement name="status-paramater" style="flex-grow: 1; justify-content: center;">
-            <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" style="border-left-color: rgb(30, 30, 30); border-left-width: 6px; padding-left: 14px;" />
+            <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" class="preview" style="border-left-color: rgb(30, 30, 30); border-left-width: 6px; padding-left: 14px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -15,10 +15,10 @@
                 <ui:Instance template="Temp_SkillTag" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="face" style="flex-grow: 1; position: absolute; width: 100%; bottom: 7%; height: 45%; justify-content: flex-end; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-bottom-width: 6px; border-top-width: 2px; margin-top: 0;">
+        <ui:VisualElement name="face" style="flex-grow: 1; position: absolute; width: 100%; bottom: 7%; height: 45%; justify-content: flex-end; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-bottom-width: 6px; border-top-width: 0; margin-top: 0;">
             <ui:Label text="(^ω^)" name="value" style="-unity-text-align: middle-center; font-size: 76px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="status-paramater" style="position: absolute; height: 45%; width: 280px; right: 0%; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
+        <ui:VisualElement name="status-paramater" style="position: absolute; height: 48%; width: 280px; right: 0%; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
             <ui:Label text="- 合計ステータス" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: bold; font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;);" />
             <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" class="display" />
         </ui:VisualElement>

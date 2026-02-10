@@ -3,14 +3,17 @@ using UI.KaomojiBuild.Template;
 using UnityEngine;
 using UnityEngine.UIElements;
 using ENUM;
+using System.Collections.Generic;
 
 namespace UI.KaomojiBuild.Module
 {
-
     public class SelectedDisplay : MonoBehaviour, IUIModuleHandler, IUIPartHandler
     {
+        [SerializeField] VisualTreeAsset temp_SkillTag;
         KaomojiBuildModulesController modulesCtrl;
         StatusParamater statusParamater;
+
+        VisualElement skilltagsContainer;
         Label kaomoji;
 
         void Awake()
@@ -23,10 +26,13 @@ namespace UI.KaomojiBuild.Module
             statusParamater = new StatusParamater();
             statusParamater.Initialize(moduleRoot);
             kaomoji = moduleRoot.Q<VisualElement>("face").Q<Label>("value");
+            skilltagsContainer = moduleRoot.Q<VisualElement>("parts-skill-tags-box").Q<VisualElement>("container");
 
             Reset();
+            KAOMOJI K = modulesCtrl.PlayerData.Kaomoji;
             BuildKaomojiDisplay();
             UpdateStatusDisplay();
+            RefreshSkillTags(K);
         }
 
         /// <summary>
@@ -35,11 +41,25 @@ namespace UI.KaomojiBuild.Module
         /// <param name="part"></param>
         public void AssignPart(KaomojiPartData part)
         {
+            Reset();
             KAOMOJI K = modulesCtrl.PlayerData.Kaomoji;
             K.SetPartDataByType(part);
 
             BuildKaomojiDisplay();
             UpdateStatusDisplay();
+            RefreshSkillTags(K);
+        }
+
+        void RefreshSkillTags(KAOMOJI K)
+        {
+            // スキルタグ表示更新
+            List<PlayerUpgradeService.SkillTagElement> tags = PlayerUpgradeService.SetTags(K.GetAllSkillTags());
+            foreach (PlayerUpgradeService.SkillTagElement elem in tags)
+            {
+                VisualElement tempRoot = temp_SkillTag.Instantiate();
+                new SkillTagUI(tempRoot, elem.tag, elem.stackCount);
+                skilltagsContainer.Add(tempRoot);
+            }
         }
 
         /// <summary>
@@ -67,6 +87,7 @@ namespace UI.KaomojiBuild.Module
         {
             statusParamater.Reset();
             kaomoji.text = string.Empty;
+            skilltagsContainer.Clear();
         }
     }
 }
