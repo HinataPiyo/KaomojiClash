@@ -19,9 +19,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4668e6b0b240c5f45b793bfff5808a63, type: 2}
   amountByDifficulties:
   - difficulty: 0
-    amount: 1
+    amount: 2
   - difficulty: 1
-    amount: 0
+    amount: 1
   - difficulty: 2
     amount: 0
   - difficulty: 3

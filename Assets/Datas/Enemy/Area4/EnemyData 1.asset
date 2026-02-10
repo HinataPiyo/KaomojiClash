@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae91c5907439043479a4e353d3b638d8, type: 3}
-  m_Name: Area2_EnemyData 1
+  m_Name: EnemyData 1
   m_EditorClassIdentifier: 
   status:
     speed: 2.6

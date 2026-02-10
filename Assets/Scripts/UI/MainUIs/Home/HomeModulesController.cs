@@ -22,6 +22,8 @@ namespace UI.Home
             module_KP = GetComponent<KaomojiPreview>();
             module_BB = GetComponent<BuildButtons>();
             module_AI = GetComponent<AreaInformation>();
+
+            playerData.Kaomoji.AllResetPartsLevel();        // ! パーツレベルの初期化（BattleSceneでしか使わないため）
         }
 
         protected override void Initialize()

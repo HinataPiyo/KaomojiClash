@@ -28,7 +28,7 @@ public class EnemyReflect : Reflect, IEnemyInitialize
 
             Rigidbody2D otherRb = col.collider.GetComponent<Rigidbody2D>();
 
-            // 相手より自分のほうが速い場合のみダメージを与える
+            // 相手より自分のほうが明確に速い場合のみダメージを与える
             if (CanApplyDamage(otherRb))
             {
                 Mental player = col.collider.GetComponent<Mental>();
@@ -40,5 +40,11 @@ public class EnemyReflect : Reflect, IEnemyInitialize
                 AudioManager.I.PlaySEReflect();
             }
         }
+    }
+
+    protected override bool CanApplyDamage(Rigidbody2D otherRb)
+    {
+        // 相手より自分のほうが明確に速い場合のみダメージを与える
+        return otherRb != null && rb.linearVelocity.sqrMagnitude > otherRb.linearVelocity.sqrMagnitude * 1.2f;
     }
 }

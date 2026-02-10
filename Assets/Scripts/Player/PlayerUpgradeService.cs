@@ -19,7 +19,7 @@ public class PlayerUpgradeService : MonoBehaviour
     {
         this.data = data;
         totalTags.Clear();
-        SetTags(tags);
+        totalTags = SetTags(tags);
         RecalculateUpgrades();
     }
 
@@ -35,8 +35,9 @@ public class PlayerUpgradeService : MonoBehaviour
     /// タグをセットする
     /// </summary>
     /// <param name="tags">記号に設定されているTagを取得する</param>
-    public void SetTags(List<SkillTag[]> tags)
+    public static List<SkillTagElement> SetTags(List<SkillTag[]> tags)
     {
+        List<SkillTagElement> total = new List<SkillTagElement>();
         for (int ii = 0; ii < tags.Count; ii++)
         {
             SkillTag[] tagList = tags[ii];
@@ -46,7 +47,7 @@ public class PlayerUpgradeService : MonoBehaviour
                 if (tag == null) continue;
 
                 // 既に登録されているか確認
-                SkillTagElement existingElement = totalTags.Find(e => e.tag == tag);
+                SkillTagElement existingElement = total.Find(e => e.tag == tag);
                 if (existingElement != null)
                 {
                     // スタック数を増加
@@ -60,11 +61,12 @@ public class PlayerUpgradeService : MonoBehaviour
                         tag = tag,
                         stackCount = 1
                     };
-                    totalTags.Add(newElement);
+                    total.Add(newElement);
                 }
             }
-
         }
+
+        return total;
     }
 
     /// <summary>

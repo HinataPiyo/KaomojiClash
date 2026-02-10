@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using Constants.Global;
 
 namespace UI.KaomojiBuild.Module
 {
@@ -37,7 +36,7 @@ namespace UI.KaomojiBuild.Module
 
                 level.text = $"レベル {index + 1}";
                 body.text = MentalData.GetConditionBodyByLevel(index + 1);
-                condition[index].style.backgroundColor = Color.gray;
+                condition[index].SetEnabled(false);     // 最初は全て無効化
             }
         }
     }

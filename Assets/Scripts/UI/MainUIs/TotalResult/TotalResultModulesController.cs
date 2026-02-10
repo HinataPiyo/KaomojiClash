@@ -65,11 +65,13 @@ namespace UI.TotalResult
 
             btn_Retry.clicked += () => 
             {
+                playerData.Kaomoji.AllResetPartsLevel();     // パーツのレベルリセット
                 SceneChangeManager.I.ChangeScene(ENUM.Scene.Battle);
                 Debug.Log("Retry Button Clicked");
             };
             btn_ToHome.clicked += () =>
             {
+                playerData.Kaomoji.AllResetPartsLevel();     // パーツのレベルリセット
                 SceneChangeManager.I.ChangeScene(ENUM.Scene.Home);
                 Debug.Log("To Title Button Clicked");
             };

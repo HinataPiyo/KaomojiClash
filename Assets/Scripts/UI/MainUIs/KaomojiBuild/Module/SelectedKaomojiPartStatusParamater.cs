@@ -11,11 +11,13 @@ namespace UI.KaomojiBuild.Module
     /// </summary>
     public class SelectedKaomojiPartStatusParamater : MonoBehaviour, IUIModuleHandler, IUIPartHandler
     {
+        [SerializeField] VisualTreeAsset temp_SkillTag;
         StatusParamater statusParamater;
 
         Label partType;     // 部位
         Label partName;     // パーツ名
         Label partIcon;     // アイコン
+        VisualElement skillTagContainer;
 
         public void Initialize(VisualElement moduleRoot)
         {
@@ -26,6 +28,8 @@ namespace UI.KaomojiBuild.Module
             partType = selected_part_info.Q<Label>("type-value");
             partName = selected_part_info.Q<Label>("name-value");
             partIcon = selected_part_info.Q<Label>("icon-value");
+
+            skillTagContainer = moduleRoot.Q<VisualElement>("skill-tags-box");
             
             Reset();
         }
@@ -46,6 +50,16 @@ namespace UI.KaomojiBuild.Module
             partType.text = Calculation.GetKaomojiPartTypeName(part.PartType);
             partName.text = part.Data.partName;
             partIcon.text = part.Data.part;
+
+            // スキルタグの表示を更新
+            skillTagContainer.Clear();
+            foreach(SkillTag tag in part.Data.SkillTags)
+            {
+                VisualElement tempRoot = temp_SkillTag.Instantiate();
+                new SkillTagUI(tempRoot, tag);
+                skillTagContainer.Add(tempRoot);
+            }
+
         }
 
         public void Reset()
@@ -54,6 +68,7 @@ namespace UI.KaomojiBuild.Module
             partType.text = "-";
             partName.text = "-";
             partIcon.text = string.Empty;
+            skillTagContainer.Clear();
         }
     }
 }

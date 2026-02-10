@@ -19,7 +19,7 @@ public class EnemyMental : Mental, IEnemyInitialize
 
     public override void TakeDamage(float damage)
     {
-        float guard = AreaManager.I.GetStatusParamByCultureLevel(StatusType.Guard, e_Data.guard)
+        float guard = AreaManager.I.GetStatusParamByCultureLevel(StatusType.Guard, e_Data.Status.guard)
                             * Calculation.GetDifficultyRate(dif);
         float reduct = damage - guard;
         currentHealth -= Mathf.Max(1f, reduct);     // 最低1ダメージ保証

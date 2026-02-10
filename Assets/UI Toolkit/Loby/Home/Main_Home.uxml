@@ -12,7 +12,7 @@
         <ui:Instance template="Temp_PanelTitle" name="Temp_PanelTitle" style="align-self: center; top: 2%;">
             <AttributeOverrides element-name="value" text="ホーム" />
         </ui:Instance>
-        <ui:Instance template="Module_KaomojiPreview" name="KaomojiPreview" style="position: absolute; right: 3%; top: 13%; width: 45%;" />
+        <ui:Instance template="Module_KaomojiPreview" name="KaomojiPreview" style="position: absolute; right: 3%; top: 17%; width: 45%; height: 27%;" />
         <ui:Instance template="Module_ArenaInformation" name="AreaInformation" style="position: absolute; width: 48%; height: 58%; top: 13%; left: 3%;" />
         <ui:Instance template="Module_BuildButtons" name="BuildButtons" style="position: absolute; right: 3%; top: 45%; width: 45%; height: 28%;" />
         <ui:Instance template="Module_OtherInformation" name="OtherInformationButtons" style="position: absolute; bottom: 3%; right: 3%; width: 60%; height: 23%;" />

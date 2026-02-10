@@ -12,7 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5842c694ebeac42a4da1a138c5efdd, type: 3}
   m_Name: AreaDatabase
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 33410e957b5f97744ab7c3417abd03e9, type: 2}
   areas:
   - {fileID: 11400000, guid: 33410e957b5f97744ab7c3417abd03e9, type: 2}
   - {fileID: 11400000, guid: 9d5c322fca95cf14fa447d948b371d27, type: 2}
+  - {fileID: 11400000, guid: 9b9f03722c05f1d4d855adab39a7a5b5, type: 2}
+  - {fileID: 11400000, guid: 36cd80f7428264d4b8a863ed73c0ff35, type: 2}
+  - {fileID: 11400000, guid: bc890094f9cb1944bb99a63c4bdafc1a, type: 2}
+  - {fileID: 11400000, guid: 4ebf9a109b6c387488e4fc42bc03651c, type: 2}
+  - {fileID: 11400000, guid: 2df68bb463a02794ca64492102bb1cf2, type: 2}
+  - {fileID: 11400000, guid: c061d218d39561a43964debb94da64dd, type: 2}
+  releaseConditions:
+  - type: 0
+    requiredCount: 0
+  - type: 1
+    requiredCount: 4
+  - type: 2
+    requiredCount: 9
+  - type: 3
+    requiredCount: 16
+  - type: 4
+    requiredCount: 24

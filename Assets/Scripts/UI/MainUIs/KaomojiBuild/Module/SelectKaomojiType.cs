@@ -13,11 +13,6 @@ namespace UI.KaomojiBuild.Module
 
         [SerializeField] AreaDatabase areaDB;
 
-        static readonly int Release_CultureLevel_Eyes = 1;
-        static readonly int Release_CultureLevel_Hands = 3;
-        static readonly int Release_CultureLevel_Decoration_First = 4;
-        static readonly int Release_CultureLevel_Decoration_Second = 5;
-
         void Awake()
         {
             moduleCtrl = GetComponent<KaomojiBuildModulesController>();
@@ -52,24 +47,7 @@ namespace UI.KaomojiBuild.Module
         /// <returns></returns>
         bool CheckIsCleared(ENUM.KaomojiPartType type)
         {
-            if(type == ENUM.KaomojiPartType.Eyes)
-            {
-                return areaDB.CheckIsClearedByCultureLevel(Release_CultureLevel_Eyes);
-            }
-            else if(type == ENUM.KaomojiPartType.Hands)
-            {
-                return areaDB.CheckIsClearedByCultureLevel(Release_CultureLevel_Hands);
-            }
-            else if(type == ENUM.KaomojiPartType.Decoration_First)
-            {
-                return areaDB.CheckIsClearedByCultureLevel(Release_CultureLevel_Decoration_First);
-            }
-            else if(type == ENUM.KaomojiPartType.Decoration_Second)
-            {
-                return areaDB.CheckIsClearedByCultureLevel(Release_CultureLevel_Decoration_Second);
-            }
-
-            return true;        // その他のタイプは常に解放されている
+            return areaDB.CheckIsClearedByCultureLevel(type);
         }
 
     }

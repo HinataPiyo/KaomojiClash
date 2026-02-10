@@ -1,15 +1,26 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_SkillTag" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_SkillTag.uxml?fileID=9197481963319205126&amp;guid=52c89602454a572499b5a51723bc1964&amp;type=3#Temp_SkillTag" />
     <ui:Template name="Temp_StatusParamater" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_StatusParamater.uxml?fileID=9197481963319205126&amp;guid=6387f6a48380b774ba9990e3e904175f&amp;type=3#Temp_StatusParamater" />
     <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Temp_StatusParamater_Type.uss?fileID=7433441132597879392&amp;guid=28e676ebba2b62d47b92d39711872319&amp;type=3#Temp_StatusParamater_Type" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Temp_StatusParamater_GrowthRate.uss?fileID=7433441132597879392&amp;guid=67c8b8c6a1fbec74baf63632d59054cd&amp;type=3#Temp_StatusParamater_GrowthRate" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/Temp_StatusParamater_ProgressBar.uss?fileID=7433441132597879392&amp;guid=93e0d985331441f43b550fdd8e99fc43&amp;type=3#Temp_StatusParamater_ProgressBar" />
     <ui:VisualElement name="root" class="panel" style="flex-direction: row;">
-        <ui:VisualElement name="face" style="flex-grow: 1; position: absolute; width: 100%; bottom: 10%; height: 45%; justify-content: flex-end; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-bottom-width: 6px;">
+        <ui:VisualElement name="parts-skill-tags-box" style="width: 60%; height: 45%; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; flex-direction: column; flex-wrap: wrap;">
+            <ui:Label name="title" text="- 合計スキル" style="font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); position: relative; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-style: bold;" />
+            <ui:VisualElement name="container" style="flex-grow: 1; flex-direction: row; flex-wrap: wrap;">
+                <ui:Instance template="Temp_SkillTag" />
+                <ui:Instance template="Temp_SkillTag" />
+                <ui:Instance template="Temp_SkillTag" />
+                <ui:Instance template="Temp_SkillTag" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="face" style="flex-grow: 1; position: absolute; width: 100%; bottom: 7%; height: 45%; justify-content: flex-end; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-bottom-width: 6px; border-top-width: 0; margin-top: 0;">
             <ui:Label text="(^ω^)" name="value" style="-unity-text-align: middle-center; font-size: 76px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="status-paramater" style="position: absolute; height: 210px; width: 280px; right: 0%; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
-            <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" class="display" style="flex-grow: 1;" />
+        <ui:VisualElement name="status-paramater" style="position: absolute; height: 48%; width: 280px; right: 0%; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
+            <ui:Label text="- 合計ステータス" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: bold; font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;);" />
+            <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" class="display" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

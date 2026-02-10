@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae91c5907439043479a4e353d3b638d8, type: 3}
-  m_Name: Area1_EnemyData 1
+  m_Name: EnemyData
   m_EditorClassIdentifier: 
   status:
-    speed: 2.1
-    health: 10
-    power: 2
+    speed: 2.2
+    health: 12
+    power: 4
+    guard: 1
     maxDragDistance: 3
     minLaunchDistance: 0.1
-    landingCooldown: 2
+    landingCooldown: 2.3
     reflectPower: 1.5
     mentalData: {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
-  guard: 0
-  launchDuration: 1
+  launchDuration: 0.8
   kaomoji:
-    mouth: {fileID: 11400000, guid: 0899cf25843677842bf92cc5b4a28eec, type: 2}
+    mouth: {fileID: 11400000, guid: 5c37e89a34db3234b86addc11d21055f, type: 2}
     eyes: {fileID: 0}
     hands: {fileID: 0}
     decoration_first: {fileID: 0}

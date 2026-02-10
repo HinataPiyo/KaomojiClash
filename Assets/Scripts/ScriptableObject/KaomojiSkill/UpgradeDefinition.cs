@@ -42,6 +42,8 @@ public abstract class SkillTag : ScriptableObject
     // 1スタック目〜Nスタック目の効果（画像の 1〜5 に相当）
     [SerializeField] protected List<StatusModifier> stackModifiers = new();
 
+    public string Name => displayName;
+
     /// <summary>
     /// 指定されたスタック数に対応する上昇値を取得する
     /// </summary>

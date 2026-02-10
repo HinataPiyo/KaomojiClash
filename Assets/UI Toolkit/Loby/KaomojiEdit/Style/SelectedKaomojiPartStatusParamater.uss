@@ -1,0 +1,17 @@
+.paramater .kaomojiedit .root {
+}
+
+.paramater .type {
+    font-size: 20px;
+}
+
+.paramater .growthrate {
+    font-size: 19px;
+    -unity-text-align: middle-right;
+}
+
+.paramater .kaomojiedit .unity-progress-bar__container {
+}
+
+.paramater .type-growthrate__box {
+}

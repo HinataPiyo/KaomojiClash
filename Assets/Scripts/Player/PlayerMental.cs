@@ -24,9 +24,10 @@ public class PlayerMental : Mental, IHeal
 
     public override void TakeDamage(float damage)
     {
-        float reductDamage = damage * Constants.DamageCalc.CalcTakenDamage(damage, Context.I.GetPlayerGuard());     
-        float finalDamage = Mathf.Max(1f, reductDamage); // 最低1ダメージ保証
-        currentHealth -= finalDamage;     // 最低1ダメージ保証
+        float guard = Context.I.GetPlayerGuard();
+        float finalDamage = Constants.DamageCalc.CalcTakenDamage(damage, guard);
+        Debug.Log($"Player TakeDamage: {damage} with Guard: {guard} => Reduced Damage: {finalDamage}");
+        currentHealth -= finalDamage;
 
         WorldCanvasManager.I.ShowDamageText(transform.position, finalDamage, Color.red);
         statusUI.UpdateHealth(currentHealth);

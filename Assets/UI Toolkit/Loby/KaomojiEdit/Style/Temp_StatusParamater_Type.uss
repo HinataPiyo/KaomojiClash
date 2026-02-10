@@ -1,7 +1,3 @@
-.display .type {
-    font-size: 16px;
-}
-
 .type {
     -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
     margin-top: 0;
@@ -12,5 +8,5 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
-    font-size: 178%;
+    font-size: 22px;
 }
