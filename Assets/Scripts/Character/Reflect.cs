@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Reflect : MonoBehaviour, ICharacterInitialize
 {
     protected Rigidbody2D rb;
-    const float REFRECT_SPEED_BORDER = 2.2f;
+    const float REFRECT_SPEED_BORDER = 1.5f;
     
     [SerializeField] GameObject hitEffectPrefab;
     protected CharacterData data;
@@ -46,9 +46,5 @@ public abstract class Reflect : MonoBehaviour, ICharacterInitialize
         return rb.linearVelocity.sqrMagnitude >= REFRECT_SPEED_BORDER;
     }
 
-    protected bool CanApplyDamage(Rigidbody2D otherRb)
-    {
-        // 相手より自分のほうが速い場合のみダメージを与える
-        return otherRb != null && rb.linearVelocity.sqrMagnitude > otherRb.linearVelocity.sqrMagnitude;
-    }
+    protected abstract bool CanApplyDamage(Rigidbody2D otherRb);
 }

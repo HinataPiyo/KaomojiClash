@@ -33,4 +33,10 @@ public class PlayerReflect : Reflect
             }
         }
     }
+
+    protected override bool CanApplyDamage(Rigidbody2D otherRb)
+    {
+        // 相手より自分のほうが速い場合のみダメージを与える
+        return otherRb != null && rb.linearVelocity.sqrMagnitude > otherRb.linearVelocity.sqrMagnitude;
+    }
 }
