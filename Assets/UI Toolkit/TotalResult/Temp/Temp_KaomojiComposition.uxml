@@ -1,9 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Development/Temp_KaomojiComposition.uss?fileID=7433441132597879392&amp;guid=e775f2bdba4a90f44ac598e636192307&amp;type=3#Temp_KaomojiComposition" />
+    <Style src="project://database/Assets/UI%20Toolkit/TotalResult/Style/Temp_KaomojiComposition.uss?fileID=7433441132597879392&amp;guid=e775f2bdba4a90f44ac598e636192307&amp;type=3#Temp_KaomojiComposition" />
     <Style src="project://database/Assets/UI%20Toolkit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
     <ui:VisualElement name="root" class="icon" style="width: 125px; height: 125px; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
-        <ui:Label text="装飾1" name="type" class="text" />
-        <ui:Label text="@" name="part" class="text" style="-unity-text-align: middle-center; position: absolute; width: 100%; height: 100%; font-size: 62px;" />
+        <ui:Label text="装飾1" name="type" class="text" style="background-color: rgb(51, 53, 51); border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; align-self: flex-start; font-size: 20px; padding-top: 3px; padding-right: 8px; padding-bottom: 3px; padding-left: 8px; left: -10%; top: -13%; color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-font-style: bold;" />
+        <ui:Label text="@" name="part" class="text" style="-unity-text-align: middle-center; position: absolute; width: 100%; height: 100%; font-size: 62px; padding-bottom: 18px;" />
         <ui:Label text="Lv9" name="level" class="text" style="position: absolute; right: 0%; bottom: 0%; -unity-text-align: lower-right;" />
     </ui:VisualElement>
 </ui:UXML>

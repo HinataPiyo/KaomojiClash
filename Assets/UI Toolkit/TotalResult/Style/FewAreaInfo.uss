@@ -3,7 +3,7 @@
     font-size: 36px;
     -unity-text-align: lower-right;
     margin-top: 0;
-    margin-right: 0;
+    margin-right: 6px;
     margin-bottom: 0;
     margin-left: 0;
     padding-top: 0;
