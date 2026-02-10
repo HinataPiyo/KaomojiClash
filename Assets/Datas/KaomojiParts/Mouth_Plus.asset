@@ -33,3 +33,5 @@ MonoBehaviour:
       growthRateType: 3
     maxDup: 50
     isInitDisplay: 1
+    skillTag:
+    - {fileID: 11400000, guid: e90db3a95baf4ed47bb45763167b1352, type: 2}

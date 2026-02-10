@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Temp_TextIcon" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_TextIcon.uxml?fileID=9197481963319205126&amp;guid=2aacb48f987e79e4abce682dca2d7b84&amp;type=3#Temp_TextIcon" />
-    <ui:Template name="Temp_StatusParamater" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_StatusParamater.uxml?fileID=9197481963319205126&amp;guid=6387f6a48380b774ba9990e3e904175f&amp;type=3#Temp_StatusParamater" />
     <ui:Template name="Temp_SkillTag" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_SkillTag.uxml?fileID=9197481963319205126&amp;guid=52c89602454a572499b5a51723bc1964&amp;type=3#Temp_SkillTag" />
+    <ui:Template name="Temp_StatusParamater" src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Template/Temp_StatusParamater.uxml?fileID=9197481963319205126&amp;guid=6387f6a48380b774ba9990e3e904175f&amp;type=3#Temp_StatusParamater" />
     <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
     <Style src="project://database/Assets/UI%20Toolkit/Style/Icon_Style.uss?fileID=7433441132597879392&amp;guid=7a86b48d2fe14424987693d9e93ca366&amp;type=3#Icon_Style" />
     <Style src="project://database/Assets/UI%20Toolkit/Loby/KaomojiEdit/Style/SelectedKaomojiPartStatusParamater.uss?fileID=7433441132597879392&amp;guid=613a1d8e8b85c924ba8dcf55bb917ba7&amp;type=3#SelectedKaomojiPartStatusParamater" />

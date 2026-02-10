@@ -16,13 +16,13 @@ MonoBehaviour:
     speed: 2
     health: 16
     power: 3
+    guard: 1
     maxDragDistance: 3
     minLaunchDistance: 0.1
     landingCooldown: 1
     reflectPower: 1.5
     mentalData: {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
-  guard: 0
-  launchDuration: 0.2
+  launchDuration: 0.6
   kaomoji:
     mouth: {fileID: 11400000, guid: c1471b614d1995549b86328892e90c1b, type: 2}
     eyes: {fileID: 0}
