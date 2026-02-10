@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3569af90a185f4f428fb519bf25634c7, type: 3}
-  m_Name: Area1_AreaData
+  m_Name: Area8_AreaData
   m_EditorClassIdentifier: 
   area:
-    spawnDatabase: {fileID: 11400000, guid: 08058e89a0c24d242ae65817d6f47562, type: 2}
-    cultureLevel: 1
+    spawnDatabase: {fileID: 11400000, guid: 494fa11692e411c4db76335e487a8b44, type: 2}
+    cultureLevel: 8
     kaomojiDensity: 0
   isClear: 0

@@ -50,6 +50,10 @@ namespace UI.KaomojiBuild.Module
             RefreshSkillTags(K);
         }
 
+        /// <summary>
+        /// スキルタグ表示を更新する
+        /// </summary>
+        /// <param name="K"></param>
         void RefreshSkillTags(KAOMOJI K)
         {
             // スキルタグ表示更新

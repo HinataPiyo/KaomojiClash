@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a1372d9d6abd474280edcca414ca33b, type: 3}
-  m_Name: Area1_EnemyDatabase
+  m_Name: Area6_EnemyDatabase
   m_EditorClassIdentifier: 
   enemyDatas:
-  - {fileID: 11400000, guid: 1370d74249f64b24491a84b7883ae0fc, type: 2}
-  - {fileID: 11400000, guid: 325b5a862fb540948b8bebfa18947dca, type: 2}
-  - {fileID: 11400000, guid: df3e7877d2611cc4aa7858c8b3e832e4, type: 2}
-  - {fileID: 11400000, guid: 4668e6b0b240c5f45b793bfff5808a63, type: 2}
+  - {fileID: 11400000, guid: f577c1ab58cd2b042977172b11d250b1, type: 2}
+  - {fileID: 11400000, guid: 8697e8fcec436fd469523a42dfb589bf, type: 2}
+  - {fileID: 11400000, guid: 6c088b264b315ec4b93755c949e7e214, type: 2}
+  - {fileID: 11400000, guid: 979c830dd6b409443a3325cb7355f781, type: 2}
   amountByDifficulties:
   - difficulty: 0
-    amount: 2
-  - difficulty: 1
     amount: 1
+  - difficulty: 1
+    amount: 2
   - difficulty: 2
-    amount: 0
+    amount: 2
   - difficulty: 3
     amount: 0

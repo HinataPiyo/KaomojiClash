@@ -38,7 +38,7 @@
                 <ui:Label text="たまに嵐が巻き起こる&#10;戦闘時、持続ダメージを受ける" name="nature-value" style="font-size: 22px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-font-style: normal; -unity-text-align: middle-center; flex-grow: 1; padding-bottom: 9px; white-space: normal;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Instance template="Temp_NormalButton" name="PlayButton" style="position: absolute; bottom: 4%; right: 3%; height: 22%; width: 30%;">
+        <ui:Instance template="Temp_NormalButton" name="PlayButton" style="position: absolute; bottom: 3%; right: 2%; height: 22%; width: 30%;">
             <AttributeOverrides element-name="Button" text="出撃" />
         </ui:Instance>
     </ui:VisualElement>
