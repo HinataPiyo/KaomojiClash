@@ -107,9 +107,9 @@ namespace Constants.Global
                 case GrowthRateType.Normal:
                     return 1f;
                 case GrowthRateType.High:
-                    return 1.20f;
+                    return 1.15f;
                 case GrowthRateType.VeryHigh:
-                    return 1.35f;
+                    return 1.2f;
                 default:
                     return 0.0f;
             }
@@ -136,15 +136,15 @@ namespace Constants.Global
             switch(type)
             {
                 case GrowthRateType.VeryLow:
-                    return baseBoderExp * 1.4f * level;
+                    return baseBoderExp * 1.25f * level;
                 case GrowthRateType.Low:
-                    return baseBoderExp * 1.2f * level;
+                    return baseBoderExp * 1.15f * level;
                 case GrowthRateType.Normal:
                     return baseBoderExp * 1.0f * level;
                 case GrowthRateType.High:
-                    return baseBoderExp * 0.8f * level;
+                    return baseBoderExp * 0.92f * level;
                 case GrowthRateType.VeryHigh:
-                    return baseBoderExp * 0.6f * level;
+                    return baseBoderExp * 0.85f * level;
                 default:
                     return 0.0f;
             }
