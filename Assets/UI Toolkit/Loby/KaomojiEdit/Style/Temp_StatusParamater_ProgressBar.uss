@@ -1,21 +1,19 @@
-.display .kaomojiedit .unity-progress-bar__container {
+.kaomojiedit .type-growthrate__box {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-bottom: 22px;
+}
+
+.kaomojiedit .unity-progress-bar__container {
     min-height: auto;
     max-height: none;
-    height: 79%;
+    justify-content: flex-end;
+    flex-grow: 1;
 }
 
-.display .kaomojiedit .unity-progress-bar__background {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-.display .kaomojiedit .unity-progress-bar__progress {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+.kaomojiedit {
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
@@ -24,6 +22,8 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
+    justify-content: flex-end;
+    height: 40%;
 }
 
 .stamina-progressbar .unity-progress-bar__progress {
@@ -51,21 +51,20 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
 }
 
 .kaomojiedit .unity-progress-bar__background {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-
-.kaomojiedit .unity-progress-bar__container {
-    min-height: auto;
-    max-height: none;
-    height: 100%;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    overflow: hidden;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
 }
