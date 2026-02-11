@@ -4,12 +4,9 @@ using UnityEngine.UIElements;
 
 namespace UI.KaomojiBuild.Module
 {
-    /// <summary>
-    /// 顔文字記号のパーツを選択するモジュール
-    /// </summary>
     public class SelectKaomojiParts : MonoBehaviour, IUIModuleHandler, IUIPartHandler
     {
-        [SerializeField] KaomojiPartsDatabase partsDatabase;
+        // [SerializeField] KaomojiPartsDatabase partsDatabase; // 削除
         [SerializeField] VisualTreeAsset temp_SelectKaomojiParts;
 
         KaomojiBuildModulesController modulesCtrl;
@@ -21,21 +18,15 @@ namespace UI.KaomojiBuild.Module
             modulesCtrl = GetComponent<KaomojiBuildModulesController>();
         }
 
-        /// <summary>
-        /// Managerクラスからこの関数が実行されRoot要素が渡される
-        /// </summary>
         public void Initialize(VisualElement moduleRoot)
         {
             this.moduleRoot = moduleRoot;
             list_view = moduleRoot.Q<ScrollView>();
             Reset();
 
-            SortByType(ENUM.KaomojiPartType.Mouth);      // 初期表示
+            SortByType(ENUM.KaomojiPartType.Mouth);
         }
 
-        /// <summary>
-        /// パーツを追加する
-        /// </summary>
         public void AssignPart(KaomojiPartData part)
         {
             VisualElement elem = temp_SelectKaomojiParts.Instantiate();
@@ -47,20 +38,16 @@ namespace UI.KaomojiBuild.Module
             button.clicked += () =>
             {
                 Debug.Log($"選択されたパーツ: {part.Data.part}");
-                // ここにパーツ選択時の処理を追加
-                // SelectedKaomojiPartStatuParamater　にDataを渡す
                 modulesCtrl.module_SKP_StatusParamater.AssignPart(part);
-                modulesCtrl.module_SD.AssignPart(part);     // ! 一旦ボタンを押下しただけで反映されるようにする
+                modulesCtrl.module_SD.AssignPart(part);
             };
 
-            // 表示非表示の制御
             bool isMaxDup = part.Data.IsMaxDup();
 
-            // 初期表示用のフラグが立っている場合
             if(part.Data.GetIsInitDisplayUI())
             {
-                isMaxDup = true;    // 強制的に表示
-                progress.highValue = 1;  // 最大値を1にしておく
+                isMaxDup = true;
+                progress.highValue = 1;
                 progress.value = 1;
             }
             else
@@ -69,29 +56,27 @@ namespace UI.KaomojiBuild.Module
                 progress.value = part.Data.CurrentDup;
             }
 
-            elem.SetEnabled(isMaxDup);      // DupCountが最大に達していれば表示
+            elem.SetEnabled(isMaxDup);
             
-            if(isMaxDup) progress.title = $"{part.Data.CurrentDup}";        // 最大に達していれば現在の所持数だけ表示
+            if(isMaxDup) progress.title = $"{part.Data.CurrentDup}";
             else progress.title = $"{part.Data.CurrentDup} / {part.Data.MaxDup}";
 
             list_view.Add(elem);
         }
 
-        /// <summary>
-        /// 指定したタイプのパーツのみを表示する
-        /// </summary>
-        /// <param name="type">顔文字の部位</param>
         public void SortByType(ENUM.KaomojiPartType type)
         {
             list_view.Clear();
-            var parts = partsDatabase.GetPartsByType(type).ToList();
+            
+            // KaomojiPartsManagerから取得
+            var parts = KaomojiPartsManager.Instance.GetPartsByType(type).ToList();
             
             // Enabled=Trueのものを前に、Falseのものを後ろにソート
             parts.Sort((a, b) =>
             {
                 bool aEnabled = a.Data.IsMaxDup() || a.Data.GetIsInitDisplayUI();
                 bool bEnabled = b.Data.IsMaxDup() || b.Data.GetIsInitDisplayUI();
-                return bEnabled.CompareTo(aEnabled);  // trueを前に
+                return bEnabled.CompareTo(aEnabled);
             });
             
             foreach (var part in parts)
@@ -100,9 +85,6 @@ namespace UI.KaomojiBuild.Module
             }
         }
 
-        /// <summary>
-        /// 表示をリセットする
-        /// </summary>
         public void Reset()
         {
             list_view.Clear();

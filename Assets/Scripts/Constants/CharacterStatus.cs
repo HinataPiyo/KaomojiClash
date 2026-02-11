@@ -335,8 +335,8 @@ namespace Constants
         [System.Serializable]
         public sealed class Speed : IKaomojiPartParameter
         {
-            public const float MIN_VALUE = -0.5f;
-            public const float MAX_VALUE = 0.5f;
+            public const float MIN_VALUE = -0.2f;
+            public const float MAX_VALUE = 0.2f;
             [Range(MIN_VALUE, MAX_VALUE), SerializeField] float value;
             [SerializeField] GrowthRateType growthRateType;     public GrowthRateType GrowthRateType => growthRateType;
             public float GetParameterByLevel(int level)
