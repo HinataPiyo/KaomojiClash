@@ -3780,9 +3780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04932ad05e6bf244fa18ad8b351893dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaDatas:
-  - {fileID: 11400000, guid: 33410e957b5f97744ab7c3417abd03e9, type: 2}
-  - {fileID: 11400000, guid: 9d5c322fca95cf14fa447d948b371d27, type: 2}
+  areaDatabase: {fileID: 11400000, guid: 0daa39e10d6247240aa677fe48a40353, type: 2}
 --- !u!4 &1271789815
 Transform:
   m_ObjectHideFlags: 0
