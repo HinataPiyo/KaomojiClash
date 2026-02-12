@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3569af90a185f4f428fb519bf25634c7, type: 3}
-  m_Name: Area_Lv01
+  m_Name: Area_Lv03
   m_EditorClassIdentifier: 
-  areaName: 1
+  areaName: 3
   area:
     spawnConfig:
       mode: 0
@@ -22,13 +22,13 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 7bb125988a92bd244a1fd6557d64d27f, type: 2}
       spawnAmounts:
       - difficulty: 0
-        amount: 3
+        amount: 1
       - difficulty: 1
         amount: 2
       - difficulty: 2
-        amount: 0
+        amount: 1
       - difficulty: 3
-        amount: 0
+        amount: 1
     mentalDataList: []
     partUnlockManager:
       unlockConfigs:
@@ -47,6 +47,6 @@ MonoBehaviour:
       - unlockCultureLevel: 21
         partType: 4
         description: "\u88C5\u98FE2"
-    cultureLevel: 1
+    cultureLevel: 3
     kaomojiDensity: 0.1
   isClear: 0

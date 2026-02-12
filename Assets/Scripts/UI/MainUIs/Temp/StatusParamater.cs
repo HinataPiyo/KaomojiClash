@@ -74,21 +74,21 @@ namespace UI.KaomojiBuild.Template
                 progressElement ??= progressBar.Q(className: PROGRESS_CLASS_NAME);
             }
 
-            public void SetInitProgress(ENUM.StatusType statusType, float magnification = 1f)
+            public void SetInitProgress(ENUM.StatusType statusType, float magnification = 1f, float partTypeMultiplier = 1f)
             {
                 switch (statusType)
                 {
                     case ENUM.StatusType.Speed:
-                        InitProgress(KaomojiPart.Speed.MIN_VALUE * magnification, KaomojiPart.Speed.MAX_VALUE * magnification);
+                        InitProgress(KaomojiPart.Speed.MIN_VALUE * magnification * partTypeMultiplier, KaomojiPart.Speed.MAX_VALUE * magnification * partTypeMultiplier);
                         break;
                     case ENUM.StatusType.Power:
-                        InitProgress(KaomojiPart.Power.MIN_VALUE * magnification, KaomojiPart.Power.MAX_VALUE * magnification);
+                        InitProgress(KaomojiPart.Power.MIN_VALUE * magnification * partTypeMultiplier, KaomojiPart.Power.MAX_VALUE * magnification * partTypeMultiplier);
                         break;
                     case ENUM.StatusType.Guard:
-                        InitProgress(KaomojiPart.Guard.MIN_VALUE * magnification, KaomojiPart.Guard.MAX_VALUE * magnification);
+                        InitProgress(KaomojiPart.Guard.MIN_VALUE * magnification * partTypeMultiplier, KaomojiPart.Guard.MAX_VALUE * magnification * partTypeMultiplier);
                         break;
                     case ENUM.StatusType.Stamina:
-                        InitProgress(KaomojiPart.Stamina.MIN_VALUE * magnification, KaomojiPart.Stamina.MAX_VALUE * magnification);
+                        InitProgress(KaomojiPart.Stamina.MIN_VALUE * magnification * partTypeMultiplier, KaomojiPart.Stamina.MAX_VALUE * magnification * partTypeMultiplier);
                         break;
                     default:
                         break;
@@ -167,10 +167,12 @@ namespace UI.KaomojiBuild.Template
         /// ステータスを表示する
         /// </summary>
         public void ShowStatus(KaomojiPart.Speed speed,KaomojiPart.Power power,
-        KaomojiPart.Guard guard, KaomojiPart.Stamina stamina)
+        KaomojiPart.Guard guard, KaomojiPart.Stamina stamina, ENUM.KaomojiPartType partType)
         {
             // ステータス表示のロジックをここに実装
             if (elements == null || elements.Length == 0) return;
+
+            float partTypeMultiplier = Calculation.GetPartTypeMultiplier(partType);
 
             for (int i = 0; i < elements.Length; i++)
             {
@@ -178,18 +180,22 @@ namespace UI.KaomojiBuild.Template
                 switch (elem.statusType)
                 {
                     case ENUM.StatusType.Speed:
+                        elem.SetInitProgress(ENUM.StatusType.Speed, 1f, partTypeMultiplier);
                         elem.SetProgress(speed.GetParameterByLevel(1));
                         elem.SetGrowthRateType(speed.GrowthRateType);
                         break;
                     case ENUM.StatusType.Power:
+                        elem.SetInitProgress(ENUM.StatusType.Power, 1f, partTypeMultiplier);
                         elem.SetProgress(power.GetParameterByLevel(1));
                         elem.SetGrowthRateType(power.GrowthRateType);
                         break;
                     case ENUM.StatusType.Guard:
+                        elem.SetInitProgress(ENUM.StatusType.Guard, 1f, partTypeMultiplier);
                         elem.SetProgress(guard.GetParameterByLevel(1));
                         elem.SetGrowthRateType(guard.GrowthRateType);
                         break;
                     case ENUM.StatusType.Stamina:
+                        elem.SetInitProgress(ENUM.StatusType.Stamina, 1f, partTypeMultiplier);
                         elem.SetProgress(stamina.GetParameterByLevel(1));
                         elem.SetGrowthRateType(stamina.GrowthRateType);
                         break;

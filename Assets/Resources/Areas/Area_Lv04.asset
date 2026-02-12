@@ -10,23 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3569af90a185f4f428fb519bf25634c7, type: 3}
-  m_Name: Area_Lv01
+  m_Name: Area_Lv04
   m_EditorClassIdentifier: 
-  areaName: 1
+  areaName: 4
   area:
     spawnConfig:
       mode: 0
       fixedEnemies:
-      - {fileID: 11400000, guid: 497e4d353ee313249aa8ba5905c08b54, type: 2}
-      - {fileID: 11400000, guid: 43b89c986ac63194f91758e501b078c3, type: 2}
-      - {fileID: 11400000, guid: 7bb125988a92bd244a1fd6557d64d27f, type: 2}
+      - {fileID: 11400000, guid: 609e2451e2810dd49bd8f2497e863461, type: 2}
+      - {fileID: 11400000, guid: 653fdfb5e5fac4a4ea32135074b72d93, type: 2}
+      - {fileID: 11400000, guid: 5f99aa3c43c7dee49ae1cc8094b348a3, type: 2}
+      - {fileID: 11400000, guid: 40b323eca19c45f458021e665c4a060f, type: 2}
       spawnAmounts:
       - difficulty: 0
-        amount: 3
+        amount: 1
       - difficulty: 1
         amount: 2
       - difficulty: 2
-        amount: 0
+        amount: 2
       - difficulty: 3
         amount: 0
     mentalDataList: []
@@ -47,6 +48,6 @@ MonoBehaviour:
       - unlockCultureLevel: 21
         partType: 4
         description: "\u88C5\u98FE2"
-    cultureLevel: 1
+    cultureLevel: 4
     kaomojiDensity: 0.1
   isClear: 0

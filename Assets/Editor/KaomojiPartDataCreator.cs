@@ -190,7 +190,7 @@ public class KaomojiPartDataCreator : EditorWindow
         EditorGUILayout.LabelField($"{GetPrefix(partType)}{fileName}.asset", prefixStyle, GUILayout.Height(18));
 
         EditorGUILayout.LabelField("倍率", EditorStyles.miniLabel);
-        EditorGUILayout.LabelField($"{GetPartTypeMultiplier(partType) * 100}%", prefixStyle, GUILayout.Height(18));
+        EditorGUILayout.LabelField($"{Calculation.GetPartTypeMultiplier(partType) * 100}%", prefixStyle, GUILayout.Height(18));
 
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
@@ -304,7 +304,7 @@ public class KaomojiPartDataCreator : EditorWindow
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("経験値成長", GUILayout.Width(100));
             levelGrowth = (GrowthRateType)EditorGUILayout.EnumPopup(levelGrowth);
-            EditorGUILayout.LabelField(GetGrowthStar(levelGrowth), GUILayout.Width(80));
+            EditorGUILayout.LabelField(Calculation.GetGrowthRateStar(levelGrowth), GUILayout.Width(80));
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
@@ -381,7 +381,7 @@ public class KaomojiPartDataCreator : EditorWindow
     /// </summary>
     private void RandomizeStatValues()
     {
-        float multiplier = GetPartTypeMultiplier(partType);
+        float multiplier = Calculation.GetPartTypeMultiplier(partType);
 
         // 各ステータスの範囲
         float speedMin = KaomojiPart.Speed.MIN_VALUE * multiplier;
@@ -513,7 +513,7 @@ public class KaomojiPartDataCreator : EditorWindow
             boxStyle.fontStyle = FontStyle.Bold;
 
             EditorGUILayout.BeginVertical(boxStyle, GUILayout.Width(90));
-            EditorGUILayout.LabelField(GetGrowthStar(rate), new GUIStyle(EditorStyles.miniLabel) { alignment = TextAnchor.MiddleCenter });
+            EditorGUILayout.LabelField(Calculation.GetGrowthRateStar(rate), new GUIStyle(EditorStyles.miniLabel) { alignment = TextAnchor.MiddleCenter });
             EditorGUILayout.LabelField($"{used}/{allowed}", new GUIStyle(EditorStyles.miniLabel)
             {
                 alignment = TextAnchor.MiddleCenter,
@@ -541,7 +541,7 @@ public class KaomojiPartDataCreator : EditorWindow
         EditorGUILayout.LabelField(name, titleStyle);
 
         // プログレスバー的な表示
-        float multiplier = GetPartTypeMultiplier(partType);
+        float multiplier = Calculation.GetPartTypeMultiplier(partType);
         float min = 0f, max = 0f;
 
         if (name == "Speed")
@@ -610,7 +610,7 @@ public class KaomojiPartDataCreator : EditorWindow
         growthStyle.alignment = TextAnchor.MiddleCenter;
         growthStyle.normal.textColor = Color.yellow;
         growthStyle.fontStyle = FontStyle.Bold;
-        EditorGUILayout.LabelField($"{GetGrowthStar(growth)} {growth}", growthStyle);
+        EditorGUILayout.LabelField($"{Calculation.GetGrowthRateStar(growth)} {growth}", growthStyle);
 
         EditorGUILayout.EndVertical();
     }
@@ -669,39 +669,13 @@ public class KaomojiPartDataCreator : EditorWindow
     private float CalculateStatByLevel(float baseValue, GrowthRateType growthType, int level)
     {
         if (level <= 1) return baseValue;
-        float growthRate = GetGrowthRateValue(growthType);
+        float growthRate = Calculation.GetGrowthRateValue(growthType);
         return baseValue * level + (growthRate * baseValue);
-    }
-
-    private float GetGrowthRateValue(GrowthRateType type)
-    {
-        switch (type)
-        {
-            case GrowthRateType.VeryLow: return 0.85f;
-            case GrowthRateType.Low: return 0.92f;
-            case GrowthRateType.Normal: return 1.0f;
-            case GrowthRateType.High: return 1.15f;
-            case GrowthRateType.VeryHigh: return 1.2f;
-            default: return 1.0f;
-        }
-    }
-
-    private string GetGrowthStar(GrowthRateType type)
-    {
-        switch (type)
-        {
-            case GrowthRateType.VeryLow: return "★";
-            case GrowthRateType.Low: return "★★";
-            case GrowthRateType.Normal: return "★★★";
-            case GrowthRateType.High: return "★★★★";
-            case GrowthRateType.VeryHigh: return "★★★★★";
-            default: return "-";
-        }
     }
 
     private float GetCurrentTotalNormalized()
     {
-        float multiplier = GetPartTypeMultiplier(partType);
+        float multiplier = Calculation.GetPartTypeMultiplier(partType);
 
         float normalizedSpeed = NormalizeValue(speedValue, KaomojiPart.Speed.MIN_VALUE * multiplier, KaomojiPart.Speed.MAX_VALUE * multiplier);
         float normalizedPower = NormalizeValue(powerValue, KaomojiPart.Power.MIN_VALUE * multiplier, KaomojiPart.Power.MAX_VALUE * multiplier);
@@ -718,20 +692,7 @@ public class KaomojiPartDataCreator : EditorWindow
 
     private float GetStatBudget()
     {
-        return 2.0f * GetPartTypeMultiplier(partType);
-    }
-
-    private float GetPartTypeMultiplier(KaomojiPartType type)
-    {
-        switch (type)
-        {
-            case KaomojiPartType.Mouth: return 1.0f;
-            case KaomojiPartType.Eyes: return 0.5f;
-            case KaomojiPartType.Hands: return 0.3f;
-            case KaomojiPartType.Decoration_First:
-            case KaomojiPartType.Decoration_Second: return 0.1f;
-            default: return 1.0f;
-        }
+        return 2.0f * Calculation.GetPartTypeMultiplier(partType);
     }
 
     private string GetPrefix(KaomojiPartType type)

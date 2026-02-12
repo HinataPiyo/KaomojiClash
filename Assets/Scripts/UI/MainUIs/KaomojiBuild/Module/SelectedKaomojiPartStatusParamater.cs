@@ -45,7 +45,7 @@ namespace UI.KaomojiBuild.Module
             KaomojiPart.Guard guard = part.Data.guard;
             KaomojiPart.Stamina stamina = part.Data.stamina;
 
-            statusParamater.ShowStatus(speed, power, guard, stamina);
+            statusParamater.ShowStatus(speed, power, guard, stamina, part.PartType);
 
             partType.text = Calculation.GetKaomojiPartTypeName(part.PartType);
             partName.text = part.Data.partName;

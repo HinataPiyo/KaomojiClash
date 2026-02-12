@@ -8,6 +8,21 @@ namespace Constants
     [System.Serializable]
     public class AreaBuild
     {
+        public static readonly int MouthReleaseLevel = 0;
+        public static readonly int EyesReleaseLevel = 3;
+        public static readonly int HandsReleaseLevel = 5;
+        public static readonly int DecorationFirstReleaseLevel = 10;
+        public static readonly int DecorationSecondReleaseLevel = 15;
+
+        public static readonly Dictionary<KaomojiPartType, int> PartTypeToReleaseLevel = new Dictionary<KaomojiPartType, int>
+        {
+            { KaomojiPartType.Mouth, MouthReleaseLevel },
+            { KaomojiPartType.Eyes, EyesReleaseLevel },
+            { KaomojiPartType.Hands, HandsReleaseLevel },
+            { KaomojiPartType.Decoration_First, DecorationFirstReleaseLevel },
+            { KaomojiPartType.Decoration_Second, DecorationSecondReleaseLevel }
+        };
+
         [Header("敵出現設定")]
         public EnemySpawnConfig spawnConfig = new EnemySpawnConfig();
         

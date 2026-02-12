@@ -139,8 +139,15 @@ public class AreaManager : MonoBehaviour
     /// <returns></returns>
     public bool CheckIsClearedByCultureLevel(ENUM.KaomojiPartType type)
     {
-        int level = AreaData.PartTypeToReleaseLevel[type];
-        return CurrentAreaData.Build.cultureLevel >= level;
+        int level = AreaBuild.PartTypeToReleaseLevel[type];
+        for (int i = 0; i < cachedAreas.Length; i++)
+        {
+            if (cachedAreas[i].Build.cultureLevel >= level)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>

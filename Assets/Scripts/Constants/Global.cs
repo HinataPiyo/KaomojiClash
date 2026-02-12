@@ -96,7 +96,7 @@ namespace Constants.Global
         /// <summary>
         /// 記号のレベルアップ時の成長率を取得する関数
         /// </summary>
-        public static float GetGrowthRate(GrowthRateType type)
+        public static float GetGrowthRateValue(GrowthRateType type)
         {
             switch(type)
             {
@@ -115,9 +115,6 @@ namespace Constants.Global
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public static float GetExperienceByDifficultyAndLevel(Difficulty difficulty, int level)
         {
             int baseExp = 100;
@@ -147,6 +144,22 @@ namespace Constants.Global
                     return baseBoderExp * 0.85f * level;
                 default:
                     return 0.0f;
+            }
+        }
+
+        /// <summary>
+        /// パーツタイプに応じてレベルアップ時の上昇値を制限
+        /// </summary>
+        public static float GetPartTypeMultiplier(KaomojiPartType type)
+        {
+            switch (type)
+            {
+                case KaomojiPartType.Mouth: return 1.0f;
+                case KaomojiPartType.Eyes: return 0.5f;
+                case KaomojiPartType.Hands: return 0.3f;
+                case KaomojiPartType.Decoration_First:
+                case KaomojiPartType.Decoration_Second: return 0.1f;
+                default: return 1.0f;
             }
         }
 
