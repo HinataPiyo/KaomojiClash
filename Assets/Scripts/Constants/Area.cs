@@ -2,33 +2,44 @@ namespace Constants
 {
     using UnityEngine;
     using ENUM;
+    using System.Collections.Generic;
 
     [System.Serializable]
     public class AreaBuild
     {
-        public EnemyDatabase spawnDatabase; // 出現する敵のデータベース
-        [Header("文化圏レベル")] public int cultureLevel;            // 文化圏レベル
-        [Header("顔文字密度(%)")] public float kaomojiDensity;        // 顔文字密度(%表記)
+        [Header("敵出現設定")]
+        public EnemySpawnConfig spawnConfig = new EnemySpawnConfig();
 
-        static readonly float BaseCultureLevelMultiplier = 1f;   // 基本文化圏レベル倍率
+        [Header("文化圏レベル")]
+        public int cultureLevel = 1;
+
+        [Header("顔文字密度(%)")]
+        public float kaomojiDensity = 0.5f;
+
+        static readonly float BaseCultureLevelMultiplier = 1f;
 
         /// <summary>
-        /// 文化圏レベルに応じたマルチプライヤーを取得する
+        /// 文化圏レベルに応じたマルチプライヤーを取得する（デフォルト15%増加）
         /// </summary>
-        /// <param name="cultureLevel">単純なレベル</param>
-        /// <returns>敵のステータスを上昇する倍率</returns>
         public static float GetCultureLevelMultiplier(int cultureLevel)
         {
-            float multiplier = BaseCultureLevelMultiplier + ((cultureLevel - 1) * 0.15f);
+            return GetCultureLevelMultiplier(cultureLevel, 0.15f);
+        }
+
+        /// <summary>
+        /// 文化圏レベルに応じたマルチプライヤーを取得する（カスタム増加率）
+        /// </summary>
+        /// <param name="cultureLevel">文化圏レベル</param>
+        /// <param name="increaseRate">1レベルごとの増加率（例: 0.15 = 15%）</param>
+        public static float GetCultureLevelMultiplier(int cultureLevel, float increaseRate)
+        {
+            float multiplier = BaseCultureLevelMultiplier + ((cultureLevel - 1) * increaseRate);
             return multiplier;
         }
 
         /// <summary>
         /// 文化圏レベルに応じた敵の平均レベルを取得する
-        /// Enemyにレベルは存在しないが、強さの指標として利用する
         /// </summary>
-        /// <param name="cultureLevel"></param>
-        /// <returns></returns>
         public static int GetEnemyAverageLevel(int cultureLevel)
         {
             return cultureLevel + Mathf.FloorToInt(GetCultureLevelMultiplier(cultureLevel) * cultureLevel);
@@ -37,12 +48,9 @@ namespace Constants
         /// <summary>
         /// Waveの難易度に応じた敵の平均レベルを取得する
         /// </summary>
-        /// <param name="cultureLevel"></param>
-        /// <param name="difficulty"></param>
-        /// <returns></returns>
         public static int GetEnemyAverageLevelByWaveDifficulty(int cultureLevel, Difficulty difficulty)
         {
-            switch(difficulty)
+            switch (difficulty)
             {
                 case Difficulty.Easy:
                     return Mathf.Max(1, GetEnemyAverageLevel(cultureLevel) - 2);
@@ -55,6 +63,14 @@ namespace Constants
                 default:
                     return GetEnemyAverageLevel(cultureLevel);
             }
+        }
+
+        /// <summary>
+        /// 文化圏レベルから顔文字密度を自動計算
+        /// </summary>
+        public static float CalculateKaomojiDensity(int cultureLevel)
+        {
+            return Mathf.Clamp(0.3f + (cultureLevel * 0.05f), 0.3f, 0.9f);
         }
     }
 }

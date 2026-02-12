@@ -10,24 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acb1bcfc0d329534bb6adb7af69bb262, type: 3}
-  m_Name: Mouth_Sharp
+  m_Name: Eyes_Caret
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
-  partType: 0
+  partType: 1
   data:
-    partName: "\u30B7\u30E3\u30FC\u30D7"
-    part: "\uFF03"
+    partName: "\u30AD\u30E3\u30EC\u30C3\u30C8"
+    part: ^^
     levelDetail:
-      growthRateType: 0
-    speed:
-      value: 0.051
-      growthRateType: 3
-    power:
-      value: 0.248
-      growthRateType: 2
-    guard:
-      value: 0.001
       growthRateType: 1
+    speed:
+      value: 0.038
+      growthRateType: 2
+    power:
+      value: 0.031
+      growthRateType: 3
+    guard:
+      value: 0.006
+      growthRateType: 0
     stamina:
-      value: 0.2
-      growthRateType: 4
+      value: 0.017
+      growthRateType: 0
+    maxDup: 50
+    isInitDisplay: 1
+    skillTag: []
