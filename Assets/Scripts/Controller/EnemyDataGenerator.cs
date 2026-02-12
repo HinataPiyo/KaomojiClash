@@ -16,7 +16,7 @@ public static class EnemyDataGenerator
     /// <summary>
     /// 文化圏レベルと難易度に基づいてランダムな敵を生成
     /// </summary>
-    public static EnemyData GenerateRandomEnemy(int cultureLevel, Difficulty difficulty, List<KaomojiPartType> excludeTypes = null, PartUnlockManager partUnlockManager = null)
+    public static EnemyData GenerateRandomEnemy(int cultureLevel, Difficulty difficulty, List<KaomojiPartType> excludeTypes = null, PartUnlockManager partUnlockManager = null, MentalData mentalData = null)
     {
         // 利用可能なパーツを取得
         var allParts = GetAvailablePartsForEnemy(cultureLevel, difficulty, excludeTypes, partUnlockManager);
@@ -37,7 +37,7 @@ public static class EnemyDataGenerator
         }
         
         // ランダムにパーツを選択して敵を構築
-        bool success = BuildEnemyKaomoji(enemy, allParts, cultureLevel, difficulty);
+        bool success = BuildEnemyKaomoji(enemy, allParts, cultureLevel, difficulty, mentalData);
         
         if (!success)
         {
@@ -118,7 +118,7 @@ public static class EnemyDataGenerator
     /// <summary>
     /// 敵の顔文字を構築
     /// </summary>
-    private static bool BuildEnemyKaomoji(EnemyData enemy, List<KaomojiPartData> availableParts, int cultureLevel, Difficulty difficulty)
+    private static bool BuildEnemyKaomoji(EnemyData enemy, List<KaomojiPartData> availableParts, int cultureLevel, Difficulty difficulty, MentalData mentalData)
     {
         if (enemy == null)
         {
@@ -163,7 +163,7 @@ public static class EnemyDataGenerator
             Debug.LogError("'kaomoji' property not found in EnemyData!");
             Debug.LogError("EnemyDataの全プロパティを確認:");
             
-            // デバッグ用: 全プロパティを列挙
+            // デバッグ用: 全プロパティを列���
             SerializedProperty iterator = serializedEnemy.GetIterator();
             if (iterator.NextVisible(true))
             {
@@ -212,7 +212,7 @@ public static class EnemyDataGenerator
             }
         }
         
-        // Hands（オプシ��ン：50%）
+        // Hands（オプション：50%）
         if (handsParts.Count > 0 && Random.value > 0.5f)
         {
             var selectedHands = handsParts[Random.Range(0, handsParts.Count)];
@@ -248,6 +248,34 @@ public static class EnemyDataGenerator
             }
         }
         
+        // ===== MentalData設定 =====
+        if (mentalData != null)
+        {
+            SerializedProperty statusProp = serializedEnemy.FindProperty("status");
+            if (statusProp != null)
+            {
+                SerializedProperty mentalDataProp = statusProp.FindPropertyRelative("mentalData");
+                if (mentalDataProp != null)
+                {
+                    // MentalDataのSOを直接設定
+                    mentalDataProp.objectReferenceValue = mentalData;
+                    Debug.Log($"MentalData assigned: 精神力={mentalData.maxMental}, 括弧={mentalData.faceline}");
+                }
+                else
+                {
+                    Debug.LogWarning("'mentalData' property not found in status");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("'status' property not found in EnemyData");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("MentalData is null! 括弧が表示されません");
+        }
+        
         try
         {
             serializedEnemy.ApplyModifiedProperties();
@@ -261,7 +289,7 @@ public static class EnemyDataGenerator
         return anyPartAssigned;
         
         #else
-        // ランタイムでは直接設定（Setterメソッドが必要）
+        // ランタイムでは直接設定
         bool anyPartAssigned = false;
         
         if (eyesParts.Count > 0)
@@ -291,6 +319,12 @@ public static class EnemyDataGenerator
             enemy.Kaomoji.SetDecorationSecond(deco2Parts[Random.Range(0, deco2Parts.Count)]);
         }
         
+        // MentalData設定（ランタイム）
+        if (mentalData != null && enemy.Status != null)
+        {
+            enemy.Status.mentalData = mentalData;
+        }
+        
         return anyPartAssigned;
         #endif
     }
@@ -298,7 +332,7 @@ public static class EnemyDataGenerator
     /// <summary>
     /// 固定敵と自動生成敵を組み合わせて敵リストを作成
     /// </summary>
-    public static List<EnemyData> GenerateEnemyList(EnemySpawnConfig config, int cultureLevel, Difficulty difficulty, int count, PartUnlockManager partUnlockManager = null)
+    public static List<EnemyData> GenerateEnemyList(EnemySpawnConfig config, int cultureLevel, Difficulty difficulty, int count, PartUnlockManager partUnlockManager = null, AreaBuild areaBuild = null)
     {
         var enemies = new List<EnemyData>();
         
@@ -320,7 +354,10 @@ public static class EnemyDataGenerator
         int remainingCount = count - fixedCount;
         for (int i = 0; i < remainingCount; i++)
         {
-            var enemy = GenerateRandomEnemy(cultureLevel, difficulty, config.excludeTypes, partUnlockManager);
+            // AreaBuildからランダムにMentalDataを取得
+            MentalData mentalData = areaBuild?.GetRandomMentalData();
+            
+            var enemy = GenerateRandomEnemy(cultureLevel, difficulty, config.excludeTypes, partUnlockManager, mentalData);
             if (enemy != null)
             {
                 enemies.Add(enemy);

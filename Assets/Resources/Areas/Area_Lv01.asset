@@ -27,6 +27,8 @@ MonoBehaviour:
         amount: 0
       - difficulty: 3
         amount: 0
+    mentalDataList:
+    - {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
     partUnlockManager:
       unlockConfigs:
       - unlockCultureLevel: 1

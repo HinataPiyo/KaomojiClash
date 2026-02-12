@@ -52,13 +52,14 @@ public class EnemySpawnController : MonoBehaviour
 
         var areaData = AreaManager.I.CurrentAreaData;
         var spawnConfig = areaData.Build.spawnConfig;
-        var partUnlockManager = areaData.Build.partUnlockManager; // 部位解放設定を取得
+        var partUnlockManager = areaData.Build.partUnlockManager;
         int cultureLevel = areaData.Build.cultureLevel;
 
         Debug.Log($"=== 敵生成開始 ===");
         Debug.Log($"エリア: {areaData.AreaName}");
         Debug.Log($"文化圏レベル: {cultureLevel}");
         Debug.Log($"生成モード: {spawnConfig.mode}");
+        Debug.Log($"MentalDataリスト: {areaData.Build.mentalDataList.Count} 個");
 
         currentAreaEnemies.Clear();
 
@@ -74,7 +75,8 @@ public class EnemySpawnController : MonoBehaviour
                 cultureLevel,
                 amountData.difficulty,
                 amountData.amount,
-                partUnlockManager  // 部位解放設定を渡す
+                partUnlockManager,
+                areaData.Build  // AreaBuildを渡す
             );
 
             currentAreaEnemies.AddRange(enemies);
