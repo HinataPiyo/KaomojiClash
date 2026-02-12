@@ -156,7 +156,6 @@ namespace Constants
 
             string _left_eye = SeparatePart(eyes?.Data.part, 0);
             string _right_eye = SeparatePart(eyes?.Data.part, 1);
-            Debug.Log("口パーツ: " + mouth?.Data.part);
             string _mouth = mouth?.Data.part;
             // string left_hands = SeparatePart(K.hands.Data.part, 0);
             // string right_hands = SeparatePart(K.hands.Data.part, 1);
