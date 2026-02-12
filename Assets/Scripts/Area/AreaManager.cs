@@ -1,6 +1,7 @@
 using Constants;
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
 public class AreaManager : MonoBehaviour
 {
@@ -39,21 +40,37 @@ public class AreaManager : MonoBehaviour
         if (loadedAreas.Length == 0)
         {
             Debug.LogWarning("エリアが見つかりません！Assets/Resources/Areas/ フォルダにAreaDataを配置してください。");
+            cachedAreas = new AreaData[0];
+            return;
+        }
+
+        // nullチェックとバリデーション
+        var validAreas = new List<AreaData>();
+        foreach (var area in loadedAreas)
+        {
+            if (area != null && area.Build != null && area.Build.spawnConfig != null)
+            {
+                validAreas.Add(area);
+                Debug.Log($"  ✓ {area.AreaName} (Lv{area.Build.cultureLevel})");
+            }
+            else
+            {
+                Debug.LogWarning($"  ✕ 無効なAreaDataをスキップしました: {(area != null ? area.name : "null")}");
+            }
         }
 
         // 文化圏レベル順にソート
-        cachedAreas = loadedAreas.OrderBy(a => a.Build.cultureLevel).ToArray();
-
-        foreach (var area in cachedAreas)
-        {
-            Debug.Log($"  - {area.AreaName} (Lv{area.Build.cultureLevel})");
-        }
+        cachedAreas = validAreas.OrderBy(a => a.Build.cultureLevel).ToArray();
 
         // デフォルトで最初のエリアを設定
         if (cachedAreas.Length > 0)
         {
             SetCurrentAreaData(0);
             Debug.Log($"現在のエリアを設定: {CurrentAreaData.AreaName}");
+        }
+        else
+        {
+            Debug.LogError("有効なエリアが1つもありません！");
         }
 
         Debug.Log("=== AreaManager: 読み込み完了 ===");
@@ -113,6 +130,17 @@ public class AreaManager : MonoBehaviour
             default:
                 return baseValue;
         }
+    }
+
+    /// <summary>
+    /// 文化圏レベルで解放済みかチェック
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    public bool CheckIsClearedByCultureLevel(ENUM.KaomojiPartType type)
+    {
+        int level = AreaData.PartTypeToReleaseLevel[type];
+        return CurrentAreaData.Build.cultureLevel >= level;
     }
 
     /// <summary>

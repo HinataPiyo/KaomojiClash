@@ -13,16 +13,22 @@ public class AreaDataCreator : EditorWindow
     private int cultureLevel = 1;
     private string fileName = "";
     
-    // 敵出現設定
-    private GenerationMode generationMode = GenerationMode.SemiAuto;
+    // 敵設定
     private List<EnemyData> fixedEnemies = new List<EnemyData>();
-    private bool[] excludeTypes = new bool[5]; // KaomojiPartTypeの数
     
     // 難易度別出現数
     private int easyAmount = 2;
     private int normalAmount = 3;
     private int hardAmount = 2;
     private int extremeAmount = 1;
+    
+    // 部位解放設定
+    private List<PartUnlockConfig> partUnlockConfigs = new List<PartUnlockConfig>();
+    private bool showPartUnlockSettings = true;
+    
+    // MentalDataリスト
+    private List<MentalData> mentalDataList = new List<MentalData>();
+    private bool showMentalDataSettings = true;
     
     // 詳細設定
     private float kaomojiDensity = 0.5f;
@@ -41,14 +47,30 @@ public class AreaDataCreator : EditorWindow
     public static void ShowWindow()
     {
         var window = GetWindow<AreaDataCreator>("エリアデータ作成");
-        window.minSize = new Vector2(650, 750);
+        window.minSize = new Vector2(650, 800);
     }
 
     private void OnEnable()
     {
         // 初期化
         UpdateAutoValues();
+        InitializePartUnlockConfigs();
         GeneratePreview();
+    }
+    
+    /// <summary>
+    /// 部位解放設定の初期化
+    /// </summary>
+    private void InitializePartUnlockConfigs()
+    {
+        partUnlockConfigs = new List<PartUnlockConfig>()
+        {
+            new PartUnlockConfig { unlockCultureLevel = 1, partType = KaomojiPartType.Mouth, description = "口（基本）" },
+            new PartUnlockConfig { unlockCultureLevel = 6, partType = KaomojiPartType.Eyes, description = "目" },
+            new PartUnlockConfig { unlockCultureLevel = 11, partType = KaomojiPartType.Hands, description = "手" },
+            new PartUnlockConfig { unlockCultureLevel = 16, partType = KaomojiPartType.Decoration_First, description = "装飾1" },
+            new PartUnlockConfig { unlockCultureLevel = 21, partType = KaomojiPartType.Decoration_Second, description = "装飾2" }
+        };
     }
 
     private void OnGUI()
@@ -61,8 +83,17 @@ public class AreaDataCreator : EditorWindow
         // ========== 基本情報 ==========
         DrawBasicInfo();
 
-        // ========== 敵出現設定 ==========
-        DrawEnemySpawnSettings();
+        // ========== MentalData設定 ==========
+        DrawMentalDataSettings();
+
+        // ========== 敵リスト設定 ==========
+        DrawEnemyListSettings();
+
+        // ========== 部位解放設定 ==========
+        DrawPartUnlockSettings();
+
+        // ========== 難易度別出現数 ==========
+        DrawDifficultyAmounts();
 
         // ========== プレビュー ==========
         DrawPreview();
@@ -96,7 +127,6 @@ public class AreaDataCreator : EditorWindow
         cultureLevel = EditorGUILayout.IntSlider("文化圏レベル", cultureLevel, 1, 100);
         if (EditorGUI.EndChangeCheck())
         {
-            // 文化圏レベル変更時に自動計算
             UpdateAutoValues();
             GeneratePreview();
         }
@@ -127,131 +157,162 @@ public class AreaDataCreator : EditorWindow
     }
 
     /// <summary>
-    /// 敵出現設定セクション
+    /// MentalData設定セクション
     /// </summary>
-    private void DrawEnemySpawnSettings()
+    private void DrawMentalDataSettings()
     {
         EditorGUILayout.BeginVertical("box");
         
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("🎲 敵出現設定", EditorStyles.boldLabel);
+        showMentalDataSettings = EditorGUILayout.Foldout(showMentalDataSettings, "🧠 MentalData設定", true, EditorStyles.foldoutHeader);
         
-        GUI.backgroundColor = new Color(0.5f, 1f, 0.5f);
-        if (GUILayout.Button("🎲 再生成", GUILayout.Width(100), GUILayout.Height(20)))
+        GUI.backgroundColor = new Color(1f, 0.9f, 0.5f);
+        if (GUILayout.Button("全てクリア", GUILayout.Width(100), GUILayout.Height(20)))
         {
-            GeneratePreview();
+            if (EditorUtility.DisplayDialog("確認", "全てのMentalDataをクリアしますか？", "はい", "いいえ"))
+            {
+                mentalDataList.Clear();
+                GeneratePreview();
+            }
         }
         GUI.backgroundColor = Color.white;
         
         EditorGUILayout.EndHorizontal();
         
-        EditorGUILayout.Space(5);
-        
-        // 生成モード選択
-        EditorGUILayout.LabelField("生成モード", EditorStyles.boldLabel);
-        EditorGUI.BeginChangeCheck();
-        
-        generationMode = (GenerationMode)EditorGUILayout.EnumPopup(generationMode);
-        
-        if (EditorGUI.EndChangeCheck())
+        if (showMentalDataSettings)
         {
-            GeneratePreview();
-        }
-        
-        EditorGUILayout.Space(5);
-        
-        // モード別設定
-        switch (generationMode)
-        {
-            case GenerationMode.FullAuto:
-                EditorGUILayout.HelpBox("完全自動モード: 文化圏レベルに基づいて全て自動生成されます", MessageType.Info);
-                break;
+            EditorGUILayout.HelpBox("敵に使用するMentalData（精神力・顔の輪郭）を設定します。\nリストからランダムに選択されます。", MessageType.Info);
+            EditorGUILayout.Space(3);
+            
+            if (mentalDataList.Count == 0)
+            {
+                EditorGUILayout.HelpBox("MentalDataが設定されていません。少なくとも1つは設定してください。", MessageType.Warning);
+            }
+            else
+            {
+                GUIStyle countStyle = new GUIStyle(EditorStyles.helpBox);
+                countStyle.normal.textColor = Color.cyan;
+                countStyle.fontStyle = FontStyle.Bold;
+                countStyle.alignment = TextAnchor.MiddleCenter;
                 
-            case GenerationMode.SemiAuto:
-                DrawSemiAutoSettings();
-                break;
+                EditorGUILayout.LabelField($"登録数: {mentalDataList.Count} 個", countStyle);
+            }
+            
+            EditorGUILayout.Space(5);
+            
+            // MentalDataリスト
+            for (int i = 0; i < mentalDataList.Count; i++)
+            {
+                EditorGUILayout.BeginHorizontal("box");
                 
-            case GenerationMode.Manual:
-                DrawManualSettings();
-                break;
+                EditorGUI.BeginChangeCheck();
+                
+                EditorGUILayout.LabelField($"{i + 1}.", GUILayout.Width(30));
+                mentalDataList[i] = (MentalData)EditorGUILayout.ObjectField(mentalDataList[i], typeof(MentalData), false, GUILayout.Width(250));
+                
+                if (mentalDataList[i] != null)
+                {
+                    GUIStyle previewStyle = new GUIStyle(EditorStyles.label);
+                    previewStyle.normal.textColor = Color.green;
+                    previewStyle.fontStyle = FontStyle.Bold;
+                    
+                    string preview = $"精神力:{mentalDataList[i].maxMental} 括弧:{mentalDataList[i].faceline}";
+                    EditorGUILayout.LabelField(preview, previewStyle);
+                }
+                else
+                {
+                    EditorGUILayout.LabelField("(未設定)", EditorStyles.miniLabel);
+                }
+                
+                if (EditorGUI.EndChangeCheck())
+                {
+                    GeneratePreview();
+                }
+                
+                GUI.backgroundColor = new Color(1f, 0.5f, 0.5f);
+                if (GUILayout.Button("✕", GUILayout.Width(25)))
+                {
+                    mentalDataList.RemoveAt(i);
+                    GeneratePreview();
+                }
+                GUI.backgroundColor = Color.white;
+                
+                EditorGUILayout.EndHorizontal();
+            }
+            
+            EditorGUILayout.Space(3);
+            
+            GUI.backgroundColor = new Color(0.7f, 0.7f, 1f);
+            if (GUILayout.Button("+ MentalDataを追加"))
+            {
+                mentalDataList.Add(null);
+            }
+            GUI.backgroundColor = Color.white;
+            
+            EditorGUILayout.Space(3);
+            
+            // 統計情報
+            if (mentalDataList.Count > 0)
+            {
+                var validMentals = mentalDataList.Where(m => m != null).ToList();
+                if (validMentals.Count > 0)
+                {
+                    float avgMental = (float)validMentals.Average(m => m.maxMental);
+                    var uniqueFacelines = validMentals.Select(m => m.faceline).Distinct().Count();
+                    
+                    EditorGUILayout.LabelField("【統計】", EditorStyles.boldLabel);
+                    EditorGUILayout.LabelField($"  有効データ: {validMentals.Count} / {mentalDataList.Count}");
+                    EditorGUILayout.LabelField($"  平均精神力: {avgMental:F1}");
+                    EditorGUILayout.LabelField($"  括弧の種類: {uniqueFacelines} 種類");
+                }
+            }
         }
-        
-        EditorGUILayout.Space(5);
-        
-        // 難易度別出現数
-        DrawDifficultyAmounts();
         
         EditorGUILayout.EndVertical();
     }
 
     /// <summary>
-    /// 半自動モード設定
+    /// 敵リスト設定セクション
     /// </summary>
-    private void DrawSemiAutoSettings()
+    private void DrawEnemyListSettings()
     {
-        EditorGUILayout.LabelField("【半自動モード設定】", EditorStyles.boldLabel);
+        EditorGUILayout.BeginVertical("box");
+        EditorGUILayout.LabelField("👾 敵リスト設定", EditorStyles.boldLabel);
         
-        // 固定敵リスト
-        EditorGUILayout.LabelField("固定敵リスト（オプション）", EditorStyles.miniLabel);
+        EditorGUILayout.HelpBox("設定された敵リストからランダムに選択されます。\n敵のステータスはEnemyDataで設定してください。", MessageType.Info);
+        
+        int validEnemyCount = fixedEnemies.Count(e => e != null);
+        
+        if (validEnemyCount == 0)
+        {
+            GUIStyle warningStyle = new GUIStyle(EditorStyles.helpBox);
+            warningStyle.normal.textColor = Color.red;
+            warningStyle.fontStyle = FontStyle.Bold;
+            
+            EditorGUILayout.LabelField("警告: 敵が1体も設定されていません", warningStyle);
+        }
+        else
+        {
+            GUIStyle infoStyle = new GUIStyle(EditorStyles.helpBox);
+            infoStyle.normal.textColor = Color.green;
+            infoStyle.fontStyle = FontStyle.Bold;
+            
+            EditorGUILayout.LabelField($"設定済み: {validEnemyCount}体（この中からランダムに選択されます）", infoStyle);
+        }
+        
+        EditorGUILayout.Space(3);
         
         for (int i = 0; i < fixedEnemies.Count; i++)
         {
             EditorGUILayout.BeginHorizontal();
+            
+            EditorGUI.BeginChangeCheck();
             fixedEnemies[i] = (EnemyData)EditorGUILayout.ObjectField($"敵 {i + 1}", fixedEnemies[i], typeof(EnemyData), false);
             
-            GUI.backgroundColor = new Color(1f, 0.5f, 0.5f);
-            if (GUILayout.Button("✕", GUILayout.Width(25)))
+            if (EditorGUI.EndChangeCheck())
             {
-                fixedEnemies.RemoveAt(i);
                 GeneratePreview();
             }
-            GUI.backgroundColor = Color.white;
-            
-            EditorGUILayout.EndHorizontal();
-        }
-        
-        GUI.backgroundColor = new Color(0.7f, 0.7f, 1f);
-        if (GUILayout.Button("+ 固定敵を追加"))
-        {
-            fixedEnemies.Add(null);
-        }
-        GUI.backgroundColor = Color.white;
-        
-        EditorGUILayout.Space(5);
-        
-        // 除外タイプ
-        EditorGUILayout.LabelField("除外する部位タイプ", EditorStyles.miniLabel);
-        EditorGUILayout.BeginHorizontal();
-        
-        EditorGUI.BeginChangeCheck();
-        excludeTypes[0] = EditorGUILayout.ToggleLeft("口", excludeTypes[0], GUILayout.Width(60));
-        excludeTypes[1] = EditorGUILayout.ToggleLeft("目", excludeTypes[1], GUILayout.Width(60));
-        excludeTypes[2] = EditorGUILayout.ToggleLeft("手", excludeTypes[2], GUILayout.Width(60));
-        excludeTypes[3] = EditorGUILayout.ToggleLeft("装飾1", excludeTypes[3], GUILayout.Width(70));
-        excludeTypes[4] = EditorGUILayout.ToggleLeft("装飾2", excludeTypes[4], GUILayout.Width(70));
-        
-        if (EditorGUI.EndChangeCheck())
-        {
-            GeneratePreview();
-        }
-        
-        EditorGUILayout.EndHorizontal();
-    }
-
-    /// <summary>
-    /// 手動モード設定
-    /// </summary>
-    private void DrawManualSettings()
-    {
-        EditorGUILayout.HelpBox("手動モード: 全ての敵を手動で指定してください", MessageType.Warning);
-        
-        // 手動モード用の固定敵リスト
-        EditorGUILayout.LabelField("敵リスト", EditorStyles.boldLabel);
-        
-        for (int i = 0; i < fixedEnemies.Count; i++)
-        {
-            EditorGUILayout.BeginHorizontal();
-            fixedEnemies[i] = (EnemyData)EditorGUILayout.ObjectField($"敵 {i + 1}", fixedEnemies[i], typeof(EnemyData), false);
             
             GUI.backgroundColor = new Color(1f, 0.5f, 0.5f);
             if (GUILayout.Button("✕", GUILayout.Width(25)))
@@ -270,14 +331,118 @@ public class AreaDataCreator : EditorWindow
             fixedEnemies.Add(null);
         }
         GUI.backgroundColor = Color.white;
+        
+        EditorGUILayout.EndVertical();
     }
 
     /// <summary>
-    /// 難易度別出現数
+    /// 部位解放設定セクション
+    /// </summary>
+    private void DrawPartUnlockSettings()
+    {
+        EditorGUILayout.BeginVertical("box");
+        
+        EditorGUILayout.BeginHorizontal();
+        showPartUnlockSettings = EditorGUILayout.Foldout(showPartUnlockSettings, "🔓 部位解放設定", true, EditorStyles.foldoutHeader);
+        
+        GUI.backgroundColor = new Color(0.7f, 0.9f, 1f);
+        if (GUILayout.Button("デフォルトに戻す", GUILayout.Width(120), GUILayout.Height(20)))
+        {
+            InitializePartUnlockConfigs();
+            GeneratePreview();
+        }
+        GUI.backgroundColor = Color.white;
+        
+        EditorGUILayout.EndHorizontal();
+        
+        if (showPartUnlockSettings)
+        {
+            EditorGUILayout.HelpBox("文化圏レベルに応じて解放される部位を設定します", MessageType.Info);
+            EditorGUILayout.Space(3);
+            
+            var tempManager = new PartUnlockManager { unlockConfigs = partUnlockConfigs };
+            var availableTypes = tempManager.GetAvailablePartTypes(cultureLevel);
+            
+            GUIStyle availableStyle = new GUIStyle(EditorStyles.helpBox);
+            availableStyle.normal.textColor = Color.green;
+            availableStyle.fontStyle = FontStyle.Bold;
+            availableStyle.alignment = TextAnchor.MiddleCenter;
+            
+            EditorGUILayout.LabelField($"文化圏Lv{cultureLevel}で使用可能: {string.Join(", ", availableTypes)}", availableStyle);
+            
+            EditorGUILayout.Space(5);
+            
+            for (int i = 0; i < partUnlockConfigs.Count; i++)
+            {
+                EditorGUILayout.BeginVertical("box");
+                EditorGUILayout.BeginHorizontal();
+                
+                EditorGUI.BeginChangeCheck();
+                EditorGUILayout.LabelField($"設定 {i + 1}", GUILayout.Width(50));
+                partUnlockConfigs[i].unlockCultureLevel = EditorGUILayout.IntSlider("Lv", partUnlockConfigs[i].unlockCultureLevel, 1, 100, GUILayout.Width(200));
+                partUnlockConfigs[i].partType = (KaomojiPartType)EditorGUILayout.EnumPopup(partUnlockConfigs[i].partType, GUILayout.Width(150));
+                
+                if (EditorGUI.EndChangeCheck())
+                {
+                    GeneratePreview();
+                }
+                
+                GUI.backgroundColor = new Color(1f, 0.5f, 0.5f);
+                if (GUILayout.Button("✕", GUILayout.Width(25)))
+                {
+                    partUnlockConfigs.RemoveAt(i);
+                    GeneratePreview();
+                }
+                GUI.backgroundColor = Color.white;
+                
+                EditorGUILayout.EndHorizontal();
+                
+                partUnlockConfigs[i].description = EditorGUILayout.TextField("説明", partUnlockConfigs[i].description);
+                
+                EditorGUILayout.EndVertical();
+            }
+            
+            EditorGUILayout.Space(3);
+            
+            GUI.backgroundColor = new Color(0.7f, 0.7f, 1f);
+            if (GUILayout.Button("+ 解放設定を追加"))
+            {
+                partUnlockConfigs.Add(new PartUnlockConfig 
+                { 
+                    unlockCultureLevel = cultureLevel, 
+                    partType = KaomojiPartType.Mouth,
+                    description = "" 
+                });
+            }
+            GUI.backgroundColor = Color.white;
+            
+            EditorGUILayout.Space(3);
+            
+            var nextUnlock = tempManager.GetNextUnlock(cultureLevel);
+            if (nextUnlock != null)
+            {
+                GUIStyle nextUnlockStyle = new GUIStyle(EditorStyles.helpBox);
+                nextUnlockStyle.normal.textColor = Color.yellow;
+                nextUnlockStyle.fontStyle = FontStyle.Bold;
+                
+                EditorGUILayout.LabelField($"次の解放: Lv{nextUnlock.unlockCultureLevel} で {nextUnlock.partType} ({nextUnlock.description})", nextUnlockStyle);
+            }
+            else
+            {
+                EditorGUILayout.LabelField("全ての部位が解放済み", EditorStyles.miniLabel);
+            }
+        }
+        
+        EditorGUILayout.EndVertical();
+    }
+
+    /// <summary>
+    /// 難易度別出現数セクション
     /// </summary>
     private void DrawDifficultyAmounts()
     {
-        EditorGUILayout.LabelField("【難易度別出現数】", EditorStyles.boldLabel);
+        EditorGUILayout.BeginVertical("box");
+        EditorGUILayout.LabelField("🎲 難易度別出現数", EditorStyles.boldLabel);
         
         EditorGUI.BeginChangeCheck();
         
@@ -312,6 +477,8 @@ public class AreaDataCreator : EditorWindow
         
         int total = easyAmount + normalAmount + hardAmount + extremeAmount;
         EditorGUILayout.LabelField($"合計: {total} 体", EditorStyles.boldLabel);
+        
+        EditorGUILayout.EndVertical();
     }
 
     /// <summary>
@@ -320,7 +487,18 @@ public class AreaDataCreator : EditorWindow
     private void DrawPreview()
     {
         EditorGUILayout.BeginVertical("box");
+        
+        EditorGUILayout.BeginHorizontal();
         showPreview = EditorGUILayout.Foldout(showPreview, "📊 プレビュー", true, EditorStyles.foldoutHeader);
+        
+        GUI.backgroundColor = new Color(0.5f, 1f, 0.5f);
+        if (GUILayout.Button("🎲 再生成", GUILayout.Width(100), GUILayout.Height(20)))
+        {
+            GeneratePreview();
+        }
+        GUI.backgroundColor = Color.white;
+        
+        EditorGUILayout.EndHorizontal();
         
         if (showPreview)
         {
@@ -337,42 +515,76 @@ public class AreaDataCreator : EditorWindow
                 {
                     if (entry.enemy != null)
                     {
-                        string kaomoji = entry.enemy.Kaomoji.BuildKaomoji(entry.enemy.Status.mentalData);
-                        int avgLevel = AreaBuild.GetEnemyAverageLevelByWaveDifficulty(cultureLevel, entry.difficulty);
-                        
-                        GUIStyle enemyStyle = new GUIStyle(EditorStyles.helpBox);
-                        enemyStyle.normal.textColor = GetDifficultyColor(entry.difficulty);
-                        enemyStyle.padding = new RectOffset(5, 5, 3, 3);
-                        
-                        EditorGUILayout.LabelField($"[{entry.difficulty}] {kaomoji} Lv{avgLevel}", enemyStyle);
-                        displayCount++;
+                        try
+                        {
+                            MentalData mental = entry.enemy.Status?.mentalData;
+                            string kaomoji = "";
+                            
+                            if (mental != null)
+                            {
+                                kaomoji = entry.enemy.Kaomoji.BuildKaomoji(mental);
+                            }
+                            else
+                            {
+                                kaomoji = entry.enemy.Kaomoji.BuildKaomoji(null);
+                                if (string.IsNullOrEmpty(kaomoji))
+                                {
+                                    kaomoji = "(顔文字なし)";
+                                }
+                            }
+                            
+                            int avgLevel = AreaBuild.GetEnemyAverageLevelByWaveDifficulty(cultureLevel, entry.difficulty);
+                            
+                            GUIStyle enemyStyle = new GUIStyle(EditorStyles.helpBox);
+                            enemyStyle.normal.textColor = GetDifficultyColor(entry.difficulty);
+                            enemyStyle.padding = new RectOffset(5, 5, 3, 3);
+                            
+                            string displayText = $"[{entry.difficulty}] {kaomoji} Lv{avgLevel}";
+                            
+                            if (mental == null)
+                            {
+                                displayText += " ⚠️ MentalDataなし";
+                            }
+                            
+                            EditorGUILayout.LabelField(displayText, enemyStyle);
+                            displayCount++;
+                        }
+                        catch (System.Exception e)
+                        {
+                            GUIStyle errorStyle = new GUIStyle(EditorStyles.helpBox);
+                            errorStyle.normal.textColor = Color.red;
+                            EditorGUILayout.LabelField($"[{entry.difficulty}] (表示エラー: {e.Message})", errorStyle);
+                            Debug.LogWarning($"Preview display error for {entry.difficulty}: {e.Message}");
+                        }
                     }
                     else
                     {
-                        EditorGUILayout.LabelField($"[{entry.difficulty}] (生成失敗)", EditorStyles.helpBox);
+                        GUIStyle nullStyle = new GUIStyle(EditorStyles.helpBox);
+                        nullStyle.normal.textColor = Color.gray;
+                        EditorGUILayout.LabelField($"[{entry.difficulty}] (生成失敗 - null)", nullStyle);
                     }
                 }
                 
                 if (displayCount == 0)
                 {
-                    EditorGUILayout.HelpBox("有効な敵が生成されませんでした。KaomojiPartsフォルダにパーツが存在するか確認してください。", MessageType.Warning);
+                    EditorGUILayout.HelpBox("有効な敵が生成されませんでした。敵リストに敵を設定してください。", MessageType.Warning);
                 }
             }
             
             EditorGUILayout.Space(5);
             
-            // 予想報酬
             EditorGUILayout.LabelField("【予想報酬】", EditorStyles.boldLabel);
             int estimatedExp = EstimateExp();
             int estimatedMoney = EstimateMoney();
             
             EditorGUILayout.LabelField($"・獲得経験値: ~{estimatedExp} Exp");
             EditorGUILayout.LabelField($"・獲得金額: ~{estimatedMoney} G");
-            EditorGUILayout.LabelField($"・ドロップ: {previewEnemies.Count * 1}-{previewEnemies.Count * 2} 個のパーツ");
+            
+            int validEnemyCount = previewEnemies.Count(e => e.enemy != null);
+            EditorGUILayout.LabelField($"・ドロップ: {validEnemyCount * 1}-{validEnemyCount * 2} 個のパーツ");
             
             EditorGUILayout.Space(5);
             
-            // 推定難易度
             int difficulty = Mathf.Clamp(cultureLevel / 20 + 1, 1, 5);
             string stars = new string('★', difficulty) + new string('☆', 5 - difficulty);
             EditorGUILayout.LabelField($"【推定難易度】{stars}");
@@ -467,7 +679,6 @@ public class AreaDataCreator : EditorWindow
             kaomojiDensity = AreaBuild.CalculateKaomojiDensity(cultureLevel);
         }
         
-        // 文化圏レベルに応じて難易度別出現数を自動調整
         int baseCount = Mathf.CeilToInt(cultureLevel / 5f);
         easyAmount = baseCount + 2;
         normalAmount = baseCount + 3;
@@ -482,31 +693,27 @@ public class AreaDataCreator : EditorWindow
     {
         previewEnemies.Clear();
         
-        // Easy
         for (int i = 0; i < easyAmount; i++)
         {
-            EnemyData enemy = GenerateRandomEnemy(Difficulty.Easy);
+            EnemyData enemy = GetRandomEnemy();
             previewEnemies.Add((enemy, Difficulty.Easy));
         }
         
-        // Normal
         for (int i = 0; i < normalAmount; i++)
         {
-            EnemyData enemy = GenerateRandomEnemy(Difficulty.Normal);
+            EnemyData enemy = GetRandomEnemy();
             previewEnemies.Add((enemy, Difficulty.Normal));
         }
         
-        // Hard
         for (int i = 0; i < hardAmount; i++)
         {
-            EnemyData enemy = GenerateRandomEnemy(Difficulty.Hard);
+            EnemyData enemy = GetRandomEnemy();
             previewEnemies.Add((enemy, Difficulty.Hard));
         }
         
-        // Extreme
         for (int i = 0; i < extremeAmount; i++)
         {
-            EnemyData enemy = GenerateRandomEnemy(Difficulty.Extreme);
+            EnemyData enemy = GetRandomEnemy();
             previewEnemies.Add((enemy, Difficulty.Extreme));
         }
         
@@ -514,52 +721,17 @@ public class AreaDataCreator : EditorWindow
     }
 
     /// <summary>
-    /// ランダムに敵を生成（プレビュー用）
+    /// 敵リストからランダムに取得
     /// </summary>
-    private EnemyData GenerateRandomEnemy(Difficulty difficulty)
+    private EnemyData GetRandomEnemy()
     {
-        List<KaomojiPartType> excludeList = new List<KaomojiPartType>();
-        for (int i = 0; i < excludeTypes.Length; i++)
+        var validFixedEnemies = fixedEnemies.Where(e => e != null).ToList();
+        if (validFixedEnemies.Count > 0)
         {
-            if (excludeTypes[i])
-            {
-                excludeList.Add((KaomojiPartType)i);
-            }
+            return validFixedEnemies[Random.Range(0, validFixedEnemies.Count)];
         }
-
-        // 生成モードに応じた処理
-        switch (generationMode)
-        {
-            case GenerationMode.FullAuto:
-                return EnemyDataGenerator.GenerateRandomEnemy(cultureLevel, difficulty, null);
-                
-            case GenerationMode.SemiAuto:
-                // 固定敵がある場合は優先
-                if (fixedEnemies.Count > 0)
-                {
-                    var validFixed = fixedEnemies.Where(e => e != null).ToList();
-                    if (validFixed.Count > 0 && Random.value < 0.3f) // 30%の確率で固定敵を使用
-                    {
-                        return validFixed[Random.Range(0, validFixed.Count)];
-                    }
-                }
-                return EnemyDataGenerator.GenerateRandomEnemy(cultureLevel, difficulty, excludeList);
-                
-            case GenerationMode.Manual:
-                // 手動モードでは固定敵のみ
-                if (fixedEnemies.Count > 0)
-                {
-                    var validFixed = fixedEnemies.Where(e => e != null).ToList();
-                    if (validFixed.Count > 0)
-                    {
-                        return validFixed[Random.Range(0, validFixed.Count)];
-                    }
-                }
-                return null;
-                
-            default:
-                return null;
-        }
+        
+        return null;
     }
 
     /// <summary>
@@ -604,24 +776,39 @@ public class AreaDataCreator : EditorWindow
             return;
         }
         
+        int validEnemyCount = fixedEnemies.Count(e => e != null);
+        
+        if (validEnemyCount == 0)
+        {
+            EditorUtility.DisplayDialog("エラー", "少���くとも1体の敵を設定する必要があります", "OK");
+            return;
+        }
+        
+        int totalSpawn = easyAmount + normalAmount + hardAmount + extremeAmount;
+        if (!EditorUtility.DisplayDialog("確認", 
+            $"・設定された敵: {validEnemyCount}体\n" +
+            $"・出現数合計: {totalSpawn}体\n\n" +
+            $"{validEnemyCount}体の中からランダムに{totalSpawn}体が選ばれます。\n" +
+            "よろしいですか？", 
+            "作成", "キャンセル"))
+        {
+            return;
+        }
+        
         if (!Directory.Exists(savePath))
         {
             Directory.CreateDirectory(savePath);
         }
         
         AreaData newArea = CreateInstance<AreaData>();
-        
-        // SerializedObjectを使用して安全に設定
         SerializedObject serializedArea = new SerializedObject(newArea);
         
-        // エリア名設定
         SerializedProperty areaNameProp = serializedArea.FindProperty("areaName");
         if (areaNameProp != null)
         {
             areaNameProp.stringValue = areaName;
         }
         
-        // AreaBuild設定
         SerializedProperty areaProp = serializedArea.FindProperty("area");
         if (areaProp == null)
         {
@@ -630,21 +817,50 @@ public class AreaDataCreator : EditorWindow
             return;
         }
         
-        // 文化圏レベル設定
         SerializedProperty cultureLevelProp = areaProp.FindPropertyRelative("cultureLevel");
         if (cultureLevelProp != null)
         {
             cultureLevelProp.intValue = cultureLevel;
         }
         
-        // 顔文字密度設定
         SerializedProperty densityProp = areaProp.FindPropertyRelative("kaomojiDensity");
         if (densityProp != null)
         {
             densityProp.floatValue = useAutoKaomojiDensity ? AreaBuild.CalculateKaomojiDensity(cultureLevel) : kaomojiDensity;
         }
         
-        // EnemySpawnConfig設定
+        SerializedProperty mentalDataListProp = areaProp.FindPropertyRelative("mentalDataList");
+        if (mentalDataListProp != null)
+        {
+            mentalDataListProp.ClearArray();
+            for (int i = 0; i < mentalDataList.Count; i++)
+            {
+                if (mentalDataList[i] != null)
+                {
+                    mentalDataListProp.InsertArrayElementAtIndex(mentalDataListProp.arraySize);
+                    mentalDataListProp.GetArrayElementAtIndex(mentalDataListProp.arraySize - 1).objectReferenceValue = mentalDataList[i];
+                }
+            }
+        }
+        
+        SerializedProperty partUnlockManagerProp = areaProp.FindPropertyRelative("partUnlockManager");
+        if (partUnlockManagerProp != null)
+        {
+            SerializedProperty unlockConfigsProp = partUnlockManagerProp.FindPropertyRelative("unlockConfigs");
+            if (unlockConfigsProp != null)
+            {
+                unlockConfigsProp.ClearArray();
+                for (int i = 0; i < partUnlockConfigs.Count; i++)
+                {
+                    unlockConfigsProp.InsertArrayElementAtIndex(i);
+                    SerializedProperty configProp = unlockConfigsProp.GetArrayElementAtIndex(i);
+                    configProp.FindPropertyRelative("unlockCultureLevel").intValue = partUnlockConfigs[i].unlockCultureLevel;
+                    configProp.FindPropertyRelative("partType").enumValueIndex = (int)partUnlockConfigs[i].partType;
+                    configProp.FindPropertyRelative("description").stringValue = partUnlockConfigs[i].description;
+                }
+            }
+        }
+        
         SerializedProperty spawnConfigProp = areaProp.FindPropertyRelative("spawnConfig");
         if (spawnConfigProp == null)
         {
@@ -654,77 +870,54 @@ public class AreaDataCreator : EditorWindow
             return;
         }
         
-        // 生成モード
         SerializedProperty modeProp = spawnConfigProp.FindPropertyRelative("mode");
         if (modeProp != null)
         {
-            modeProp.enumValueIndex = (int)generationMode;
+            modeProp.enumValueIndex = (int)GenerationMode.Manual;
         }
         
-        // 固定敵リスト
         SerializedProperty fixedEnemiesProp = spawnConfigProp.FindPropertyRelative("fixedEnemies");
         if (fixedEnemiesProp != null)
         {
             fixedEnemiesProp.ClearArray();
+            int index = 0;
             for (int i = 0; i < fixedEnemies.Count; i++)
             {
                 if (fixedEnemies[i] != null)
                 {
-                    fixedEnemiesProp.InsertArrayElementAtIndex(i);
-                    fixedEnemiesProp.GetArrayElementAtIndex(i).objectReferenceValue = fixedEnemies[i];
+                    fixedEnemiesProp.InsertArrayElementAtIndex(index);
+                    fixedEnemiesProp.GetArrayElementAtIndex(index).objectReferenceValue = fixedEnemies[i];
+                    index++;
                 }
             }
         }
         
-        // 除外タイプ設定
-        SerializedProperty excludeTypesProp = spawnConfigProp.FindPropertyRelative("excludeTypes");
-        if (excludeTypesProp != null)
-        {
-            excludeTypesProp.ClearArray();
-            int excludeIndex = 0;
-            for (int i = 0; i < excludeTypes.Length; i++)
-            {
-                if (excludeTypes[i])
-                {
-                    excludeTypesProp.InsertArrayElementAtIndex(excludeIndex);
-                    excludeTypesProp.GetArrayElementAtIndex(excludeIndex).enumValueIndex = i;
-                    excludeIndex++;
-                }
-            }
-        }
-        
-        // 難易度別出現数
         SerializedProperty spawnAmountsProp = spawnConfigProp.FindPropertyRelative("spawnAmounts");
         if (spawnAmountsProp != null)
         {
             spawnAmountsProp.ClearArray();
             
-            // Easy
             spawnAmountsProp.InsertArrayElementAtIndex(0);
             SerializedProperty easy = spawnAmountsProp.GetArrayElementAtIndex(0);
             easy.FindPropertyRelative("difficulty").enumValueIndex = (int)Difficulty.Easy;
             easy.FindPropertyRelative("amount").intValue = easyAmount;
             
-            // Normal
             spawnAmountsProp.InsertArrayElementAtIndex(1);
             SerializedProperty normal = spawnAmountsProp.GetArrayElementAtIndex(1);
             normal.FindPropertyRelative("difficulty").enumValueIndex = (int)Difficulty.Normal;
             normal.FindPropertyRelative("amount").intValue = normalAmount;
             
-            // Hard
             spawnAmountsProp.InsertArrayElementAtIndex(2);
             SerializedProperty hard = spawnAmountsProp.GetArrayElementAtIndex(2);
             hard.FindPropertyRelative("difficulty").enumValueIndex = (int)Difficulty.Hard;
             hard.FindPropertyRelative("amount").intValue = hardAmount;
             
-            // Extreme
             spawnAmountsProp.InsertArrayElementAtIndex(3);
             SerializedProperty extreme = spawnAmountsProp.GetArrayElementAtIndex(3);
             extreme.FindPropertyRelative("difficulty").enumValueIndex = (int)Difficulty.Extreme;
             extreme.FindPropertyRelative("amount").intValue = extremeAmount;
         }
         
-        // 変更を適用
         serializedArea.ApplyModifiedProperties();
         
         string assetPath = $"{savePath}/{fileName}.asset";
@@ -755,10 +948,10 @@ public class AreaDataCreator : EditorWindow
     {
         areaName = "";
         cultureLevel = 1;
-        generationMode = GenerationMode.SemiAuto;
         fixedEnemies.Clear();
-        excludeTypes = new bool[5];
+        mentalDataList.Clear();
         useAutoKaomojiDensity = true;
+        InitializePartUnlockConfigs();
         UpdateAutoValues();
         GeneratePreview();
     }

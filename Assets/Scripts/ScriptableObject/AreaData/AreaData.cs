@@ -1,9 +1,24 @@
 using UnityEngine;
 using Constants;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "AreaData", menuName = "Arena/AreaData")]
 public class AreaData : ScriptableObject
 {
+    public static readonly int MouthReleaseLevel = 0;
+    public static readonly int EyesReleaseLevel = 3;
+    public static readonly int HandsReleaseLevel = 5;
+    public static readonly int DecorationFirstReleaseLevel = 10;
+    public static readonly int DecorationSecondReleaseLevel = 15;
+
+    public static readonly Dictionary<ENUM.KaomojiPartType, int> PartTypeToReleaseLevel = new Dictionary<ENUM.KaomojiPartType, int>
+    {
+        { ENUM.KaomojiPartType.Mouth, MouthReleaseLevel },
+        { ENUM.KaomojiPartType.Eyes, EyesReleaseLevel },
+        { ENUM.KaomojiPartType.Hands, HandsReleaseLevel },
+        { ENUM.KaomojiPartType.Decoration_First, DecorationFirstReleaseLevel },
+        { ENUM.KaomojiPartType.Decoration_Second, DecorationSecondReleaseLevel }
+    };
     [Header("基本情報")]
     [SerializeField] string areaName = "新規エリア";
     public string AreaName => areaName;
