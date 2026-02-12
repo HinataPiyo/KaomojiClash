@@ -27,6 +27,23 @@ MonoBehaviour:
         amount: 0
       - difficulty: 3
         amount: 0
+    partUnlockManager:
+      unlockConfigs:
+      - unlockCultureLevel: 1
+        partType: 0
+        description: "\u53E3\uFF08\u57FA\u672C\uFF09"
+      - unlockCultureLevel: 6
+        partType: 1
+        description: "\u76EE"
+      - unlockCultureLevel: 11
+        partType: 2
+        description: "\u624B"
+      - unlockCultureLevel: 16
+        partType: 3
+        description: "\u88C5\u98FE1"
+      - unlockCultureLevel: 21
+        partType: 4
+        description: "\u88C5\u98FE2"
     cultureLevel: 1
     kaomojiDensity: 0.35000002
   isClear: 0

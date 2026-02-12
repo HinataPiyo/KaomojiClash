@@ -24,6 +24,10 @@ public class AreaDataCreator : EditorWindow
     private int hardAmount = 2;
     private int extremeAmount = 1;
     
+    // 部位解放設定
+    private List<PartUnlockConfig> partUnlockConfigs = new List<PartUnlockConfig>();
+    private bool showPartUnlockSettings = true;
+    
     // 詳細設定
     private float kaomojiDensity = 0.5f;
     private bool useAutoKaomojiDensity = true;
@@ -41,14 +45,30 @@ public class AreaDataCreator : EditorWindow
     public static void ShowWindow()
     {
         var window = GetWindow<AreaDataCreator>("エリアデータ作成");
-        window.minSize = new Vector2(650, 750);
+        window.minSize = new Vector2(650, 850);
     }
 
     private void OnEnable()
     {
         // 初期化
         UpdateAutoValues();
+        InitializePartUnlockConfigs();
         GeneratePreview();
+    }
+    
+    /// <summary>
+    /// 部位解放設定の初期化
+    /// </summary>
+    private void InitializePartUnlockConfigs()
+    {
+        partUnlockConfigs = new List<PartUnlockConfig>()
+        {
+            new PartUnlockConfig { unlockCultureLevel = 1, partType = KaomojiPartType.Mouth, description = "口（基本）" },
+            new PartUnlockConfig { unlockCultureLevel = 6, partType = KaomojiPartType.Eyes, description = "目" },
+            new PartUnlockConfig { unlockCultureLevel = 11, partType = KaomojiPartType.Hands, description = "手" },
+            new PartUnlockConfig { unlockCultureLevel = 16, partType = KaomojiPartType.Decoration_First, description = "装飾1" },
+            new PartUnlockConfig { unlockCultureLevel = 21, partType = KaomojiPartType.Decoration_Second, description = "装飾2" }
+        };
     }
 
     private void OnGUI()
@@ -60,6 +80,9 @@ public class AreaDataCreator : EditorWindow
 
         // ========== 基本情報 ==========
         DrawBasicInfo();
+
+        // ========== 部位解放設定 ==========
+        DrawPartUnlockSettings();
 
         // ========== 敵出現設定 ==========
         DrawEnemySpawnSettings();
@@ -122,6 +145,116 @@ public class AreaDataCreator : EditorWindow
         
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
+        
+        EditorGUILayout.EndVertical();
+    }
+
+    /// <summary>
+    /// 部位解放設定セクション
+    /// </summary>
+    private void DrawPartUnlockSettings()
+    {
+        EditorGUILayout.BeginVertical("box");
+        
+        EditorGUILayout.BeginHorizontal();
+        showPartUnlockSettings = EditorGUILayout.Foldout(showPartUnlockSettings, "🔓 部位解放設定", true, EditorStyles.foldoutHeader);
+        
+        GUI.backgroundColor = new Color(0.7f, 0.9f, 1f);
+        if (GUILayout.Button("デフォルトに戻す", GUILayout.Width(120), GUILayout.Height(20)))
+        {
+            InitializePartUnlockConfigs();
+            GeneratePreview();
+        }
+        GUI.backgroundColor = Color.white;
+        
+        EditorGUILayout.EndHorizontal();
+        
+        if (showPartUnlockSettings)
+        {
+            EditorGUILayout.HelpBox("文化圏レベルに応じて解放される部位を設定します", MessageType.Info);
+            EditorGUILayout.Space(3);
+            
+            // 現在の文化圏レベルで使用可能な部位を表示
+            var tempManager = new PartUnlockManager { unlockConfigs = partUnlockConfigs };
+            var availableTypes = tempManager.GetAvailablePartTypes(cultureLevel);
+            
+            GUIStyle availableStyle = new GUIStyle(EditorStyles.helpBox);
+            availableStyle.normal.textColor = Color.green;
+            availableStyle.fontStyle = FontStyle.Bold;
+            availableStyle.alignment = TextAnchor.MiddleCenter;
+            
+            EditorGUILayout.LabelField($"文化圏Lv{cultureLevel}で使用可能: {string.Join(", ", availableTypes)}", availableStyle);
+            
+            EditorGUILayout.Space(5);
+            
+            // 部位解放設定リスト
+            for (int i = 0; i < partUnlockConfigs.Count; i++)
+            {
+                EditorGUILayout.BeginVertical("box");
+                EditorGUILayout.BeginHorizontal();
+                
+                // 解放レベル
+                EditorGUI.BeginChangeCheck();
+                EditorGUILayout.LabelField($"設定 {i + 1}", GUILayout.Width(50));
+                partUnlockConfigs[i].unlockCultureLevel = EditorGUILayout.IntSlider("Lv", partUnlockConfigs[i].unlockCultureLevel, 1, 100, GUILayout.Width(200));
+                
+                // 部位タイプ
+                partUnlockConfigs[i].partType = (KaomojiPartType)EditorGUILayout.EnumPopup(partUnlockConfigs[i].partType, GUILayout.Width(150));
+                
+                if (EditorGUI.EndChangeCheck())
+                {
+                    GeneratePreview();
+                }
+                
+                // 削除ボタン
+                GUI.backgroundColor = new Color(1f, 0.5f, 0.5f);
+                if (GUILayout.Button("✕", GUILayout.Width(25)))
+                {
+                    partUnlockConfigs.RemoveAt(i);
+                    GeneratePreview();
+                }
+                GUI.backgroundColor = Color.white;
+                
+                EditorGUILayout.EndHorizontal();
+                
+                // 説明
+                partUnlockConfigs[i].description = EditorGUILayout.TextField("説明", partUnlockConfigs[i].description);
+                
+                EditorGUILayout.EndVertical();
+            }
+            
+            EditorGUILayout.Space(3);
+            
+            // 追加ボタン
+            GUI.backgroundColor = new Color(0.7f, 0.7f, 1f);
+            if (GUILayout.Button("+ 解放設定を追加"))
+            {
+                partUnlockConfigs.Add(new PartUnlockConfig 
+                { 
+                    unlockCultureLevel = cultureLevel, 
+                    partType = KaomojiPartType.Mouth,
+                    description = "" 
+                });
+            }
+            GUI.backgroundColor = Color.white;
+            
+            EditorGUILayout.Space(3);
+            
+            // 次の解放予定
+            var nextUnlock = tempManager.GetNextUnlock(cultureLevel);
+            if (nextUnlock != null)
+            {
+                GUIStyle nextUnlockStyle = new GUIStyle(EditorStyles.helpBox);
+                nextUnlockStyle.normal.textColor = Color.yellow;
+                nextUnlockStyle.fontStyle = FontStyle.Bold;
+                
+                EditorGUILayout.LabelField($"次の解放: Lv{nextUnlock.unlockCultureLevel} で {nextUnlock.partType} ({nextUnlock.description})", nextUnlockStyle);
+            }
+            else
+            {
+                EditorGUILayout.LabelField("全ての部位が解放済み", EditorStyles.miniLabel);
+            }
+        }
         
         EditorGUILayout.EndVertical();
     }
@@ -526,27 +659,27 @@ public class AreaDataCreator : EditorWindow
                 excludeList.Add((KaomojiPartType)i);
             }
         }
+        
+        // 部位解放設定を適用
+        var tempManager = new PartUnlockManager { unlockConfigs = partUnlockConfigs };
 
-        // 生成モードに応じた処理
         switch (generationMode)
         {
             case GenerationMode.FullAuto:
-                return EnemyDataGenerator.GenerateRandomEnemy(cultureLevel, difficulty, null);
+                return EnemyDataGenerator.GenerateRandomEnemy(cultureLevel, difficulty, null, tempManager);
                 
             case GenerationMode.SemiAuto:
-                // 固定敵がある場合は優先
                 if (fixedEnemies.Count > 0)
                 {
                     var validFixed = fixedEnemies.Where(e => e != null).ToList();
-                    if (validFixed.Count > 0 && Random.value < 0.3f) // 30%の確率で固定敵を使用
+                    if (validFixed.Count > 0 && Random.value < 0.3f)
                     {
                         return validFixed[Random.Range(0, validFixed.Count)];
                     }
                 }
-                return EnemyDataGenerator.GenerateRandomEnemy(cultureLevel, difficulty, excludeList);
+                return EnemyDataGenerator.GenerateRandomEnemy(cultureLevel, difficulty, excludeList, tempManager);
                 
             case GenerationMode.Manual:
-                // 手動モードでは固定敵のみ
                 if (fixedEnemies.Count > 0)
                 {
                     var validFixed = fixedEnemies.Where(e => e != null).ToList();
@@ -642,6 +775,25 @@ public class AreaDataCreator : EditorWindow
         if (densityProp != null)
         {
             densityProp.floatValue = useAutoKaomojiDensity ? AreaBuild.CalculateKaomojiDensity(cultureLevel) : kaomojiDensity;
+        }
+        
+        // 部位解放設定
+        SerializedProperty partUnlockManagerProp = areaProp.FindPropertyRelative("partUnlockManager");
+        if (partUnlockManagerProp != null)
+        {
+            SerializedProperty unlockConfigsProp = partUnlockManagerProp.FindPropertyRelative("unlockConfigs");
+            if (unlockConfigsProp != null)
+            {
+                unlockConfigsProp.ClearArray();
+                for (int i = 0; i < partUnlockConfigs.Count; i++)
+                {
+                    unlockConfigsProp.InsertArrayElementAtIndex(i);
+                    SerializedProperty configProp = unlockConfigsProp.GetArrayElementAtIndex(i);
+                    configProp.FindPropertyRelative("unlockCultureLevel").intValue = partUnlockConfigs[i].unlockCultureLevel;
+                    configProp.FindPropertyRelative("partType").enumValueIndex = (int)partUnlockConfigs[i].partType;
+                    configProp.FindPropertyRelative("description").stringValue = partUnlockConfigs[i].description;
+                }
+            }
         }
         
         // EnemySpawnConfig設定
@@ -759,6 +911,7 @@ public class AreaDataCreator : EditorWindow
         fixedEnemies.Clear();
         excludeTypes = new bool[5];
         useAutoKaomojiDensity = true;
+        InitializePartUnlockConfigs();
         UpdateAutoValues();
         GeneratePreview();
     }

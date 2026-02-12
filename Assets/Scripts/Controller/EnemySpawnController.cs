@@ -52,6 +52,7 @@ public class EnemySpawnController : MonoBehaviour
 
         var areaData = AreaManager.I.CurrentAreaData;
         var spawnConfig = areaData.Build.spawnConfig;
+        var partUnlockManager = areaData.Build.partUnlockManager; // 部位解放設定を取得
         int cultureLevel = areaData.Build.cultureLevel;
 
         Debug.Log($"=== 敵生成開始 ===");
@@ -72,7 +73,8 @@ public class EnemySpawnController : MonoBehaviour
                 spawnConfig,
                 cultureLevel,
                 amountData.difficulty,
-                amountData.amount
+                amountData.amount,
+                partUnlockManager  // 部位解放設定を渡す
             );
 
             currentAreaEnemies.AddRange(enemies);

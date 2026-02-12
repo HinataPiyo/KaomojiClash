@@ -16,10 +16,10 @@ public static class EnemyDataGenerator
     /// <summary>
     /// 文化圏レベルと難易度に基づいてランダムな敵を生成
     /// </summary>
-    public static EnemyData GenerateRandomEnemy(int cultureLevel, Difficulty difficulty, List<KaomojiPartType> excludeTypes = null)
+    public static EnemyData GenerateRandomEnemy(int cultureLevel, Difficulty difficulty, List<KaomojiPartType> excludeTypes = null, PartUnlockManager partUnlockManager = null)
     {
         // 利用可能なパーツを取得
-        var allParts = GetAvailablePartsForEnemy(cultureLevel, difficulty, excludeTypes);
+        var allParts = GetAvailablePartsForEnemy(cultureLevel, difficulty, excludeTypes, partUnlockManager);
         
         if (allParts.Count == 0)
         {
@@ -61,7 +61,7 @@ public static class EnemyDataGenerator
     /// <summary>
     /// 文化圏レベルと難易度に応じた利用可能なパーツを取得
     /// </summary>
-    private static List<KaomojiPartData> GetAvailablePartsForEnemy(int cultureLevel, Difficulty difficulty, List<KaomojiPartType> excludeTypes)
+    private static List<KaomojiPartData> GetAvailablePartsForEnemy(int cultureLevel, Difficulty difficulty, List<KaomojiPartType> excludeTypes, PartUnlockManager partUnlockManager = null)
     {
         var allParts = new List<KaomojiPartData>();
         
@@ -93,6 +93,15 @@ public static class EnemyDataGenerator
         {
             Debug.LogWarning("パーツが見つかりません。Resources/KaomojiParts フォルダにパーツを配置してください。");
             return allParts;
+        }
+        
+        // 文化圏レベルによる部位制限
+        if (partUnlockManager != null)
+        {
+            var availableTypes = partUnlockManager.GetAvailablePartTypes(cultureLevel);
+            allParts = allParts.Where(p => availableTypes.Contains(p.PartType)).ToList();
+            
+            Debug.Log($"文化圏Lv{cultureLevel}で使用可能な部位: {string.Join(", ", availableTypes)}");
         }
         
         // 除外タイプをフィルタ
@@ -169,7 +178,7 @@ public static class EnemyDataGenerator
         
         bool anyPartAssigned = false;
         
-        // Eyes（必須）
+        // Eyes（利用可能なら必須）
         if (eyesParts.Count > 0)
         {
             var selectedEyes = eyesParts[Random.Range(0, eyesParts.Count)];
@@ -185,12 +194,8 @@ public static class EnemyDataGenerator
                 Debug.LogWarning("'eyes' property not found in kaomoji");
             }
         }
-        else
-        {
-            Debug.LogWarning("Eyes パーツがありません！");
-        }
         
-        // Mouth（必須）
+        // Mouth（利用可能なら必須）
         if (mouthParts.Count > 0)
         {
             var selectedMouth = mouthParts[Random.Range(0, mouthParts.Count)];
@@ -206,12 +211,8 @@ public static class EnemyDataGenerator
                 Debug.LogWarning("'mouth' property not found in kaomoji");
             }
         }
-        else
-        {
-            Debug.LogWarning("Mouth パー��がありません！");
-        }
         
-        // Hands（オプション：50%）
+        // Hands（オプシ��ン：50%）
         if (handsParts.Count > 0 && Random.value > 0.5f)
         {
             var selectedHands = handsParts[Random.Range(0, handsParts.Count)];
@@ -295,9 +296,9 @@ public static class EnemyDataGenerator
     }
 
     /// <summary>
-    /// 固定敵と自動生成敵を組み合わせて敵���ストを作成
+    /// 固定敵と自動生成敵を組み合わせて敵リストを作成
     /// </summary>
-    public static List<EnemyData> GenerateEnemyList(EnemySpawnConfig config, int cultureLevel, Difficulty difficulty, int count)
+    public static List<EnemyData> GenerateEnemyList(EnemySpawnConfig config, int cultureLevel, Difficulty difficulty, int count, PartUnlockManager partUnlockManager = null)
     {
         var enemies = new List<EnemyData>();
         
@@ -319,7 +320,7 @@ public static class EnemyDataGenerator
         int remainingCount = count - fixedCount;
         for (int i = 0; i < remainingCount; i++)
         {
-            var enemy = GenerateRandomEnemy(cultureLevel, difficulty, config.excludeTypes);
+            var enemy = GenerateRandomEnemy(cultureLevel, difficulty, config.excludeTypes, partUnlockManager);
             if (enemy != null)
             {
                 enemies.Add(enemy);
