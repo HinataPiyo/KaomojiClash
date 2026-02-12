@@ -96,7 +96,7 @@ public class PlayerMovement : Movement
         // ここで「着地硬直中の顔文字」に切り替える
         // 例：faceController.SetLandingFace();
 
-        yield return new WaitForSeconds(data.Status.landingCooldown);
+        yield return new WaitForSeconds(data.landingCooldown);
 
         // 硬直終了 → Idleへ
         state = State.Idle;

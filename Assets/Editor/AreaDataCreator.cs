@@ -26,10 +26,6 @@ public class AreaDataCreator : EditorWindow
     private List<PartUnlockConfig> partUnlockConfigs = new List<PartUnlockConfig>();
     private bool showPartUnlockSettings = true;
     
-    // MentalDataリスト
-    private List<MentalData> mentalDataList = new List<MentalData>();
-    private bool showMentalDataSettings = true;
-    
     // 詳細設定
     private float kaomojiDensity = 0.5f;
     private bool useAutoKaomojiDensity = true;
@@ -47,7 +43,7 @@ public class AreaDataCreator : EditorWindow
     public static void ShowWindow()
     {
         var window = GetWindow<AreaDataCreator>("エリアデータ作成");
-        window.minSize = new Vector2(650, 800);
+        window.minSize = new Vector2(650, 700);
     }
 
     private void OnEnable()
@@ -82,9 +78,6 @@ public class AreaDataCreator : EditorWindow
 
         // ========== 基本情報 ==========
         DrawBasicInfo();
-
-        // ========== MentalData設定 ==========
-        DrawMentalDataSettings();
 
         // ========== 敵リスト設定 ==========
         DrawEnemyListSettings();
@@ -157,121 +150,6 @@ public class AreaDataCreator : EditorWindow
     }
 
     /// <summary>
-    /// MentalData設定セクション
-    /// </summary>
-    private void DrawMentalDataSettings()
-    {
-        EditorGUILayout.BeginVertical("box");
-        
-        EditorGUILayout.BeginHorizontal();
-        showMentalDataSettings = EditorGUILayout.Foldout(showMentalDataSettings, "🧠 MentalData設定", true, EditorStyles.foldoutHeader);
-        
-        GUI.backgroundColor = new Color(1f, 0.9f, 0.5f);
-        if (GUILayout.Button("全てクリア", GUILayout.Width(100), GUILayout.Height(20)))
-        {
-            if (EditorUtility.DisplayDialog("確認", "全てのMentalDataをクリアしますか？", "はい", "いいえ"))
-            {
-                mentalDataList.Clear();
-                GeneratePreview();
-            }
-        }
-        GUI.backgroundColor = Color.white;
-        
-        EditorGUILayout.EndHorizontal();
-        
-        if (showMentalDataSettings)
-        {
-            EditorGUILayout.HelpBox("敵に使用するMentalData（精神力・顔の輪郭）を設定します。\nリストからランダムに選択されます。", MessageType.Info);
-            EditorGUILayout.Space(3);
-            
-            if (mentalDataList.Count == 0)
-            {
-                EditorGUILayout.HelpBox("MentalDataが設定されていません。少なくとも1つは設定してください。", MessageType.Warning);
-            }
-            else
-            {
-                GUIStyle countStyle = new GUIStyle(EditorStyles.helpBox);
-                countStyle.normal.textColor = Color.cyan;
-                countStyle.fontStyle = FontStyle.Bold;
-                countStyle.alignment = TextAnchor.MiddleCenter;
-                
-                EditorGUILayout.LabelField($"登録数: {mentalDataList.Count} 個", countStyle);
-            }
-            
-            EditorGUILayout.Space(5);
-            
-            // MentalDataリスト
-            for (int i = 0; i < mentalDataList.Count; i++)
-            {
-                EditorGUILayout.BeginHorizontal("box");
-                
-                EditorGUI.BeginChangeCheck();
-                
-                EditorGUILayout.LabelField($"{i + 1}.", GUILayout.Width(30));
-                mentalDataList[i] = (MentalData)EditorGUILayout.ObjectField(mentalDataList[i], typeof(MentalData), false, GUILayout.Width(250));
-                
-                if (mentalDataList[i] != null)
-                {
-                    GUIStyle previewStyle = new GUIStyle(EditorStyles.label);
-                    previewStyle.normal.textColor = Color.green;
-                    previewStyle.fontStyle = FontStyle.Bold;
-                    
-                    string preview = $"精神力:{mentalDataList[i].maxMental} 括弧:{mentalDataList[i].faceline}";
-                    EditorGUILayout.LabelField(preview, previewStyle);
-                }
-                else
-                {
-                    EditorGUILayout.LabelField("(未設定)", EditorStyles.miniLabel);
-                }
-                
-                if (EditorGUI.EndChangeCheck())
-                {
-                    GeneratePreview();
-                }
-                
-                GUI.backgroundColor = new Color(1f, 0.5f, 0.5f);
-                if (GUILayout.Button("✕", GUILayout.Width(25)))
-                {
-                    mentalDataList.RemoveAt(i);
-                    GeneratePreview();
-                }
-                GUI.backgroundColor = Color.white;
-                
-                EditorGUILayout.EndHorizontal();
-            }
-            
-            EditorGUILayout.Space(3);
-            
-            GUI.backgroundColor = new Color(0.7f, 0.7f, 1f);
-            if (GUILayout.Button("+ MentalDataを追加"))
-            {
-                mentalDataList.Add(null);
-            }
-            GUI.backgroundColor = Color.white;
-            
-            EditorGUILayout.Space(3);
-            
-            // 統計情報
-            if (mentalDataList.Count > 0)
-            {
-                var validMentals = mentalDataList.Where(m => m != null).ToList();
-                if (validMentals.Count > 0)
-                {
-                    float avgMental = (float)validMentals.Average(m => m.maxMental);
-                    var uniqueFacelines = validMentals.Select(m => m.faceline).Distinct().Count();
-                    
-                    EditorGUILayout.LabelField("【統計】", EditorStyles.boldLabel);
-                    EditorGUILayout.LabelField($"  有効データ: {validMentals.Count} / {mentalDataList.Count}");
-                    EditorGUILayout.LabelField($"  平均精神力: {avgMental:F1}");
-                    EditorGUILayout.LabelField($"  括弧の種類: {uniqueFacelines} 種類");
-                }
-            }
-        }
-        
-        EditorGUILayout.EndVertical();
-    }
-
-    /// <summary>
     /// 敵リスト設定セクション
     /// </summary>
     private void DrawEnemyListSettings()
@@ -279,7 +157,7 @@ public class AreaDataCreator : EditorWindow
         EditorGUILayout.BeginVertical("box");
         EditorGUILayout.LabelField("👾 敵リスト設定", EditorStyles.boldLabel);
         
-        EditorGUILayout.HelpBox("設定された敵リストからランダムに選択されます。\n敵のステータスはEnemyDataで設定してください。", MessageType.Info);
+        EditorGUILayout.HelpBox("設定された敵リストからランダムに選択されます。\n敵のステータス・顔文字・MentalDataはEnemyDataで設定してください。", MessageType.Info);
         
         int validEnemyCount = fixedEnemies.Count(e => e != null);
         
@@ -546,6 +424,9 @@ public class AreaDataCreator : EditorWindow
                                 displayText += " ⚠️ MentalDataなし";
                             }
                             
+                            // 敵の名前も表示
+                            displayText += $" ({entry.enemy.name})";
+                            
                             EditorGUILayout.LabelField(displayText, enemyStyle);
                             displayCount++;
                         }
@@ -780,7 +661,7 @@ public class AreaDataCreator : EditorWindow
         
         if (validEnemyCount == 0)
         {
-            EditorUtility.DisplayDialog("エラー", "少���くとも1体の敵を設定する必要があります", "OK");
+            EditorUtility.DisplayDialog("エラー", "少なくとも1体の敵を設定する必要があります", "OK");
             return;
         }
         
@@ -827,20 +708,6 @@ public class AreaDataCreator : EditorWindow
         if (densityProp != null)
         {
             densityProp.floatValue = useAutoKaomojiDensity ? AreaBuild.CalculateKaomojiDensity(cultureLevel) : kaomojiDensity;
-        }
-        
-        SerializedProperty mentalDataListProp = areaProp.FindPropertyRelative("mentalDataList");
-        if (mentalDataListProp != null)
-        {
-            mentalDataListProp.ClearArray();
-            for (int i = 0; i < mentalDataList.Count; i++)
-            {
-                if (mentalDataList[i] != null)
-                {
-                    mentalDataListProp.InsertArrayElementAtIndex(mentalDataListProp.arraySize);
-                    mentalDataListProp.GetArrayElementAtIndex(mentalDataListProp.arraySize - 1).objectReferenceValue = mentalDataList[i];
-                }
-            }
         }
         
         SerializedProperty partUnlockManagerProp = areaProp.FindPropertyRelative("partUnlockManager");
@@ -942,14 +809,13 @@ public class AreaDataCreator : EditorWindow
     }
 
     /// <summary>
-    /// フィールドリセット
+    /// フィ���ルドリセット
     /// </summary>
     private void ResetFields()
     {
         areaName = "";
         cultureLevel = 1;
         fixedEnemies.Clear();
-        mentalDataList.Clear();
         useAutoKaomojiDensity = true;
         InitializePartUnlockConfigs();
         UpdateAutoValues();
