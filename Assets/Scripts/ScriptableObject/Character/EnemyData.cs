@@ -27,11 +27,6 @@ public class EnemyData : CharacterData
     [SerializeField, Range(0.5f, 10f)] float launchInterval = 2.5f;
     public float LaunchInterval => launchInterval;
 
-    // 下位互換のため残す（削除予定）
-    [HideInInspector]
-    [SerializeField] float launchDuration = 1.5f;
-    public float LaunchDuration => launchWaitTime; // launchWaitTimeにリダイレクト
-
     [SerializeField] Wave wave;
     public Wave Wave => wave;
 

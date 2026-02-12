@@ -18,9 +18,6 @@ namespace Constants
         public float maxDragDistance = 3f;       // ドラッグ最大距離
         public float minLaunchDistance = 0.1f;   // これ未満なら発射しない
 
-        [Header("Landing / Cooldown")]
-        public float landingCooldown = 0.25f;    // 着地硬直時間(=CT)
-
         [Header("Reflect")]
         public float reflectPower = 1f;         // 反射時の速度倍率
 
