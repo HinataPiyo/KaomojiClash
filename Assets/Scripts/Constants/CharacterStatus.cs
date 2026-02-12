@@ -390,7 +390,7 @@ namespace Constants
             public float GetParameterByLevel(int level)
             {
                 if (level <= 1) return value;
-                return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
+                return value * level + (Calculation.GetGrowthRateValue(growthRateType) * value);
             }
 
             public float GetInitialParam() => value;
@@ -407,7 +407,7 @@ namespace Constants
             {
                 if (level <= 1) return value;
                 // まず増加量を計算
-                return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
+                return value * level + (Calculation.GetGrowthRateValue(growthRateType) * value);
             }
 
             public float GetInitialParam() => value;
@@ -423,7 +423,7 @@ namespace Constants
             public float GetParameterByLevel(int level)
             {
                 if (level <= 1) return value;
-                return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
+                return value * level + (Calculation.GetGrowthRateValue(growthRateType) * value);
             }
 
             public float GetInitialParam() => value;
@@ -439,7 +439,7 @@ namespace Constants
             public float GetParameterByLevel(int level)
             {
                 if (level <= 1) return value;
-                return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
+                return value * level + (Calculation.GetGrowthRateValue(growthRateType) * value);
             }
 
             public float GetInitialParam() => value;

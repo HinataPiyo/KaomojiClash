@@ -28,6 +28,7 @@ namespace UI.KaomojiBuild.Module
                 int index = i;      // ローカルコピーを作成
                 ENUM.KaomojiPartType type = (ENUM.KaomojiPartType)index;
                 bool isCleared = CheckIsCleared(type);
+                Debug.Log($"KaomojiPartType: {type}, IsCleared: {isCleared}");
                 buttons[index].SetEnabled(isCleared);
                 buttons[index].text = Calculation.GetKaomojiPartTypeName(type);
                 // ボタンがクリックされたときの処理

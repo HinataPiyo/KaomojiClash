@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3569af90a185f4f428fb519bf25634c7, type: 3}
+  m_Name: Area_Lv05
+  m_EditorClassIdentifier: 
+  areaName: 5
+  area:
+    spawnConfig:
+      mode: 0
+      fixedEnemies:
+      - {fileID: 11400000, guid: 609e2451e2810dd49bd8f2497e863461, type: 2}
+      - {fileID: 11400000, guid: 653fdfb5e5fac4a4ea32135074b72d93, type: 2}
+      - {fileID: 11400000, guid: 5f99aa3c43c7dee49ae1cc8094b348a3, type: 2}
+      - {fileID: 11400000, guid: 40b323eca19c45f458021e665c4a060f, type: 2}
+      spawnAmounts:
+      - difficulty: 0
+        amount: 1
+      - difficulty: 1
+        amount: 1
+      - difficulty: 2
+        amount: 2
+      - difficulty: 3
+        amount: 1
+    mentalDataList: []
+    partUnlockManager:
+      unlockConfigs:
+      - unlockCultureLevel: 1
+        partType: 0
+        description: "\u53E3\uFF08\u57FA\u672C\uFF09"
+      - unlockCultureLevel: 6
+        partType: 1
+        description: "\u76EE"
+      - unlockCultureLevel: 11
+        partType: 2
+        description: "\u624B"
+      - unlockCultureLevel: 16
+        partType: 3
+        description: "\u88C5\u98FE1"
+      - unlockCultureLevel: 21
+        partType: 4
+        description: "\u88C5\u98FE2"
+    cultureLevel: 5
+    kaomojiDensity: 0.1
+  isClear: 0

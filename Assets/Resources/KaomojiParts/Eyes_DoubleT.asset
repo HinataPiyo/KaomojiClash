@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acb1bcfc0d329534bb6adb7af69bb262, type: 3}
-  m_Name: Eyes_Caret
+  m_Name: Eyes_DoubleT
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
   partType: 1
   data:
-    partName: "\u30AD\u30E3\u30EC\u30C3\u30C8"
-    part: ^^
+    partName: "\u30C6\u30A3\u30FC"
+    part: TT
     levelDetail:
       growthRateType: 1
     speed:
-      value: 0.038
-      growthRateType: 2
-    power:
-      value: 0.031
-      growthRateType: 3
-    guard:
-      value: 0.006
-      growthRateType: 0
-    stamina:
       value: 0.017
       growthRateType: 0
+    power:
+      value: 0.15
+      growthRateType: 2
+    guard:
+      value: 0.007
+      growthRateType: 0
+    stamina:
+      value: 0.006
+      growthRateType: 3
     maxDup: 50
     isInitDisplay: 1
     skillTag: []
