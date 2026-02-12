@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acb1bcfc0d329534bb6adb7af69bb262, type: 3}
-  m_Name: Mouth_Omega
+  m_Name: Mouth_Three
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
   partType: 0
   data:
-    partName: "\u30AA\u30E1\u30AC"
-    part: "\u03C9"
+    partName: "\u30B5\u30F3"
+    part: 3
     levelDetail:
       growthRateType: 1
     speed:
-      value: 0.027
-      growthRateType: 1
-    power:
-      value: 0.384
+      value: 0.13
       growthRateType: 2
-    guard:
-      value: 0.034
+    power:
+      value: 0.142
       growthRateType: 1
-    stamina:
-      value: 0.119
+    guard:
+      value: 0.031
       growthRateType: 0
+    stamina:
+      value: 0.104
+      growthRateType: 1
     maxDup: 50
     isInitDisplay: 1
     skillTag: []

@@ -11,8 +11,6 @@ namespace UI.KaomojiBuild.Module
         KaomojiBuildModulesController moduleCtrl;
         Button[] buttons;
 
-        [SerializeField] AreaDatabase areaDB;
-
         void Awake()
         {
             moduleCtrl = GetComponent<KaomojiBuildModulesController>();
@@ -47,7 +45,7 @@ namespace UI.KaomojiBuild.Module
         /// <returns></returns>
         bool CheckIsCleared(ENUM.KaomojiPartType type)
         {
-            return areaDB.CheckIsClearedByCultureLevel(type);
+            return AreaManager.I.CheckIsClearedByCultureLevel(type);
         }
 
     }

@@ -19,14 +19,17 @@ MonoBehaviour:
     guard: 1
     maxDragDistance: 3
     minLaunchDistance: 0.1
-    landingCooldown: 2
+    landingCooldown: 0
     reflectPower: 1.5
     mentalData: {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
-  launchDuration: 1.2
   kaomoji:
-    mouth: {fileID: 11400000, guid: 0899cf25843677842bf92cc5b4a28eec, type: 2}
+    mouth: {fileID: 11400000, guid: 1d1e6e3293ece5f45b102b018ebefd72, type: 2}
     eyes: {fileID: 0}
     hands: {fileID: 0}
     decoration_first: {fileID: 0}
     decoration_second: {fileID: 0}
   findPlayerRadius: 2
+  launchWaitTime: 1.18
+  launchCooldown: 1.1
+  launchInterval: 1.49
+  launchDuration: 1.2

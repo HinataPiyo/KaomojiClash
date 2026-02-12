@@ -15,8 +15,10 @@ MonoBehaviour:
   areaName: 1
   area:
     spawnConfig:
-      mode: 0
-      fixedEnemies: []
+      mode: 2
+      fixedEnemies:
+      - {fileID: 11400000, guid: 1370d74249f64b24491a84b7883ae0fc, type: 2}
+      - {fileID: 11400000, guid: 325b5a862fb540948b8bebfa18947dca, type: 2}
       excludeTypes: 
       spawnAmounts:
       - difficulty: 0
@@ -29,6 +31,63 @@ MonoBehaviour:
         amount: 0
     mentalDataList:
     - {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
+    difficultyEnemyConfigs:
+    - difficulty: 0
+      baseStats:
+        speed: 8
+        health: 8
+        power: 0.8
+        guard: 0.5
+        maxDragDistance: 3
+        minLaunchDistance: 0.1
+        maxReflectCount: 5
+      timingSettings:
+        launchWaitTime: 2.5
+        launchCooldown: 1.5
+        launchInterval: 3.5
+        landingCooldown: 0.25
+    - difficulty: 1
+      baseStats:
+        speed: 10
+        health: 10
+        power: 1
+        guard: 1
+        maxDragDistance: 3
+        minLaunchDistance: 0.1
+        maxReflectCount: 5
+      timingSettings:
+        launchWaitTime: 2
+        launchCooldown: 1
+        launchInterval: 2.5
+        landingCooldown: 0.25
+    - difficulty: 2
+      baseStats:
+        speed: 12
+        health: 12
+        power: 1.5
+        guard: 1.5
+        maxDragDistance: 3
+        minLaunchDistance: 0.1
+        maxReflectCount: 5
+      timingSettings:
+        launchWaitTime: 1.5
+        launchCooldown: 0.8
+        launchInterval: 2
+        landingCooldown: 0.25
+    - difficulty: 3
+      baseStats:
+        speed: 15
+        health: 15
+        power: 2
+        guard: 2
+        maxDragDistance: 3
+        minLaunchDistance: 0.1
+        maxReflectCount: 5
+      timingSettings:
+        launchWaitTime: 1
+        launchCooldown: 0.5
+        launchInterval: 1.5
+        landingCooldown: 0.25
     partUnlockManager:
       unlockConfigs:
       - unlockCultureLevel: 1
@@ -47,5 +106,5 @@ MonoBehaviour:
         partType: 4
         description: "\u88C5\u98FE2"
     cultureLevel: 1
-    kaomojiDensity: 0.35000002
+    kaomojiDensity: 0
   isClear: 0

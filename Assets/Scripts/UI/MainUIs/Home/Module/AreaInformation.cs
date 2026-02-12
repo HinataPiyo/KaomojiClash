@@ -64,26 +64,20 @@ namespace UI.Home.Module
             cultureLevel.text = data.Build.cultureLevel.ToString();
             average.text = AreaBuild.GetEnemyAverageLevel(data.Build.cultureLevel).ToString();
             kamojiDensity.text = (data.Build.kaomojiDensity * 100f).ToString("F1") + "%";
+            nature.text = "なし";       // 未実装なため無し
 
             // 出現する敵の情報を簡潔に表示
             spawnKaomojiList.Clear();
             
-            var spawnConfig = data.Build.spawnConfig;
-            int totalEnemies = spawnConfig.GetTotalSpawnAmount();
+            EnemySpawnConfig spawnConfig = data.Build.spawnConfig;
             
             // 各難易度の敵数を表示
-            foreach (var amountData in spawnConfig.spawnAmounts)
+            foreach (EnemyData enemy in spawnConfig.fixedEnemies)
             {
-                if (amountData.amount > 0)
-                {
-                    VisualElement entry = temp_SapawnKaomoji.Instantiate();
-                    string difficultyText = $"[{amountData.difficulty}] × {amountData.amount}体";
-                    entry.Q<Label>("value").text = difficultyText;
-                    spawnKaomojiList.Add(entry);
-                }
+                VisualElement entry = temp_SapawnKaomoji.Instantiate();
+                entry.Q<Label>("value").text = enemy.Kaomoji.BuildKaomoji(enemy.Status.mentalData);
+                spawnKaomojiList.Add(entry);
             }
-            
-            nature.text = "なし";
         }
     }
 }

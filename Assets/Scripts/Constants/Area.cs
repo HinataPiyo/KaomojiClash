@@ -37,8 +37,6 @@ namespace Constants
         /// <summary>
         /// 文化圏レベルに応じたマルチプライヤーを取得する（カスタム増加率）
         /// </summary>
-        /// <param name="cultureLevel">文化圏レベル</param>
-        /// <param name="increaseRate">1レベルごとの増加率（例: 0.15 = 15%）</param>
         public static float GetCultureLevelMultiplier(int cultureLevel, float increaseRate)
         {
             float multiplier = BaseCultureLevelMultiplier + ((cultureLevel - 1) * increaseRate);
@@ -110,15 +108,11 @@ namespace Constants
     public class EnemySpawnConfig
     {
         [Header("生成モード")]
-        public GenerationMode mode = GenerationMode.SemiAuto;
+        public GenerationMode mode = GenerationMode.Manual;
 
-        [Header("固定敵設定（半自動/手動モード）")]
-        [Tooltip("固定で出現させる敵データ")]
+        [Header("敵リスト")]
+        [Tooltip("出現させる敵データ（この中からランダムに選択）")]
         public List<EnemyData> fixedEnemies = new List<EnemyData>();
-
-        [Header("除外設定（自動/半自動モード）")]
-        [Tooltip("自動生成時に除外する部位タイプ")]
-        public List<KaomojiPartType> excludeTypes = new List<KaomojiPartType>();
 
         [Header("難易度別出現数")]
         public DifficultySpawnAmount[] spawnAmounts = new DifficultySpawnAmount[]
@@ -130,20 +124,17 @@ namespace Constants
         };
 
         /// <summary>
-        /// 生成された敵データ（ランタイムキャッシュ）
-        /// </summary>
-        [System.NonSerialized]
-        public List<EnemyData> generatedEnemies = new List<EnemyData>();
-
-        /// <summary>
         /// 全難易度の合計出現数を取得
         /// </summary>
         public int GetTotalSpawnAmount()
         {
             int total = 0;
-            foreach (var amount in spawnAmounts)
+            if (spawnAmounts != null)
             {
-                total += amount.amount;
+                foreach (var amount in spawnAmounts)
+                {
+                    total += amount.amount;
+                }
             }
             return total;
         }
@@ -153,10 +144,13 @@ namespace Constants
         /// </summary>
         public int GetAmountByDifficulty(Difficulty difficulty)
         {
-            foreach (var amount in spawnAmounts)
+            if (spawnAmounts != null)
             {
-                if (amount.difficulty == difficulty)
-                    return amount.amount;
+                foreach (var amount in spawnAmounts)
+                {
+                    if (amount.difficulty == difficulty)
+                        return amount.amount;
+                }
             }
             return 0;
         }
@@ -167,9 +161,7 @@ namespace Constants
     /// </summary>
     public enum GenerationMode
     {
-        FullAuto,    // 完全自動（文化圏レベルのみ）
-        SemiAuto,    // 半自動（固定敵 + 残りは自動）
-        Manual       // 完全手動（全て指定）
+        Manual       // 手動（敵リストからランダム選択）
     }
 
     /// <summary>
@@ -222,13 +214,16 @@ namespace Constants
         {
             var availableTypes = new List<KaomojiPartType>();
             
-            foreach (var config in unlockConfigs)
+            if (unlockConfigs != null)
             {
-                if (cultureLevel >= config.unlockCultureLevel)
+                foreach (var config in unlockConfigs)
                 {
-                    if (!availableTypes.Contains(config.partType))
+                    if (cultureLevel >= config.unlockCultureLevel)
                     {
-                        availableTypes.Add(config.partType);
+                        if (!availableTypes.Contains(config.partType))
+                        {
+                            availableTypes.Add(config.partType);
+                        }
                     }
                 }
             }
@@ -237,15 +232,18 @@ namespace Constants
         }
 
         /// <summary>
-        /// 指定された部位が���用可能かチェック
+        /// 指定された部位が使用可能かチェック
         /// </summary>
         public bool IsPartTypeAvailable(int cultureLevel, KaomojiPartType partType)
         {
-            foreach (var config in unlockConfigs)
+            if (unlockConfigs != null)
             {
-                if (config.partType == partType && cultureLevel >= config.unlockCultureLevel)
+                foreach (var config in unlockConfigs)
                 {
-                    return true;
+                    if (config.partType == partType && cultureLevel >= config.unlockCultureLevel)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -259,12 +257,15 @@ namespace Constants
             PartUnlockConfig nextUnlock = null;
             int minLevel = int.MaxValue;
             
-            foreach (var config in unlockConfigs)
+            if (unlockConfigs != null)
             {
-                if (config.unlockCultureLevel > cultureLevel && config.unlockCultureLevel < minLevel)
+                foreach (var config in unlockConfigs)
                 {
-                    nextUnlock = config;
-                    minLevel = config.unlockCultureLevel;
+                    if (config.unlockCultureLevel > cultureLevel && config.unlockCultureLevel < minLevel)
+                    {
+                        nextUnlock = config;
+                        minLevel = config.unlockCultureLevel;
+                    }
                 }
             }
             

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Constants;
 using ENUM;
+using System.Linq;
 
 public class EnemySpawnController : MonoBehaviour
 {
@@ -52,39 +53,54 @@ public class EnemySpawnController : MonoBehaviour
 
         var areaData = AreaManager.I.CurrentAreaData;
         var spawnConfig = areaData.Build.spawnConfig;
-        var partUnlockManager = areaData.Build.partUnlockManager;
         int cultureLevel = areaData.Build.cultureLevel;
 
         Debug.Log($"=== 敵生成開始 ===");
         Debug.Log($"エリア: {areaData.AreaName}");
         Debug.Log($"文化圏レベル: {cultureLevel}");
-        Debug.Log($"生成モード: {spawnConfig.mode}");
-        Debug.Log($"MentalDataリスト: {areaData.Build.mentalDataList.Count} 個");
 
         currentAreaEnemies.Clear();
 
-        // 難易度別に敵を生成
+        // 敵リストから有効な敵を取得
+        var validEnemies = spawnConfig.fixedEnemies.Where(e => e != null).ToList();
+
+        if (validEnemies.Count == 0)
+        {
+            Debug.LogError("有効な敵が設定されていません！AreaDataに敵を設定してください。");
+            return;
+        }
+
+        Debug.Log($"使用可能な敵: {validEnemies.Count}体");
+
+        // 難易度別に敵を生成（リストからランダムに選択）
         foreach (var amountData in spawnConfig.spawnAmounts)
         {
             if (amountData.amount <= 0) continue;
 
             Debug.Log($"難易度 {amountData.difficulty} の敵を {amountData.amount} 体生成中...");
 
-            var enemies = EnemyDataGenerator.GenerateEnemyList(
-                spawnConfig,
-                cultureLevel,
-                amountData.difficulty,
-                amountData.amount,
-                partUnlockManager,
-                areaData.Build  // AreaBuildを渡す
-            );
+            for (int i = 0; i < amountData.amount; i++)
+            {
+                // 敵リストからランダムに1体選択
+                EnemyData selectedEnemy = validEnemies[Random.Range(0, validEnemies.Count)];
+                currentAreaEnemies.Add(selectedEnemy);
 
-            currentAreaEnemies.AddRange(enemies);
+                Debug.Log($"  {i + 1}体目: {selectedEnemy.name}");
+            }
 
-            Debug.Log($"  → {enemies.Count} 体生成完了");
+            Debug.Log($"  → {amountData.amount} 体生成完了");
         }
 
         Debug.Log($"=== 合計 {currentAreaEnemies.Count} 体の敵を生成 ===");
+
+        // 生成された敵の詳細をログ出力
+        foreach (var enemy in currentAreaEnemies)
+        {
+            if (enemy != null && enemy.Status != null)
+            {
+                Debug.Log($"Enemy: {enemy.name}, Speed: {enemy.Status.speed}, Health: {enemy.Status.health}");
+            }
+        }
     }
 
     /// <summary>
