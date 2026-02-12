@@ -1,44 +1,98 @@
-using System.Collections.Generic;
-using ENUM;
 using UnityEngine;
+using System.Collections.Generic;
+using Constants;
+using ENUM;
 
 public class EnemySpawnController : MonoBehaviour
 {
-    [Header("敵のデータベース"), SerializeField] EnemyDatabase enemy_DB;
     [Header("敵の元Prefab"), SerializeField] GameObject enemy_Prefab;
-
     [Header("INFO")]
     [Tooltip("エリアの大きさ"), SerializeField] Vector2 fieldAreaSize;
 
     [Header("戦闘時の囲いを制御するスクリプト"), SerializeField] WallController wallCtrl;
     [Header("Waveを管理するスクリプト"), SerializeField] WaveController waveCtrl;
     [Header("CameraのTargetingを制御するスクリプト"), SerializeField] TargetGroupController targetGroupCtrl;
+
     public List<GameObject> CurrentEnemies { get; private set; } = new List<GameObject>();
+
+    // 現在のエリアデータから敵リストを取得
+    private List<EnemyData> currentAreaEnemies = new List<EnemyData>();
 
     public bool IsAllEnemyDefeated() => CurrentEnemies.Count == 0;
 
-
     void Start()
     {
-        // AreaManagerがない場合はSerialideFieldで設定したDBを使用
-        if(AreaManager.I != null) enemy_DB = AreaManager.I.CurrentAreaData.Build.spawnDatabase;
+        GenerateAreaEnemies();
+
+        if (currentAreaEnemies.Count == 0)
+        {
+            Debug.LogError("敵が生成されていません!AreaDataまたはKaomojiPartsを確認してください。");
+            return;
+        }
+
         FirstSpawnEnemy();
+    }
+
+    /// <summary>
+    /// 現在のエリアデータから敵を生成
+    /// </summary>
+    private void GenerateAreaEnemies()
+    {
+        if (AreaManager.I == null)
+        {
+            Debug.LogError("AreaManager.I is null! シーンにAreaManagerが配置されていません。");
+            return;
+        }
+
+        if (AreaManager.I.CurrentAreaData == null)
+        {
+            Debug.LogError("CurrentAreaData is null! エリアが設定されていません。");
+            return;
+        }
+
+        var areaData = AreaManager.I.CurrentAreaData;
+        var spawnConfig = areaData.Build.spawnConfig;
+        int cultureLevel = areaData.Build.cultureLevel;
+
+        Debug.Log($"=== 敵生成開始 ===");
+        Debug.Log($"エリア: {areaData.AreaName}");
+        Debug.Log($"文化圏レベル: {cultureLevel}");
+        Debug.Log($"生成モード: {spawnConfig.mode}");
+
+        currentAreaEnemies.Clear();
+
+        // 難易度別に敵を生成
+        foreach (var amountData in spawnConfig.spawnAmounts)
+        {
+            if (amountData.amount <= 0) continue;
+
+            Debug.Log($"難易度 {amountData.difficulty} の敵を {amountData.amount} 体生成中...");
+
+            var enemies = EnemyDataGenerator.GenerateEnemyList(
+                spawnConfig,
+                cultureLevel,
+                amountData.difficulty,
+                amountData.amount
+            );
+
+            currentAreaEnemies.AddRange(enemies);
+
+            Debug.Log($"  → {enemies.Count} 体生成完了");
+        }
+
+        Debug.Log($"=== 合計 {currentAreaEnemies.Count} 体の敵を生成 ===");
     }
 
     /// <summary>
     /// 壁の内側に敵を生成させる
     /// </summary>
-    /// <param name="count">生成量</param>
     public void SpawnEnemyInWall(int waveCount, EnemyData firstEnemyData, Difficulty dif)
     {
-        // 現在生成されている壁から生成範囲を取得
         Wall wall = wallCtrl.GetWall();
         Vector2 spawnAreaSize = wall.SpawnArea;
 
-        // 今のところ敵はランダム抽選
-        foreach(EnemyData data in firstEnemyData.Wave.elements[waveCount].datas)
+        foreach (EnemyData data in firstEnemyData.Wave.elements[waveCount].datas)
         {
-            // WaveControllerでFirstEnemyに入れたWaveDataの中にあるEnemyDataをSpawn()関数に入れ実行
             GameObject e = Spawn(RandomPosition(wall.CenterPosition, spawnAreaSize), data, dif);
             BattleFlowManager.I.BattleEnemies.Add(e.transform);
             targetGroupCtrl.AddTarget(e.transform);
@@ -49,32 +103,42 @@ public class EnemySpawnController : MonoBehaviour
 
     /// <summary>
     /// 一番最初の敵を生成する関数
-    /// 生成後Waveデータを作成
     /// </summary>
-    /// <param name="count">生成量</param>
     public void FirstSpawnEnemy()
     {
-        for(int q = 0; q < enemy_DB.GetAmountByDifficulties().Length; q++)
+        if (currentAreaEnemies.Count == 0)
         {
-            int spawnAmount = enemy_DB.GetAmountByDifficulties()[q].amount;
-            for(int i = 0; i < spawnAmount; i++)
+            Debug.LogError("No enemies to spawn!");
+            return;
+        }
+
+        var spawnConfig = AreaManager.I.CurrentAreaData.Build.spawnConfig;
+        int cultureLevel = AreaManager.I.CurrentAreaData.Build.cultureLevel;
+
+        // 難易度別に敵を配置
+        foreach (var amountData in spawnConfig.spawnAmounts)
+        {
+            int spawnAmount = amountData.amount;
+            Difficulty dif = amountData.difficulty;
+
+            for (int i = 0; i < spawnAmount; i++)
             {
-                Difficulty dif = enemy_DB.GetAmountByDifficulties()[q].difficulty;
-                GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), SelectEnemyData(), dif);
+                EnemyData enemyData = SelectEnemyData(dif);
+                if (enemyData == null) continue;
+
+                GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), enemyData, dif);
                 EnemyController eCtrl = e.GetComponent<EnemyController>();
                 waveCtrl.CreateWaveData(eCtrl.EnemyData, dif);
-                int avgLevel = Constants.AreaBuild.GetEnemyAverageLevelByWaveDifficulty(AreaManager.I.CurrentAreaData.Build.cultureLevel, dif);
-                eCtrl.SetEnemyWorldUI(avgLevel, dif);       // 最初の敵のUIを設定（平均レベルと難易度）
+
+                int avgLevel = AreaBuild.GetEnemyAverageLevelByWaveDifficulty(cultureLevel, dif);
+                eCtrl.SetEnemyWorldUI(avgLevel, dif);
             }
         }
     }
 
     /// <summary>
-    /// 設定したエリア内でランダムな位置を取得する
+    /// ランダムな位置を取得
     /// </summary>
-    /// <param name="spawnAreaSize"></param>
-    /// <returns></returns>
-
     Vector2 RandomPosition(Vector2 center, Vector2 spawnAreaSize)
     {
         Vector3 randomPosition = new Vector3(
@@ -87,20 +151,43 @@ public class EnemySpawnController : MonoBehaviour
     }
 
     /// <summary>
-    /// 敵のデータベースからランダムに抽選する
+    /// 特定難易度の敵をランダム選択
+    /// </summary>
+    public EnemyData SelectEnemyData(Difficulty difficulty)
+    {
+        var availableEnemies = currentAreaEnemies.FindAll(e =>
+        {
+            // 難易度に応じた敵を選択（簡易実装）
+            // TODO: より詳細な判定ロジックを追加
+            return true;
+        });
+
+        if (availableEnemies.Count == 0)
+        {
+            Debug.LogWarning($"No enemies available for difficulty {difficulty}");
+            return null;
+        }
+
+        int index = Random.Range(0, availableEnemies.Count);
+        EnemyData copy = Instantiate(availableEnemies[index]);
+        return copy;
+    }
+
+    /// <summary>
+    /// 全敵からランダム選択（互換性のため残す）
     /// </summary>
     public EnemyData SelectEnemyData()
     {
-        int index = Random.Range(0, enemy_DB.GetAllEnemyData().Length);
-        EnemyData copy = Instantiate(enemy_DB.GetAllEnemyData()[index]);
+        if (currentAreaEnemies.Count == 0) return null;
+
+        int index = Random.Range(0, currentAreaEnemies.Count);
+        EnemyData copy = Instantiate(currentAreaEnemies[index]);
         return copy;
     }
 
     /// <summary>
     /// 敵の生成処理
     /// </summary>
-    /// <param name="pos">出現位置</param>
-    /// <param name="data">敵のデータ</param>
     GameObject Spawn(Vector2 pos, EnemyData data, Difficulty dif)
     {
         GameObject enemy = Instantiate(enemy_Prefab, pos, Quaternion.identity);

@@ -10,10 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3569af90a185f4f428fb519bf25634c7, type: 3}
-  m_Name: Area6_AreaData
+  m_Name: Area_Lv01
   m_EditorClassIdentifier: 
+  areaName: 1
   area:
-    spawnDatabase: {fileID: 11400000, guid: 82495c1b1c69c404b97f3fce8a37c868, type: 2}
-    cultureLevel: 6
-    kaomojiDensity: 0
+    spawnConfig:
+      mode: 0
+      fixedEnemies: []
+      excludeTypes: 
+      spawnAmounts:
+      - difficulty: 0
+        amount: 3
+      - difficulty: 1
+        amount: 2
+      - difficulty: 2
+        amount: 0
+      - difficulty: 3
+        amount: 0
+    cultureLevel: 1
+    kaomojiDensity: 0.35000002
   isClear: 0

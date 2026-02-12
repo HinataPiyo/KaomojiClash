@@ -23,7 +23,7 @@ MonoBehaviour:
     reflectPower: 1.2
     mentalData: {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
   kaomoji:
-    mouth: {fileID: 11400000, guid: 0899cf25843677842bf92cc5b4a28eec, type: 2}
+    mouth: {fileID: 11400000, guid: 833e688bacf4f874baa6487264858c26, type: 2}
     eyes: {fileID: 0}
     hands: {fileID: 0}
     decoration_first: {fileID: 0}

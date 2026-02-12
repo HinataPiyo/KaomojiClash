@@ -27,7 +27,7 @@ namespace Constants
         [Header("MentalPower")]
         public MentalData mentalData;
     }
-    
+
     [System.Serializable]
     public class Status
     {
@@ -50,11 +50,11 @@ namespace Constants
         public Params UpdateTotalPartsParameter(KaomojiPartData[] datas)
         {
             m_params.speed = m_params.power = m_params.guard = m_params.stamina = 0f;
-            foreach(var part in datas)
+            foreach (var part in datas)
             {
                 // 記号が割り当てられてなければスキップ
                 if (part == null || part.Data == null) continue;
-                
+
                 int level = part.Data.levelDetail.Level;
                 m_params.speed += part.Data.speed.GetParameterByLevel(level);
                 m_params.power += part.Data.power.GetParameterByLevel(level);
@@ -66,8 +66,8 @@ namespace Constants
         }
     }
 
-    
-    
+
+
     [System.Serializable]
     public sealed class KAOMOJI
     {
@@ -84,7 +84,7 @@ namespace Constants
         public void AllResetPartsLevel()
         {
             KaomojiPartData[] parts = GetAllPartsData();
-            foreach(var part in parts)
+            foreach (var part in parts)
             {
                 part?.Data.levelDetail.ResetLevel();
             }
@@ -94,9 +94,9 @@ namespace Constants
         {
             List<SkillTag[]> allTags = new List<SkillTag[]>();
             KaomojiPartData[] parts = GetAllPartsData();
-            foreach(var part in parts)
+            foreach (var part in parts)
             {
-                if(part != null)
+                if (part != null)
                 {
                     allTags.Add(part.Data.SkillTags);
                 }
@@ -109,9 +109,9 @@ namespace Constants
         {
             int count = 0;
             KaomojiPartData[] parts = GetAllPartsData();
-            foreach(var part in parts)
+            foreach (var part in parts)
             {
-                if(part != null)
+                if (part != null)
                 {
                     count++;
                 }
@@ -121,7 +121,7 @@ namespace Constants
 
         public void SetPartDataByType(KaomojiPartData partData)
         {
-            switch(partData.PartType)
+            switch (partData.PartType)
             {
                 case KaomojiPartType.Eyes:
                     eyes = partData;
@@ -165,11 +165,11 @@ namespace Constants
         public float GetInitialParam(StatusType type)
         {
             float value = 0f;
-            foreach(var part in GetAllPartsData())
+            foreach (var part in GetAllPartsData())
             {
                 // 記号が割り当てられてなければスキップ
                 if (part == null) continue;
-                switch(type)
+                switch (type)
                 {
                     case StatusType.Speed:
                         value += part.Data.speed.GetInitialParam();
@@ -192,12 +192,12 @@ namespace Constants
         public float GetTotalParamByType(StatusType type)
         {
             float value = 0f;
-            foreach(var part in GetAllPartsData())
+            foreach (var part in GetAllPartsData())
             {
                 // 記号が割り当てられてなければスキップ
                 if (part == null) continue;
                 int level = part.Data.levelDetail.Level;
-                switch(type)
+                switch (type)
                 {
                     case StatusType.Speed:
                         value += part.Data.speed.GetParameterByLevel(level);
@@ -227,12 +227,54 @@ namespace Constants
         {
             // index: 0=左側、1=右側
             // partがnullまたは空文字、indexが範囲外の場合は空文字を返す
-            if(string.IsNullOrEmpty(part) || part.Length <= index)
+            if (string.IsNullOrEmpty(part) || part.Length <= index)
             {
                 return "";
             }
 
             return part[index].ToString();
+        }
+
+        // 既存のKAOMOJI構造体内に以下を追加
+
+        /// <summary>
+        /// 目パーツを設定
+        /// </summary>
+        public void SetEyes(KaomojiPartData part)
+        {
+            eyes = part;
+        }
+
+        /// <summary>
+        /// 口パーツを設定
+        /// </summary>
+        public void SetMouth(KaomojiPartData part)
+        {
+            mouth = part;
+        }
+
+        /// <summary>
+        /// 手パーツを設定
+        /// </summary>
+        public void SetHands(KaomojiPartData part)
+        {
+            hands = part;
+        }
+
+        /// <summary>
+        /// 装飾1パーツを設定
+        /// </summary>
+        public void SetDecorationFirst(KaomojiPartData part)
+        {
+            decoration_first = part;
+        }
+
+        /// <summary>
+        /// 装飾2パーツを設定
+        /// </summary>
+        public void SetDecorationSecond(KaomojiPartData part)
+        {
+            decoration_second = part;
         }
     }
 
@@ -245,7 +287,7 @@ namespace Constants
         public string partName;
         public string part;
         public LevelDetail levelDetail;
-            
+
         // %で計算(例: 0.1なら10%UP)
         [Tooltip("移動速度に影響")] public Speed speed;
         [Tooltip("攻撃力に影響")] public Power power;
@@ -256,7 +298,7 @@ namespace Constants
         [SerializeField] SkillTag[] skillTag;           // このパーツに対応するスキルタグ
         public SkillTag[] SkillTags => skillTag;
 
-        
+
         /// <summary>
         /// 初期表示するかどうか
         /// </summary>
@@ -329,7 +371,7 @@ namespace Constants
                 Exp = 0f;
             }
         }
-        
+
 
         // レベルごとの効果値
         [System.Serializable]
@@ -338,10 +380,10 @@ namespace Constants
             public const float MIN_VALUE = -0.2f;
             public const float MAX_VALUE = 0.2f;
             [Range(MIN_VALUE, MAX_VALUE), SerializeField] float value;
-            [SerializeField] GrowthRateType growthRateType;     public GrowthRateType GrowthRateType => growthRateType;
+            [SerializeField] GrowthRateType growthRateType; public GrowthRateType GrowthRateType => growthRateType;
             public float GetParameterByLevel(int level)
             {
-                if(level <= 1) return value;
+                if (level <= 1) return value;
                 return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
             }
 
@@ -354,14 +396,14 @@ namespace Constants
             public const float MIN_VALUE = -0.7f;
             public const float MAX_VALUE = 0.7f;
             [Range(MIN_VALUE, MAX_VALUE), SerializeField] float value;
-            [SerializeField] GrowthRateType growthRateType;     public GrowthRateType GrowthRateType => growthRateType;
+            [SerializeField] GrowthRateType growthRateType; public GrowthRateType GrowthRateType => growthRateType;
             public float GetParameterByLevel(int level)
             {
-                if(level <= 1) return value;
+                if (level <= 1) return value;
                 // まず増加量を計算
                 return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
             }
-            
+
             public float GetInitialParam() => value;
         }
 
@@ -371,10 +413,10 @@ namespace Constants
             public const float MIN_VALUE = -0.05f;
             public const float MAX_VALUE = 0.05f;
             [Range(MIN_VALUE, MAX_VALUE), SerializeField] float value;
-            [SerializeField] GrowthRateType growthRateType;     public GrowthRateType GrowthRateType => growthRateType;
+            [SerializeField] GrowthRateType growthRateType; public GrowthRateType GrowthRateType => growthRateType;
             public float GetParameterByLevel(int level)
             {
-                if(level <= 1) return value;
+                if (level <= 1) return value;
                 return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
             }
 
@@ -387,15 +429,17 @@ namespace Constants
             public const float MIN_VALUE = -0.2f;
             public const float MAX_VALUE = 0.2f;
             [Range(MIN_VALUE, MAX_VALUE), SerializeField] float value;
-            [SerializeField] GrowthRateType growthRateType;     public GrowthRateType GrowthRateType => growthRateType;
+            [SerializeField] GrowthRateType growthRateType; public GrowthRateType GrowthRateType => growthRateType;
             public float GetParameterByLevel(int level)
             {
-                if(level <= 1) return value;
+                if (level <= 1) return value;
                 return value * level + (Calculation.GetGrowthRate(growthRateType) * value);
             }
 
             public float GetInitialParam() => value;
         }
-        
+
     }
+
+
 }

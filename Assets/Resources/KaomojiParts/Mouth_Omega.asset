@@ -18,21 +18,19 @@ MonoBehaviour:
     partName: "\u30AA\u30E1\u30AC"
     part: "\u03C9"
     levelDetail:
-      growthRateType: 0
+      growthRateType: 1
     speed:
-      value: 0.4
-      growthRateType: 4
+      value: 0.027
+      growthRateType: 1
     power:
-      value: 0.3
+      value: 0.384
       growthRateType: 2
     guard:
-      value: 0.006
-      growthRateType: 0
+      value: 0.034
+      growthRateType: 1
     stamina:
-      value: 0.1
-      growthRateType: 2
+      value: 0.119
+      growthRateType: 0
     maxDup: 50
-    isInitDisplay: 1
-    skillTag:
-    - {fileID: 11400000, guid: 1ec76cdd47c7dc7418f3ac9d93703e15, type: 2}
-    - {fileID: 11400000, guid: 3bf96e70a58782546bf814964b275550, type: 2}
+    isInitDisplay: 0
+    skillTag: []

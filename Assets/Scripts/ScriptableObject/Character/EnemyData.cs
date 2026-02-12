@@ -1,16 +1,39 @@
-using System;
+using UnityEngine;
 using Constants;
 using Constants.Global;
-using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyData", menuName = "Character/nemyData")]
-public class EnemyData : CharacterData 
+[CreateAssetMenu(fileName = "EnemyData", menuName = "Character/EnemyData")]
+public class EnemyData : CharacterData
 {
-    public float launchDuration;    // 発射までの待機時間
-    // 本体の顔文字   
-    [Tooltip("ここでは顔の構成のみを決める"), SerializeField] KAOMOJI kaomoji;     public KAOMOJI Kaomoji => kaomoji;
-    [SerializeField] float findPlayerRadius = 2f;    public float FindPlayerRadius => findPlayerRadius;
+    [Header("基本情報")]
+    [SerializeField] KAOMOJI kaomoji;
+    public KAOMOJI Kaomoji => kaomoji;
 
-    public Wave Wave { get; private set; } = new Wave();
-    public void SetWaveData(Wave w) => Wave = w;
+    [Header("敵専用設定")]
+    [Tooltip("プレイヤーを発見する範囲")]
+    [SerializeField, Range(0.1f, 10f)] float findPlayerRadius = 1.5f;
+    public float FindPlayerRadius => findPlayerRadius;
+
+    [Header("敵の行動タイミング")]
+    [Tooltip("発射までの待機時間（秒）")]
+    [SerializeField, Range(0.1f, 5f)] float launchWaitTime = 1.5f;
+    public float LaunchWaitTime => launchWaitTime;
+
+    [Tooltip("発射後の硬直時間（秒）")]
+    [SerializeField, Range(0.1f, 3f)] float launchCooldown = 1.0f;
+    public float LaunchCooldown => launchCooldown;
+
+    [Tooltip("次の発射までの間隔（秒）")]
+    [SerializeField, Range(0.5f, 10f)] float launchInterval = 2.5f;
+    public float LaunchInterval => launchInterval;
+
+    // 下位互換のため残す（削除予定）
+    [HideInInspector]
+    [SerializeField] float launchDuration = 1.5f;
+    public float LaunchDuration => launchWaitTime; // launchWaitTimeにリダイレクト
+
+    [SerializeField] Wave wave;
+    public Wave Wave => wave;
+
+    public void SetWaveData(Wave w) => wave = w;
 }

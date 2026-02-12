@@ -1,13 +1,11 @@
-using Constants;
-using UnityEngine;
-using UnityEngine.UIElements;
-
 namespace UI.Home.Module
 {
-    
+    using UnityEngine;
+    using UnityEngine.UIElements;
+    using Constants;
+
     public class AreaInformation : MonoBehaviour, IUIModuleHandler
     {
-        [SerializeField] AreaDatabase areaDatabase;
         [SerializeField] VisualTreeAsset temp_SapawnKaomoji;
         [SerializeField] VisualTreeAsset temp_CultureLevelEntry;
         const string PLAY_BUTTON = "PlayButton";
@@ -33,49 +31,59 @@ namespace UI.Home.Module
             nature = root.Q<Label>("nature-value");
 
             cultureLevelList.Clear();
-            for(int ii = 0; ii < areaDatabase.GetAllAreas().Length; ii++)
+            
+            if (AreaManager.I != null && AreaManager.I.AreaDatas != null)
             {
-                int index = ii; // クロージャ対策
-                VisualElement cultureEntry = temp_CultureLevelEntry.Instantiate();
-                Button b = cultureEntry.Q<Button>();
-                AreaData areaData = areaDatabase.GetAllAreas()[index];
-                b.clicked += () => UpdateAreaInformation(areaData);
-                b.text = "レベル" + areaData.Build.cultureLevel.ToString();     // 文化圏レベルを表示
-                cultureLevelList.Add(cultureEntry);
-            }
+                for (int ii = 0; ii < AreaManager.I.AreaDatas.Length; ii++)
+                {
+                    int index = ii;
+                    VisualElement cultureEntry = temp_CultureLevelEntry.Instantiate();
+                    Button b = cultureEntry.Q<Button>();
+                    AreaData areaData = AreaManager.I.AreaDatas[index];
+                    b.clicked += () => UpdateAreaInformation(areaData);
+                    b.text = "レベル" + areaData.Build.cultureLevel.ToString();
+                    cultureLevelList.Add(cultureEntry);
+                }
 
-            UpdateAreaInformation(areaDatabase.GetAllAreas()[0]);       // 最初はレベル1の情報を表示
+                if (AreaManager.I.AreaDatas.Length > 0)
+                {
+                    UpdateAreaInformation(AreaManager.I.AreaDatas[0]);
+                }
+            }
         }
 
-        /// <summary>
-        /// 出撃が押された時の処理
-        /// </summary>
         void PlayButtonOnClick()
         {
             AreaManager.I.SetCurrentAreaData(currentAreaIndex);
             SceneChangeManager.I.ChangeScene(ENUM.Scene.Battle);
         }
 
-        /// <summary>
-        /// エリア情報の更新
-        /// </summary>
-        /// <param name="areaData">エリアデータ</param>
         void UpdateAreaInformation(AreaData data)
         {
             currentAreaIndex = data.Build.cultureLevel - 1;
-            cultureLevel.text = data.Build.cultureLevel.ToString();     // 文化圏レベルを表示
-            average.text = AreaBuild.GetEnemyAverageLevel(data.Build.cultureLevel).ToString();      // 敵の平均レベルを表示
+            cultureLevel.text = data.Build.cultureLevel.ToString();
+            average.text = AreaBuild.GetEnemyAverageLevel(data.Build.cultureLevel).ToString();
             kamojiDensity.text = (data.Build.kaomojiDensity * 100f).ToString("F1") + "%";
 
-            // 出現する顔文字リストの更新
+            // 出現する敵の情報を簡潔に表示
             spawnKaomojiList.Clear();
-            foreach(EnemyData enemy in data.Build.spawnDatabase.GetAllEnemyData())
+            
+            var spawnConfig = data.Build.spawnConfig;
+            int totalEnemies = spawnConfig.GetTotalSpawnAmount();
+            
+            // 各難易度の敵数を表示
+            foreach (var amountData in spawnConfig.spawnAmounts)
             {
-                VisualElement kaomojiEntry = temp_SapawnKaomoji.Instantiate();
-                kaomojiEntry.Q<Label>("value").text = enemy.Kaomoji.BuildKaomoji(enemy.Status.mentalData);
-                spawnKaomojiList.Add(kaomojiEntry);
+                if (amountData.amount > 0)
+                {
+                    VisualElement entry = temp_SapawnKaomoji.Instantiate();
+                    string difficultyText = $"[{amountData.difficulty}] × {amountData.amount}体";
+                    entry.Q<Label>("value").text = difficultyText;
+                    spawnKaomojiList.Add(entry);
+                }
             }
-            nature.text = "なし"; // 仮
+            
+            nature.text = "なし";
         }
     }
 }
