@@ -3780,7 +3780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04932ad05e6bf244fa18ad8b351893dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaDatabase: {fileID: 11400000, guid: 0daa39e10d6247240aa677fe48a40353, type: 2}
 --- !u!4 &1271789815
 Transform:
   m_ObjectHideFlags: 0
@@ -5273,7 +5272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764ee5aded18e5249a608e8a0bf08d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_DB: {fileID: 11400000, guid: 08058e89a0c24d242ae65817d6f47562, type: 2}
   enemy_Prefab: {fileID: 1981634585419082555, guid: f02e06c0b7be5e3488b15b9121f21234, type: 3}
   fieldAreaSize: {x: 45, y: 45}
   wallCtrl: {fileID: 796114082}
