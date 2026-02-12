@@ -10,7 +10,7 @@ namespace ArenaItem
     /// <summary>
     /// 反発パッド
     /// </summary>
-    public class ReboundPad : AreaItemBase, IReboundPad
+    public class ReboundPad : ArenaItemBase, IReboundPad
     {
         [SerializeField] Data.ReboundPad data;
 
