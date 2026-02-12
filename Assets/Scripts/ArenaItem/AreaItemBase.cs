@@ -2,12 +2,12 @@ namespace ArenaItem
 {
     using UnityEngine;
 
-    public class AreaItemBase : MonoBehaviour
+    public class ArenaItemBase : MonoBehaviour
     {
         protected const string ANIM_TRIGGER_PLAY = "Play";
         protected Animator anim;
 
-        void Awake()
+        protected virtual void Awake()
         {
             anim = GetComponentInChildren<Animator>();
         }

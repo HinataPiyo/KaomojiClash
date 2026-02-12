@@ -2,7 +2,7 @@ namespace ArenaItem
 {
     using UnityEngine;
 
-    public class HealingPad : AreaItemBase, IReboundPad
+    public class HealingPad : ArenaItemBase, IReboundPad
     {
         [SerializeField] Data.HealingPad data;
         void OnCollisionEnter2D(Collision2D col)

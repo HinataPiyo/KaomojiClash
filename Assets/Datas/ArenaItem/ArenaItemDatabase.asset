@@ -15,3 +15,5 @@ MonoBehaviour:
   arenaItemDatas:
   - {fileID: 11400000, guid: 47c3f2b7a8d774649959a0e8ca80d85f, type: 2}
   - {fileID: 11400000, guid: e9a6bb30ebfc5a946b2296167b0ff00e, type: 2}
+  - {fileID: 11400000, guid: 3bea3b0dd956f5240bb232aba1265210, type: 2}
+  - {fileID: 11400000, guid: 4c0fc1f1ae9f0414ba581aa7403a765b, type: 2}

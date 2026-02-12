@@ -78,7 +78,8 @@ public class PlayerMovement : Movement
 
             // 距離に応じて速度をスケール
             float powerRate = Mathf.Clamp01(dragVector.magnitude / data.Status.maxDragDistance);
-            float launchSpeed = Context.I.GetPlayerSpeed() * powerRate;
+            float playerSpeed = Context.I.GetPlayerSpeed();
+            float launchSpeed = (playerSpeed + (playerSpeed * speedupRate)) * powerRate;
 
             Launch(launchDir * launchSpeed);
             CameraZoom.I.SetCameraOrthographic(Context.I.BattleStat);

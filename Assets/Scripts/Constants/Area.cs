@@ -10,9 +10,9 @@ namespace Constants
     {
         public static readonly int MouthReleaseLevel = 0;
         public static readonly int EyesReleaseLevel = 3;
-        public static readonly int HandsReleaseLevel = 5;
-        public static readonly int DecorationFirstReleaseLevel = 10;
-        public static readonly int DecorationSecondReleaseLevel = 15;
+        public static readonly int HandsReleaseLevel = 10;
+        public static readonly int DecorationFirstReleaseLevel = 15;
+        public static readonly int DecorationSecondReleaseLevel = 25;
 
         public static readonly Dictionary<KaomojiPartType, int> PartTypeToReleaseLevel = new Dictionary<KaomojiPartType, int>
         {

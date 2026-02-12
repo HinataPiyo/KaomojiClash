@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MouthOnly_1
   m_EditorClassIdentifier: 
   status:
-    speed: 4.1
+    speed: 6.31
     health: 14.4
     power: 5
     guard: 1

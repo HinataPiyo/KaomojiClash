@@ -49,5 +49,5 @@ MonoBehaviour:
         partType: 4
         description: "\u88C5\u98FE2"
     cultureLevel: 4
-    kaomojiDensity: 0.1
+    kaomojiDensity: 0
   isClear: 0

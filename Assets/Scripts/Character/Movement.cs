@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public abstract class Movement : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public abstract class Movement : MonoBehaviour
 
     protected CharacterShootDirectionArrow shootDirectionArrow;
     public CharacterShootDirectionArrow ShootDirectionArrow => shootDirectionArrow;
+    protected float speedupRate { get; private set; } = 0;
 
     protected enum State
     {
@@ -29,7 +31,6 @@ public abstract class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rectTF = GetComponentInChildren<RectTransform>();
     }
-
 
     void Update()
     {
@@ -119,5 +120,19 @@ public abstract class Movement : MonoBehaviour
 
         Vector3 worldPos = cam.ScreenToWorldPoint(screenPos);
         return new Vector2(worldPos.x, worldPos.y);
+    }
+
+    /// <summary>
+    /// 速度を上乗せする
+    /// </summary>
+    /// <param name="rate"></param>
+    public void SpeedUp(float rate)
+    {
+        speedupRate = rate;
+    }
+
+    public void ResetSpeedUp()
+    {
+        speedupRate = 0f;
     }
 }
