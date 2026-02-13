@@ -11,11 +11,6 @@ namespace UI.KaomojiBuild.Module
     public class SelectKaomojiType : MonoBehaviour, IUIModuleHandler
     {
         KaomojiBuildModulesController moduleCtrl;
-        
-
-        [Header("メッセージテキスト")]
-        [SerializeField] Canvas canvas;
-        [SerializeField] GameObject messageUI_Prefab;
 
         void Awake()
         {
@@ -45,7 +40,7 @@ namespace UI.KaomojiBuild.Module
                 {
                     if (!isCleared)
                     {
-                        ShowMessage(GetTypeLockedMessage(type));
+                        moduleCtrl.ShowMessage(moduleCtrl.GetTypeLockedMessage(type));
                         return;
                     }
 
@@ -62,18 +57,6 @@ namespace UI.KaomojiBuild.Module
         bool CheckIsCleared(ENUM.KaomojiPartType type)
         {
             return AreaManager.I.CheckIsClearedByCultureLevel(type);
-        }
-
-        void ShowMessage(string message)
-        {
-            GameObject messageUI_Obj = Instantiate(messageUI_Prefab, canvas.transform);
-            MessageUI messageUI = messageUI_Obj.GetComponent<MessageUI>();
-            messageUI.SetMessage(message);
-        }
-
-        string GetTypeLockedMessage(ENUM.KaomojiPartType type)
-        {
-            return $"文化圏レベル{AreaBuild.PartTypeToReleaseLevel[type]}をクリアすると解放されます。";
         }
     }
 }

@@ -2,24 +2,33 @@ using Constants;
 using UnityEngine;
 using ENUM;
 using System.Collections.Generic;
+using System.Collections;
 
+/// <summary>
+/// プレイヤーのアップグレード管理クラス
+/// </summary>
 public class PlayerUpgradeService : MonoBehaviour
 {
-    public class SkillTagElement
-    {
-        public SkillTag tag;
-        public int stackCount;
-    }
-
+    PlayerMovement movement;
+    TmpAfterImageTrail afterImageTrail;
     public Status.Params UpgradedStatus { get; private set; } = new Status.Params();
-    List<SkillTagElement> totalTags = new List<SkillTagElement>();
+    public List<SkillTag.Stack> TotalTags { get; private set; } = new List<SkillTag.Stack>();
+    public List<SkillTag.Stack> ConditionTags { get; private set; } = new List<SkillTag.Stack>();
     PlayerData data;
+
+    void Awake()
+    {
+        movement = GetComponent<PlayerMovement>();
+        afterImageTrail = GetComponent<TmpAfterImageTrail>();
+    }
 
     public void Initialize(PlayerData data, List<SkillTag[]> tags)
     {
         this.data = data;
-        totalTags.Clear();
-        totalTags = SetTags(tags);
+        TotalTags.Clear();
+        TotalTags = SetTags(tags);
+        ConditionTags.Clear();
+        ConditionTags = SetConditionTags(tags);
         RecalculateUpgrades();
     }
 
@@ -28,26 +37,27 @@ public class PlayerUpgradeService : MonoBehaviour
     /// </summary>
     public void RecalculateUpgrades()
     {
-        UpgradedStatus = ApplyTagEffects(totalTags.ToArray());
+        UpgradedStatus = ApplyTagEffects(TotalTags.ToArray());
     }
 
     /// <summary>
     /// タグをセットする
     /// </summary>
     /// <param name="tags">記号に設定されているTagを取得する</param>
-    public static List<SkillTagElement> SetTags(List<SkillTag[]> tags)
+    public static List<SkillTag.Stack> SetTags(List<SkillTag[]> tags)
     {
-        List<SkillTagElement> total = new List<SkillTagElement>();
+        List<SkillTag.Stack> total = new List<SkillTag.Stack>();
         for (int ii = 0; ii < tags.Count; ii++)
         {
-            SkillTag[] tagList = tags[ii];
+            SkillTag[] tagList = tags[ii];      // 各記号に設定されているタグ群
             for (int jj = 0; jj < tagList.Length; jj++)
             {
                 SkillTag tag = tagList[jj];
                 if (tag == null) continue;
 
                 // 既に登録されているか確認
-                SkillTagElement existingElement = total.Find(e => e.tag == tag);
+                SkillTag.Stack existingElement = total.Find(e => e.tag == tag);
+
                 if (existingElement != null)
                 {
                     // スタック数を増加
@@ -56,7 +66,7 @@ public class PlayerUpgradeService : MonoBehaviour
                 else
                 {
                     // 新規登録
-                    SkillTagElement newElement = new SkillTagElement
+                    SkillTag.Stack newElement = new SkillTag.Stack
                     {
                         tag = tag,
                         stackCount = 1
@@ -69,6 +79,41 @@ public class PlayerUpgradeService : MonoBehaviour
         return total;
     }
 
+    public static List<SkillTag.Stack> SetConditionTags(List<SkillTag[]> tags)
+    {
+        List<SkillTag.Stack> conditionTags = new List<SkillTag.Stack>();
+        for (int ii = 0; ii < tags.Count; ii++)
+        {
+            SkillTag[] tagList = tags[ii];      // 各記号に設定されているタグ群
+            for (int jj = 0; jj < tagList.Length; jj++)
+            {
+                SkillTag tag = tagList[jj];
+                if (tag == null || !tag.IsCondition) continue;
+
+                // 既に登録されているか確認
+                SkillTag.Stack existingElement = conditionTags.Find(e => e.tag == tag);
+
+                if (existingElement != null)
+                {
+                    // スタック数を増加
+                    existingElement.stackCount = Mathf.Min(existingElement.stackCount + 1, 5); // 最大5スタック
+                }
+                else
+                {
+                    // 新規登録
+                    SkillTag.Stack newElement = new SkillTag.Stack
+                    {
+                        tag = tag,
+                        stackCount = 1
+                    };
+                    conditionTags.Add(newElement);
+                }
+            }
+        }
+
+        return conditionTags;
+    }
+
     /// <summary>
     /// アップグレードを適用する
     /// </summary>
@@ -76,7 +121,7 @@ public class PlayerUpgradeService : MonoBehaviour
     /// <param name="upgrades">セット中のSkillTagSOたち</param>
     /// <param name="stackCounts"></param>
     /// <returns></returns>
-    public Status.Params ApplyTagEffects(SkillTagElement[] elems)
+    public Status.Params ApplyTagEffects(SkillTag.Stack[] elems)
     {
         // 基礎ステータスをコピー
         UpgradedStatus = new Status.Params
@@ -91,6 +136,9 @@ public class PlayerUpgradeService : MonoBehaviour
         for (int i = 0; i < elems.Length; i++)
         {
             SkillTag upgrade = elems[i].tag;
+
+            if(upgrade.IsCondition) continue;   // 条件付きスキルタグは除外
+
             int stackCount = elems[i].stackCount;
             SkillTag.StatusModifier modifier = upgrade.GetStatusModifier(stackCount);
 
@@ -112,7 +160,7 @@ public class PlayerUpgradeService : MonoBehaviour
             }
         }
 
-        ApplyPartsEffects();
+        ApplyPartsEffects();        // パーツ効果を適用
 
         return UpgradedStatus;
     }
@@ -127,7 +175,24 @@ public class PlayerUpgradeService : MonoBehaviour
         UpgradedStatus.power += UpgradedStatus.power * data.Kaomoji.GetTotalParamByType(StatusType.Power);
         UpgradedStatus.guard += UpgradedStatus.guard * data.Kaomoji.GetTotalParamByType(StatusType.Guard);
         UpgradedStatus.stamina += UpgradedStatus.stamina * data.Kaomoji.GetTotalParamByType(StatusType.Stamina);
+    }
 
-        Debug.Log($"アップグレード後のステータス - 速度: {UpgradedStatus.speed}, 力: {UpgradedStatus.power}, ガード: {UpgradedStatus.guard}, 体力: {UpgradedStatus.stamina}");
+    /// <summary>
+    /// 一定時間速度を上げる効果を開始する
+    /// </summary>
+    /// <param name="duration">継続時間</param>
+    /// <param name="speedMultiplier">速度上昇値(%)</param>
+    public void StartSpeedUpEffect(float duration, float speedMultiplier)
+    {
+        StartCoroutine(ApplySpeedUpEffect(duration, speedMultiplier));
+    }
+
+    IEnumerator ApplySpeedUpEffect(float duration, float speedMultiplier)
+    {
+        afterImageTrail.SetActive(true);
+        movement.SpeedUp(speedMultiplier);
+        yield return new WaitForSeconds(duration);
+        movement.ResetSpeedUp();
+        afterImageTrail.SetActive(false);
     }
 }

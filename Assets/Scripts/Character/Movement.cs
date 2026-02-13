@@ -124,6 +124,7 @@ public abstract class Movement : MonoBehaviour
 
     /// <summary>
     /// 速度を上乗せする
+    /// 例：20%上乗せならrate=0.2f
     /// </summary>
     /// <param name="rate"></param>
     public void SpeedUp(float rate)

@@ -13,11 +13,17 @@ namespace UI.KaomojiBuild.Module
     {
         [SerializeField] VisualTreeAsset temp_SkillTag;
         StatusParamater statusParamater;
+        KaomojiBuildModulesController moduleCtrl;
 
         Label partType;     // 部位
         Label partName;     // パーツ名
         Label partIcon;     // アイコン
         VisualElement skillTagContainer;
+
+        void Awake()
+        {
+            moduleCtrl = GetComponent<KaomojiBuildModulesController>();
+        }
 
         public void Initialize(VisualElement moduleRoot)
         {
@@ -56,10 +62,48 @@ namespace UI.KaomojiBuild.Module
             foreach(SkillTag tag in part.Data.SkillTags)
             {
                 VisualElement tempRoot = temp_SkillTag.Instantiate();
-                new SkillTagUI(tempRoot, tag);
+                SkillTagUI ui = new SkillTagUI(tempRoot, tag);
+                RegisterTagAndCreateDescription(tempRoot, tag, ui);
                 skillTagContainer.Add(tempRoot);
             }
 
+        }
+
+        // 正しいタイミングで座標を取得
+        public void RegisterTagAndCreateDescription(VisualElement elem, SkillTag tag, SkillTagUI ui)
+        {
+            // GeometryChangedEventに登録
+            elem.RegisterCallback<GeometryChangedEvent>(evt =>
+            {
+                CreateTagAtPosition(elem, tag, ui);
+            });
+        }
+        
+        void CreateTagAtPosition(VisualElement elem, SkillTag tag, SkillTagUI ui)
+        {
+            GameObject skillTagObject = null;
+
+            elem.RegisterCallback<PointerEnterEvent>(ev =>
+            {
+                Vector2 uiToolkitScreenPos = elem.worldBound.position;
+                skillTagObject = moduleCtrl.ShowSkillTagDescription(tag, uiToolkitScreenPos);
+            });
+
+            elem.RegisterCallback<PointerLeaveEvent>(ev =>
+            {
+                if (skillTagObject == null) return;
+
+                Destroy(skillTagObject);
+                skillTagObject = null;
+            });
+
+            // elem.RegisterCallback<DetachFromPanelEvent>(ev =>
+            // {
+            //     if (skillTagObject == null) return;
+
+            //     Destroy(skillTagObject);
+            //     skillTagObject = null;
+            // });
         }
 
         public void Reset()

@@ -1,9 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Combo))]
-public class PlayerReflect : Reflect
+public class PlayerReflect : Reflect 
 {
     [SerializeField] Combo combo;
+    [SerializeField] PlayerUpgradeService upgradeService;
 
     protected override void OnCollisionEnter2D(Collision2D col)
     {
@@ -32,11 +35,35 @@ public class PlayerReflect : Reflect
                 AudioManager.I.PlaySEReflect();
             }
         }
+        else if (col.collider.CompareTag("Wall"))
+        {
+            ApplaySkillTagEffects();     // 反射に関連するスキルタグの効果を適用
+            AudioManager.I.PlaySEReflect();
+        }
     }
 
     protected override bool CanApplyDamage(Rigidbody2D otherRb)
     {
         // 相手より自分のほうが速い場合のみダメージを与える
-        return otherRb != null && rb.linearVelocity.sqrMagnitude > otherRb.linearVelocity.sqrMagnitude;
+        return otherRb != null && rb.linearVelocity.sqrMagnitude > otherRb.linearVelocity.sqrMagnitude * 0.92f;
+    }
+
+    void ApplaySkillTagEffects()
+    {
+        // 反射に関連するスキルタグの効果を適用する処理をここに実装
+        // 例: 反射ダメージ増加、反射後の無敵時間付与など
+
+        List<SkillTag.Stack> skillTags = upgradeService.ConditionTags;
+
+        foreach (SkillTag.Stack elem in skillTags)
+        {
+            if(elem.tag is ReboundBoost boost)        // RebounBoostがタグにある場合
+            {
+                float multiplier = boost.GetSpeedUpMultiplierByLevel(elem.stackCount);
+                float duration = boost.GetDurationByLevel(elem.stackCount);
+
+                upgradeService.StartSpeedUpEffect(duration, multiplier);        // 速度上昇効果を開始
+            }
+        }
     }
 }

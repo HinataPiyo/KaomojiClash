@@ -45,6 +45,6 @@ public class EnemyReflect : Reflect, IEnemyInitialize
     protected override bool CanApplyDamage(Rigidbody2D otherRb)
     {
         // 相手より自分のほうが明確に速い場合のみダメージを与える
-        return otherRb != null && rb.linearVelocity.sqrMagnitude > otherRb.linearVelocity.sqrMagnitude * 1.2f;
+        return otherRb != null && rb.linearVelocity.sqrMagnitude > otherRb.linearVelocity.sqrMagnitude * 1.0f;
     }
 }

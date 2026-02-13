@@ -275,6 +275,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
+  canvas: {fileID: 914850066}
+  messageUI_Prefab: {fileID: 6688569733568170583, guid: d9e4eba93351f0c48a12a97f964fdd21, type: 3}
+  skillTag_Prefab: {fileID: 6673629863444093409, guid: 005ca22409ca86740bd87b5845cdac47, type: 3}
 --- !u!114 &454582375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,8 +303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c419391b607ab624a9bf709912f47f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 914850066}
-  messageUI_Prefab: {fileID: 6688569733568170583, guid: d9e4eba93351f0c48a12a97f964fdd21, type: 3}
 --- !u!114 &454582377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,7 +587,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &914850067
 RectTransform:

@@ -57,8 +57,8 @@ namespace UI.KaomojiBuild.Module
         void RefreshSkillTags(KAOMOJI K)
         {
             // スキルタグ表示更新
-            List<PlayerUpgradeService.SkillTagElement> tags = PlayerUpgradeService.SetTags(K.GetAllSkillTags());
-            foreach (PlayerUpgradeService.SkillTagElement elem in tags)
+            List<SkillTag.Stack> tags = PlayerUpgradeService.SetTags(K.GetAllSkillTags());
+            foreach (SkillTag.Stack elem in tags)
             {
                 VisualElement tempRoot = temp_SkillTag.Instantiate();
                 new SkillTagUI(tempRoot, elem.tag, elem.stackCount);

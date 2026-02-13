@@ -4,7 +4,7 @@ namespace ArenaItem
 
     interface IReboundPad
     {
-        void ApplyRebound(Rigidbody2D rb, GameObject target);
+        void ApplyRebound(Rigidbody2D rb, Collision2D target);
     }
 
     /// <summary>
@@ -17,14 +17,14 @@ namespace ArenaItem
         void OnCollisionEnter2D(Collision2D col)
         {
             Rigidbody2D rb = col.gameObject.GetComponent<Rigidbody2D>();
-            ApplyRebound(rb, col.gameObject);
+            ApplyRebound(rb, col);
         }
 
         /// <summary>
         /// 反発を適用する
         /// </summary>
         /// <param name="target">衝突した相手</param>
-        public void ApplyRebound(Rigidbody2D rb, GameObject target)
+        public void ApplyRebound(Rigidbody2D rb, Collision2D target)
         {
             if(rb != null)
             {
