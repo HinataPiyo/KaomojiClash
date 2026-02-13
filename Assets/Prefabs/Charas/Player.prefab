@@ -398,6 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffectPrefab: {fileID: 5053206923923617459, guid: 6992f0d222af63e42b07fc233b5b0bc1, type: 3}
   combo: {fileID: 3274461508384448215}
+  upgradeService: {fileID: 4237118377759929476}
 --- !u!114 &8257460518724741839
 MonoBehaviour:
   m_ObjectHideFlags: 0

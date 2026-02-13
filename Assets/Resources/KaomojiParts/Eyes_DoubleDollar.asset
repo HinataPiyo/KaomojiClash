@@ -34,4 +34,4 @@ MonoBehaviour:
     maxDup: 50
     isInitDisplay: 1
     skillTag:
-    - {fileID: 11400000, guid: b04e48a1be3b1214fafdd01b378fbddb, type: 2}
+    - {fileID: 11400000, guid: c88049c764314a2459606e2f6d63a65e, type: 2}

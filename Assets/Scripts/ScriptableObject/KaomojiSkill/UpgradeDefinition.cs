@@ -4,6 +4,12 @@ using ENUM;
 
 public abstract class SkillTag : ScriptableObject
 {
+    public class Stack
+    {
+        public SkillTag tag;
+        public int stackCount;
+    }
+
     [System.Serializable]
     public class StatusModifier
     {
@@ -36,7 +42,11 @@ public abstract class SkillTag : ScriptableObject
         }
     }
 
+    [Header("このスキルタグが条件付きかどうか")]
+    [SerializeField] bool isCondition = false;      public bool IsCondition => isCondition;
+    [Header("スキルタグの表示名")]
     [SerializeField] string displayName;
+    [Header("最大スタック数")]
     [SerializeField] int maxStacks = 5;
 
     // 1スタック目〜Nスタック目の効果（画像の 1〜5 に相当）
