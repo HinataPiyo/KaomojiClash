@@ -99,6 +99,6 @@ public class RangeLine2D : MonoBehaviour
 
     public void ResetColor()
     {
-        color = Color.cyan;
+        color = Color.gray;
     }
 }

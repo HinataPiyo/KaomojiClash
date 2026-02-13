@@ -75,7 +75,7 @@ namespace ArenaItem
         void ApplySpeedUp(Movement move)
         {
             isInside = true;
-            rangeLine.SetColor(Color.red);
+            rangeLine.SetColor(Color.cyan);
             move.SpeedUp(speedUpAreaData.GetSpeedMultiplier());
         }
 

@@ -66,7 +66,7 @@ namespace UI.KaomojiBuild
                 uiToolkitScreenPos, canvas, rect
             );
 
-            Vector2 offsetY = new Vector2(0, -30);
+            Vector2 offsetY = new Vector2(0, -40);
             rect.anchoredPosition = canvasPosition + offsetY;
 
             SkillTagDescription skillTag = obj.GetComponent<SkillTagDescription>();
