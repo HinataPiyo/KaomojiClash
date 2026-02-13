@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
+/// <summary>
+/// TMPの残像エフェクトクラス
+/// </summary>
 public class TmpAfterImageTrail : MonoBehaviour
 {
     [Header("Target TMP (player visual)")]
