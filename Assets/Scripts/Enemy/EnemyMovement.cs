@@ -84,8 +84,6 @@ public class EnemyMovement : Movement, IEnemyInitialize
             
             Launch(launchDir * speed);
 
-            Debug.Log("Launch! : " + launchDir.ToString() + " : " + speed.ToString());
-
             isLaunch = false;
         }
     }

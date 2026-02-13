@@ -7,6 +7,7 @@ namespace UI.KaomojiBuild.Template
         Button button;
         Label name;
         Label stackCount;
+
         public SkillTagUI(VisualElement tempRoot, SkillTag tag, int stack = 1)
         {
             name = tempRoot.Q<Label>("name");

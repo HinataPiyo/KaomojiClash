@@ -43,6 +43,15 @@ public abstract class SkillTag : ScriptableObject
     [SerializeField] protected List<StatusModifier> stackModifiers = new();
 
     public string Name => displayName;
+    public string[] GetDescriptionsArray()
+    {
+        string[] descriptions = new string[maxStacks];
+        for (int i = 0; i < maxStacks; i++)
+        {
+            descriptions[i] = GetDescription(i + 1);
+        }
+        return descriptions;
+    }
 
     /// <summary>
     /// 指定されたスタック数に対応する上昇値を取得する

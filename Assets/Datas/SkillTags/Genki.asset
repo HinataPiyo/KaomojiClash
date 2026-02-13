@@ -28,5 +28,5 @@ MonoBehaviour:
     add: 80
     mul: 1.02
   - stat: 3
-    add: 80
-    mul: 1.02
+    add: 100
+    mul: 1.04

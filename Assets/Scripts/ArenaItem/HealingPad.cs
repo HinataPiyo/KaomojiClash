@@ -9,7 +9,7 @@ namespace ArenaItem
         {
             Rigidbody2D rb = col.gameObject.GetComponent<Rigidbody2D>();
             ApplyHealing(rb);
-            ApplyRebound(rb, col.gameObject);
+            ApplyRebound(rb, col);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace ArenaItem
         /// 反発を適用する
         /// </summary>
         /// <param name="target"></param>
-        public void ApplyRebound(Rigidbody2D rb, GameObject target)
+        public void ApplyRebound(Rigidbody2D rb, Collision2D target)
         {
             if(rb != null)
             {
