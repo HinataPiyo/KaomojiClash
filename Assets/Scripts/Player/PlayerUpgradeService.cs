@@ -10,6 +10,7 @@ using System.Collections;
 public class PlayerUpgradeService : MonoBehaviour
 {
     PlayerMovement movement;
+    TmpAfterImageTrail afterImageTrail;
     public Status.Params UpgradedStatus { get; private set; } = new Status.Params();
     public List<SkillTag.Stack> TotalTags { get; private set; } = new List<SkillTag.Stack>();
     public List<SkillTag.Stack> ConditionTags { get; private set; } = new List<SkillTag.Stack>();
@@ -18,6 +19,7 @@ public class PlayerUpgradeService : MonoBehaviour
     void Awake()
     {
         movement = GetComponent<PlayerMovement>();
+        afterImageTrail = GetComponent<TmpAfterImageTrail>();
     }
 
     public void Initialize(PlayerData data, List<SkillTag[]> tags)
@@ -187,8 +189,10 @@ public class PlayerUpgradeService : MonoBehaviour
 
     IEnumerator ApplySpeedUpEffect(float duration, float speedMultiplier)
     {
+        afterImageTrail.SetActive(true);
         movement.SpeedUp(speedMultiplier);
         yield return new WaitForSeconds(duration);
         movement.ResetSpeedUp();
+        afterImageTrail.SetActive(false);
     }
 }
