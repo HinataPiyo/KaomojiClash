@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceline: ()
   name: "\u62EC\u5F27"
-  maxMental: 1
+  maxMental: 0

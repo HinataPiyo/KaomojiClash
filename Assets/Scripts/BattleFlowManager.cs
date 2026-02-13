@@ -2,6 +2,7 @@ using UnityEngine;
 using ENUM;
 using System.Collections.Generic;
 using System.Collections;
+using Map;
 
 
 /// <summary>
@@ -12,6 +13,7 @@ public class BattleFlowManager : MonoBehaviour
     public static BattleFlowManager I { get; private set; }
 
     [SerializeField] WallController wallCtrl;
+    [SerializeField] MapCreator mapCreator;
     [SerializeField] EnemySpawnController enemySpawnCtrl;
     [SerializeField] WaveController waveCtrl;
     [SerializeField] TargetGroupController targetGroupCtrl;
@@ -47,6 +49,8 @@ public class BattleFlowManager : MonoBehaviour
         Vector2 centerPos = wallCtrl.CreateWall(player.position, enemy.position);
         waveDataCtrl = waveCtrl.WaveStart(enemy, centerPos);
 
+        mapCreator.OnBattle();
+
         Debug.Log("エンカウントした敵の難易度 : " + enemy.GetComponent<EnemyController>().EnemyData.Wave.difficulty.ToString());
         AudioManager.I.PlayBGM(string.Empty);       // BGMを止める
         AudioManager.I.PlaySE("Encount");
@@ -79,6 +83,7 @@ public class BattleFlowManager : MonoBehaviour
         AllOutEnemies();
 
         waveDataCtrl.DisablePanel();
+        mapCreator.OutBattle();
         
         Context.I.ChangeStat(BattleStat.None);
         AudioManager.I.PlayBGM("EndBattle");
