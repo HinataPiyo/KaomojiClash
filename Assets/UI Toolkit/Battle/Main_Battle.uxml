@@ -1,10 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="StatusResource" src="project://database/Assets/UI%20Toolkit/StatusResource.uxml?fileID=9197481963319205126&amp;guid=dcb86c8adbed07a4d9b74b8b81a12a53&amp;type=3#StatusResource" />
+    <ui:Template name="StatusResource" src="project://database/Assets/UI%20Toolkit/Battle/Module_StatusResource.uxml?fileID=9197481963319205126&amp;guid=dcb86c8adbed07a4d9b74b8b81a12a53&amp;type=3#Module_StatusResource" />
     <ui:Template name="Temp_HasMoney" src="project://database/Assets/UI%20Toolkit/Temp_HasMoney.uxml?fileID=9197481963319205126&amp;guid=6dab5f65ea67fcd45a1388a94afe85f1&amp;type=3#Temp_HasMoney" />
+    <ui:Template name="Module_EquipKaomojiPart" src="project://database/Assets/UI%20Toolkit/Battle/Module_EquipKaomojiPart.uxml?fileID=9197481963319205126&amp;guid=cc069965aa29ec94fa3bac090eb003fd&amp;type=3#Module_EquipKaomojiPart" />
     <ui:VisualElement name="root" style="flex-grow: 1;">
         <ui:VisualElement name="status-resource" style="position: absolute; height: 10%; width: 35%; bottom: 0; align-self: center; justify-content: flex-end;">
             <ui:Instance template="StatusResource" />
         </ui:VisualElement>
         <ui:Instance template="Temp_HasMoney" name="Temp_HasMoney" style="position: absolute; right: 16%; top: 2%;" />
+        <ui:Instance template="Module_EquipKaomojiPart" name="EquipKaomojiParts" style="position: absolute; bottom: 0%; left: 0%;" />
     </ui:VisualElement>
 </ui:UXML>
