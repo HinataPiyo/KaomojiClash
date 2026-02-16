@@ -55,9 +55,9 @@ public class EnemySpawnController : MonoBehaviour
         var spawnConfig = areaData.Build.spawnConfig;
         int cultureLevel = areaData.Build.cultureLevel;
 
-        Debug.Log($"=== 敵生成開始 ===");
-        Debug.Log($"エリア: {areaData.AreaName}");
-        Debug.Log($"文化圏レベル: {cultureLevel}");
+        // Debug.Log($"=== 敵生成開始 ===");
+        // Debug.Log($"エリア: {areaData.AreaName}");
+        // Debug.Log($"文化圏レベル: {cultureLevel}");
 
         currentAreaEnemies.Clear();
 
@@ -70,14 +70,14 @@ public class EnemySpawnController : MonoBehaviour
             return;
         }
 
-        Debug.Log($"使用可能な敵: {validEnemies.Count}体");
+        // Debug.Log($"使用可能な敵: {validEnemies.Count}体");
 
         // 難易度別に敵を生成（リストからランダムに選択）
         foreach (var amountData in spawnConfig.spawnAmounts)
         {
             if (amountData.amount <= 0) continue;
 
-            Debug.Log($"難易度 {amountData.difficulty} の敵を {amountData.amount} 体生成中...");
+            // Debug.Log($"難易度 {amountData.difficulty} の敵を {amountData.amount} 体生成中...");
 
             for (int i = 0; i < amountData.amount; i++)
             {
@@ -85,20 +85,20 @@ public class EnemySpawnController : MonoBehaviour
                 EnemyData selectedEnemy = validEnemies[Random.Range(0, validEnemies.Count)];
                 currentAreaEnemies.Add(selectedEnemy);
 
-                Debug.Log($"  {i + 1}体目: {selectedEnemy.name}");
+                // Debug.Log($"  {i + 1}体目: {selectedEnemy.name}");
             }
 
-            Debug.Log($"  → {amountData.amount} 体生成完了");
+            // Debug.Log($"  → {amountData.amount} 体生成完了");
         }
 
-        Debug.Log($"=== 合計 {currentAreaEnemies.Count} 体の敵を生成 ===");
+        // Debug.Log($"=== 合計 {currentAreaEnemies.Count} 体の敵を生成 ===");
 
         // 生成された敵の詳細をログ出力
         foreach (var enemy in currentAreaEnemies)
         {
             if (enemy != null && enemy.Status != null)
             {
-                Debug.Log($"Enemy: {enemy.name}, Speed: {enemy.Status.speed}, Health: {enemy.Status.health}");
+                // Debug.Log($"Enemy: {enemy.name}, Speed: {enemy.Status.speed}, Health: {enemy.Status.health}");
             }
         }
     }
