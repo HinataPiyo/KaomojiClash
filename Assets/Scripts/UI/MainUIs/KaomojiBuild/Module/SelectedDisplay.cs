@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace UI.KaomojiBuild.Module
 {
-    public class SelectedDisplay : MonoBehaviour, IUIModuleHandler, IUIPartHandler
+    public class SelectedDisplay : MonoBehaviour, IUIModuleHandler, IUIPartHandler, ISkillTagShowPosition
     {
         [SerializeField] VisualTreeAsset temp_SkillTag;
         KaomojiBuildModulesController modulesCtrl;
@@ -62,9 +62,40 @@ namespace UI.KaomojiBuild.Module
             {
                 VisualElement tempRoot = temp_SkillTag.Instantiate();
                 new SkillTagUI(tempRoot, elem.tag, elem.stackCount);
+                RegisterTagAndCreateDescription(tempRoot, elem.tag);
                 skilltagsContainer.Add(tempRoot);
             }
         }
+
+        // 正しいタイミングで座標を取得
+        public void RegisterTagAndCreateDescription(VisualElement elem, SkillTag tag)
+        {
+            // GeometryChangedEventに登録
+            elem.RegisterCallback<GeometryChangedEvent>(evt =>
+            {
+                CreateTagAtPosition(elem, tag);
+            });
+        }
+
+        public void CreateTagAtPosition(VisualElement elem, SkillTag tag)
+        {
+            GameObject skillTagObject = null;
+
+            elem.RegisterCallback<PointerEnterEvent>(ev =>
+            {
+                Vector2 uiToolkitScreenPos = elem.worldBound.position;
+                skillTagObject = OverlayCanvasManager.I.ShowSkillTagDescription(tag, uiToolkitScreenPos);
+            });
+
+            elem.RegisterCallback<PointerLeaveEvent>(ev =>
+            {
+                if (skillTagObject == null) return;
+
+                Destroy(skillTagObject);
+                skillTagObject = null;
+            });
+        }
+
 
         /// <summary>
         /// 顔文字表示を更新する

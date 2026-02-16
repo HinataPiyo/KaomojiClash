@@ -38,11 +38,11 @@ namespace ArenaItem.Data
             switch(GradeType)
             {
                 case ENUM.ArenaItemGradeType.None:
-                    return $"触れると最大スタミナの{healAmount}回復する簡易医療キット。";
+                    return $"触れると最大スタミナの{healAmount * 100}%回復する簡易医療キット。";
                 case ENUM.ArenaItemGradeType.MK_ONE:
-                    return $"触れると最大スタミナの{healAmount * 1.5f}回復する医療キット。";
+                    return $"触れると最大スタミナの{healAmount * 1.5f * 100}%回復する医療キット。";
                 case ENUM.ArenaItemGradeType.MK_TWO:
-                    return $"触れると最大スタミナの{healAmount * 2f}回復する高性能医療キット。";
+                    return $"触れると最大スタミナの{healAmount * 2f * 100}%回復する高性能医療キット。";
                 default:
                     return $"-";
             }

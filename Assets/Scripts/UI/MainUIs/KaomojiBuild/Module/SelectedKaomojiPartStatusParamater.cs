@@ -9,7 +9,7 @@ namespace UI.KaomojiBuild.Module
     /// <summary>
     ///  選択された記号のステータスを表示する
     /// </summary>
-    public class SelectedKaomojiPartStatusParamater : MonoBehaviour, IUIModuleHandler, IUIPartHandler
+    public class SelectedKaomojiPartStatusParamater : MonoBehaviour, IUIModuleHandler, IUIPartHandler, ISkillTagShowPosition
     {
         [SerializeField] VisualTreeAsset temp_SkillTag;
         StatusParamater statusParamater;
@@ -62,31 +62,31 @@ namespace UI.KaomojiBuild.Module
             foreach(SkillTag tag in part.Data.SkillTags)
             {
                 VisualElement tempRoot = temp_SkillTag.Instantiate();
-                SkillTagUI ui = new SkillTagUI(tempRoot, tag);
-                RegisterTagAndCreateDescription(tempRoot, tag, ui);
+                new SkillTagUI(tempRoot, tag);
+                RegisterTagAndCreateDescription(tempRoot, tag);
                 skillTagContainer.Add(tempRoot);
             }
 
         }
 
         // 正しいタイミングで座標を取得
-        public void RegisterTagAndCreateDescription(VisualElement elem, SkillTag tag, SkillTagUI ui)
+        public void RegisterTagAndCreateDescription(VisualElement elem, SkillTag tag)
         {
             // GeometryChangedEventに登録
             elem.RegisterCallback<GeometryChangedEvent>(evt =>
             {
-                CreateTagAtPosition(elem, tag, ui);
+                CreateTagAtPosition(elem, tag);
             });
         }
         
-        void CreateTagAtPosition(VisualElement elem, SkillTag tag, SkillTagUI ui)
+        public void CreateTagAtPosition(VisualElement elem, SkillTag tag)
         {
             GameObject skillTagObject = null;
 
             elem.RegisterCallback<PointerEnterEvent>(ev =>
             {
                 Vector2 uiToolkitScreenPos = elem.worldBound.position;
-                skillTagObject = moduleCtrl.ShowSkillTagDescription(tag, uiToolkitScreenPos);
+                skillTagObject = OverlayCanvasManager.I.ShowSkillTagDescription(tag, uiToolkitScreenPos);
             });
 
             elem.RegisterCallback<PointerLeaveEvent>(ev =>
@@ -96,14 +96,6 @@ namespace UI.KaomojiBuild.Module
                 Destroy(skillTagObject);
                 skillTagObject = null;
             });
-
-            // elem.RegisterCallback<DetachFromPanelEvent>(ev =>
-            // {
-            //     if (skillTagObject == null) return;
-
-            //     Destroy(skillTagObject);
-            //     skillTagObject = null;
-            // });
         }
 
         public void Reset()

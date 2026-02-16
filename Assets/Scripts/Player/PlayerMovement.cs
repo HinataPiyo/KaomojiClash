@@ -19,7 +19,7 @@ public class PlayerMovement : Movement
         Mouse
     }
 
-    DragInputSource dragInputSource;
+    // DragInputSource dragInputSource;
 
     public void Initialize(PlayerData data)
     {
@@ -72,7 +72,7 @@ public class PlayerMovement : Movement
         if (!Input.GetMouseButtonDown(0)) return;
 
         dragStartWorld = GetMouseWorldPos();
-        dragInputSource = DragInputSource.Mouse;
+        // dragInputSource = DragInputSource.Mouse;
         state = State.Dragging;
 
         BeginAimVisuals();

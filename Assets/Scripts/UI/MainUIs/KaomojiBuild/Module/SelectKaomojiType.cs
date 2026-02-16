@@ -40,7 +40,7 @@ namespace UI.KaomojiBuild.Module
                 {
                     if (!isCleared)
                     {
-                        moduleCtrl.ShowMessage(moduleCtrl.GetTypeLockedMessage(type));
+                        OverlayCanvasManager.I.ShowMessage(moduleCtrl.GetTypeLockedMessage(type));
                         return;
                     }
 
