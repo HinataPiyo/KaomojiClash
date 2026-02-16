@@ -7,7 +7,7 @@ namespace ArenaItem
         [SerializeField] Data.SpeedUpArea speedUpAreaData;
         ParticleSystem particle;
         RangeLine2D rangeLine;
-        bool isInside = false;
+        // bool isInside = false;
         Movement insideTarget = null;
         CircleCollider2D col;
         
@@ -74,8 +74,8 @@ namespace ArenaItem
         /// </summary>
         void ApplySpeedUp(Movement move)
         {
-            isInside = true;
-            rangeLine.SetColor(Color.red);
+            // isInside = true;
+            rangeLine.SetColor(Color.cyan);
             move.SpeedUp(speedUpAreaData.GetSpeedMultiplier());
         }
 
@@ -84,7 +84,7 @@ namespace ArenaItem
         /// </summary>
         void RemoveSpeedUp()
         {
-            isInside = false;
+            // isInside = false;
             rangeLine.ResetColor();
 
             insideTarget = null;

@@ -31,15 +31,15 @@ public class AreaManager : MonoBehaviour
     /// </summary>
     private void LoadAllAreas()
     {
-        Debug.Log("=== AreaManager: エリア読み込み開始 ===");
+        // Debug.Log("=== AreaManager: エリア読み込み開始 ===");
 
         AreaData[] loadedAreas = Resources.LoadAll<AreaData>("Areas");
 
-        Debug.Log($"Resources/Areas から {loadedAreas.Length} 個のエリアを読み込みました");
+        // Debug.Log($"Resources/Areas から {loadedAreas.Length} 個のエリアを読み込みました");
 
         if (loadedAreas.Length == 0)
         {
-            Debug.LogWarning("エリアが見つかりません！Assets/Resources/Areas/ フォルダにAreaDataを配置してください。");
+            Debug.LogWarning("エリアが見つかりません!Assets/Resources/Areas/ フォルダにAreaDataを配置してください。");
             cachedAreas = new AreaData[0];
             return;
         }
@@ -51,11 +51,11 @@ public class AreaManager : MonoBehaviour
             if (area != null && area.Build != null && area.Build.spawnConfig != null)
             {
                 validAreas.Add(area);
-                Debug.Log($"  ✓ {area.AreaName} (Lv{area.Build.cultureLevel})");
+                // Debug.Log($"  ✓ {area.AreaName} (Lv{area.Build.cultureLevel})");
             }
             else
             {
-                Debug.LogWarning($"  ✕ 無効なAreaDataをスキップしました: {(area != null ? area.name : "null")}");
+                // Debug.LogWarning($"  ✕ 無効なAreaDataをスキップしました: {(area != null ? area.name : "null")}");
             }
         }
 
@@ -66,14 +66,14 @@ public class AreaManager : MonoBehaviour
         if (cachedAreas.Length > 0)
         {
             SetCurrentAreaData(0);
-            Debug.Log($"現在のエリアを設定: {CurrentAreaData.AreaName}");
+            // Debug.Log($"現在のエリアを設定: {CurrentAreaData.AreaName}");
         }
         else
         {
-            Debug.LogError("有効なエリアが1つもありません！");
+            Debug.LogError("有効なエリアが1つもありません!");
         }
 
-        Debug.Log("=== AreaManager: 読み込み完了 ===");
+        // Debug.Log("=== AreaManager: 読み込み完了 ===");
     }
 
     /// <summary>
@@ -139,12 +139,13 @@ public class AreaManager : MonoBehaviour
     /// <returns></returns>
     public bool CheckIsClearedByCultureLevel(ENUM.KaomojiPartType type)
     {
+        if(type == ENUM.KaomojiPartType.Mouth) return true;   // 口は最初から解放されている
         int level = AreaBuild.PartTypeToReleaseLevel[type];
         for (int i = 0; i < cachedAreas.Length; i++)
         {
-            if (cachedAreas[i].Build.cultureLevel >= level)
+            if (cachedAreas[i].Build.cultureLevel == level)
             {
-                return true;
+                return cachedAreas[i].IsClear;
             }
         }
         return false;

@@ -152,15 +152,41 @@ namespace Constants.Global
         /// </summary>
         public static float GetPartTypeMultiplier(KaomojiPartType type)
         {
+            const float eyesRatio = 0.5f;
+            const float handsRatio = 0.3f;
+            const float decorationRatio = 0.1f;
+
             switch (type)
             {
                 case KaomojiPartType.Mouth: return 1.0f;
-                case KaomojiPartType.Eyes: return 0.5f;
-                case KaomojiPartType.Hands: return 0.3f;
+                case KaomojiPartType.Eyes: return eyesRatio;
+                case KaomojiPartType.Hands: return handsRatio;
                 case KaomojiPartType.Decoration_First:
-                case KaomojiPartType.Decoration_Second: return 0.1f;
+                case KaomojiPartType.Decoration_Second: return decorationRatio;
                 default: return 1.0f;
             }
+        }
+
+        public static float GetStatusBaseValue(StatusType statusType)
+        {
+            switch (statusType)
+            {
+                case StatusType.Speed:
+                    return Mathf.Max(Mathf.Abs(KaomojiPart.Speed.MIN_VALUE), Mathf.Abs(KaomojiPart.Speed.MAX_VALUE));
+                case StatusType.Power:
+                    return Mathf.Max(Mathf.Abs(KaomojiPart.Power.MIN_VALUE), Mathf.Abs(KaomojiPart.Power.MAX_VALUE));
+                case StatusType.Guard:
+                    return Mathf.Max(Mathf.Abs(KaomojiPart.Guard.MIN_VALUE), Mathf.Abs(KaomojiPart.Guard.MAX_VALUE));
+                case StatusType.Stamina:
+                    return Mathf.Max(Mathf.Abs(KaomojiPart.Stamina.MIN_VALUE), Mathf.Abs(KaomojiPart.Stamina.MAX_VALUE));
+                default:
+                    return 0f;
+            }
+        }
+
+        public static float GetPartTypeMultiplier(KaomojiPartType partType, StatusType statusType)
+        {
+            return GetStatusBaseValue(statusType) * GetPartTypeMultiplier(partType);
         }
 
         public static string GetKaomojiPartTypeName(KaomojiPartType type)

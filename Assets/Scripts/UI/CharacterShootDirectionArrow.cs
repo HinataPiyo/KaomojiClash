@@ -3,7 +3,7 @@ using UnityEngine;
 public class CharacterShootDirectionArrow : MonoBehaviour
 {
     [SerializeField] Transform arrow;
-    [SerializeField] float maxScale = 10f;
+    [SerializeField] float maxScale = 8f;
     public void UpdateArrow(Vector2 dir, float dragDis)
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;

@@ -275,9 +275,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
-  canvas: {fileID: 914850066}
-  messageUI_Prefab: {fileID: 6688569733568170583, guid: d9e4eba93351f0c48a12a97f964fdd21, type: 3}
-  skillTag_Prefab: {fileID: 6673629863444093409, guid: 005ca22409ca86740bd87b5845cdac47, type: 3}
 --- !u!114 &454582375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +516,7 @@ GameObject:
   - component: {fileID: 914850066}
   - component: {fileID: 914850065}
   - component: {fileID: 914850064}
+  - component: {fileID: 914850068}
   m_Layer: 5
   m_Name: OverlayCanvas
   m_TagString: Untagged
@@ -608,6 +606,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &914850068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914850063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58208b52bbfb8b24abb0da9f24675745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageUI_Prefab: {fileID: 6688569733568170583, guid: d9e4eba93351f0c48a12a97f964fdd21, type: 3}
+  skillTag_Prefab: {fileID: 6673629863444093409, guid: 005ca22409ca86740bd87b5845cdac47, type: 3}
 --- !u!1 &965717555
 GameObject:
   m_ObjectHideFlags: 0

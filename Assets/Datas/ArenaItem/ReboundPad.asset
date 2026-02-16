@@ -17,4 +17,5 @@ MonoBehaviour:
   item_Type: 0
   name: "\u53CD\u767A\u30D1\u30C3\u30C9"
   price: 20
+  max_First_UsageCount: 5
   reboundForce: 10

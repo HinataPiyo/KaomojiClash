@@ -2,12 +2,12 @@ using UnityEngine;
 
 public abstract class ArenaItemData : ScriptableObject
 {
-    [SerializeField] GameObject item_Prefab;    public GameObject Item_Prefab => item_Prefab;
-    [SerializeField] Sprite item_Icon;        public Sprite Item_Icon => item_Icon;
-    [SerializeField] ENUM.ArenaBuildType item_Type;    public ENUM.ArenaBuildType Item_Type => item_Type;
-    [SerializeField] new string name;          public string Name => name;
+    [SerializeField] GameObject item_Prefab; public GameObject Item_Prefab => item_Prefab;
+    [SerializeField] Sprite item_Icon; public Sprite Item_Icon => item_Icon;
+    [SerializeField] ENUM.ArenaBuildType item_Type; public ENUM.ArenaBuildType Item_Type => item_Type;
+    [SerializeField] new string name; public string Name => name;
     [SerializeField] int price = 100;
-    [SerializeField] int max_First_UsageCount = 30;    public int Max_First_UsageCount => max_First_UsageCount;
+    [SerializeField] int max_First_UsageCount = 30; public int Max_First_UsageCount => max_First_UsageCount;
 
     public ENUM.ArenaItemGradeType GradeType { get; private set; } = ENUM.ArenaItemGradeType.None;
     public Vector2 SetPosition { get; set; } = Vector2.zero;
@@ -17,7 +17,7 @@ public abstract class ArenaItemData : ScriptableObject
     public abstract string GetDiscription();
     public int GetPrice()
     {
-        switch(GradeType)
+        switch (GradeType)
         {
             case ENUM.ArenaItemGradeType.None:
                 return price;
@@ -34,21 +34,23 @@ public abstract class ArenaItemData : ScriptableObject
     {
         GradeType = gradeType;
     }
-    
+
     /// <summary>
     /// 使用回数を増加させる
     /// </summary>
     public void ApplyUsageCountUp()
     {
-        UsageCount ++;
-        if(UsageCount < 0)
+        UsageCount++;
+        if (UsageCount < 0)
         {
             UsageCount = 0;
         }
     }
 
-    public int GetMaxUsageCountByGrade()
+    public int GetMaxUsageCountByGrade(ENUM.ArenaItemGradeType gradeType = ENUM.ArenaItemGradeType.None)
     {
+        bool useCurrentGradeType = gradeType == ENUM.ArenaItemGradeType.None;
+        ENUM.ArenaItemGradeType GradeType = useCurrentGradeType ? this.GradeType : gradeType;
         switch (GradeType)
         {
             case ENUM.ArenaItemGradeType.None:
@@ -59,6 +61,23 @@ public abstract class ArenaItemData : ScriptableObject
                 return max_First_UsageCount * 2;
             default:
                 return max_First_UsageCount;
+        }
+    }
+
+    /// <summary>
+    /// 指定したGradeTypeが使用回数で解放済みか判定する。
+    /// </summary>
+    public bool IsGradeTypeUnlocked(ENUM.ArenaItemGradeType type)
+    {
+        switch (type)
+        {
+            case ENUM.ArenaItemGradeType.None:
+                return true;
+            case ENUM.ArenaItemGradeType.MK_ONE:
+            case ENUM.ArenaItemGradeType.MK_TWO:
+                return UsageCount >= GetMaxUsageCountByGrade();
+            default:
+                return false;
         }
     }
 }

@@ -31,7 +31,7 @@ public class EnemyMovement : Movement, IEnemyInitialize
     IEnumerator LaunchRoutine()
     {
         // 戦闘開始の合図があるまで待機
-        yield return new WaitUntil(() => Context.I.BattleStat == ENUM.BattleStat.Now);
+        yield return new WaitUntil(() => Context.I.BattleStat == BattleStat.Now);
         isInput = true;
 
         // 発射までの待機時間（エディタで設定可能）
