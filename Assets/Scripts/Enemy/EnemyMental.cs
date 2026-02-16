@@ -49,6 +49,7 @@ public class EnemyMental : Mental, IEnemyInitialize
 
     protected override void Die()
     {
+        GlobalVolumeManager.I.DieFlashEffect();
         WorldCanvasManager.I.CrashEffect(transform.position);
         CameraZoom.I.EnemyKilledZoom();
         BattleFlowManager.I.RemoveEnemy(transform);

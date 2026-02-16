@@ -8,10 +8,33 @@
 
 #health .unity-progress-bar__progress {
     background-color: rgb(68, 255, 115);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 #health .unity-progress-bar__title {
     font-size: 26px;
     -unity-text-align: middle-center;
-    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+    -unity-font-definition: url("project://database/Assets/ThirdParty/Plugins/CW/Shared/Common/Examples/Fonts/VarelaRound-Regular.ttf?fileID=12800000&guid=da9a51ce28f0d7443a5bcbdbe04c4f4b&type=3#VarelaRound-Regular");
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+#health .unity-progress-bar__background {
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-bottom-left-radius: 18px;
 }
