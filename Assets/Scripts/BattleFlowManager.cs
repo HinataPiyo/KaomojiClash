@@ -91,7 +91,6 @@ public class BattleFlowManager : MonoBehaviour
         bool isAllEnemyDefeated = enemySpawnCtrl.IsAllEnemyDefeated();      // 全ての敵を倒しているかどうかを確認
         if(isAllEnemyDefeated)
         {
-            
             Context.I.StageClear();         // 全ての敵を倒していたらTotalResultを再生
         }
         

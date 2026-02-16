@@ -184,7 +184,7 @@ namespace Map
             {
                 if (spawnedObjects[i] != null)
                 {
-                    spawnedObjects[i].GetComponentInChildren<TMP_Text>().color = new Color(0f, 0f, 0f, 0.3f);
+                    spawnedObjects[i].GetComponentInChildren<TMP_Text>().color = new Color(0f, 0f, 0f, 1f);
                 }
             }
         }
