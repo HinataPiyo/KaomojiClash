@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 5158471732273271746}
-  maxScale: 10
+  maxScale: 5
 --- !u!1 &5270504459619407643
 GameObject:
   m_ObjectHideFlags: 0
