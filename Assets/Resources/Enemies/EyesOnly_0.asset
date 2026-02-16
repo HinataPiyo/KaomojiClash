@@ -30,4 +30,4 @@ MonoBehaviour:
   findPlayerRadius: 1.5
   launchWaitTime: 1.2
   launchCooldown: 1
-  launchInterval: 1.8
+  launchInterval: 0.68

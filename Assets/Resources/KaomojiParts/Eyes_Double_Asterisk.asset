@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acb1bcfc0d329534bb6adb7af69bb262, type: 3}
-  m_Name: Eyes_DoubleT
+  m_Name: Eyes_Double_Asterisk
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
   partType: 1
   data:
-    partName: "\u30C6\u30A3\u30FC"
-    part: TT
+    partName: "\u30A2\u30B9\u30BF\u30EA\u30B9\u30AF"
+    part: '**'
     levelDetail:
       growthRateType: 1
     speed:
-      value: 0.1
-      growthRateType: 0
+      value: 0.054
+      growthRateType: 3
     power:
-      value: 0.29
+      value: 0.355
       growthRateType: 2
     guard:
-      value: 0.0148
+      value: 0.032
       growthRateType: 0
     stamina:
-      value: 0.072
-      growthRateType: 3
+      value: 0.114
+      growthRateType: 0
     maxDup: 50
     isInitDisplay: 1
     skillTag:

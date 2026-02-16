@@ -72,9 +72,9 @@ namespace Constants.Global
                 case Difficulty.Normal:
                     return 1.0f;
                 case Difficulty.Hard:
-                    return 1.15f;
-                case Difficulty.Extreme:
                     return 1.25f;
+                case Difficulty.Extreme:
+                    return 1.5f;
                 default:
                     return 1.0f;
             }

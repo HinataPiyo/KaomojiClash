@@ -16,7 +16,7 @@ namespace UI.KaomojiBuild.Template
         const string GROWTH_RATE_LABEL_NAME = "growthrate";
         const string PROGRESS_CLASS_NAME = "unity-progress-bar__progress";
         const float BASE_MAGNIFICATION = 1f;
-        const float PER_TYPE_STEP_MAGNIFICATION = 0.05f;
+        const float PER_TYPE_STEP_MAGNIFICATION = 0.2f;
         static readonly Color32 NEGATIVE_PROGRESS_COLOR = new Color32(140, 140, 140, 255);
         /// <summary>
         /// ステータス要素のクラス
@@ -74,8 +74,6 @@ namespace UI.KaomojiBuild.Template
                 progressBar.highValue = Mathf.Max(Mathf.Abs(min), Mathf.Abs(max));
                 progressBar.value = 0f;  // ← この行を追加（初期値を0に設定）
 
-                Debug.Log($"[StatusParamater] {statusType} のProgressBar範囲を設定: min={min:F3}, max={max:F3}, highValue={progressBar.highValue:F3}");
-
                 progressElement ??= progressBar.Q(className: PROGRESS_CLASS_NAME);
             }
 
@@ -86,14 +84,12 @@ namespace UI.KaomojiBuild.Template
             public void SetInitProgress(ENUM.KaomojiPartType type)
             {
                 float highValue = Calculation.GetPartTypeMultiplier(type, statusType);
-                Debug.Log($"[StatusParamater] パーツ表示の上限値を適用: partType={type}, statusType={statusType}, 上限値={highValue:F3}");
                 InitProgress(-highValue, highValue);
             }
 
             public void SetInitProgressByEquippedCount(int equippedPartsCount)
             {
                 float magnification = GetMagnification(equippedPartsCount);
-                Debug.Log($"[StatusParamater] 合計表示の上限倍率を適用: 装備数={equippedPartsCount}, 倍率={magnification:F3}, statusType={statusType}");
                 ApplyProgressRange(magnification);
             }
 
@@ -276,8 +272,6 @@ namespace UI.KaomojiBuild.Template
         {
             if (elements == null || elements.Length == 0) return;
 
-            Debug.Log($"[StatusParamater] ShowStatus開始: partType={partType}, 要素数={elements.Length}");
-
             for (int i = 0; i < elements.Length; i++)
             {
                 Element elem = elements[i];
@@ -290,8 +284,6 @@ namespace UI.KaomojiBuild.Template
 
                 elem.SetProgress(value);
                 elem.SetGrowthRateType(growthRateType);
-
-                Debug.Log($"[StatusParamater] {elem.statusType} の表示値を反映: value={value:F3}, growthRate={growthRateType}, 計算上限値={multiplier:F3}");
             }
         }
 
@@ -301,8 +293,6 @@ namespace UI.KaomojiBuild.Template
         public void TotalShowStatus(float speed, float power, float guard, float stamina, int equippedPartsCount = 0)
         {
             if (elements == null || elements.Length == 0) return;
-
-            Debug.Log($"[StatusParamater] TotalShowStatus開始: 装備数={equippedPartsCount}, 要素数={elements.Length}");
 
             for (int i = 0; i < elements.Length; i++)
             {
