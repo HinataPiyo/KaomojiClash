@@ -106,7 +106,7 @@ public class GlobalVolumeManager : MonoBehaviour
     {
         float duration = 0.5f;
         float elapsed = 0f;
-        float initialIntensity = -0.25f;
+        float initialIntensity = 0.25f;
 
         while (elapsed < duration)
         {

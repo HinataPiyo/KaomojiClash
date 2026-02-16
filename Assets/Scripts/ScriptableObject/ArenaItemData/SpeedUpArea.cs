@@ -45,11 +45,11 @@ namespace ArenaItem.Data
             switch(GradeType)
             {
                 case ArenaItemGradeType.None:
-                    return $"触れると移動速度が{speedMultiplier}倍になる加速エリア。";
+                    return $"エリア内にいると移動速度が{speedMultiplier}倍になる。";
                 case ArenaItemGradeType.MK_ONE:
-                    return $"触れると移動速度が{speedMultiplier * 1.5f}倍になる強化加速エリア。";
+                    return $"エリア内にいると移動速度が{speedMultiplier * 1.5f}倍になる。";
                 case ArenaItemGradeType.MK_TWO:
-                    return $"触れると移動速度が{speedMultiplier * 2f}倍になる最強加速エリア。";
+                    return $"エリア内にいると移動速度が{speedMultiplier * 2f}倍になる。";
                 default:
                     return $"-";
             }

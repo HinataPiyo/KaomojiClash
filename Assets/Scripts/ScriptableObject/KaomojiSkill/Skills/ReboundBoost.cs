@@ -22,9 +22,9 @@ public class ReboundBoost : SkillTag
             case 1:
                 return speedUpDuration;
             case 2:
-                return speedUpDuration * 0.95f;
+                return speedUpDuration * 1.15f;
             case 3:
-                return speedUpDuration * 0.9f;
+                return speedUpDuration * 1.25f;
             default:
                 return 0f;
         }
