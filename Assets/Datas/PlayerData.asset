@@ -23,10 +23,10 @@ MonoBehaviour:
     mentalData: {fileID: 11400000, guid: b3308dfcdc49d7142a3babd9fc83bd57, type: 2}
   landingCooldown: 0.25
   kaomoji:
-    mouth: {fileID: 11400000, guid: 63e401a791e023247abc36fc28a34588, type: 2}
+    mouth: {fileID: 11400000, guid: cb9a1fbac614da74391cfe16cfbdaeed, type: 2}
     eyes: {fileID: 0}
     hands: {fileID: 0}
     decoration_first: {fileID: 0}
     decoration_second: {fileID: 0}
   strengthMaxAmplifyer: 1.5
-  isMouseClickDrag: 0
+  isMouseClickDrag: 1
