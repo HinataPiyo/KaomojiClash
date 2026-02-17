@@ -7,7 +7,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="info-box" style="flex-grow: 1; flex-direction: column; justify-content: space-evenly;">
             <ui:Label text="ダブルクォーテーション" name="name-value" class="text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; top: 6%;" />
-            <ui:ProgressBar value="22" title="22/100" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 30%; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); font-size: 18px; -unity-text-align: middle-center;" />
+            <ui:ProgressBar value="22" title="22/100" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 30%;" />
         </ui:VisualElement>
         <ui:VisualElement name="count-box" style="width: 17%;">
             <ui:Label text="+99" name="value" style="-unity-text-align: middle-center; flex-grow: 1; font-size: 42px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); -unity-font-style: bold;" />
