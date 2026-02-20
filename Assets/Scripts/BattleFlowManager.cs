@@ -34,6 +34,12 @@ public class BattleFlowManager : MonoBehaviour
         if(I == null) I = this;
     }
 
+    void Start()
+    {
+        Vector2 firstEnemyPos = enemySpawnCtrl.CurrentEnemies[0].transform.position;
+        Context.I.PlayerForceMove(firstEnemyPos);        // 最初の敵の位置にプレイヤーを強制移動させる
+    }
+
     /// <summary>
     /// 戦闘開始の際に実行する処理
     /// </summary>
@@ -92,8 +98,11 @@ public class BattleFlowManager : MonoBehaviour
         if(isAllEnemyDefeated)
         {
             Context.I.StageClear();         // 全ての敵を倒していたらTotalResultを再生
+            return;
         }
-        
+
+        Vector2 nextEnemyPos = enemySpawnCtrl.CurrentEnemies[0].transform.position;
+        Context.I.PlayerForceMove(nextEnemyPos);
     }
 
     /// <summary>
