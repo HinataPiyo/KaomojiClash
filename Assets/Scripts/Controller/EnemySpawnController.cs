@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Constants;
 using ENUM;
 using System.Linq;
+using UI.Battle;
 
 public class EnemySpawnController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class EnemySpawnController : MonoBehaviour
     [Header("戦闘時の囲いを制御するスクリプト"), SerializeField] WallController wallCtrl;
     [Header("Waveを管理するスクリプト"), SerializeField] WaveController waveCtrl;
     [Header("CameraのTargetingを制御するスクリプト"), SerializeField] TargetGroupController targetGroupCtrl;
+    [SerializeField] BattleModulesController battleModulesCtrl;
 
     public List<GameObject> CurrentEnemies { get; private set; } = new List<GameObject>();
 
@@ -88,6 +90,13 @@ public class EnemySpawnController : MonoBehaviour
         EnemySpawnConfig spawnConfig = AreaManager.I.CurrentAreaData.Build.spawnConfig;
         int cultureLevel = AreaManager.I.CurrentAreaData.Build.cultureLevel;
 
+        // StageProgress の「最後判定」に使うため、先に全体の生成数を集計しておく
+        int totalSpawnCount = 0;
+        foreach (DifficultySpawnAmount amountData in spawnConfig.spawnAmounts)
+        {
+            totalSpawnCount += amountData.amount;
+        }
+
         int spawnCount = 0;
         // 難易度別に敵を配置
         foreach (DifficultySpawnAmount amountData in spawnConfig.spawnAmounts)
@@ -99,6 +108,10 @@ public class EnemySpawnController : MonoBehaviour
             {
                 EnemyData enemyData = SelectEnemyData();
                 if (enemyData == null) continue;
+
+                // 最後の1体だけ true。終端アイコン生成時は line を伸ばさないために使う
+                bool isLastSpawn = spawnCount == totalSpawnCount - 1;
+                battleModulesCtrl.module_SP.CreateStageProgressIcon(isLastSpawn, spawnCount, dif);     // ステージ進行UIにアイコンを追加
 
                 Vector2 spawnPos = new Vector2(SPAWN_WIDTH * (spawnCount + 1), 0);       // 直線状に設置されるように修正
                 GameObject e = Spawn(spawnPos, enemyData, dif);
