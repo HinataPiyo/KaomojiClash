@@ -21,6 +21,7 @@ public class EnemySpawnController : MonoBehaviour
 
     // 現在のエリアデータから敵リストを取得
     private List<EnemyData> currentAreaEnemies = new List<EnemyData>();
+    public List<EnemyData> FirstEnemiesData { get; private set; } = new List<EnemyData>();
 
     public bool IsAllEnemyDefeated() => CurrentEnemies.Count == 0;
 
@@ -103,11 +104,13 @@ public class EnemySpawnController : MonoBehaviour
         {
             int spawnAmount = amountData.amount;
             Difficulty dif = amountData.difficulty;
+            Debug.Log($"SpawnEnemyInWall: {spawnAmount} enemies for difficulty {dif}");
 
             for (int i = 0; i < spawnAmount; i++)
             {
                 EnemyData enemyData = SelectEnemyData();
                 if (enemyData == null) continue;
+                FirstEnemiesData.Add(enemyData);     // 最初の敵のデータを保存
 
                 // 最後の1体だけ true。終端アイコン生成時は line を伸ばさないために使う
                 bool isLastSpawn = spawnCount == totalSpawnCount - 1;

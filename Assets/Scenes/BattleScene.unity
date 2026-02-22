@@ -2239,6 +2239,7 @@ GameObject:
   - component: {fileID: 728756202}
   - component: {fileID: 728756203}
   - component: {fileID: 728756204}
+  - component: {fileID: 728756205}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -2330,6 +2331,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   temp_StageProgress: {fileID: 9197481963319205126, guid: b3e869d403d030349a0a36fccc13ea1a, type: 3}
+--- !u!114 &728756205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728756197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afbc6bc6dc8a8e8498aac7a5d04033f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &730630919
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,8 +19,6 @@ namespace UI.Battle
         float iconStartLeft = -30f;
         bool geometryReady;
 
-        int progressCount = 0;      // 現在の進行数。アイコンの通しインデックスとしても使う。
-
         public void Initialize(VisualElement root)
         {
             VisualElement icon = root.Q<VisualElement>("icon-value");
@@ -104,16 +102,15 @@ namespace UI.Battle
             line.style.width = newWidth;
         }
 
-        public void NowStage()
+        public void NowStage(int progressCount)
         {
             iconContainers[progressCount].AddToClassList("nowStage");
         }
 
-        public void StageClear()
+        public void StageClear(int progressCount)
         {
-            iconContainers[progressCount].RemoveFromClassList("nowStage");
-            icons[progressCount].style.backgroundColor = Color.cyan;
-            progressCount++;
+            iconContainers[progressCount - 1].RemoveFromClassList("nowStage");
+            icons[progressCount - 1].style.backgroundColor = Color.cyan;
         }
     }
 }

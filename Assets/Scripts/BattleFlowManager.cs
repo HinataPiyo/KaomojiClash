@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using Map;
 using UI.Battle;
+using Constants;
 
 
 /// <summary>
@@ -28,6 +29,7 @@ public class BattleFlowManager : MonoBehaviour
     public bool NoneEnemy() => BattleEnemies.Count == 0;
 
     static readonly float EncountWaitTime = 1.5f;
+    int progressCount = 0;      // 現在の進行数。
 
 
 
@@ -40,6 +42,7 @@ public class BattleFlowManager : MonoBehaviour
     {
         Vector2 firstEnemyPos = enemySpawnCtrl.CurrentEnemies[0].transform.position;
         Context.I.PlayerForceMove(firstEnemyPos);        // 最初の敵の位置にプレイヤーを強制移動させる
+        SetNextStageInfo(progressCount);       // 最初のステージの次ステージ情報をセット
     }
 
     /// <summary>
@@ -62,7 +65,8 @@ public class BattleFlowManager : MonoBehaviour
         AudioManager.I.PlayBGM(string.Empty);       // BGMを止める
         AudioManager.I.PlaySE("Encount");
 
-        battleModulesCtrl.module_SP.NowStage();     // ステージ進行UIを更新
+        battleModulesCtrl.module_SP.NowStage(progressCount);     // ステージ進行UIを更新
+        battleModulesCtrl.module_NSI.Hidden();      // 次ステージの情報を隠す
 
         StartCoroutine(BattleStatChangeNowFlow(effect));
     }
@@ -86,6 +90,7 @@ public class BattleFlowManager : MonoBehaviour
     /// </summary>
     public void EndBattle()
     {
+        progressCount++;       // 進行数を増やす
         Context.I.ChangeStat(BattleStat.End);
         wallCtrl.DestroyWall();
         CameraZoom.I.InitSetCameraOrthographic(Context.I.BattleStat);
@@ -97,7 +102,8 @@ public class BattleFlowManager : MonoBehaviour
         Context.I.ChangeStat(BattleStat.None);
         AudioManager.I.PlayBGM("EndBattle");
         
-        battleModulesCtrl.module_SP.StageClear();       // ステージクリアのUIを更新
+        battleModulesCtrl.module_SP.StageClear(progressCount);       // ステージクリアのUIを更新
+        SetNextStageInfo(progressCount);                // 次のステージの次ステージ情報をセット
 
         bool isAllEnemyDefeated = enemySpawnCtrl.IsAllEnemyDefeated();      // 全ての敵を倒しているかどうかを確認
         if(isAllEnemyDefeated)
@@ -176,5 +182,19 @@ public class BattleFlowManager : MonoBehaviour
         {
             enemyObject.GetComponent<EnemyController>().BattleEnd();
         }
+    }
+
+    public void SetNextStageInfo(int progressCount)
+    {
+        // 進行数が最初の敵の数以上になったら次ステージの情報を隠す
+        if(progressCount >= enemySpawnCtrl.FirstEnemiesData.Count)
+        {
+            battleModulesCtrl.module_NSI.Hidden();      // 次ステージの情報を隠す
+            return;
+        }
+
+        Difficulty dif = enemySpawnCtrl.FirstEnemiesData[progressCount].Wave.difficulty;
+        int avgLevel = AreaBuild.GetEnemyAverageLevelByWaveDifficulty(AreaManager.I.CurrentAreaData.Build.cultureLevel, dif);
+        battleModulesCtrl.module_NSI.SetNextStageInfo(dif, avgLevel);
     }
 }
