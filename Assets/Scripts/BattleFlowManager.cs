@@ -3,6 +3,7 @@ using ENUM;
 using System.Collections.Generic;
 using System.Collections;
 using Map;
+using UI.Battle;
 
 
 /// <summary>
@@ -17,6 +18,7 @@ public class BattleFlowManager : MonoBehaviour
     [SerializeField] EnemySpawnController enemySpawnCtrl;
     [SerializeField] WaveController waveCtrl;
     [SerializeField] TargetGroupController targetGroupCtrl;
+    [SerializeField] BattleModulesController battleModulesCtrl;
 
     [SerializeField] GameObject encountEffect;
     [SerializeField] GameObject startWaveEffect;
@@ -57,9 +59,10 @@ public class BattleFlowManager : MonoBehaviour
 
         mapCreator.OnBattle();
 
-        Debug.Log("エンカウントした敵の難易度 : " + enemy.GetComponent<EnemyController>().EnemyData.Wave.difficulty.ToString());
         AudioManager.I.PlayBGM(string.Empty);       // BGMを止める
         AudioManager.I.PlaySE("Encount");
+
+        battleModulesCtrl.module_SP.NowStage();     // ステージ進行UIを更新
 
         StartCoroutine(BattleStatChangeNowFlow(effect));
     }
@@ -93,6 +96,8 @@ public class BattleFlowManager : MonoBehaviour
         
         Context.I.ChangeStat(BattleStat.None);
         AudioManager.I.PlayBGM("EndBattle");
+        
+        battleModulesCtrl.module_SP.StageClear();       // ステージクリアのUIを更新
 
         bool isAllEnemyDefeated = enemySpawnCtrl.IsAllEnemyDefeated();      // 全ての敵を倒しているかどうかを確認
         if(isAllEnemyDefeated)

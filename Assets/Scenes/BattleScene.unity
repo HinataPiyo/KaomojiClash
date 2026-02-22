@@ -5384,6 +5384,7 @@ MonoBehaviour:
   enemySpawnCtrl: {fileID: 1800827688}
   waveCtrl: {fileID: 1781551793}
   targetGroupCtrl: {fileID: 898216140}
+  battleModulesCtrl: {fileID: 728756202}
   encountEffect: {fileID: 5807485332029659025, guid: 19566893ec4bdb047b9cfb1c36513cf1, type: 3}
   startWaveEffect: {fileID: 88459031}
 --- !u!4 &1800827690
