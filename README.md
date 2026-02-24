@@ -1,4 +1,6 @@
-⸻
+# Kaomoji Clash
+
+... (contents of the original README)
 
 ## License
 
