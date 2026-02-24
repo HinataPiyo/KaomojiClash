@@ -66,7 +66,7 @@ Enemy
 ### Growth System
 
 ステータス上昇は以下で決定：
-'Final Growth = Base Growth × Growth Rate'
+`Final Growth = Base Growth × Growth Rate`
 
 ## 6. Difficulty Structure
 	•	複数難易度
