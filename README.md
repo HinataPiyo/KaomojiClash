@@ -1,11 +1,11 @@
-#KaomojiClash
+# KaomojiClash
 
 顔文字を組み立て、弾き、衝突させて戦う
 ビルド主導型トップダウンアクションゲーム
 
 ⸻
 
-##1. Overview
+## 1. Overview
 
 KaomojiClash は
 顔文字（記号構成）によって強さが決定する
@@ -19,14 +19,14 @@ KaomojiClash は
 
 ⸻
 
-##2. Core Concept
+## 2. Core Concept
 	•	見た目ではなく「構成」が性能を決定
 	•	衝突アクション × ビルド戦略
 	•	記号収集 → 再構成 → 再挑戦 のループ
 
 ⸻
 
-##3. Core Gameplay Loop
+## 3. Core Gameplay Loop
 	1.	エリア選択
 	2.	戦闘開始（Wave進行）
 	3.	敵撃破
@@ -36,7 +36,7 @@ KaomojiClash は
 
 ⸻
 
-##4. Combat System
+## 4. Combat System
 
 Player Action
 	•	Drag & Release による発射
@@ -49,7 +49,7 @@ Enemy
 
 ⸻
 
-##5. Build System
+## 5. Build System
 
 顔文字は以下のパーツで構成されます：
 	•	Outline
@@ -63,12 +63,12 @@ Enemy
 	•	Defence
 	•	Stamina
 
-###Growth System
+### Growth System
 
 ステータス上昇は以下で決定：
 'Final Growth = Base Growth × Growth Rate'
 
-##6. Difficulty Structure
+## 6. Difficulty Structure
 	•	複数難易度
 	•	段階的アンロック
 	•	文化圏レベルによる敵強化
@@ -77,7 +77,7 @@ Enemy
 
 ⸻
 
-##7. Arena System
+## 7. Arena System
 
 戦闘時に生成されるアリーナ内に
 設置型オブジェクトを配置可能。
@@ -90,7 +90,7 @@ Enemy
 
 ⸻
 
-##8. Skills
+## 8. Skills
 
 タグベースのスキルシステム。
 スキルは重複可能で同じスキルがあればレベルが上昇し、スキルの効果も上昇する
@@ -103,7 +103,7 @@ Enemy
 
 ⸻
 
-##9. Technical Stack
+## 9. Technical Stack
 	•	Unity
 	•	C#
 	•	TextMeshPro
@@ -112,7 +112,7 @@ Enemy
 
 ⸻
 
-##10. Current Status
+## 10. Current Status
 
 Implemented
 	•	Core combat loop
@@ -123,26 +123,26 @@ Implemented
 	•	Hit effects / Hit stop / Hit zoom
 	•	Afterimage system (Rebound Boost)
 
-###In Progress
+### In Progress
 	•	Balance tuning
 	•	Additional skill conditions
 	•	UI refinement
 
-###Planned
+### Planned
 	•	More build variations
 	•	Additional arena mechanics
 	•	Extended difficulty scaling
 
 ⸻
 
-##11. Design Philosophy
+## 11. Design Philosophy
 	•	プレイヤー成長より「ビルド成長」を重視
 	•	数値ではなく構成で強さが変わる設計
 	•	シンプル操作 × 奥行きビルド
 
 ⸻
 
-##12. Future Direction
+## 12. Future Direction
 	•	Online expansion (Trophy-based matchmaking)
 	•	More combinational bonuses
 	•	Expanded ASCII environment system
