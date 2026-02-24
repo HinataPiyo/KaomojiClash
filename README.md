@@ -1,175 +1,26 @@
-# KaomojiClash
+# Kaomoji Clash
 
-> 顔文字を組み立て、弾き、衝突させて戦う  
-> ビルド主導型トップダウンアクションゲーム
+## Technical Description
 
----
+### Assets/Scripts
 
-## Status
+The `Assets/Scripts` directory contains the core game logic and functionalities. Each script is designed to handle different aspects of the game, including:
 
-**Prototype / Active Development**
+- **GameManager.cs**: Manages the game state and transitions between different gameplay phases.
+- **PlayerController.cs**: Handles player input and movement, ensuring responsive controls for a better user experience.
+- **AIManager.cs**: Controls the behavior of AI opponents, making strategic decisions to challenge the player.
+- **ScoreManager.cs**: Manages the scoring system, tracking player scores and providing feedback on their performance.
 
----
+### Assets/UIToolkit
 
-## Overview
+The `Assets/UIToolkit` directory includes the user interface components utilized throughout the game. Notable files include:
 
-**KaomojiClash** は、  
-顔文字（記号構成）によって強さが決定するトップダウンアクションゲームです。
+- **MainMenu.ui**: The layout and elements for the main menu where players start and configure their settings.
+- **GameHUD.ui**: Displays in-game information such as player health, scores, and available actions.
+- **Settings.ui**: Allows players to adjust game settings like sound volume and control options.
 
-プレイヤーは顔文字を引っ張って発射し、  
-敵に衝突させてダメージを与えます。
+This structure ensures a modular approach, making it easier to update specific components without affecting the overall game structure. 
 
-強さはレベルではなく、  
-**記号構成（ビルド）によって決定されます。**
+## How to Contribute
 
----
-
-## Core Concept
-
-- 見た目ではなく「構成」が性能を決定
-- 衝突アクション × ビルド戦略
-- 記号収集 → 再構成 → 再挑戦 のループ構造
-
----
-
-## Core Gameplay Loop
-
-1. エリア選択
-2. 戦闘開始（Wave進行）
-3. 敵撃破
-4. 記号ドロップ
-5. ビルド再構成
-6. より高難易度へ挑戦
-
----
-
-## Combat System
-
-### Player Action
-- Drag & Release による発射
-- 壁反射
-- 条件付きスキル発動（例：Rebound Boost）
-
-### Enemy System
-- 難易度別スポーン
-- 文化圏レベルによる強化
-- 平均レベル表示による強さ可視化
-
----
-
-## Build System
-
-顔文字は以下のパーツで構成されます：
-
-- Outline
-- Eyes
-- Mouth
-- Decoration
-
-各パーツは以下のステータスを持ちます：
-
-- Speed
-- Power
-- Defence
-- Stamina
-
----
-
-## Growth System
-
-ステータス上昇は以下の式で決定されます：Final Growth = Base Growth × Growth Rate
-
-- Base Growth：基礎成長量
-- Growth Rate：成長率（段階式）
-
----
-
-## Difficulty Structure
-
-- 複数難易度制
-- 段階的アンロック
-- 文化圏レベルによる敵強化
-
-低難易度は高難易度へ挑戦するための準備段階として設計。
-
----
-
-## Arena System
-
-戦闘時に生成されるアリーナ内に設置型オブジェクトを配置可能。
-
-例：
-
-- Rebound Pad
-- Heal Pad
-- Acceleration Area
-- Recovery Kit
-
----
-
-## Skill System
-
-タグベースのスキル構造。
-
-例：
-
-- Shunsoku
-- Muscle Boost
-- Iron Wall
-- Rebound Boost（条件型スキル）
-
----
-
-## Technical Stack
-
-- Unity
-- C#
-- TextMeshPro
-- ScriptableObject設計
-- Physicsベース衝突処理
-
----
-
-## Implemented Features
-
-- コア戦闘ループ
-- Wave進行
-- 記号ビルドシステム
-- アリーナ設置システム
-- 基礎スキル実装
-- Hit Effect / Hit Stop / Hit Zoom
-- Afterimage（条件付きスキル連動）
-
----
-
-## In Progress
-
-- バランス調整
-- スキル拡張
-- UI最適化
-- 背景アスキーアート強化
-
----
-
-## Planned
-
-- 記号バリエーション追加
-- 組み合わせボーナス拡張
-- オンライン対応（将来的構想）
-- 難易度拡張
-
----
-
-## Design Philosophy
-
-- プレイヤー成長より「ビルド成長」を重視
-- シンプル操作 × 戦略構成
-- 数値より構成の意味を重視
-
----
-
-## Future Direction
-
-- ビルド特化型拡張
-- 高難易度チャレンジ設計
-- トロフィー制度（将来的オンライン構想）
+We welcome contributions! Please check the contribution guidelines if you want to help out with the development of Kaomoji Clash.
