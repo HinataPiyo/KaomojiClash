@@ -39,11 +39,13 @@ KaomojiClash は
 ## 4. Combat System
 
 Player Action
+
 	•	Drag & Release による発射
 	•	壁反射
 	•	条件付きスキル（例：Rebound Boost）
 
 Enemy
+
 	•	難易度別スポーン
 	•	文化圏レベルによる強化
 
@@ -52,12 +54,14 @@ Enemy
 ## 5. Build System
 
 顔文字は以下のパーツで構成されます：
+
 	•	Outline
 	•	Eyes
 	•	Mouth
 	•	Decoration
 
 各パーツは以下のステータスを持ちます：
+
 	•	Speed
 	•	Power
 	•	Defence
@@ -66,6 +70,7 @@ Enemy
 ### Growth System
 
 ステータス上昇は以下で決定：
+
 `Final Growth = Base Growth × Growth Rate`
 
 ## 6. Difficulty Structure
@@ -83,6 +88,7 @@ Enemy
 設置型オブジェクトを配置可能。
 
 例：
+
 	•	Rebound Pad
 	•	Heal Pad
 	•	Acceleration Area
@@ -96,6 +102,7 @@ Enemy
 スキルは重複可能で同じスキルがあればレベルが上昇し、スキルの効果も上昇する
 
 例：
+
 	•	Shunsoku
 	•	Muscle Boost
 	•	Iron Wall
@@ -115,6 +122,7 @@ Enemy
 ## 10. Current Status
 
 Implemented
+
 	•	Core combat loop
 	•	Wave progression
 	•	Build system
