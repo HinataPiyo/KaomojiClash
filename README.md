@@ -1,13 +1,7 @@
-# Kaomoji Clash
+[Content from commit 9485b9a592ab77a0744ef9fa2a684c70d3bebc29 goes here]
 
-... (contents of the original README)
+---
 
-## License
+# License
 
-Copyright (c) 2026 Shimizu
-
-All rights reserved.
-
-This repository is published for portfolio and evaluation purposes only.
-
-Permission is granted to view the source code for evaluation. Reproduction, redistribution, modification, sublicensing, and commercial use are strictly prohibited without explicit written permission from the author.
+This project is licensed under the MIT License. See the LICENSE file for details.
