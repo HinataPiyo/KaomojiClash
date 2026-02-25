@@ -16,6 +16,7 @@ public class EnemySpawnController : MonoBehaviour
     [Header("CameraのTargetingを制御するスクリプト"), SerializeField] TargetGroupController targetGroupCtrl;
 
     public List<GameObject> CurrentEnemies { get; private set; } = new List<GameObject>();
+    public List<GameObject> FirstSpawnEnemies { get; private set; } = new List<GameObject>();
 
     // 現在のエリアデータから敵リストを取得
     private List<EnemyData> currentAreaEnemies = new List<EnemyData>();
@@ -134,6 +135,7 @@ public class EnemySpawnController : MonoBehaviour
 
                 int avgLevel = AreaBuild.GetEnemyAverageLevelByWaveDifficulty(cultureLevel, dif);
                 eCtrl.SetEnemyWorldUI(avgLevel, dif);
+                FirstSpawnEnemies.Add(e);
             }
         }
     }

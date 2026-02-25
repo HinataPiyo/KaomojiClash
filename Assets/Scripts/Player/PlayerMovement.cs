@@ -15,6 +15,7 @@ public class PlayerMovement : Movement
     PlayerData data;
 
     [SerializeField, Range(0.1f, 1f)] float freeDragMaxDistanceRate = 0.5f; // data.IsMouseClickDrag=false時の最大ドラッグ距離倍率
+    Coroutine moveToNextEnemyRoutine;
 
     public void Initialize(PlayerData data)
     {
@@ -107,11 +108,6 @@ public class PlayerMovement : Movement
         {
             aimLine.positionCount = 2;
         }
-    }
-
-    void UpdateAimVisuals(Vector2 dragVector)
-    {
-        UpdateAimVisuals(dragStartWorld, dragVector);
     }
 
     void UpdateAimVisuals(Vector2 startWorld, Vector2 dragVector)
@@ -227,4 +223,65 @@ public class PlayerMovement : Movement
         state = State.Idle;
         cooldown = null;
     }
+
+    public void StartMoveToNextEnemy(Vector2 nextEnemyPos)
+    {
+        if (cooldown != null)
+        {
+            StopCoroutine(cooldown);
+            cooldown = null;
+        }
+
+        if (shootDirectionArrow != null)
+        {
+            shootDirectionArrow.Del();
+        }
+
+        if (aimLine != null)
+        {
+            aimLine.positionCount = 0;
+        }
+
+        state = State.MoveToNextEnemy;
+
+        if (moveToNextEnemyRoutine != null)
+        {
+            StopCoroutine(moveToNextEnemyRoutine);
+        }
+
+        AudioManager.I.PlayBGM("NextMoveToEnemy");
+        moveToNextEnemyRoutine = StartCoroutine(MoveToNextEnemyRoutine(nextEnemyPos));
+    }
+
+    IEnumerator MoveToNextEnemyRoutine(Vector2 nextEnemyPos)
+    {
+        yield return new WaitForSeconds(1f);
+        // 次の敵に移動する際の演出や処理をここに実装
+        // 例: プレイヤーを次の敵に向かって移動させる、特殊なエフェクトを再生するなど
+
+        // 仮の移動処理（例: 1秒かけて次の敵に移動）
+        float moveDuration = 3f;
+        Vector2 startPos = transform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            if(state != State.MoveToNextEnemy)
+            {
+                // 状態が変わったら移動を中断
+                yield break;
+            }
+
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / moveDuration);;
+            Vector2 newPos = Vector2.Lerp(startPos, nextEnemyPos, t);
+            transform.position = newPos;
+            Debug.Log($"Moving to next enemy... {t * 100f:0.0}%");
+            yield return null;
+        }
+
+        moveToNextEnemyRoutine = null;
+    }
+
+    
 }

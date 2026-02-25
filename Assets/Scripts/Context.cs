@@ -13,6 +13,7 @@ public class Context : MonoBehaviour
 
     [SerializeField] GameObject player;         public GameObject Player => player;
     [SerializeField] PlayerData playerData;     public PlayerData PlayerData => playerData;
+    [SerializeField] EnemySpawnController enemySpawnCtrl;
     [SerializeField] BattleModulesController battleModuleCtrl;
 
     [Header("TotalResult用のデータ")]
@@ -143,5 +144,26 @@ public class Context : MonoBehaviour
         totalResultModuleCtrl.module_TGP.CreateUI(InventoryManager.I.inv.GetAllPartsData());
         totalResultModuleCtrl.module_AI.CreateUI(arenaItemSettingData.GetArenaItemDatas());
 
+    }
+
+    /// <summary>
+    /// プレイヤーを次の敵に移動させる処理を開始する
+    /// </summary>
+    public void StartMovePlayerToNextEnemy(int nextStageIndex)
+    {
+        Vector2 nextEnemyPos = GetNextEnemyPosition(nextStageIndex);
+        player.GetComponent<PlayerMovement>().StartMoveToNextEnemy(nextEnemyPos);
+    }
+
+    Vector2 GetNextEnemyPosition(int nextStageIndex)
+    {
+        if(enemySpawnCtrl.FirstSpawnEnemies.Count == 0)
+        {
+            Debug.LogError("敵が存在しません。");
+            return Vector2.zero;
+        }
+
+        GameObject nextEnemy = enemySpawnCtrl.FirstSpawnEnemies[nextStageIndex];
+        return nextEnemy.transform.position;
     }
 }

@@ -27,11 +27,16 @@ public class BattleFlowManager : MonoBehaviour
 
     static readonly float EncountWaitTime = 1.5f;
 
-
+    int progressStage = 0;
 
     void Awake()
     {
         if(I == null) I = this;
+    }
+
+    void Start()
+    {
+        Context.I.StartMovePlayerToNextEnemy(0);
     }
 
     /// <summary>
@@ -51,7 +56,6 @@ public class BattleFlowManager : MonoBehaviour
 
         mapCreator.OnBattle();
 
-        Debug.Log("エンカウントした敵の難易度 : " + enemy.GetComponent<EnemyController>().EnemyData.Wave.difficulty.ToString());
         AudioManager.I.PlayBGM(string.Empty);       // BGMを止める
         AudioManager.I.PlaySE("Encount");
 
@@ -77,6 +81,7 @@ public class BattleFlowManager : MonoBehaviour
     /// </summary>
     public void EndBattle()
     {
+        progressStage++;
         Context.I.ChangeStat(BattleStat.End);
         wallCtrl.DestroyWall();
         CameraZoom.I.InitSetCameraOrthographic(Context.I.BattleStat);
@@ -92,8 +97,11 @@ public class BattleFlowManager : MonoBehaviour
         if(isAllEnemyDefeated)
         {
             Context.I.StageClear();         // 全ての敵を倒していたらTotalResultを再生
+            return;
         }
         
+        Debug.Log(progressStage);
+        Context.I.StartMovePlayerToNextEnemy(progressStage);        // プレイヤーを次の敵に移動させる
     }
 
     /// <summary>
