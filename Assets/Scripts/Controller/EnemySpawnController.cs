@@ -6,6 +6,7 @@ using System.Linq;
 
 public class EnemySpawnController : MonoBehaviour
 {
+    const float SPAWN_DISTANCE = 20f;
     [Header("敵の元Prefab"), SerializeField] GameObject enemy_Prefab;
     [Header("INFO")]
     [Tooltip("エリアの大きさ"), SerializeField] Vector2 fieldAreaSize;
@@ -54,11 +55,6 @@ public class EnemySpawnController : MonoBehaviour
         var areaData = AreaManager.I.CurrentAreaData;
         var spawnConfig = areaData.Build.spawnConfig;
         int cultureLevel = areaData.Build.cultureLevel;
-
-        // Debug.Log($"=== 敵生成開始 ===");
-        // Debug.Log($"エリア: {areaData.AreaName}");
-        // Debug.Log($"文化圏レベル: {cultureLevel}");
-
         currentAreaEnemies.Clear();
 
         // 敵リストから有効な敵を取得
@@ -66,7 +62,7 @@ public class EnemySpawnController : MonoBehaviour
 
         if (validEnemies.Count == 0)
         {
-            Debug.LogError("有効な敵が設定されていません！AreaDataに敵を設定してください。");
+            Debug.LogError("有効な敵が設定されていません!AreaDataに敵を設定してください。");
             return;
         }
 
@@ -77,28 +73,11 @@ public class EnemySpawnController : MonoBehaviour
         {
             if (amountData.amount <= 0) continue;
 
-            // Debug.Log($"難易度 {amountData.difficulty} の敵を {amountData.amount} 体生成中...");
-
             for (int i = 0; i < amountData.amount; i++)
             {
                 // 敵リストからランダムに1体選択
                 EnemyData selectedEnemy = validEnemies[Random.Range(0, validEnemies.Count)];
                 currentAreaEnemies.Add(selectedEnemy);
-
-                // Debug.Log($"  {i + 1}体目: {selectedEnemy.name}");
-            }
-
-            // Debug.Log($"  → {amountData.amount} 体生成完了");
-        }
-
-        // Debug.Log($"=== 合計 {currentAreaEnemies.Count} 体の敵を生成 ===");
-
-        // 生成された敵の詳細をログ出力
-        foreach (var enemy in currentAreaEnemies)
-        {
-            if (enemy != null && enemy.Status != null)
-            {
-                // Debug.Log($"Enemy: {enemy.name}, Speed: {enemy.Status.speed}, Health: {enemy.Status.health}");
             }
         }
     }
@@ -132,11 +111,12 @@ public class EnemySpawnController : MonoBehaviour
             return;
         }
 
-        var spawnConfig = AreaManager.I.CurrentAreaData.Build.spawnConfig;
+        EnemySpawnConfig spawnConfig = AreaManager.I.CurrentAreaData.Build.spawnConfig;
         int cultureLevel = AreaManager.I.CurrentAreaData.Build.cultureLevel;
+        int spawnIndex = 0;
 
         // 難易度別に敵を配置
-        foreach (var amountData in spawnConfig.spawnAmounts)
+        foreach (DifficultySpawnAmount amountData in spawnConfig.spawnAmounts)
         {
             int spawnAmount = amountData.amount;
             Difficulty dif = amountData.difficulty;
@@ -146,7 +126,9 @@ public class EnemySpawnController : MonoBehaviour
                 EnemyData enemyData = SelectEnemyData(dif);
                 if (enemyData == null) continue;
 
-                GameObject e = Spawn(RandomPosition(Vector2.zero, fieldAreaSize), enemyData, dif);
+                spawnIndex++;
+                Vector2 spawnPosition = new Vector2(spawnIndex * SPAWN_DISTANCE, 0);
+                GameObject e = Spawn(spawnPosition, enemyData, dif);
                 EnemyController eCtrl = e.GetComponent<EnemyController>();
                 waveCtrl.CreateWaveData(eCtrl.EnemyData, dif);
 
