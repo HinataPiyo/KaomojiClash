@@ -1,5 +1,5 @@
 .body {
-    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=b49d1e2661d334f4eacd4fab80debf85&type=3#NotoSansJP-Medium");
     font-size: 22px;
     white-space: normal;
     margin-top: 0;
@@ -14,7 +14,7 @@
 }
 
 .level {
-    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=b49d1e2661d334f4eacd4fab80debf85&type=3#NotoSansJP-Medium");
     margin-top: 1px;
     margin-right: 1px;
     margin-bottom: 1px;
@@ -49,4 +49,5 @@
     padding-bottom: 10px;
     padding-left: 10px;
     flex-grow: 1;
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=b49d1e2661d334f4eacd4fab80debf85&type=3#NotoSansJP-Medium");
 }

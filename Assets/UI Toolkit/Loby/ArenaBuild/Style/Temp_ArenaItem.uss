@@ -5,7 +5,7 @@
     margin-left: 0;
     font-size: 22px;
     -unity-text-align: middle-center;
-    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=b49d1e2661d334f4eacd4fab80debf85&type=3#NotoSansJP-Medium");
     padding-left: 0;
     padding-top: 0;
     padding-right: 0;
@@ -30,6 +30,7 @@
     border-right-width: 3px;
     border-bottom-width: 3px;
     border-left-width: 3px;
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=b49d1e2661d334f4eacd4fab80debf85&type=3#NotoSansJP-Medium");
 }
 
 .unity-progress-bar__container {

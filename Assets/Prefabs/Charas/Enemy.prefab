@@ -263,7 +263,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2611809501162453130, guid: be93d70936df42b45b5e5a8bcaaa363b, type: 2}
+  - {fileID: 7368372154105849109, guid: 0c69d4e4e219c5b41b470dc02b77de0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -307,8 +307,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: (>_<)3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: be93d70936df42b45b5e5a8bcaaa363b, type: 2}
-  m_sharedMaterial: {fileID: -2611809501162453130, guid: be93d70936df42b45b5e5a8bcaaa363b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0c69d4e4e219c5b41b470dc02b77de0f, type: 2}
+  m_sharedMaterial: {fileID: 7368372154105849109, guid: 0c69d4e4e219c5b41b470dc02b77de0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -453,7 +453,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1642401505
-  m_SortingLayer: 2
+  m_SortingLayer: -2
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -526,7 +526,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3739190457360230139, guid: 87ca6cc4119583844b855a474646063a, type: 2}
+  - {fileID: -3586964316710374348, guid: 48f054a5a3dcfd04faff284594aee8ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -570,8 +570,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lv8 Extreme
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 87ca6cc4119583844b855a474646063a, type: 2}
-  m_sharedMaterial: {fileID: -3739190457360230139, guid: 87ca6cc4119583844b855a474646063a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 48f054a5a3dcfd04faff284594aee8ac, type: 2}
+  m_sharedMaterial: {fileID: -3586964316710374348, guid: 48f054a5a3dcfd04faff284594aee8ac, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

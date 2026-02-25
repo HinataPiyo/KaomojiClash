@@ -1,6 +1,6 @@
 .category-button {
     -unity-text-align: middle-center;
-    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=b49d1e2661d334f4eacd4fab80debf85&type=3#NotoSansJP-Medium");
     font-size: 32px;
     border-left-color: rgb(0, 0, 0);
     border-right-color: rgb(0, 0, 0);
@@ -21,7 +21,7 @@
 
 .category-button:hover {
     -unity-text-align: middle-center;
-    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+    -unity-font-definition: url('project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium');
     font-size: 32px;
     border-left-color: rgb(0, 0, 0);
     border-right-color: rgb(0, 0, 0);
@@ -44,7 +44,7 @@
 
 .category-button:active {
     -unity-text-align: middle-center;
-    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+    -unity-font-definition: url('project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium');
     font-size: 32px;
     border-left-color: rgb(0, 0, 0);
     border-right-color: rgb(0, 0, 0);

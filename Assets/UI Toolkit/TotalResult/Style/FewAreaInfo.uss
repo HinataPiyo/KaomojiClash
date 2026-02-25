@@ -4,7 +4,7 @@
 }
 
 .text-value {
-    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Bold.ttf?fileID=12800000&guid=afea64cb7652df6418f06336f9f9113e&type=3#NotoSansJP-Bold");
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=b49d1e2661d334f4eacd4fab80debf85&type=3#NotoSansJP-Medium");
     font-size: 36px;
     -unity-text-align: lower-right;
     margin-top: 0;

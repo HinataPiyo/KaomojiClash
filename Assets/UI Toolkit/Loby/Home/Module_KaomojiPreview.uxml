@@ -7,8 +7,8 @@
         <ui:VisualElement name="kaomoji-preview" style="flex-grow: 1; justify-content: center;">
             <ui:Label text="(^ω^)" name="value" style="-unity-text-align: middle-center; font-size: 62px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=b49d1e2661d334f4eacd4fab80debf85&amp;type=3#NotoSansJP-Medium&quot;);" />
         </ui:VisualElement>
-        <ui:VisualElement name="status-paramater" style="flex-grow: 1; justify-content: center;">
-            <ui:Instance template="Temp_StatusParamater" name="Temp_StatusParamater" class="preview" style="border-left-color: rgb(30, 30, 30); border-left-width: 6px; padding-left: 14px;" />
+        <ui:VisualElement name="status-paramater" style="flex-grow: 1; justify-content: center; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); margin-left: 0; padding-left: 28px;">
+            <ui:Instance template="Temp_StatusParamater" class="growthrate preview" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
