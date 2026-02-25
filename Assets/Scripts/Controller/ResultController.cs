@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Constants.Global;
 using Constants;
 using UnityEngine;
+using UI.Battle;
 
 public class ResultController : MonoBehaviour
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Constants;
 using ENUM;
 using System.Linq;
+using UI.Battle;
 
 public class EnemySpawnController : MonoBehaviour
 {
@@ -14,25 +15,20 @@ public class EnemySpawnController : MonoBehaviour
     [Header("戦闘時の囲いを制御するスクリプト"), SerializeField] WallController wallCtrl;
     [Header("Waveを管理するスクリプト"), SerializeField] WaveController waveCtrl;
     [Header("CameraのTargetingを制御するスクリプト"), SerializeField] TargetGroupController targetGroupCtrl;
+    [SerializeField] BattleModulesController battleModulesCtrl;
 
     public List<GameObject> CurrentEnemies { get; private set; } = new List<GameObject>();
     public List<GameObject> FirstSpawnEnemies { get; private set; } = new List<GameObject>();
 
     // 現在のエリアデータから敵リストを取得
     private List<EnemyData> currentAreaEnemies = new List<EnemyData>();
+    public List<EnemyData> FirstEnemiesData { get; private set; } = new List<EnemyData>();
 
     public bool IsAllEnemyDefeated() => CurrentEnemies.Count == 0;
 
     void Start()
     {
         GenerateAreaEnemies();
-
-        if (currentAreaEnemies.Count == 0)
-        {
-            Debug.LogError("敵が生成されていません!AreaDataまたはKaomojiPartsを確認してください。");
-            return;
-        }
-
         FirstSpawnEnemy();
     }
 
@@ -41,18 +37,6 @@ public class EnemySpawnController : MonoBehaviour
     /// </summary>
     private void GenerateAreaEnemies()
     {
-        if (AreaManager.I == null)
-        {
-            Debug.LogError("AreaManager.I is null! シーンにAreaManagerが配置されていません。");
-            return;
-        }
-
-        if (AreaManager.I.CurrentAreaData == null)
-        {
-            Debug.LogError("CurrentAreaData is null! エリアが設定されていません。");
-            return;
-        }
-
         var areaData = AreaManager.I.CurrentAreaData;
         var spawnConfig = areaData.Build.spawnConfig;
         int cultureLevel = areaData.Build.cultureLevel;
@@ -66,8 +50,6 @@ public class EnemySpawnController : MonoBehaviour
             Debug.LogError("有効な敵が設定されていません!AreaDataに敵を設定してください。");
             return;
         }
-
-        // Debug.Log($"使用可能な敵: {validEnemies.Count}体");
 
         // 難易度別に敵を生成（リストからランダムに選択）
         foreach (var amountData in spawnConfig.spawnAmounts)
@@ -106,10 +88,14 @@ public class EnemySpawnController : MonoBehaviour
     /// </summary>
     public void FirstSpawnEnemy()
     {
-        if (currentAreaEnemies.Count == 0)
+        EnemySpawnConfig spawnConfig = AreaManager.I.CurrentAreaData.Build.spawnConfig;
+        int cultureLevel = AreaManager.I.CurrentAreaData.Build.cultureLevel;
+
+        // StageProgress の「最後判定」に使うため、先に全体の生成数を集計しておく
+        int totalSpawnCount = 0;
+        foreach (DifficultySpawnAmount amountData in spawnConfig.spawnAmounts)
         {
-            Debug.LogError("No enemies to spawn!");
-            return;
+            totalSpawnCount += amountData.amount;
         }
 
         EnemySpawnConfig spawnConfig = AreaManager.I.CurrentAreaData.Build.spawnConfig;
@@ -121,11 +107,13 @@ public class EnemySpawnController : MonoBehaviour
         {
             int spawnAmount = amountData.amount;
             Difficulty dif = amountData.difficulty;
+            Debug.Log($"SpawnEnemyInWall: {spawnAmount} enemies for difficulty {dif}");
 
             for (int i = 0; i < spawnAmount; i++)
             {
-                EnemyData enemyData = SelectEnemyData(dif);
+                EnemyData enemyData = SelectEnemyData();
                 if (enemyData == null) continue;
+                FirstEnemiesData.Add(enemyData);     // 最初の敵のデータを保存
 
                 spawnIndex++;
                 Vector2 spawnPosition = new Vector2(spawnIndex * SPAWN_DISTANCE, 0);
@@ -152,29 +140,6 @@ public class EnemySpawnController : MonoBehaviour
             ) + (Vector3)center;
 
         return (Vector2)randomPosition;
-    }
-
-    /// <summary>
-    /// 特定難易度の敵をランダム選択
-    /// </summary>
-    public EnemyData SelectEnemyData(Difficulty difficulty)
-    {
-        var availableEnemies = currentAreaEnemies.FindAll(e =>
-        {
-            // 難易度に応じた敵を選択（簡易実装）
-            // TODO: より詳細な判定ロジックを追加
-            return true;
-        });
-
-        if (availableEnemies.Count == 0)
-        {
-            Debug.LogWarning($"No enemies available for difficulty {difficulty}");
-            return null;
-        }
-
-        int index = Random.Range(0, availableEnemies.Count);
-        EnemyData copy = Instantiate(availableEnemies[index]);
-        return copy;
     }
 
     /// <summary>

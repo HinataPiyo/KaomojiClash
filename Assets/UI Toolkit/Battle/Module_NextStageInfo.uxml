@@ -1,0 +1,14 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Battle/Style/NextStageInfo.uss?fileID=7433441132597879392&amp;guid=fce28254f921190459c09ec70c99283d&amp;type=3#NextStageInfo" />
+    <ui:VisualElement name="root" style="flex-grow: 1; align-items: center;">
+        <ui:Label text="NEXT" name="title" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/Galindo-Regular.ttf?fileID=12800000&amp;guid=3107e02a1ddc7cc48bfe7db96ec64af0&amp;type=3#Galindo-Regular&quot;); font-size: 28px; -unity-text-align: middle-center;" />
+        <ui:VisualElement name="difficulty" style="flex-direction: row;">
+            <ui:Label text="難易度：" name="title" class="text" />
+            <ui:Label text="EASY" name="value" class="text" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Bold.ttf?fileID=12800000&amp;guid=13e9717e548c5c5468315405fc2bcbbb&amp;type=3#NotoSansJP-Bold&quot;); color: rgb(0, 255, 17); -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 1px; -unity-font-style: bold;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="avgLevel" style="flex-direction: row;">
+            <ui:Label text="平均レベル：" name="title" class="text" />
+            <ui:Label text="10" name="value" class="text" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -26,7 +26,6 @@ public class PlayerMental : Mental, IHeal
     {
         float guard = Context.I.GetPlayerGuard();
         float finalDamage = Constants.DamageCalc.CalcTakenDamage(damage, guard);
-        Debug.Log($"Player TakeDamage: {damage} with Guard: {guard} => Reduced Damage: {finalDamage}");
         currentHealth -= finalDamage;
 
         WorldCanvasManager.I.ShowDamageText(transform.position, finalDamage, Color.red);

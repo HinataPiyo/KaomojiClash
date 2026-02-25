@@ -16,7 +16,7 @@ namespace UI.KaomojiBuild.Template
         const string GROWTH_RATE_LABEL_NAME = "growthrate";
         const string PROGRESS_CLASS_NAME = "unity-progress-bar__progress";
         const float BASE_MAGNIFICATION = 1f;
-        const float PER_TYPE_STEP_MAGNIFICATION = 0.05f;
+        const float PER_TYPE_STEP_MAGNIFICATION = 0.2f;
         static readonly Color32 NEGATIVE_PROGRESS_COLOR = new Color32(140, 140, 140, 255);
         /// <summary>
         /// ステータス要素のクラス
@@ -72,7 +72,7 @@ namespace UI.KaomojiBuild.Template
 
                 progressBar.lowValue = 0f;
                 progressBar.highValue = Mathf.Max(Mathf.Abs(min), Mathf.Abs(max));
-                progressBar.value = 0f;  // 初期値を0に設定
+                progressBar.value = 0f;  // ← この行を追加（初期値を0に設定）
 
                 progressElement ??= progressBar.Q(className: PROGRESS_CLASS_NAME);
             }

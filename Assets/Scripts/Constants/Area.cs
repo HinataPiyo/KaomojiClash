@@ -122,9 +122,6 @@ namespace Constants
     [System.Serializable]
     public class EnemySpawnConfig
     {
-        [Header("生成モード")]
-        public GenerationMode mode = GenerationMode.Manual;
-
         [Header("敵リスト")]
         [Tooltip("出現させる敵データ（この中からランダムに選択）")]
         public List<EnemyData> fixedEnemies = new List<EnemyData>();

@@ -49,4 +49,4 @@ MonoBehaviour:
         description: "\u88C5\u98FE2"
     cultureLevel: 3
     kaomojiDensity: 0
-  isClear: 0
+  isClear: 1

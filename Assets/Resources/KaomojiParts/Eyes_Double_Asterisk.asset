@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acb1bcfc0d329534bb6adb7af69bb262, type: 3}
-  m_Name: Eyes_Greater_Less_Than
+  m_Name: Eyes_Double_Asterisk
   m_EditorClassIdentifier: 
   dorpProbability: 0.3
   partType: 1
   data:
-    partName: "\u5927\u306A\u308A\u5C0F\u306A\u308A"
-    part: '><'
+    partName: "\u30A2\u30B9\u30BF\u30EA\u30B9\u30AF"
+    part: '**'
     levelDetail:
       growthRateType: 1
     speed:
-      value: 0.027
-      growthRateType: 0
-    power:
-      value: 0.51
-      growthRateType: 0
-    guard:
-      value: 0.0251
+      value: 0.054
       growthRateType: 3
-    stamina:
-      value: 0.015
+    power:
+      value: 0.355
       growthRateType: 2
+    guard:
+      value: 0.032
+      growthRateType: 0
+    stamina:
+      value: 0.114
+      growthRateType: 0
     maxDup: 50
     isInitDisplay: 1
     skillTag:

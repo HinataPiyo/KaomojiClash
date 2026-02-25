@@ -14,6 +14,9 @@
             </ui:VisualElement>
             <ui:Instance template="StatusResource" name="Status" />
         </ui:VisualElement>
-        <ui:Instance template="Temp_HasMoney" name="Temp_HasMoney" style="position: absolute; right: 0%;" />
+        <ui:Instance template="Temp_HasMoney" name="Temp_HasMoney" style="position: absolute; right: 0%; top: 0%;" />
+        <ui:Instance template="Module_EquipKaomojiPart" name="EquipKaomojiParts" style="position: absolute; bottom: 10%; left: 0%; margin-bottom: 0; margin-top: 0; margin-right: 0; margin-left: 0;" />
+        <ui:Instance template="Module_StageProgress" name="StageProgress" style="align-self: center;" />
+        <ui:Instance template="Module_NextStageInfo" name="NextStageInfo" style="position: absolute; align-self: center; top: 30%;" />
     </ui:VisualElement>
 </ui:UXML>

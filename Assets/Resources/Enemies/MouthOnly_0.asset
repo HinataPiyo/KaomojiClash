@@ -28,6 +28,6 @@ MonoBehaviour:
     decoration_first: {fileID: 0}
     decoration_second: {fileID: 0}
   findPlayerRadius: 1.5
-  launchWaitTime: 1.26
-  launchCooldown: 1
+  launchWaitTime: 0.8
+  launchCooldown: 0.49
   launchInterval: 1.05
