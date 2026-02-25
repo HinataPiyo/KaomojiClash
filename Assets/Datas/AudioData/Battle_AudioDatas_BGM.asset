@@ -21,3 +21,5 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 806ee236319f08047abf5de50fca7e13, type: 3}
   - tag: TotalResult_StageFailed
     clip: {fileID: 8300000, guid: 4a1d63d8eaad5a54e9ce4044ea446b91, type: 3}
+  - tag: NextMoveToEnemy
+    clip: {fileID: 8300000, guid: e6066b92d90d01b4cb1d09457ea4ccc4, type: 3}

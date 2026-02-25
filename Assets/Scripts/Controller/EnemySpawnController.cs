@@ -7,7 +7,7 @@ using UI.Battle;
 
 public class EnemySpawnController : MonoBehaviour
 {
-    const float SPAWN_WIDTH = 25f;     // 敵のスポーン間隔
+    const float SPAWN_DISTANCE = 20f;
     [Header("敵の元Prefab"), SerializeField] GameObject enemy_Prefab;
     [Header("INFO")]
     [Tooltip("エリアの大きさ"), SerializeField] Vector2 fieldAreaSize;
@@ -18,6 +18,7 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] BattleModulesController battleModulesCtrl;
 
     public List<GameObject> CurrentEnemies { get; private set; } = new List<GameObject>();
+    public List<GameObject> FirstSpawnEnemies { get; private set; } = new List<GameObject>();
 
     // 現在のエリアデータから敵リストを取得
     private List<EnemyData> currentAreaEnemies = new List<EnemyData>();
@@ -39,7 +40,6 @@ public class EnemySpawnController : MonoBehaviour
         var areaData = AreaManager.I.CurrentAreaData;
         var spawnConfig = areaData.Build.spawnConfig;
         int cultureLevel = areaData.Build.cultureLevel;
-
         currentAreaEnemies.Clear();
 
         // 敵リストから有効な敵を取得
@@ -47,7 +47,7 @@ public class EnemySpawnController : MonoBehaviour
 
         if (validEnemies.Count == 0)
         {
-            Debug.LogError("有効な敵が設定されていません！AreaDataに敵を設定してください。");
+            Debug.LogError("有効な敵が設定されていません!AreaDataに敵を設定してください。");
             return;
         }
 
@@ -98,7 +98,10 @@ public class EnemySpawnController : MonoBehaviour
             totalSpawnCount += amountData.amount;
         }
 
-        int spawnCount = 0;
+        EnemySpawnConfig spawnConfig = AreaManager.I.CurrentAreaData.Build.spawnConfig;
+        int cultureLevel = AreaManager.I.CurrentAreaData.Build.cultureLevel;
+        int spawnIndex = 0;
+
         // 難易度別に敵を配置
         foreach (DifficultySpawnAmount amountData in spawnConfig.spawnAmounts)
         {
@@ -112,18 +115,15 @@ public class EnemySpawnController : MonoBehaviour
                 if (enemyData == null) continue;
                 FirstEnemiesData.Add(enemyData);     // 最初の敵のデータを保存
 
-                // 最後の1体だけ true。終端アイコン生成時は line を伸ばさないために使う
-                bool isLastSpawn = spawnCount == totalSpawnCount - 1;
-                battleModulesCtrl.module_SP.CreateStageProgressIcon(isLastSpawn, spawnCount, dif);     // ステージ進行UIにアイコンを追加
-
-                Vector2 spawnPos = new Vector2(SPAWN_WIDTH * (spawnCount + 1), 0);       // 直線状に設置されるように修正
-                GameObject e = Spawn(spawnPos, enemyData, dif);
+                spawnIndex++;
+                Vector2 spawnPosition = new Vector2(spawnIndex * SPAWN_DISTANCE, 0);
+                GameObject e = Spawn(spawnPosition, enemyData, dif);
                 EnemyController eCtrl = e.GetComponent<EnemyController>();
                 waveCtrl.CreateWaveData(eCtrl.EnemyData, dif);
 
                 int avgLevel = AreaBuild.GetEnemyAverageLevelByWaveDifficulty(cultureLevel, dif);
                 eCtrl.SetEnemyWorldUI(avgLevel, dif);
-                spawnCount++;
+                FirstSpawnEnemies.Add(e);
             }
         }
     }

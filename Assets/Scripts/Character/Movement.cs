@@ -19,7 +19,7 @@ public abstract class Movement : MonoBehaviour
         Dragging,   // ドラッグ中（方向決め）
         Launched,   // 発射中（移動中）
         Cooldown,    // 着地硬直中（CT）
-        ForceMove,
+        MoveToNextEnemy, // 次の敵に移動中（移動中）
     }
 
     [SerializeField] protected State state = State.Idle;
@@ -35,21 +35,24 @@ public abstract class Movement : MonoBehaviour
     void Update()
     {
         // StatがStartの状態である場合、動かない
-        if(Context.I.BattleStat == ENUM.BattleStat.Start)
+        if(Context.I.BattleStat == ENUM.BattleStat.Start
+        || Context.I.BattleStat == ENUM.BattleStat.StageClear
+        || Context.I.BattleStat == ENUM.BattleStat.StageFailed)
         {
             rb.linearVelocity = Vector2.zero;
             if(ShootDirectionArrow != null) ShootDirectionArrow.Del();
             state = State.Idle;
             return;
-        }
+        }    
 
-        if(Context.I.BattleStat == ENUM.BattleStat.None
-        || Context.I.BattleStat == ENUM.BattleStat.StageClear
-        || Context.I.BattleStat == ENUM.BattleStat.StageFailed)
+        // MoveToNextEnemy状態である場合
+        if (state == State.MoveToNextEnemy)
         {
-            state = State.Idle;
+            rb.linearVelocity = Vector2.zero;
+            if(ShootDirectionArrow != null) ShootDirectionArrow.Del();
             return;
         }
+
 
         switch (state)
         {

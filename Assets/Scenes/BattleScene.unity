@@ -1236,6 +1236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1170213470}
   playerData: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
+  enemySpawnCtrl: {fileID: 1800827688}
   battleModuleCtrl: {fileID: 728756202}
   totalResult_Director: {fileID: 1752409385}
   totalResult_Timelines:
@@ -1709,7 +1710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1000000\u5186"
+  m_text: "1234567890\u5186"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0525e5b1f3fbc24e93609c672c5f1a5, type: 2}
   m_sharedMaterial: {fileID: -3428018950987536453, guid: b0525e5b1f3fbc24e93609c672c5f1a5, type: 2}
@@ -1742,7 +1743,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 3
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2238,8 +2239,6 @@ GameObject:
   - component: {fileID: 728756200}
   - component: {fileID: 728756202}
   - component: {fileID: 728756203}
-  - component: {fileID: 728756204}
-  - component: {fileID: 728756205}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -2315,32 +2314,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 728756197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32467329ad2d51f47acdc6ae406b90d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &728756204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728756197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c260a095085dd53459d97e1b07c06b4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  temp_StageProgress: {fileID: 9197481963319205126, guid: b3e869d403d030349a0a36fccc13ea1a, type: 3}
---- !u!114 &728756205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728756197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afbc6bc6dc8a8e8498aac7a5d04033f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 444e98df85583b649839e6751aeecf2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &730630919
@@ -2359,7 +2333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &730630920
 Transform:
   m_ObjectHideFlags: 0
@@ -2369,7 +2343,7 @@ Transform:
   m_GameObject: {fileID: 730630919}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 75, y: 0, z: 0}
+  m_LocalPosition: {x: 50, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2401,7 +2375,7 @@ MonoBehaviour:
   useRandomSplit: 1
   minSplitLength: 2
   createCount: 300
-  spawnArea: {x: 200, y: 45}
+  spawnArea: {x: 125, y: 45}
   objectRadius: 0.2
   maxTryPerObject: 30
   blockLayerMask:
@@ -4092,8 +4066,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: RESULT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 48f054a5a3dcfd04faff284594aee8ac, type: 2}
-  m_sharedMaterial: {fileID: -3586964316710374348, guid: 48f054a5a3dcfd04faff284594aee8ac, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0c69d4e4e219c5b41b470dc02b77de0f, type: 2}
+  m_sharedMaterial: {fileID: 7368372154105849109, guid: 0c69d4e4e219c5b41b470dc02b77de0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4123,7 +4097,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5938,8 +5912,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: EXP
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 48f054a5a3dcfd04faff284594aee8ac, type: 2}
-  m_sharedMaterial: {fileID: -3586964316710374348, guid: 48f054a5a3dcfd04faff284594aee8ac, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0c69d4e4e219c5b41b470dc02b77de0f, type: 2}
+  m_sharedMaterial: {fileID: 7368372154105849109, guid: 0c69d4e4e219c5b41b470dc02b77de0f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5969,7 +5943,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -6375,6 +6349,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2939240241458162487, guid: 403d55ba36e62b24cac83a516bc9b119, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7368372154105849109, guid: 0c69d4e4e219c5b41b470dc02b77de0f, type: 2}
     - target: {fileID: 3274461508384448215, guid: 403d55ba36e62b24cac83a516bc9b119, type: 3}
       propertyPath: comboUI
       value: 

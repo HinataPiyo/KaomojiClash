@@ -31,7 +31,7 @@ public class BattleFlowManager : MonoBehaviour
     static readonly float EncountWaitTime = 1.5f;
     int progressCount = 0;      // 現在の進行数。
 
-
+    int progressStage = 0;
 
     void Awake()
     {
@@ -40,9 +40,7 @@ public class BattleFlowManager : MonoBehaviour
 
     void Start()
     {
-        Vector2 firstEnemyPos = enemySpawnCtrl.CurrentEnemies[0].transform.position;
-        Context.I.PlayerForceMove(firstEnemyPos);        // 最初の敵の位置にプレイヤーを強制移動させる
-        SetNextStageInfo(progressCount);       // 最初のステージの次ステージ情報をセット
+        Context.I.StartMovePlayerToNextEnemy(0);
     }
 
     /// <summary>
@@ -90,7 +88,7 @@ public class BattleFlowManager : MonoBehaviour
     /// </summary>
     public void EndBattle()
     {
-        progressCount++;       // 進行数を増やす
+        progressStage++;
         Context.I.ChangeStat(BattleStat.End);
         wallCtrl.DestroyWall();
         CameraZoom.I.InitSetCameraOrthographic(Context.I.BattleStat);
@@ -111,9 +109,9 @@ public class BattleFlowManager : MonoBehaviour
             Context.I.StageClear();         // 全ての敵を倒していたらTotalResultを再生
             return;
         }
-
-        Vector2 nextEnemyPos = enemySpawnCtrl.CurrentEnemies[0].transform.position;
-        Context.I.PlayerForceMove(nextEnemyPos);
+        
+        Debug.Log(progressStage);
+        Context.I.StartMovePlayerToNextEnemy(progressStage);        // プレイヤーを次の敵に移動させる
     }
 
     /// <summary>

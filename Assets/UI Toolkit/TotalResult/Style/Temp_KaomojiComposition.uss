@@ -11,3 +11,8 @@
     font-size: 24px;
     -unity-text-align: middle-left;
 }
+
+.frame {
+    width: 125px;
+    height: 125px;
+}

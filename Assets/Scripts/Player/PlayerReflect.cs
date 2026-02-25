@@ -38,7 +38,6 @@ public class PlayerReflect : Reflect
         else if (col.collider.CompareTag("Wall"))
         {
             ApplaySkillTagEffects();     // 反射に関連するスキルタグの効果を適用
-            AudioManager.I.PlaySEReflect();
         }
     }
 

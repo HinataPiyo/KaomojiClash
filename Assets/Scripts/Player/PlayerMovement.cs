@@ -15,11 +15,7 @@ public class PlayerMovement : Movement
     PlayerData data;
 
     [SerializeField, Range(0.1f, 1f)] float freeDragMaxDistanceRate = 0.5f; // data.IsMouseClickDrag=false時の最大ドラッグ距離倍率
-    [SerializeField, Range(0.1f, 1.5f)] float forceMoveDuration = 0.35f;
-    [SerializeField, Range(1f, 20f)] float forceMoveMaxSpeed = 8f;
-    [SerializeField, Range(1.5f, 5f)] float forceMoveEasePower = 3f;
-
-    Coroutine forceMoveRoutine;
+    Coroutine moveToNextEnemyRoutine;
 
     public void Initialize(PlayerData data)
     {
@@ -228,53 +224,63 @@ public class PlayerMovement : Movement
         cooldown = null;
     }
 
-    /// <summary>
-    /// 指定位置にプレイヤーを強制移動させる
-    /// </summary>
-    /// <param name="target"></param>
-    public void ForceMove(Vector2 target)
+    public void StartMoveToNextEnemy(Vector2 nextEnemyPos)
     {
-        if (forceMoveRoutine != null)
+        if (cooldown != null)
         {
-            StopCoroutine(forceMoveRoutine);
-            forceMoveRoutine = null;
+            StopCoroutine(cooldown);
+            cooldown = null;
         }
 
-        forceMoveRoutine = StartCoroutine(ForceMoveRoutine(target));
+        if (shootDirectionArrow != null)
+        {
+            shootDirectionArrow.Del();
+        }
+
+        if (aimLine != null)
+        {
+            aimLine.positionCount = 0;
+        }
+
+        state = State.MoveToNextEnemy;
+
+        if (moveToNextEnemyRoutine != null)
+        {
+            StopCoroutine(moveToNextEnemyRoutine);
+        }
+
+        AudioManager.I.PlayBGM("NextMoveToEnemy");
+        moveToNextEnemyRoutine = StartCoroutine(MoveToNextEnemyRoutine(nextEnemyPos));
     }
 
-    /// <summary>
-    /// 指定位置にプレイヤーを強制移動させるコルーチン
-    /// </summary>
-    IEnumerator ForceMoveRoutine(Vector2 target)
+    IEnumerator MoveToNextEnemyRoutine(Vector2 nextEnemyPos)
     {
-        state = State.ForceMove;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        // 次の敵に移動する際の演出や処理をここに実装
+        // 例: プレイヤーを次の敵に向かって移動させる、特殊なエフェクトを再生するなど
 
-        Vector2 start = transform.position;
-        float distance = Vector2.Distance(start, target);
-        float durationBySpeed = distance / Mathf.Max(forceMoveMaxSpeed, 0.01f);
-        float duration = Mathf.Max(forceMoveDuration, durationBySpeed);
-        float elapsed = 0f;
+        // 仮の移動処理（例: 1秒かけて次の敵に移動）
+        float moveDuration = 3f;
+        Vector2 startPos = transform.position;
+        float elapsedTime = 0f;
 
-        while (elapsed < duration)
+        while (elapsedTime < moveDuration)
         {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            float easedT = 1f - Mathf.Pow(1f - t, forceMoveEasePower);
-
-            transform.position = Vector2.Lerp(start, target, easedT);
-
-            if(Context.I.BattleStat == ENUM.BattleStat.Start)
+            if(state != State.MoveToNextEnemy)
             {
-                // 強制移動中に戦闘開始したら即座に移動終了させる
-                break;
+                // 状態が変わったら移動を中断
+                yield break;
             }
 
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / moveDuration);;
+            Vector2 newPos = Vector2.Lerp(startPos, nextEnemyPos, t);
+            transform.position = newPos;
             yield return null;
         }
-        
-        state = State.Idle;
-        forceMoveRoutine = null;
+
+        moveToNextEnemyRoutine = null;
     }
+
+    
 }

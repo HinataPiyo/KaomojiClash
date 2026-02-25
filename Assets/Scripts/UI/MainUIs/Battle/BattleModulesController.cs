@@ -3,6 +3,7 @@ namespace UI.Battle
     using Constants;
 
     using UI.Base;
+    using UI.TotalResult.Module;
     using UnityEngine.UIElements;
 
     public class BattleModulesController : ModuleControllerBase
@@ -16,32 +17,28 @@ namespace UI.Battle
         public NextStageInfo module_NSI { get; private set; }
 
 
+        const string KAOMOJI_COMPOSITIONS = "KaomojiCompositions";
+        public KaomojiCompositions module_KC { get; private set; }
+
         void Awake()
         {
             uiDoc = GetComponent<UIDocument>();
-            module_EKP = GetComponent<EquipKaomojiParts>();
-            module_SP = GetComponent<StageProgress>();
-            module_NSI = GetComponent<NextStageInfo>();
+            module_KC = GetComponent<KaomojiCompositions>();
+        }
+
+        void Start()
+        {
+            UpdateKaomojiCompositions();
         }
 
         protected override void Initialize()
         {
             VisualElement root = uiDoc.rootVisualElement;
             CreateHasMoney(root);
-            Initialize(module_EKP, MODULE_EQUIPMENT_KAOMOJI_PARTS, root);
-            Initialize(module_SP, MODULE_STAGE_PROGRESS, root);
-            Initialize(module_NSI, MODULE_NEXT_STAGE_INFO, root);
 
-            UpdateEquipKaomojiParts();
+            Initialize(module_KC, KAOMOJI_COMPOSITIONS, root);
         }
 
-        /// <summary>
-        /// 装備している顔文字パーツの情報を更新して表示する
-        /// </summary>
-        public void UpdateEquipKaomojiParts()
-        {
-            KAOMOJI kaomoji = Context.I.PlayerData.Kaomoji;
-            module_EKP.UpdateUI(kaomoji);
-        }
+        public void UpdateKaomojiCompositions() => module_KC.UpdateUI(Context.I.PlayerData.Kaomoji);
     }
 }
