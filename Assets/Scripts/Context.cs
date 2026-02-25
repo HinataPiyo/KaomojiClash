@@ -66,6 +66,7 @@ public class Context : MonoBehaviour
     public void RefreshPlayerStatus()
     {
         PlayerKaomojiApply.RefreshUpgradedStatus();
+        battleModuleCtrl.UpdateKaomojiCompositions();
     }
 
     /// <summary>

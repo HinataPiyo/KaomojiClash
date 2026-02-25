@@ -276,7 +276,6 @@ public class PlayerMovement : Movement
             float t = Mathf.Clamp01(elapsedTime / moveDuration);;
             Vector2 newPos = Vector2.Lerp(startPos, nextEnemyPos, t);
             transform.position = newPos;
-            Debug.Log($"Moving to next enemy... {t * 100f:0.0}%");
             yield return null;
         }
 
