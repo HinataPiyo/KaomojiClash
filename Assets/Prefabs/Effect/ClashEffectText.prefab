@@ -69,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CLASH!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fcbb94cc05f022d4aba8e483993f938e, type: 2}
-  m_sharedMaterial: {fileID: 3746502072491284219, guid: fcbb94cc05f022d4aba8e483993f938e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d9b4dcf962a1d5342bd5f5cef36e5960, type: 2}
+  m_sharedMaterial: {fileID: -7452494340076523655, guid: d9b4dcf962a1d5342bd5f5cef36e5960, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

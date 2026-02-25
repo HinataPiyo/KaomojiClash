@@ -1,4 +1,4 @@
-.preview .type-growthrate__box {
+.preview .growthrate {
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
@@ -7,9 +7,10 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
+    display: none;
 }
 
 .preview .type {
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=b49d1e2661d334f4eacd4fab80debf85&type=3#NotoSansJP-Medium");
     font-size: 22px;
-    -unity-font-style: bold;
 }
