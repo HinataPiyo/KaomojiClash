@@ -4,6 +4,8 @@
 }
 
 #health .unity-progress-bar__container {
+    min-height: auto;
+    max-height: none;
 }
 
 #health .unity-progress-bar__progress {

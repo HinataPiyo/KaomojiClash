@@ -16,7 +16,7 @@ MonoBehaviour:
   - tag: StartBattle
     clip: {fileID: 8300000, guid: 35f7055784acc0a4e87a3866eba74fca, type: 3}
   - tag: EndBattle
-    clip: {fileID: 8300000, guid: 5c1b3ba96273ce64c9547aaec22fe152, type: 3}
+    clip: {fileID: 8300000, guid: 7cd2dfb0740299d46a98b9bd3d2d821c, type: 3}
   - tag: TotalResult_StageClear
     clip: {fileID: 8300000, guid: 806ee236319f08047abf5de50fca7e13, type: 3}
   - tag: TotalResult_StageFailed

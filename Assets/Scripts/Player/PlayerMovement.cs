@@ -15,6 +15,11 @@ public class PlayerMovement : Movement
     PlayerData data;
 
     [SerializeField, Range(0.1f, 1f)] float freeDragMaxDistanceRate = 0.5f; // data.IsMouseClickDrag=false時の最大ドラッグ距離倍率
+    [SerializeField, Range(0.1f, 1.5f)] float forceMoveDuration = 0.35f;
+    [SerializeField, Range(1f, 20f)] float forceMoveMaxSpeed = 8f;
+    [SerializeField, Range(1.5f, 5f)] float forceMoveEasePower = 3f;
+
+    Coroutine forceMoveRoutine;
 
     public void Initialize(PlayerData data)
     {
@@ -107,11 +112,6 @@ public class PlayerMovement : Movement
         {
             aimLine.positionCount = 2;
         }
-    }
-
-    void UpdateAimVisuals(Vector2 dragVector)
-    {
-        UpdateAimVisuals(dragStartWorld, dragVector);
     }
 
     void UpdateAimVisuals(Vector2 startWorld, Vector2 dragVector)
@@ -226,5 +226,55 @@ public class PlayerMovement : Movement
 
         state = State.Idle;
         cooldown = null;
+    }
+
+    /// <summary>
+    /// 指定位置にプレイヤーを強制移動させる
+    /// </summary>
+    /// <param name="target"></param>
+    public void ForceMove(Vector2 target)
+    {
+        if (forceMoveRoutine != null)
+        {
+            StopCoroutine(forceMoveRoutine);
+            forceMoveRoutine = null;
+        }
+
+        forceMoveRoutine = StartCoroutine(ForceMoveRoutine(target));
+    }
+
+    /// <summary>
+    /// 指定位置にプレイヤーを強制移動させるコルーチン
+    /// </summary>
+    IEnumerator ForceMoveRoutine(Vector2 target)
+    {
+        state = State.ForceMove;
+        yield return new WaitForSeconds(2f);
+
+        Vector2 start = transform.position;
+        float distance = Vector2.Distance(start, target);
+        float durationBySpeed = distance / Mathf.Max(forceMoveMaxSpeed, 0.01f);
+        float duration = Mathf.Max(forceMoveDuration, durationBySpeed);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            float easedT = 1f - Mathf.Pow(1f - t, forceMoveEasePower);
+
+            transform.position = Vector2.Lerp(start, target, easedT);
+
+            if(Context.I.BattleStat == ENUM.BattleStat.Start)
+            {
+                // 強制移動中に戦闘開始したら即座に移動終了させる
+                break;
+            }
+
+            yield return null;
+        }
+        
+        state = State.Idle;
+        forceMoveRoutine = null;
     }
 }

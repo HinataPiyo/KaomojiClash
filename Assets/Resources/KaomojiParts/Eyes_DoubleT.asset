@@ -20,16 +20,16 @@ MonoBehaviour:
     levelDetail:
       growthRateType: 1
     speed:
-      value: 0.017
+      value: 0.1
       growthRateType: 0
     power:
-      value: 0.15
+      value: 0.29
       growthRateType: 2
     guard:
-      value: 0.007
+      value: 0.0148
       growthRateType: 0
     stamina:
-      value: 0.006
+      value: 0.072
       growthRateType: 3
     maxDup: 50
     isInitDisplay: 1

@@ -29,5 +29,5 @@ MonoBehaviour:
     decoration_second: {fileID: 0}
   findPlayerRadius: 1.5
   launchWaitTime: 1.2
-  launchCooldown: 1
+  launchCooldown: 0.79
   launchInterval: 1.31

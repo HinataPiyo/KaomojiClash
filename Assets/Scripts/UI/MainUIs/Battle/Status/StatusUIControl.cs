@@ -45,8 +45,10 @@ public class StatusUIControl : MonoBehaviour
 
     public void UpdateHealth(float currentHealth)
     {
-        healthBar.value = currentHealth;
-        healthBar.title = currentHealth.ToString("N0") + "/" + healthBar.highValue.ToString("N0");
+        int _current = Mathf.CeilToInt(currentHealth);
+        if(_current < 0) _current = 0;
+        healthBar.value = _current;
+        healthBar.title = _current.ToString("N0") + "/" + healthBar.highValue.ToString("N0");
     }
 #endregion
 

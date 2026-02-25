@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_EquipKaomojiPart" src="project://database/Assets/UI%20Toolkit/Battle/Temp/Temp_EquipKaomojiPart.uxml?fileID=9197481963319205126&amp;guid=6e513370507a63c47a05e8590cf77834&amp;type=3#Temp_EquipKaomojiPart" />
+    <Style src="project://database/Assets/UI%20Toolkit/Battle/Style/Temp_EquipKaomojiPart.uss?fileID=7433441132597879392&amp;guid=aea7cc9e0a5d5a641b75d6fb4d051fd0&amp;type=3#Temp_EquipKaomojiPart" />
+    <ui:VisualElement name="root" class="equip" style="flex-grow: 1; flex-direction: row;">
+        <ui:Instance template="Temp_EquipKaomojiPart" name="composition" />
+        <ui:Instance template="Temp_EquipKaomojiPart" name="composition" />
+        <ui:Instance template="Temp_EquipKaomojiPart" name="composition" />
+        <ui:Instance template="Temp_EquipKaomojiPart" name="composition" />
+        <ui:Instance template="Temp_EquipKaomojiPart" name="composition" />
+    </ui:VisualElement>
+</ui:UXML>

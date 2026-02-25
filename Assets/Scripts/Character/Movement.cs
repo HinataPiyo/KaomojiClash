@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public abstract class Movement : MonoBehaviour
 {
@@ -19,7 +18,8 @@ public abstract class Movement : MonoBehaviour
         Idle,       // 待機中（ドラッグ開始可能）
         Dragging,   // ドラッグ中（方向決め）
         Launched,   // 発射中（移動中）
-        Cooldown    // 着地硬直中（CT）
+        Cooldown,    // 着地硬直中（CT）
+        ForceMove,
     }
 
     [SerializeField] protected State state = State.Idle;
@@ -39,6 +39,14 @@ public abstract class Movement : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
             if(ShootDirectionArrow != null) ShootDirectionArrow.Del();
+            state = State.Idle;
+            return;
+        }
+
+        if(Context.I.BattleStat == ENUM.BattleStat.None
+        || Context.I.BattleStat == ENUM.BattleStat.StageClear
+        || Context.I.BattleStat == ENUM.BattleStat.StageFailed)
+        {
             state = State.Idle;
             return;
         }
