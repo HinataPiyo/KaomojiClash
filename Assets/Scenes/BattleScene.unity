@@ -747,7 +747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &252700490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1257,11 +1257,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Events:
     m_Signals:
-    - {fileID: 0}
     - {fileID: 11400000, guid: 403e3f719af2509448b44539c3b560c3, type: 2}
     m_Events:
-    - m_PersistentCalls:
-        m_Calls: []
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 408325804}
@@ -2240,6 +2237,9 @@ GameObject:
   - component: {fileID: 728756198}
   - component: {fileID: 728756200}
   - component: {fileID: 728756202}
+  - component: {fileID: 728756203}
+  - component: {fileID: 728756204}
+  - component: {fileID: 728756205}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -2306,6 +2306,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 493efa51c5db1b54291307cfd36ddc27, type: 2}
+--- !u!114 &728756203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728756197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32467329ad2d51f47acdc6ae406b90d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &728756204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728756197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c260a095085dd53459d97e1b07c06b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temp_StageProgress: {fileID: 9197481963319205126, guid: b3e869d403d030349a0a36fccc13ea1a, type: 3}
+--- !u!114 &728756205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728756197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afbc6bc6dc8a8e8498aac7a5d04033f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &730630919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,7 +2369,7 @@ Transform:
   m_GameObject: {fileID: 730630919}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2364,7 +2401,7 @@ MonoBehaviour:
   useRandomSplit: 1
   minSplitLength: 2
   createCount: 300
-  spawnArea: {x: 45, y: 45}
+  spawnArea: {x: 200, y: 45}
   objectRadius: 0.2
   maxTryPerObject: 30
   blockLayerMask:
@@ -5106,7 +5143,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 30, y: 0}
   m_SizeDelta: {x: 700, y: 500}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1761777404
@@ -5342,6 +5379,7 @@ MonoBehaviour:
   wallCtrl: {fileID: 796114082}
   waveCtrl: {fileID: 1781551793}
   targetGroupCtrl: {fileID: 898216140}
+  battleModulesCtrl: {fileID: 728756202}
 --- !u!114 &1800827689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5359,6 +5397,7 @@ MonoBehaviour:
   enemySpawnCtrl: {fileID: 1800827688}
   waveCtrl: {fileID: 1781551793}
   targetGroupCtrl: {fileID: 898216140}
+  battleModulesCtrl: {fileID: 728756202}
   encountEffect: {fileID: 5807485332029659025, guid: 19566893ec4bdb047b9cfb1c36513cf1, type: 3}
   startWaveEffect: {fileID: 88459031}
 --- !u!4 &1800827690
@@ -5585,7 +5624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -20, y: -20}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1956724144
@@ -6585,7 +6624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &4561089515480425752
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -383,18 +383,18 @@ public class KaomojiPartDataCreator : EditorWindow
     {
         float multiplier = Calculation.GetPartTypeMultiplier(partType);
 
-        // 各ステータスの範囲
-        float speedMin = KaomojiPart.Speed.MIN_VALUE * multiplier;
-        float speedMax = KaomojiPart.Speed.MAX_VALUE * multiplier;
+        // 各ステータスの範囲（元の定数値に対してmultiplierを適用）
+        float speedMin = KaomojiPart.Speed.MIN_VALUE;
+        float speedMax = KaomojiPart.Speed.MAX_VALUE;
 
-        float powerMin = KaomojiPart.Power.MIN_VALUE * multiplier;
-        float powerMax = KaomojiPart.Power.MAX_VALUE * multiplier;
+        float powerMin = KaomojiPart.Power.MIN_VALUE;
+        float powerMax = KaomojiPart.Power.MAX_VALUE;
 
-        float guardMin = KaomojiPart.Guard.MIN_VALUE * multiplier;
-        float guardMax = KaomojiPart.Guard.MAX_VALUE * multiplier;
+        float guardMin = KaomojiPart.Guard.MIN_VALUE;
+        float guardMax = KaomojiPart.Guard.MAX_VALUE;
 
-        float staminaMin = KaomojiPart.Stamina.MIN_VALUE * multiplier;
-        float staminaMax = KaomojiPart.Stamina.MAX_VALUE * multiplier;
+        float staminaMin = KaomojiPart.Stamina.MIN_VALUE;
+        float staminaMax = KaomojiPart.Stamina.MAX_VALUE;
 
         float budget = GetStatBudget();
         int maxAttempts = 100;
@@ -409,12 +409,12 @@ public class KaomojiPartDataCreator : EditorWindow
             float tempGuard = Random.Range(0f, guardMax * 0.7f);
             float tempStamina = Random.Range(0f, staminaMax * 0.7f);
 
-            // ステップ2: 合計値を計算
+            // ステップ2: 合計値を計算（multiplierを掛けてから正規化）
             float total =
-                Mathf.Abs(NormalizeValue(tempSpeed, speedMin, speedMax)) +
-                Mathf.Abs(NormalizeValue(tempPower, powerMin, powerMax)) +
-                Mathf.Abs(NormalizeValue(tempGuard, guardMin, guardMax)) +
-                Mathf.Abs(NormalizeValue(tempStamina, staminaMin, staminaMax));
+                Mathf.Abs(NormalizeValue(tempSpeed * multiplier, speedMin * multiplier, speedMax * multiplier)) +
+                Mathf.Abs(NormalizeValue(tempPower * multiplier, powerMin * multiplier, powerMax * multiplier)) +
+                Mathf.Abs(NormalizeValue(tempGuard * multiplier, guardMin * multiplier, guardMax * multiplier)) +
+                Mathf.Abs(NormalizeValue(tempStamina * multiplier, staminaMin * multiplier, staminaMax * multiplier));
 
             // ステップ3: 予算オーバーの場合のみマイナス値を導入
             if (total > budget)
@@ -431,7 +431,7 @@ public class KaomojiPartDataCreator : EditorWindow
             };
 
                 // 正規化値でソート（高い順）
-                stats = stats.OrderByDescending(s => Mathf.Abs(NormalizeValue(s.value, s.min, s.max))).ToList();
+                stats = stats.OrderByDescending(s => Mathf.Abs(NormalizeValue(s.value * multiplier, s.min * multiplier, s.max * multiplier))).ToList();
 
                 // 上位1-2個をマイナスに調整
                 int negativeCount = excess > budget * 0.5f ? 2 : 1;
@@ -452,10 +452,10 @@ public class KaomojiPartDataCreator : EditorWindow
 
                 // 再計算
                 total =
-                    Mathf.Abs(NormalizeValue(tempSpeed, speedMin, speedMax)) +
-                    Mathf.Abs(NormalizeValue(tempPower, powerMin, powerMax)) +
-                    Mathf.Abs(NormalizeValue(tempGuard, guardMin, guardMax)) +
-                    Mathf.Abs(NormalizeValue(tempStamina, staminaMin, staminaMax));
+                    Mathf.Abs(NormalizeValue(tempSpeed * multiplier, speedMin * multiplier, speedMax * multiplier)) +
+                    Mathf.Abs(NormalizeValue(tempPower * multiplier, powerMin * multiplier, powerMax * multiplier)) +
+                    Mathf.Abs(NormalizeValue(tempGuard * multiplier, guardMin * multiplier, guardMax * multiplier)) +
+                    Mathf.Abs(NormalizeValue(tempStamina * multiplier, staminaMin * multiplier, staminaMax * multiplier));
             }
 
             float diff = Mathf.Abs(total - budget);
@@ -527,10 +527,7 @@ public class KaomojiPartDataCreator : EditorWindow
         EditorGUILayout.EndVertical();
     }
 
-    /// <summary>
-    /// ステータス表示（表示のみ）
-    /// </summary>
-    private void DrawStatDisplay(string name, float value, GrowthRateType growth, Color color)
+        private void DrawStatDisplay(string name, float value, GrowthRateType growth, Color color)
     {
         EditorGUILayout.BeginVertical("box");
 
@@ -570,13 +567,17 @@ public class KaomojiPartDataCreator : EditorWindow
         // 背景（より暗い灰色）
         EditorGUI.DrawRect(barRect, new Color(0.15f, 0.15f, 0.15f));
 
-        float normalizedValue = value >= 0 ? (value / max) : (value / Mathf.Abs(min));
-        float barWidth = Mathf.Abs(normalizedValue) * (barRect.width / 2f);
+        // 正規化: valueにmultiplierを適用してから計算し、0-1の範囲にクランプ
+        float normalizedValue = value >= 0 
+            ? Mathf.Clamp01((value * multiplier) / max) 
+            : Mathf.Clamp01((value * multiplier) / Mathf.Abs(min));
+        
+        float barWidth = normalizedValue * (barRect.width / 2f);
         float barX = value >= 0 ? barRect.x + barRect.width / 2f : barRect.x + barRect.width / 2f - barWidth;
 
         Rect fillRect = new Rect(barX, barRect.y, barWidth, barRect.height);
 
-        // バーの色を暗めに調整（視認性向上）
+        // バーの色を暗めに調整（視認性���上）
         Color barColor;
         if (value >= 0)
         {
@@ -677,10 +678,14 @@ public class KaomojiPartDataCreator : EditorWindow
     {
         float multiplier = Calculation.GetPartTypeMultiplier(partType);
 
-        float normalizedSpeed = NormalizeValue(speedValue, KaomojiPart.Speed.MIN_VALUE * multiplier, KaomojiPart.Speed.MAX_VALUE * multiplier);
-        float normalizedPower = NormalizeValue(powerValue, KaomojiPart.Power.MIN_VALUE * multiplier, KaomojiPart.Power.MAX_VALUE * multiplier);
-        float normalizedGuard = NormalizeValue(guardValue, KaomojiPart.Guard.MIN_VALUE * multiplier, KaomojiPart.Guard.MAX_VALUE * multiplier);
-        float normalizedStamina = NormalizeValue(staminaValue, KaomojiPart.Stamina.MIN_VALUE * multiplier, KaomojiPart.Stamina.MAX_VALUE * multiplier);
+        float normalizedSpeed = NormalizeValue(speedValue * multiplier, 
+            KaomojiPart.Speed.MIN_VALUE * multiplier, KaomojiPart.Speed.MAX_VALUE * multiplier);
+        float normalizedPower = NormalizeValue(powerValue * multiplier, 
+            KaomojiPart.Power.MIN_VALUE * multiplier, KaomojiPart.Power.MAX_VALUE * multiplier);
+        float normalizedGuard = NormalizeValue(guardValue * multiplier, 
+            KaomojiPart.Guard.MIN_VALUE * multiplier, KaomojiPart.Guard.MAX_VALUE * multiplier);
+        float normalizedStamina = NormalizeValue(staminaValue * multiplier, 
+            KaomojiPart.Stamina.MIN_VALUE * multiplier, KaomojiPart.Stamina.MAX_VALUE * multiplier);
 
         return Mathf.Abs(normalizedSpeed) + Mathf.Abs(normalizedPower) + Mathf.Abs(normalizedGuard) + Mathf.Abs(normalizedStamina);
     }
@@ -692,7 +697,7 @@ public class KaomojiPartDataCreator : EditorWindow
 
     private float GetStatBudget()
     {
-        return 2.0f * Calculation.GetPartTypeMultiplier(partType);
+        return 2.0f; // multiplierは正規化時に適用済みなので、budgetは固定値
     }
 
     private string GetPrefix(KaomojiPartType type)
@@ -801,4 +806,6 @@ public class KaomojiPartDataCreator : EditorWindow
         Selection.activeObject = newData;
         EditorGUIUtility.PingObject(newData);
     }
+
+    
 }

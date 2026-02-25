@@ -57,6 +57,16 @@ public class Context : MonoBehaviour
         }
         
         PlayerKaomojiApply = player.GetComponent<PlayerApplyKaomoji>();
+        ChangeStat(BattleStat.None);
+    }
+
+    /// <summary>
+    /// プレイヤーを指定位置に強制移動させる
+    /// </summary>
+    /// <param name="target"></param>
+    public void PlayerForceMove(Vector2 target)
+    {
+        player.GetComponent<PlayerMovement>().ForceMove(target);
     }
 
     /// <summary>
@@ -65,6 +75,7 @@ public class Context : MonoBehaviour
     public void RefreshPlayerStatus()
     {
         PlayerKaomojiApply.RefreshUpgradedStatus();
+        battleModuleCtrl.UpdateEquipKaomojiParts();
     }
 
     /// <summary>
@@ -74,6 +85,7 @@ public class Context : MonoBehaviour
     public void ChangeStat(BattleStat stat)
     {
         BattleStat = stat;
+        Debug.Log($"BattleStat changed to {stat}");
     }
 
     /// <summary>
