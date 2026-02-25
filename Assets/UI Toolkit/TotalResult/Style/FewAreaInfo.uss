@@ -1,5 +1,10 @@
+.text-title {
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Bold.ttf?fileID=12800000&guid=afea64cb7652df6418f06336f9f9113e&type=3#NotoSansJP-Bold");
+    font-size: 17px;
+}
+
 .text-value {
-    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&guid=ab2e348a338b3204291b7c93387ae084&type=3#NotoSansJP-Medium");
+    -unity-font-definition: url("project://database/Assets/Fonts/NotoSansJP-Bold.ttf?fileID=12800000&guid=afea64cb7652df6418f06336f9f9113e&type=3#NotoSansJP-Bold");
     font-size: 36px;
     -unity-text-align: lower-right;
     margin-top: 0;
