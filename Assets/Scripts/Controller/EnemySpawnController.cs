@@ -97,9 +97,6 @@ public class EnemySpawnController : MonoBehaviour
         {
             totalSpawnCount += amountData.amount;
         }
-
-        EnemySpawnConfig spawnConfig = AreaManager.I.CurrentAreaData.Build.spawnConfig;
-        int cultureLevel = AreaManager.I.CurrentAreaData.Build.cultureLevel;
         int spawnIndex = 0;
 
         // 難易度別に敵を配置
@@ -107,7 +104,6 @@ public class EnemySpawnController : MonoBehaviour
         {
             int spawnAmount = amountData.amount;
             Difficulty dif = amountData.difficulty;
-            Debug.Log($"SpawnEnemyInWall: {spawnAmount} enemies for difficulty {dif}");
 
             for (int i = 0; i < spawnAmount; i++)
             {
@@ -124,6 +120,7 @@ public class EnemySpawnController : MonoBehaviour
                 int avgLevel = AreaBuild.GetEnemyAverageLevelByWaveDifficulty(cultureLevel, dif);
                 eCtrl.SetEnemyWorldUI(avgLevel, dif);
                 FirstSpawnEnemies.Add(e);
+                battleModulesCtrl.module_SP.CreateStageProgressIcon(spawnIndex == totalSpawnCount, spawnIndex - 1, dif);
             }
         }
     }
