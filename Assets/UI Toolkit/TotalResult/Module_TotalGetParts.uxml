@@ -1,8 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="Temp_GetPart" src="project://database/Assets/Development/Temp_GetPart.uxml?fileID=9197481963319205126&amp;guid=424975106f015e74f9d4ff9b1225c4d5&amp;type=3#Temp_GetPart" />
+    <ui:Template name="Temp_GetPart" src="project://database/Assets/UI%20Toolkit/TotalResult/Temp/Temp_GetPart.uxml?fileID=9197481963319205126&amp;guid=424975106f015e74f9d4ff9b1225c4d5&amp;type=3#Temp_GetPart" />
     <Style src="project://database/Assets/UI%20Toolkit/Style/Panel_Style.uss?fileID=7433441132597879392&amp;guid=34648c00f98871249abd43d9bf1ccf5e&amp;type=3#Panel_Style" />
     <ui:VisualElement name="root" class="panel" style="flex-grow: 1;">
-        <ui:Label text="合計獲得記号" name="title" style="-unity-text-align: upper-center; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=ab2e348a338b3204291b7c93387ae084&amp;type=3#NotoSansJP-Medium&quot;); font-size: 24px;" />
+        <ui:Label text="合計獲得記号" name="title" style="-unity-text-align: upper-center; -unity-font-definition: url(&quot;project://database/Assets/Fonts/NotoSansJP-Medium.ttf?fileID=12800000&amp;guid=b49d1e2661d334f4eacd4fab80debf85&amp;type=3#NotoSansJP-Medium&quot;); font-size: 24px;" />
         <ui:ScrollView horizontal-scroller-visibility="Hidden" style="flex-grow: 1;">
             <ui:Instance template="Temp_GetPart" />
             <ui:Instance template="Temp_GetPart" />
