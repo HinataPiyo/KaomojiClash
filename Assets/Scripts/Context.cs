@@ -62,15 +62,6 @@ public class Context : MonoBehaviour
     }
 
     /// <summary>
-    /// プレイヤーを指定位置に強制移動させる
-    /// </summary>
-    /// <param name="target"></param>
-    public void PlayerForceMove(Vector2 target)
-    {
-        player.GetComponent<PlayerMovement>().ForceMove(target);
-    }
-
-    /// <summary>
     /// 記号全体のステータスを更新する
     /// </summary>
     public void RefreshPlayerStatus()

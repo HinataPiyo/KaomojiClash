@@ -29,7 +29,6 @@ public class BattleFlowManager : MonoBehaviour
     public bool NoneEnemy() => BattleEnemies.Count == 0;
 
     static readonly float EncountWaitTime = 1.5f;
-    int progressCount = 0;      // 現在の進行数。
 
     int progressStage = 0;
 
@@ -41,6 +40,7 @@ public class BattleFlowManager : MonoBehaviour
     void Start()
     {
         Context.I.StartMovePlayerToNextEnemy(0);
+        SetNextStageInfo(progressStage);                // 次のステージの次ステージ情報をセット
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ public class BattleFlowManager : MonoBehaviour
         AudioManager.I.PlayBGM(string.Empty);       // BGMを止める
         AudioManager.I.PlaySE("Encount");
 
-        battleModulesCtrl.module_SP.NowStage(progressCount);     // ステージ進行UIを更新
+        battleModulesCtrl.module_SP.NowStage(progressStage);     // ステージ進行UIを更新
         battleModulesCtrl.module_NSI.Hidden();      // 次ステージの情報を隠す
 
         StartCoroutine(BattleStatChangeNowFlow(effect));
@@ -100,8 +100,8 @@ public class BattleFlowManager : MonoBehaviour
         Context.I.ChangeStat(BattleStat.None);
         AudioManager.I.PlayBGM("EndBattle");
         
-        battleModulesCtrl.module_SP.StageClear(progressCount);       // ステージクリアのUIを更新
-        SetNextStageInfo(progressCount);                // 次のステージの次ステージ情報をセット
+        battleModulesCtrl.module_SP.StageClear(progressStage);       // ステージクリアのUIを更新
+        SetNextStageInfo(progressStage);                // 次のステージの次ステージ情報をセット
 
         bool isAllEnemyDefeated = enemySpawnCtrl.IsAllEnemyDefeated();      // 全ての敵を倒しているかどうかを確認
         if(isAllEnemyDefeated)
