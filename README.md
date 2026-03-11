@@ -1,5 +1,9 @@
 # KaomojiClash
 
+> ゲームの詳細なマニュアルは [Assets/Docs/README.md](Assets/Docs/README.md) を参照してください。  
+> スクリプトのアーキテクチャ概要は [Assets/Docs/documentation.md](Assets/Docs/documentation.md) を参照してください。  
+> ストーリーの背景については [Assets/Docs/story.md](Assets/Docs/story.md) を参照してください。
+
 顔文字を組み立て、弾き、衝突させて戦う
 ビルド主導型トップダウンアクションゲーム
 
