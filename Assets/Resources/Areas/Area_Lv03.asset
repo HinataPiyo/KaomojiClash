@@ -19,6 +19,7 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 497e4d353ee313249aa8ba5905c08b54, type: 2}
       - {fileID: 11400000, guid: 43b89c986ac63194f91758e501b078c3, type: 2}
       - {fileID: 11400000, guid: 7bb125988a92bd244a1fd6557d64d27f, type: 2}
+      - {fileID: 11400000, guid: 7bb125988a92bd244a1fd6557d64d27f, type: 2}
       spawnAmounts:
       - difficulty: 0
         amount: 1
