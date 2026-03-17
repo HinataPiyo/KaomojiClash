@@ -180,12 +180,6 @@ namespace UI.KaomojiBuild.Template
         public void Initialize(VisualElement moduleRoot)
         {
             VisualElement root = moduleRoot.Q<VisualElement>(TEMP_STATUS_PARAMATER);
-            if (root == null)
-            {
-                elements = System.Array.Empty<Element>();
-                return;
-            }
-
             VisualElement[] elems = root.Query<VisualElement>(BOX_NAME).ToList().ToArray();
             elements = new Element[elems.Length];
 
@@ -292,6 +286,7 @@ namespace UI.KaomojiBuild.Template
         /// </summary>
         public void TotalShowStatus(float speed, float power, float guard, float stamina, int equippedPartsCount = 0)
         {
+            Debug.Log($"elements Length: {(elements == null ? "null" : elements.Length.ToString())}, equippedPartsCount: {equippedPartsCount}");
             if (elements == null || elements.Length == 0) return;
 
             for (int i = 0; i < elements.Length; i++)
