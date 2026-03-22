@@ -15,12 +15,9 @@ MonoBehaviour:
   areaName: 4
   area:
     spawnConfig:
-      mode: 0
       fixedEnemies:
       - {fileID: 11400000, guid: 609e2451e2810dd49bd8f2497e863461, type: 2}
       - {fileID: 11400000, guid: 653fdfb5e5fac4a4ea32135074b72d93, type: 2}
-      - {fileID: 11400000, guid: 5f99aa3c43c7dee49ae1cc8094b348a3, type: 2}
-      - {fileID: 11400000, guid: 40b323eca19c45f458021e665c4a060f, type: 2}
       spawnAmounts:
       - difficulty: 0
         amount: 1
