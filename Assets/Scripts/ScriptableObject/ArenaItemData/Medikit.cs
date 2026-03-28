@@ -1,7 +1,5 @@
 namespace ArenaItem.Data
 {
-    using System.Threading;
-    using UnityEditor.EditorTools;
     using UnityEngine;
     
     [CreateAssetMenu(fileName = "Medikit", menuName = "ArenaItem/Medikit")]

@@ -1,0 +1,23 @@
+# ninja log v5
+135	1384	7962200507564859	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	e645588c77d376ea
+17	3959	7962200532964640	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	38352bc0557b5143
+1388	2024	7962200513286960	D:/Unity/KaomojiClash/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/526m163w/obj/arm64-v8a/libswappywrapper.so	1d857fded55a82a4
+59	3465	7962200527986550	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	e71623903ec9de6
+75	3484	7962200527930374	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2e2f9ce12a5aeccc
+31	3489	7962200528198978	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	361143d7177931fc
+1	3499	7962200528533479	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	87c8229a8e1de0df
+91	3494	7962200528188942	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	3459661fc6d1bd99
+44	3777	7962200531251461	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	eab49b28e267d1a1
+115	4052	7962200534041695	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	d8217bdbb1644ad
+4053	4335	7962200536534302	D:/Unity/KaomojiClash/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/526m163w/obj/arm64-v8a/libgame.so	401fb23b4c951c99
+142	1144	7962977876208402	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	e645588c77d376ea
+1145	1714	7962977882354675	D:/Unity/KaomojiClash/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/526m163w/obj/arm64-v8a/libswappywrapper.so	1d857fded55a82a4
+28	2932	7962977894882123	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	361143d7177931fc
+52	2973	7962977895142558	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2e2f9ce12a5aeccc
+92	2984	7962977895249051	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	e71623903ec9de6
+107	2989	7962977895324408	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	3459661fc6d1bd99
+63	3002	7962977895682501	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	87c8229a8e1de0df
+77	3179	7962977897334094	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	eab49b28e267d1a1
+15	3285	7962977898395859	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	38352bc0557b5143
+123	3620	7962977901874725	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	d8217bdbb1644ad
+3620	3828	7962977903607390	D:/Unity/KaomojiClash/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/526m163w/obj/arm64-v8a/libgame.so	401fb23b4c951c99
