@@ -10,7 +10,7 @@
         <ui:Instance template="Module_FewAreaInfo" name="FewArenaInfo" style="position: absolute; width: 40%; height: 16%; top: 3%; left: 5%;" />
         <ui:Instance template="Module_TotalGetParts" name="TotalGetParts" style="position: absolute; height: 75%; width: 40%; left: 5%; bottom: 4%;" />
         <ui:Instance template="Module_KaomojiCompositions" name="KaomojiCompositions" style="position: absolute; right: 5%; top: 3%; width: 45%;" />
-        <ui:Instance template="Module_ArenaItems" name="ArenaItems" style="position: absolute; right: 5%; top: 32%; width: 45%; height: 35%;" />
+        <ui:Instance template="Module_ArenaItems" name="ArenaItems" style="position: absolute; right: 5%; top: 32%; width: 45%; margin-top: 3px; margin-bottom: 3px;" />
         <ui:Instance template="Module_TotalGetMoneyAndDecMoney" name="TotalGetMoneyAndDecMoney" style="position: absolute; bottom: 5%; right: 5%; width: 45%; height: 26%;" />
     </ui:VisualElement>
     <ui:VisualElement name="buttons" style="position: absolute; bottom: 3%; width: 45%; left: 25%; flex-direction: row; justify-content: space-around;">

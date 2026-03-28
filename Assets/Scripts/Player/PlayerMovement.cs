@@ -35,9 +35,11 @@ public class PlayerMovement : Movement
 
     protected override void HandleDraggingInput()
     {
-        Vector2 currentDragStart = GetCurrentDragStart();
+        // タップ開始位置を中心にドラッグ距離を計算
+        Vector2 currentDragStart = dragStartWorld;
         Vector2 currentTouchPos = GetTouchWorldPos();
         Vector2 dragVector = currentTouchPos - currentDragStart;
+        Debug.Log($"CurrentTouchPos: {currentTouchPos}, DragStart: {currentDragStart}, DragVector: {dragVector}");
         dragVector = ClampDragDistance(-dragVector);
 
         UpdateAimVisuals(currentDragStart, dragVector);
@@ -49,6 +51,7 @@ public class PlayerMovement : Movement
             CancelDragging();
             return;
         }
+
         EndAimVisuals();
         LaunchByDragVector(dragVector);
     }
@@ -66,12 +69,6 @@ public class PlayerMovement : Movement
         return transform.position;
     }
 
-    // タッチ操作中か判定
-    bool IsTouchActive()
-    {
-        return Input.touchCount > 0;
-    }
-
     // タッチがこのフレームで終了したか判定
     bool IsTouchEndedThisFrame()
     {
@@ -87,7 +84,17 @@ public class PlayerMovement : Movement
     {
         // モバイル専用: タッチ開始時のみドラッグ開始
         if (!IsTouchBeganThisFrame()) return;
-        dragStartWorld = transform.position;
+        // タップ開始時のワールド座標を原点に
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.touches[0];
+            Vector3 screenPos = touch.position;
+            dragStartWorld = Camera.main.ScreenToWorldPoint(screenPos);
+        }
+        else
+        {
+            dragStartWorld = transform.position;
+        }
         state = State.Dragging;
         BeginAimVisuals();
     }
@@ -103,6 +110,12 @@ public class PlayerMovement : Movement
         return false;
     }
 
+    /// <summary>
+    /// ドラッグ距離を最大値でクランプ。
+    /// モバイル専用: freeDragMaxDistanceRateを考慮してクランプする
+    /// </summary>
+    /// <param name="dragVector"></param>
+    /// <returns></returns>
     Vector2 ClampDragDistance(Vector2 dragVector)
     {
         float maxDragDistance = GetCurrentMaxDragDistance();
@@ -149,12 +162,6 @@ public class PlayerMovement : Movement
         WorldCanvasManager.I.ShowShootDirectionArrow(shootDirectionArrow, transform.position, arrowVector, arrowMagnitude);
     }
 
-    Vector2 GetCurrentDragStart()
-    {
-        // モバイル専用: transform.positionを常に返す
-        return transform.position;
-    }
-
     void EndAimVisuals()
     {
         if (aimLine != null)
@@ -169,12 +176,12 @@ public class PlayerMovement : Movement
         if (shootDirectionArrow != null) shootDirectionArrow.Del();
     }
 
-    // モバイル専用: IsLaunchTriggeredは未使用化
-    // --- マウス/タッチ両対応の入力ヘルパー ---
-    // モバイル専用: IsPointerDown, IsPointerUpは未使用化
-
-    // モバイル専用: GetPointerWorldPosは未使用化
-
+    /// <summary>
+    /// ドラッグベクトルを元に発射準備ができているか判定。
+    /// 最小発射距離を満たしていれば発射可能とする。
+    /// </summary>
+    /// <param name="dragVector"></param>
+    /// <returns></returns>
     bool TryPrepareLaunchVector(ref Vector2 dragVector)
     {
         // 最小発射距離を満たしていればそのまま発射可能。
